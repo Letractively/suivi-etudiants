@@ -1,65 +1,50 @@
-package suiviPro;
+package fr.ua.iutlens.suivi.model.suiviPro;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import personne.Personne;
+import fr.ua.iutlens.suivi.model.BaseEntity;
+import fr.ua.iutlens.suivi.model.personne.Personne;
 
 /**
  * Entity implementation class for Entity: SuiviStage
- *
+ * 
  */
 @Entity
+public class SuiviStage extends BaseEntity implements Serializable {
 
-public class SuiviStage implements Serializable {
-
-	@Id
-	@GeneratedValue
-	@Column(name = "id_suivi")
-	private int idSuivi;
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "date_commentaire")
 	private Date dateCommentaire;
-	@Column(name= "commentaire_suivi_stage")
+	@Column(name = "commentaire_suivi_stage", length = 2000)
 	private String commentaireSuiviStage;
-	
-	//clé étrangère id_stage
+
 	@ManyToOne
-	@JoinColumn(name="id_stage",referencedColumnName ="id_stage")
-	private Stage idStage;
-	
-	// clé étrangère id_personne
+	private Stage stage;
+
 	@ManyToOne
-	@JoinColumn(name="id_personne",referencedColumnName ="id_personne")
-	private Personne idPersonne;
-	
+	private Personne personne;
+
 	private static final long serialVersionUID = 1L;
 
 	public SuiviStage() {
 		super();
-	}   
-	public Integer getIdSuivi() {
-		return this.idSuivi;
 	}
 
-	public void setIdSuivi(Integer idSuivi) {
-		this.idSuivi = idSuivi;
-	}   
 	public Date getDateCommentaire() {
 		return this.dateCommentaire;
 	}
 
 	public void setDateCommentaire(Date dateCommentaire) {
 		this.dateCommentaire = dateCommentaire;
-	}   
+	}
+
 	public String getCommentaireSuiviStage() {
 		return this.commentaireSuiviStage;
 	}
@@ -67,17 +52,27 @@ public class SuiviStage implements Serializable {
 	public void setCommentaireSuiviStage(String commentaire_suivi_stage) {
 		this.commentaireSuiviStage = commentaire_suivi_stage;
 	}
-	public void setIdStage(Stage idStage) {
-		this.idStage = idStage;
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
-	public Stage getIdStage() {
-		return idStage;
+
+	public Stage getStage() {
+		return stage;
 	}
-	public void setIdPersonne(Personne idPersonne) {
-		this.idPersonne = idPersonne;
+
+	public void setIdPersonne(Personne personne) {
+		this.personne = personne;
 	}
-	public Personne getIdPersonne() {
-		return idPersonne;
+
+	public Personne getPersonne() {
+		return personne;
 	}
-   
+
+	@Override
+	public String getDisplayText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

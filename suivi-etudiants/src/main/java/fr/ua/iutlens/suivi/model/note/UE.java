@@ -1,13 +1,12 @@
-package note;
+package fr.ua.iutlens.suivi.model.note;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import fr.ua.iutlens.suivi.model.BaseEntity;
 
 /**
  * Entity implementation class for Entity: UE
@@ -15,31 +14,19 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 
-public class UE implements Serializable {
+public class UE extends BaseEntity implements Serializable {
 
-	   
-	@Id
-	@GeneratedValue
-	@Column(name ="id_UE")
-	private int idUE;
+
 	@Column(name ="libelle_UE")
 	private String libelleUE;
 	@Column(name ="coefUE_UE")
 	private int coefUE;
 	@ManyToOne
-	@JoinColumn(name="id_etape",  referencedColumnName = "id_etape")
-	private Etape idEtape;
+	private Etape etape;
 	private static final long serialVersionUID = 1L;
 
 	public UE() {
 		super();
-	}   
-	public int getIdUE() {
-		return this.idUE;
-	}
-
-	public void setIdUE(int idUE) {
-		this.idUE = idUE;
 	}   
 	public String getLibelleUE() {
 		return this.libelleUE;
@@ -55,11 +42,15 @@ public class UE implements Serializable {
 	public void setCoef(int coefUE) {
 		this.coefUE = coefUE;
 	}
-	public void setIdEtape(Etape idEtape) {
-		this.idEtape = idEtape;
+	public void setEtape(Etape idEtape) {
+		this.etape = idEtape;
 	}
-	public Etape getIdEtape() {
-		return idEtape;
+	public Etape getEtape() {
+		return etape;
+	}
+	@Override
+	public String getDisplayText() {
+		return libelleUE;
 	}
    
 }

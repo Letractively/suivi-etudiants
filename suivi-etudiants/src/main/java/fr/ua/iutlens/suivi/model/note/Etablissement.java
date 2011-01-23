@@ -1,13 +1,13 @@
-package note;
+package fr.ua.iutlens.suivi.model.note;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import fr.ua.iutlens.suivi.model.BaseEntity;
 
 /**
  * Entity implementation class for Entity: Etablissement
@@ -15,29 +15,18 @@ import javax.persistence.ManyToMany;
  */
 @Entity
 
-public class Etablissement implements Serializable {
+public class Etablissement extends BaseEntity implements Serializable {
 
-	   
-	@Id
-	@GeneratedValue
-	@Column(name = "id_Etablissement")
-	private int idEtablissement;
+
 	private String type;
 	@Column(name = "nom_etablissement")
 	private String nomEtablissement;
-	@ManyToMany(mappedBy = "idEtablissement")
-	private List<Formation> idFormation;
+	@ManyToMany(mappedBy = "etablissement")
+	private List<Formation> formations;
 	private static final long serialVersionUID = 1L;
 
 	public Etablissement() {
 		super();
-	}   
-	public Integer getIdEtablissement() {
-		return this.idEtablissement;
-	}
-
-	public void setIdEtablissement(Integer idEtablissement) {
-		this.idEtablissement = idEtablissement;
 	}   
 	public String getType() {
 		return this.type;
@@ -53,11 +42,15 @@ public class Etablissement implements Serializable {
 	public void setNomEtablissement(String nomEtablissement) {
 		this.nomEtablissement = nomEtablissement;
 	}
-	public void setIdFormation(List<Formation> idFormation) {
-		this.idFormation = idFormation;
+	public void setFormations(List<Formation> idFormation) {
+		this.formations = idFormation;
 	}
-	public List<Formation> getIdFormation() {
-		return idFormation;
+	public List<Formation> getFormations() {
+		return formations;
+	}
+	@Override
+	public String getDisplayText() {
+		return nomEtablissement;
 	}
    
 }

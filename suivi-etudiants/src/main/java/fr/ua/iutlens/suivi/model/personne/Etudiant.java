@@ -1,11 +1,17 @@
-package personne;
+package fr.ua.iutlens.suivi.model.personne;
 
 import java.io.Serializable;
-import java.lang.Byte;
-import java.lang.Integer;
-import java.lang.String;
 import java.util.Date;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import fr.ua.iutlens.suivi.model.suiviPro.ActivitePro;
 
 /**
  * Entity implementation class for Entity: Etudiant
@@ -16,24 +22,23 @@ import javax.persistence.*;
 public class Etudiant extends Personne implements Serializable {
 
 	   
-	@Column(name="id_etudiant")
-	private Integer idEtudiant;
 	
 	@Temporal(TemporalType.DATE)
+	@Column(name = "date_naissance")
 	private Date datedenaissance;
-	private String nationnalite;
-	private Byte photoEtudiant;
+	@Column(length = 50)
+	@Basic
+	private String nationalite;
+	
+	@OneToMany(mappedBy = "etudiant")
+	private List<ActivitePro> activitesPro;
+	
+	private String numero;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Etudiant() {
 		super();
-	}   
-	public Integer getIdEtudiant() {
-		return this.idEtudiant;
-	}
-
-	public void setIdEtudiant(Integer idEtudiant) {
-		this.idEtudiant = idEtudiant;
 	}   
 	public Date getDatedenaissance() {
 		return this.datedenaissance;
@@ -42,19 +47,24 @@ public class Etudiant extends Personne implements Serializable {
 	public void setDatedenaissance(Date datedenaissance) {
 		this.datedenaissance = datedenaissance;
 	}   
-	public String getNationnalite() {
-		return this.nationnalite;
+	public String getNationalite() {
+		return this.nationalite;
 	}
 
-	public void setNationnalite(String nationnalite) {
-		this.nationnalite = nationnalite;
-	}   
-	public Byte getPhotoEtudiant() {
-		return this.photoEtudiant;
+	public void setNationalite(String nationnalite) {
+		this.nationalite = nationnalite;
 	}
-
-	public void setPhotoEtudiant(Byte photoEtudiant) {
-		this.photoEtudiant = photoEtudiant;
+	public List<ActivitePro> getActivitesPro() {
+		return activitesPro;
+	}
+	public void setActivitesPro(List<ActivitePro> activitesPro) {
+		this.activitesPro = activitesPro;
+	}
+	public String getNumero() {
+		return numero;
+	}
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
    
 }

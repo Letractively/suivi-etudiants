@@ -1,45 +1,41 @@
 package fr.ua.iutlens.suivi.model;
 
+import static javax.persistence.TemporalType.TIMESTAMP;
+
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.Basic;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+
 /**
- * This is the base {@link MappedSuperclass} for all the entities in the
- * application. It implements the Id and the created and modified time stamps.
- * It also includes the callback methods for populating the timestamp values,
- * and implements hashcode and equals based on the id.
- * <p/>
- * The abstract {@link BaseEntity#getDisplayText()} method provides a nice way
- * to get a textual representation of who or what the entity is (course or
- * person name). Since it is baked into the superclass, it will be available for all entity classes.
- * 
- * @author Andy Gibson
+ * Entity implementation class for Entity: BaseEntity
  * 
  */
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Temporal(TemporalType.TIMESTAMP)
+	@Basic
+	@Temporal(TIMESTAMP)
 	private Date createdOn;
-
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TIMESTAMP)
 	private Date modifiedOn;
+	private static final long serialVersionUID = 1L;
+
+	public BaseEntity() {
+		super();
+	}
 
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -47,19 +43,19 @@ public abstract class BaseEntity {
 	}
 
 	public Date getCreatedOn() {
-		return createdOn;
+		return this.createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedOn(Date CreateOn) {
+		this.createdOn = CreateOn;
 	}
 
 	public Date getModifiedOn() {
-		return modifiedOn;
+		return this.modifiedOn;
 	}
 
-	public void setModifiedOn(Date modifiedOn) {
-		this.modifiedOn = modifiedOn;
+	public void setModifiedOn(Date ModifiedOn) {
+		this.modifiedOn = ModifiedOn;
 	}
 
 	@Transient
