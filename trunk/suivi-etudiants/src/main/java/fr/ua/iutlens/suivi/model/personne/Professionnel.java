@@ -1,51 +1,36 @@
-package personne;
+package fr.ua.iutlens.suivi.model.personne;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
-import suiviPro.Entreprise;
+import fr.ua.iutlens.suivi.model.suiviPro.Entreprise;
 
 /**
  * Entity implementation class for Entity: Professionnel
- *
+ * 
  */
 @Entity
-
 public class Professionnel extends Personne implements Serializable {
 
-	   
-	@Column(name="id_professionnel")
-	private Integer idProfessionnel;
 	private String poste;
 	private String service;
 	private static final long serialVersionUID = 1L;
 
-	@ManyToOne(optional=false)
-	@JoinColumn(name="id_entreprise",referencedColumnName="id_entreprise")
-	private Entreprise idEntreprise;
-	
-	
+	private Entreprise entreprise;
+
 	public Professionnel() {
 		super();
-	}   
-	public Integer getIdProfessionnel() {
-		return this.idProfessionnel;
 	}
 
-	public void setIdProfessionnel(Integer idProfessionnel) {
-		this.idProfessionnel = idProfessionnel;
-	}   
 	public String getPoste() {
 		return this.poste;
 	}
 
 	public void setPoste(String poste) {
 		this.poste = poste;
-	}   
+	}
+
 	public String getService() {
 		return this.service;
 	}
@@ -53,11 +38,13 @@ public class Professionnel extends Personne implements Serializable {
 	public void setService(String service) {
 		this.service = service;
 	}
-	public void setIdEntreprise(Entreprise idEntreprise) {
-		this.idEntreprise = idEntreprise;
+
+	public Entreprise getEntreprise() {
+		return entreprise;
 	}
-	public Entreprise getIdEntreprise() {
-		return idEntreprise;
+
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
 	}
-   
+
 }

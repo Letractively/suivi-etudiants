@@ -1,9 +1,8 @@
-package personne;
+package fr.ua.iutlens.suivi.model.personne;
 
 import java.io.Serializable;
-import java.lang.Byte;
-import java.lang.Integer;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
 
 /**
  * Entity implementation class for Entity: Enseignant
@@ -14,27 +13,21 @@ import javax.persistence.*;
 public class Enseignant extends Personne implements Serializable {
 
 	   
-	@Column(name="id_enseignant")
-	private Integer idEnseignant;
-	private Byte photoEnseignant;
+	private String status;
 	private static final long serialVersionUID = 1L;
 
 	public Enseignant() {
 		super();
-	}   
-	public Integer getIdEnseignant() {
-		return this.idEnseignant;
 	}
 
-	public void setIdEnseignant(Integer idEnseignant) {
-		this.idEnseignant = idEnseignant;
-	}   
-	public Byte getPhotoEnseignant() {
-		return this.photoEnseignant;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setPhotoEnseignant(Byte photoEnseignant) {
-		this.photoEnseignant = photoEnseignant;
-	}
+	public void setStatus(String status) {
+		this.status = status;
+	} 
+	
+	
    
 }

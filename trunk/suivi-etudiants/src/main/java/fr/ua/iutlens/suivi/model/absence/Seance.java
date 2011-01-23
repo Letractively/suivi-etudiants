@@ -1,20 +1,18 @@
-package absence;
+package fr.ua.iutlens.suivi.model.absence;
 
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import note.Groupe;
-import note.Matiere;
-import personne.Enseignant;
+import fr.ua.iutlens.suivi.model.BaseEntity;
+import fr.ua.iutlens.suivi.model.note.Groupe;
+import fr.ua.iutlens.suivi.model.note.Matiere;
+import fr.ua.iutlens.suivi.model.personne.Enseignant;
 
 /**
  * Entity implementation class for Entity: Seance
@@ -22,40 +20,30 @@ import personne.Enseignant;
  */
 @Entity
 
-public class Seance implements Serializable {
+public class Seance extends BaseEntity implements Serializable {
 
 	   
-	@Id
-	@Column(name = "id_seance")
-	private String idSeance;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	private int duree;
 	private String type;
+	private String lieu;
+	
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="id_matiere", referencedColumnName = "id_matiere")
-	private Matiere idMatiere;
+	private Matiere matiere;
 		
 	@ManyToOne(optional=false)
-	@JoinColumn(name="id_groupe", referencedColumnName = "id_groupe")
-	private Groupe idGroupe;
+	private Groupe groupe;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="id_enseignant", referencedColumnName = "id_enseignant")
-	private Enseignant idEnseignant;
+	private Enseignant enseignant;
 
 	public Seance() {
 		super();
 	}   
-	public String getIdSeance() {
-		return this.idSeance;
-	}
-
-	public void setIdSeance(String idSeance) {
-		this.idSeance = idSeance;
-	}   
+ 
 	public Date getDate() {
 		return this.date;
 	}
@@ -77,23 +65,35 @@ public class Seance implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public void setIdMatiere(Matiere idMatiere) {
-		this.idMatiere = idMatiere;
+	public void setMatiere(Matiere idMatiere) {
+		this.matiere = idMatiere;
 	}
-	public Matiere getIdMatiere() {
-		return idMatiere;
+	public Matiere getMatiere() {
+		return matiere;
 	}
-	public void setIdGroupe(Groupe idGroupe) {
-		this.idGroupe = idGroupe;
+	public void setGroupe(Groupe idGroupe) {
+		this.groupe = idGroupe;
 	}
-	public Groupe getIdGroupe() {
-		return idGroupe;
+	public Groupe getGroupe() {
+		return groupe;
 	}
-	public void setIdEnseignant(Enseignant idEnseignant) {
-		this.idEnseignant = idEnseignant;
+	public void setEnseignant(Enseignant idEnseignant) {
+		this.enseignant = idEnseignant;
 	}
-	public Enseignant getIdEnseignant() {
-		return idEnseignant;
+	public Enseignant getEnseignant() {
+		return enseignant;
+	}
+	public String getLieu() {
+		return lieu;
+	}
+
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
+	}
+
+	@Override
+	public String getDisplayText() {
+		return groupe.getId() + "_" + enseignant.getId() + "_" + matiere.getId() + "_" + date;
 	}
    
 }

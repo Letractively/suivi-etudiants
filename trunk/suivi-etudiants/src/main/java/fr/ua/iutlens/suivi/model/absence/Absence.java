@@ -1,15 +1,13 @@
-package absence;
+package fr.ua.iutlens.suivi.model.absence;
 
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import personne.Etudiant;
+import fr.ua.iutlens.suivi.model.BaseEntity;
+import fr.ua.iutlens.suivi.model.note.Inscription;
 
 /**
  * Entity implementation class for Entity: Absence
@@ -17,41 +15,29 @@ import personne.Etudiant;
  */
 @Entity
 
-public class Absence implements Serializable {
+public class Absence extends BaseEntity implements Serializable {
 
-	   
-	@Id
-	@Column(name = "id_absence")
-	private Integer idAbsence;
+
 	private String nature;
 	private String justifie;
+	private Boolean valide;
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(optional=false)
-	@JoinColumn(name="id_coupon", referencedColumnName = "id_coupon")
-	private Coupon idCoupon;
+	@ManyToOne
+	private Coupon coupon;
+	
+	@ManyToOne(optional = false)
+	private Inscription inscription;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="id_etudiant", referencedColumnName = "id_etudiant")
-	private Etudiant idEtudiant;
-	
-	
-	@ManyToOne(optional=false)
-	@JoinColumn(name="id_seance", referencedColumnName = "id_seance")
-	private Seance idSeance;
+	private Seance seance;
 	 
 	
 	
 	public Absence() {
 		super();
 	}   
-	public Integer getIdAbsence() {
-		return this.idAbsence;
-	}
 
-	public void setIdAbsence(Integer idAbsence) {
-		this.idAbsence = idAbsence;
-	}   
 	public String getNature() {
 		return this.nature;
 	}
@@ -66,23 +52,37 @@ public class Absence implements Serializable {
 	public void setJustifie(String justifie) {
 		this.justifie = justifie;
 	}
-	public void setIdCoupon(Coupon idCoupon) {
-		this.idCoupon = idCoupon;
+	public void setCoupon(Coupon idCoupon) {
+		this.coupon = idCoupon;
 	}
-	public Coupon getIdCoupon() {
-		return idCoupon;
+	public Coupon getCoupon() {
+		return coupon;
 	}
-	public void setIdEtudiant(Etudiant idEtudiant) {
-		this.idEtudiant = idEtudiant;
+	public Inscription getInscription() {
+		return inscription;
 	}
-	public Etudiant getIdEtudiant() {
-		return idEtudiant;
+
+	public void setInscription(Inscription inscription) {
+		this.inscription = inscription;
 	}
-	public void setIdSeance(Seance idSeance) {
-		this.idSeance = idSeance;
+
+	public void setSeance(Seance idSeance) {
+		this.seance = idSeance;
 	}
-	public Seance getIdSeance() {
-		return idSeance;
+	public Seance getSeance() {
+		return seance;
+	}
+	public Boolean getValide() {
+		return valide;
+	}
+
+	public void setValide(Boolean valide) {
+		this.valide = valide;
+	}
+
+	@Override
+	public String getDisplayText() {
+		return nature;
 	}
    
 }
