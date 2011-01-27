@@ -20,17 +20,22 @@ import fr.ua.iutlens.suivi.model.personne.Enseignant;
  */
 @Entity
 public class Controle extends BaseEntity implements Serializable {
-
+	
 	@Column(name = "date_controle")
 	@Temporal(TemporalType.DATE)
 	private Date dateControle;
+	//champs servant à définir s'il s'agit d'un controle pour le controle continu ou du partiel
 	private String indicatif;
+	//clé etrangere : un groupe aura plusieurs controle
 	@ManyToOne
 	private Groupe groupe;
+	//clé étrangere : une matiere aura plusieurs controle
 	@ManyToOne
 	private Matiere matiere;
+	//clé etrangere : un enseignant aura plusieurs controle
 	@ManyToOne
 	private Enseignant enseignant;
+	//un controle possedera plusieurs notes
 	@OneToMany(mappedBy = "controle")
 	private List<Note> notes;
 	private static final long serialVersionUID = 1L;

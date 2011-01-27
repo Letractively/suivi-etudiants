@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import fr.ua.iutlens.suivi.model.BaseEntity;
 import fr.ua.iutlens.suivi.model.note.Inscription;
+import javax.persistence.Column;
 
 /**
  * Entity implementation class for Entity: Absence
@@ -17,26 +18,38 @@ import fr.ua.iutlens.suivi.model.note.Inscription;
 
 public class Absence extends BaseEntity implements Serializable {
 
-
-	private String nature;
-	private String justifie;
-	private Boolean valide;
+	@Column(length=500)
+	private String nature; //la nature de l'absence
+	@Column(length=500)
+	private String justifie; //commentaire de la validation par l'administration
+	private Boolean valide; //validation de l'absence par l'administration
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
+	//la table absence prend la clé primaire de la table coupon en clé étrangère
+	@ManyToOne(optional = false)
 	private Coupon coupon;
 	
+	//la table absence prend la clé primaire de la table inscription en clé étrangère
 	@ManyToOne(optional = false)
 	private Inscription inscription;
 	
+	//la table absence prend la clé primaire de la table seance en clé étrangère
 	@ManyToOne(optional=false)
 	private Seance seance;
 	 
-	
-	
 	public Absence() {
 		super();
-	}   
+	} 
+	
+	//renvoi de toutes les absences d'un élève
+	//public int NbAbs()
+	//{
+	//	int nbAbs=0;
+		
+		
+	//	return nbAbs;
+		
+	//}  
 
 	public String getNature() {
 		return this.nature;

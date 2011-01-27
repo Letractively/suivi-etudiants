@@ -15,10 +15,12 @@ import fr.ua.iutlens.suivi.model.BaseEntity;
 @Entity
 public class Etape extends BaseEntity implements Serializable {
 
+	//champs definissant si il s'agit d'un semestre ou d'un trimestre
 	@Column(name = "type_etape")
 	private String typeEtape;
 	@Column(name = "libelle_etape")
 	private String libelleEtape;
+	//clé etrangere : une formation poura servir pour plusieurs etapes
 	@ManyToOne
 	private Formation formation;
 	private static final long serialVersionUID = 1L;

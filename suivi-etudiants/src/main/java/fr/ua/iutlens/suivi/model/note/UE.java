@@ -19,15 +19,17 @@ public class UE extends BaseEntity implements Serializable {
 
 	@Column(name ="libelle_UE")
 	private String libelleUE;
-	@Column(name ="coefUE_UE")
+	@Column(name ="coef_UE")
 	private int coefUE;
+	//une etape aura une liste d'etape
 	@ManyToOne
 	private Etape etape;
 	private static final long serialVersionUID = 1L;
 
 	public UE() {
 		super();
-	}   
+	}
+	
 	public String getLibelleUE() {
 		return this.libelleUE;
 	}

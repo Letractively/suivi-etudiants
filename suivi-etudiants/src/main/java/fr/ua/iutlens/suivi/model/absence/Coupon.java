@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import fr.ua.iutlens.suivi.model.BaseEntity;
+import org.eclipse.persistence.annotations.JoinFetch;
+import static org.eclipse.persistence.annotations.JoinFetchType.OUTER;
+import javax.persistence.Column;
 
 /**
  * Entity implementation class for Entity: Coupon
@@ -15,9 +18,12 @@ import fr.ua.iutlens.suivi.model.BaseEntity;
 @Entity
 public class Coupon extends BaseEntity implements Serializable {
 
-	private String motif;
-	private String justificatif;
-	@OneToMany(mappedBy = "coupon")
+	@Column(length=500)
+	private String motif; // justification de l'absence
+	@Column(length=500)
+	private String justificatif; // ex : certificat médicale
+	@OneToMany(mappedBy = "coupon") //clé étrangère pointant vers "absence"
+	@JoinFetch(OUTER)
 	private List<Absence> absences;
 	private static final long serialVersionUID = 1L;
 
@@ -25,6 +31,7 @@ public class Coupon extends BaseEntity implements Serializable {
 		super();
 	}
 
+	//on récupère le motif de l'absence
 	public String getMotif() {
 		return this.motif;
 	}
@@ -33,6 +40,7 @@ public class Coupon extends BaseEntity implements Serializable {
 		this.motif = motif;
 	}
 
+	//on récupère le justificatif
 	public String getJustificatif() {
 		return this.justificatif;
 	}
@@ -41,6 +49,7 @@ public class Coupon extends BaseEntity implements Serializable {
 		this.justificatif = justificatif;
 	}
 
+	//On récupère la liste d'absences
 	public List<Absence> getAbsences() {
 		return absences;
 	}

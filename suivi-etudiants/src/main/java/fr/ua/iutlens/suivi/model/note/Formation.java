@@ -22,13 +22,17 @@ public class Formation extends BaseEntity implements Serializable {
 	private String type;
 	@Column(name = "libelle_formation")
 	private String libelleFormation;
-	private static final long serialVersionUID = 1L;
+
+	//Relation N-N : chaque formation poura se faire de plusieur etablissement
 	@ManyToMany
 	private List<Etablissement> etablissement;
 	
+	//une formation aura une liste d'etapes
 	@OneToMany(mappedBy = "formation")
 	private List<Etape> etapes;
 
+	private static final long serialVersionUID = 1L;
+	
 	public Formation() {
 		super();
 	}   

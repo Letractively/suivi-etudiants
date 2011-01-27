@@ -30,17 +30,21 @@ public class Inscription extends BaseEntity implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateFinInscription;
 	private String anneeUniv;
+	//champs indiquant l'obtention ou pas du diplome associé à l'inscription
 	private String resultat;
-	@ManyToOne
-	private Etape etape;
+	// clé etrangere : un etudiant aura plusieurs inscription
 	@ManyToOne
 	private Etudiant etudiant;
-	
+	//une etapes pourra avoir plusieur inscription
+	@ManyToOne
+	private Etape Etape;
+	//une inscription aura une liste de notes
 	@OneToMany(mappedBy = "inscription")
 	private List<Note> notes;
+	//relation N-N : une inscription aura une liste de groupe 
 	@ManyToMany
 	private List<Groupe> groupes;
-	
+	// une inscription aura une liste d'absence
 	@OneToMany(mappedBy = "inscription")
 	private List<Absence> absences;
 	
@@ -72,14 +76,6 @@ public class Inscription extends BaseEntity implements Serializable {
 
 	public void setResultat(String resultat) {
 		this.resultat = resultat;
-	}
-
-	public void setEtape(Etape idEtape) {
-		this.etape = idEtape;
-	}
-
-	public Etape getEtape() {
-		return etape;
 	}
 
 	public void setEtudiant(Etudiant idEtudiant) {
@@ -125,5 +121,13 @@ public class Inscription extends BaseEntity implements Serializable {
 	@Override
 	public String getDisplayText() {
 		return etudiant.getNumero()+ "_" + anneeUniv;
+	}
+
+	public void setEtape(Etape etape) {
+		Etape = etape;
+	}
+
+	public Etape getEtape() {
+		return Etape;
 	}
 }

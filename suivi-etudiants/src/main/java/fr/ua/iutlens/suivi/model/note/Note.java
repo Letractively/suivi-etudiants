@@ -11,12 +11,14 @@ import javax.persistence.*;
 @Entity
 
 public class Note extends BaseEntity implements Serializable {
-
+	
+	private double note;
+	//clé etrangere : une inscription aura plusieurs notes
 	@ManyToOne
 	private Inscription inscription;
+	//clé etrangere : un controle aura plusieurs notes
 	@ManyToOne
 	private Controle controle;
-	private Boolean valide;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -40,17 +42,16 @@ public class Note extends BaseEntity implements Serializable {
 		this.controle = controle;
 	}
 
-	public Boolean getValide() {
-		return valide;
+	public void setNote(double note) {
+		this.note = note;
 	}
 
-	public void setValide(Boolean valide) {
-		this.valide = valide;
+	public double getNote() {
+		return note;
 	}
 
 	@Override
 	public String getDisplayText() {
-		// TODO Auto-generated method stub
 		return inscription.getId() + "_" + controle.getId();
 	}
    
