@@ -17,12 +17,23 @@ import fr.ua.iutlens.suivi.model.BaseEntity;
 @Entity
 public class Utilisateur extends BaseEntity implements Serializable {
 
+	// champs login (unique, non null, taille max 50caractères)
 	@Column(unique = true, nullable = false, length = 50)
 	private String login;
+	
+	// champs mot de passe
 	private String mdp;
+	
+	// champs role de l'utilisateur (admin, secrétaire, enseignant, etudiant, ...)
+	private String role;
+	
+	// clé étrangère ???
+	// option fetch :
+	// La stratégie EAGER est une exigence sur le runtime fournisseur de persistance que l'entité associée doit être chargée agressivement.
+	// La stratégie LAZY est une allusion à l'exécution fournisseur de persistance.
 	@ManyToOne(fetch = LAZY)
 	private Personne personne;
-	private String role;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Utilisateur() {
@@ -69,6 +80,10 @@ public class Utilisateur extends BaseEntity implements Serializable {
 		this.role = role;
 	}
 
+	// Override :
+	// Indique qu'une déclaration de méthode est destinée à remplacer une déclaration de méthode dans
+	// une superclasse. Si une méthode est annoté avec ce type d'annotation mais ne remplace pas une 
+	// méthode de classe, les compilateurs sont nécessaires pour générer un message d'erreur
 	@Override
 	public String getDisplayText() {
 		return login;

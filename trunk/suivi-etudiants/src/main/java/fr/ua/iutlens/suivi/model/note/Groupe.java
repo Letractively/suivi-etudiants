@@ -19,8 +19,7 @@ public class Groupe extends BaseEntity implements Serializable {
 	@Column(name = "nom_groupe")
 	private String nomGroupe;
 
-	private String anneeUniv;
-
+	//un groupe correspondera a une liste d'inscription
 	@ManyToMany(mappedBy = "groupes")
 	private List<Inscription> inscriptions;
 
@@ -37,14 +36,6 @@ public class Groupe extends BaseEntity implements Serializable {
 
 	public void setNomGroupe(String nomGroupe) {
 		this.nomGroupe = nomGroupe;
-	}
-
-	public String getAnneeUniv() {
-		return anneeUniv;
-	}
-
-	public void setAnneeUniv(String anneeUniv) {
-		this.anneeUniv = anneeUniv;
 	}
 
 	public List<Inscription> getInscriptions() {
