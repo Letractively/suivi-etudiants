@@ -20,7 +20,7 @@ public class Groupe extends BaseEntity implements Serializable {
 	private String nomGroupe;
 
 	//un groupe correspondera a une liste d'inscription
-	@ManyToMany(mappedBy = "groupes")
+	@ManyToMany
 	private List<Inscription> inscriptions;
 
 	private static final long serialVersionUID = 1L;

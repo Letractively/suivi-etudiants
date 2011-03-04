@@ -19,9 +19,9 @@ import javax.persistence.Column;
 public class Coupon extends BaseEntity implements Serializable {
 
 	@Column(length=500)
-	private String motif; // justification de l'absence
+	private String motif;
 	@Column(length=500)
-	private String justificatif; // ex : certificat médicale
+	private String justificatif;
 	@OneToMany(mappedBy = "coupon") //clé étrangère pointant vers "absence"
 	@JoinFetch(OUTER)
 	private List<Absence> absences;

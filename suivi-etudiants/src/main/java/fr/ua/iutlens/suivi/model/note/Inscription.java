@@ -42,7 +42,7 @@ public class Inscription extends BaseEntity implements Serializable {
 	@OneToMany(mappedBy = "inscription")
 	private List<Note> notes;
 	//relation N-N : une inscription aura une liste de groupe 
-	@ManyToMany
+	@ManyToMany(mappedBy="inscriptions")
 	private List<Groupe> groupes;
 	// une inscription aura une liste d'absence
 	@OneToMany(mappedBy = "inscription")

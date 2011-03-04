@@ -21,7 +21,7 @@ public class Absence extends BaseEntity implements Serializable {
 	@Column(length=500)
 	private String nature; //la nature de l'absence
 	@Column(length=500)
-	private String justifie; //commentaire de la validation par l'administration
+	private String justifie; //la justification de l'absence par l'élève
 	private Boolean valide; //validation de l'absence par l'administration
 	private static final long serialVersionUID = 1L;
 	

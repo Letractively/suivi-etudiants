@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
@@ -22,6 +23,7 @@ import javax.persistence.Transient;
 public abstract class BaseEntity implements Serializable {
 
 	@Id
+	@GeneratedValue
 	private Long id;
 	@Basic
 	@Temporal(TIMESTAMP)

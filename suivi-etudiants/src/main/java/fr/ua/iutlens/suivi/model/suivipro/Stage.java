@@ -35,6 +35,9 @@ public class Stage extends BaseEntity implements Serializable {
 	// champs url du rapport de stage
 	@Column(name = "url_rapport")
 	private String urlRapport;
+	// champs intitule de stage
+	@Column(name = "intitule_stage")
+	private String intituleStage;
 
 	// clé étrangère de la table entreprise
 	private Entreprise entreprise;
@@ -145,6 +148,14 @@ public class Stage extends BaseEntity implements Serializable {
 	public String getDisplayText() {
 		return etudiant.getNomPersonne() + "_" + enseignant.getNomPersonne()
 				+ "_" + professionnel.getNomPersonne();
+	}
+
+	public void setIntituleStage(String intituleStage) {
+		this.intituleStage = intituleStage;
+	}
+
+	public String getIntituleStage() {
+		return intituleStage;
 	}
 
 }
