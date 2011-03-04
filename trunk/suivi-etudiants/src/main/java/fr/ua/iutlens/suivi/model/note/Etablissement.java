@@ -24,13 +24,13 @@ public class Etablissement extends BaseEntity implements Serializable {
 	//les champs de l'adresse
 	private String numero;
 	private String adresse;
-	private String codepostal;
+	private String codePostal;
 	private String ville;
 	private String mail;
 	private String tel;
 	
 	//relation N-N : chaque etablissement aura une liste de formation
-	@ManyToMany(mappedBy = "etablissement")
+	@ManyToMany
 	private List<Formation> formations;
 	private static final long serialVersionUID = 1L;
 
@@ -63,11 +63,11 @@ public class Etablissement extends BaseEntity implements Serializable {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public String getCodepostal() {
-		return codepostal;
+	public String getCodePostal() {
+		return codePostal;
 	}
-	public void setCodepostal(String codepostal) {
-		this.codepostal = codepostal;
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
 	}
 	public String getVille() {
 		return ville;
@@ -93,6 +93,11 @@ public class Etablissement extends BaseEntity implements Serializable {
 	public List<Formation> getFormations() {
 		return formations;
 	}
+	
+	public String getAdresseComplete(){
+		return numero+ " " + adresse + " " + codePostal + " " + ville;
+	}
+	
 	@Override
 	public String getDisplayText() {
 		return nomEtablissement;

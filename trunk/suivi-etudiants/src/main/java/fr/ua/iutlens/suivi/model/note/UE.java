@@ -37,11 +37,11 @@ public class UE extends BaseEntity implements Serializable {
 	public void setLibelleUE(String libelleUE) {
 		this.libelleUE = libelleUE;
 	}   
-	public int getCoef() {
+	public int getCoefUE() {
 		return this.coefUE;
 	}
 
-	public void setCoef(int coefUE) {
+	public void setCoefUE(int coefUE) {
 		this.coefUE = coefUE;
 	}
 	public void setEtape(Etape idEtape) {

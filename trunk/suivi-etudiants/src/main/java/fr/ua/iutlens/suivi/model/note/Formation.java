@@ -24,8 +24,8 @@ public class Formation extends BaseEntity implements Serializable {
 	private String libelleFormation;
 
 	//Relation N-N : chaque formation poura se faire de plusieur etablissement
-	@ManyToMany
-	private List<Etablissement> etablissement;
+	@ManyToMany(mappedBy="formations")
+	private List<Etablissement> etablissements;
 	
 	//une formation aura une liste d'etapes
 	@OneToMany(mappedBy = "formation")
@@ -50,11 +50,11 @@ public class Formation extends BaseEntity implements Serializable {
 	public void setLibelleFormation(String libelleFormation) {
 		this.libelleFormation = libelleFormation;
 	}
-	public void setEtablissement(List<Etablissement> idEtablissement) {
-		this.etablissement = idEtablissement;
+	public void setEtablissements(List<Etablissement> etablissements) {
+		this.etablissements = etablissements;
 	}
-	public List<Etablissement> getEtablissement() {
-		return etablissement;
+	public List<Etablissement> getEtablissements() {
+		return etablissements;
 	}
 	
 	public List<Etape> getEtapes() {

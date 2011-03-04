@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 
 import fr.ua.iutlens.suivi.model.BaseEntity;
 import fr.ua.iutlens.suivi.model.personne.Enseignant;
+import fr.ua.iutlens.suivi.model.personne.Etudiant;
 
 /**
  * Entity implementation class for Entity: Controle
@@ -42,6 +43,15 @@ public class Controle extends BaseEntity implements Serializable {
 
 	public Controle() {
 		super();
+	}
+	
+	public double noteEtudiant(Etudiant etudiant){
+		for (Note note : notes){
+			if(note.noteEtudiant(etudiant)!=-1){
+				return note.noteEtudiant(etudiant);
+			}
+		}
+		return -1;
 	}
 
 	public Date getDateControle() {

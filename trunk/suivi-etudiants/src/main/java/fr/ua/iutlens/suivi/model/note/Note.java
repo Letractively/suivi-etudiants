@@ -1,8 +1,12 @@
 package fr.ua.iutlens.suivi.model.note;
 
-import fr.ua.iutlens.suivi.model.BaseEntity;
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+import fr.ua.iutlens.suivi.model.BaseEntity;
+import fr.ua.iutlens.suivi.model.personne.Etudiant;
 
 /**
  * Entity implementation class for Entity: Note
@@ -26,6 +30,13 @@ public class Note extends BaseEntity implements Serializable {
 		super();
 	}
 
+	public double noteEtudiant(Etudiant etudiant){
+		if (inscription.getEtudiant().equals(etudiant)){
+			return note;
+		}
+		return -1;
+	}
+	
 	public Inscription getInscription() {
 		return inscription;
 	}

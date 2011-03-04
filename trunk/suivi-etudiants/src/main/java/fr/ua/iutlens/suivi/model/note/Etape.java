@@ -20,7 +20,8 @@ public class Etape extends BaseEntity implements Serializable {
 	private String typeEtape;
 	@Column(name = "libelle_etape")
 	private String libelleEtape;
-	//clé etrangere : une formation poura servir pour plusieurs etapes
+	private String anneeUniv;
+	//clé etrangere : une formation pourra servir pour plusieurs etapes
 	@ManyToOne
 	private Formation formation;
 	private static final long serialVersionUID = 1L;
@@ -43,6 +44,14 @@ public class Etape extends BaseEntity implements Serializable {
 
 	public void setLibelleEtape(String libelleEtape) {
 		this.libelleEtape = libelleEtape;
+	}
+
+	public void setAnneeUniv(String anneeUniv) {
+		this.anneeUniv = anneeUniv;
+	}
+
+	public String getAnneeUniv() {
+		return anneeUniv;
 	}
 
 	public Formation getFormation() {
