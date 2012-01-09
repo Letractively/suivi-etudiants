@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<body>
+		<ul>
+			<ui:fragment rendered="#{!login.loggedIn}">
+				<li><a href="login.faces">Connexion</a></li>
+				<li><a href="site.faces">Accueil</a></li>
+			</ui:fragment>
+			<ui:fragment rendered="#{login.loggedIn}">
+				<h:form>
+					<li>Bienvenue</li>
+					<li><a href="site.faces">Accueil</a></li>
+					<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
+					<li><a href="ajoutEtudiant.faces">Inscrire un étudiant</a></li>
+					<li><a href="listeUsers.faces">Liste des utilisateurs</a></li>
+				</h:form>
+			</ui:fragment>
+		</ul> 
+	</body>
+</html>

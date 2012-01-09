@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Gestion des absences</ui:define>
+
+    <ui:define name="content">
+ 
+    <h1>Liste des étudiants</h1>
+     <h:form>
+	    <h:dataTable value="#{etudiantBean.etudiants}" var="et" class="tab" >
+		    <h:column>
+		    	<f:facet name="header">
+		    		
+		    	</f:facet>
+		    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.id]}" />
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Nom" />
+		    	</f:facet>
+		    	<h:outputText value="#{et.nom}" /> 	
+		    </h:column>	    
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Prenom" />
+		    	</f:facet>
+		    	<h:outputText value="#{et.prenom}" />
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Adresse" />
+		    	</f:facet>
+		    	<h:outputText value="#{et.adresse}" />
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Tel" />
+		    	</f:facet>
+		    	<h:outputText value="#{et.tel}" />
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Mail" />
+		    	</f:facet>
+		    	<h:outputText value="#{et.mail}" />
+		    </h:column>
+		    <h:column>
+			    <h:commandButton value="Modifier" action="#{etudiantBean.edit()}">   
+	      			<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.editEtudiant}" />
+	    		</h:commandButton>
+	    	</h:column> 
+		    
+	    </h:dataTable>
+	    <br />
+		<h:commandButton value="Supprimer" action="#{etudiantBean.supprimer()}" />
+	</h:form>
+    </ui:define> 
+
+</ui:composition>
+</html>

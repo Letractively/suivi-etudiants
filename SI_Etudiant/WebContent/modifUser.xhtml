@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Gestion des absences</ui:define>
+
+    <ui:define name="content">
+    <h1>Modification de votre compte</h1>
+	    <h:form> 
+	    	<h:outputLabel for="mdp" value="Mot de passe : " />
+			<h:inputSecret id="mdp" required="true" label="mdp" value="" />
+			<br />
+			<h:outputLabel for="mdp2" value="Répéter mot de passe : " />
+			<h:inputSecret id="mdp2" required="true" label="mdp2" value="" />
+			<br />
+			<h:commandButton value="Modifier" action="#{etudiantBean.modifier()}" />
+	    </h:form>  
+    </ui:define> 
+</ui:composition>
+</html>

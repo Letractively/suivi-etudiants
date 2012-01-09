@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+              http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+	<navigation-rule>
+	<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+	     <from-view-id>listeEtudiants.xhtml</from-view-id>
+	     <navigation-case>
+	            <from-outcome>edit</from-outcome>
+	            <to-view-id>modifEtudiant.xhtml</to-view-id>
+	            <redirect />
+	     </navigation-case>
+	 </navigation-rule>
+	 <navigation-rule>
+	     <from-view-id>ajoutEtudiant.xhtml</from-view-id>
+	     <navigation-case>
+	            <from-outcome>list</from-outcome>
+	            <to-view-id>listeEtudiants.xhtml</to-view-id>
+	            <redirect />
+	     </navigation-case>
+	 </navigation-rule>
+	 <navigation-rule>
+	     <from-view-id>modifEtudiant.xhtml</from-view-id>
+	     <navigation-case>
+	            <from-outcome>list</from-outcome>
+	            <to-view-id>listeEtudiants.xhtml</to-view-id>
+	            <redirect />
+	     </navigation-case>
+	 </navigation-rule>
+	 
+		
+</faces-config>

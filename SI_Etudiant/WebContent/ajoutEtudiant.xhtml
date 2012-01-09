@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Gestion des absences</ui:define>
+
+    <ui:define name="content">
+	    <h1>Inscription</h1>
+	    <h:form>
+	    	<h:outputLabel for="nom" value="Nom : " />
+			<h:inputText id="nom" required="true" label="nom" value="#{etudiantBean.etudiant.nom}" />
+			<br />
+			<h:outputLabel for="prenom" value="Prenom : " />
+			<h:inputText id="prenom" required="true" label="prenom" value="#{etudiantBean.etudiant.prenom}" />
+			<br />
+			<h:outputLabel for="sexe" value="Sexe : " />
+			<h:inputText id="sexe" required="true" label="sexe" value="#{etudiantBean.etudiant.sexe}" />
+			<br />
+			<h:outputLabel for="adresse" value="Adresse : " />
+			<h:inputText id="adresse" required="true" label="adresse" value="#{etudiantBean.etudiant.adresse}"/>
+			<br />
+			<h:outputLabel for="cp" value="Code Postal: " />
+			<h:inputText id="cp" required="true" label="cp" value="#{etudiantBean.etudiant.codepostal}"/>
+			<br />
+			<h:outputLabel for="mail" value="Mail : " />
+			<h:inputText id="mail" required="true" label="mail" value="#{etudiantBean.etudiant.mail}"/>
+			<br />
+			<h:outputLabel for="tel" value="Tel : " />
+			<h:inputText id="tel" required="true" label="tel" value="#{etudiantBean.etudiant.tel}"/>
+			<br />
+			<h:commandButton value="Ajouter" action="#{etudiantBean.ajout()}" />
+	    </h:form>
+    
+    </ui:define> 
+
+</ui:composition>
+</html>
