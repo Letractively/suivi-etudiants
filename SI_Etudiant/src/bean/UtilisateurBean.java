@@ -13,27 +13,25 @@ import entity.Utilisateur;
 
 @ManagedBean(name = "utilisateurBean")
 @RequestScoped
-public class UtilisateurBean 
-{
-
+public class UtilisateurBean {
+	
 	@EJB
-	private UtilisateurEJB utilisateurEJB;
-	
-	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
-	
-	@PostConstruct
-	public void init() 
-	{
-		utilisateurs = utilisateurEJB.findAllUtilisateurs();
-	}
+    private UtilisateurEJB utilisateurEJB;
+    
+    private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
+    
+    @PostConstruct
+    public void init() 
+    {
+            utilisateurs = utilisateurEJB.findAllUtilisateurs();
+    }
 
-	public List<Utilisateur> getUtilisateurs() {
-		return utilisateurs;
-	}
+    public List<Utilisateur> getUtilisateurs() {
+            return utilisateurs;
+    }
 
-	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
-		this.utilisateurs = utilisateurs;
-	}  
-	
-	
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+            this.utilisateurs = utilisateurs;
+    }  
+
 }

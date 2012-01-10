@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="logout::site.xhtml" NAME="output"
+    PATH="site.xhtml" TARGET="rules:site.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:listeEtudiants.xhtml"
+  PATH="listeEtudiants.xhtml" SHAPE="256,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:listeEtudiants.xhtml:0" NAME="item"
+   PATH="listeEtudiants.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="edit::modifEtudiant.xhtml" NAME="output"
+    PATH="modifEtudiant.xhtml" TARGET="rules:modifEtudiant.xhtml"
+    TITLE="edit" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:ajoutEtudiant.xhtml"
+  PATH="ajoutEtudiant.xhtml" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:ajoutEtudiant.xhtml:0" NAME="item"
+   PATH="ajoutEtudiant.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="list::listeEtudiants.xhtml" NAME="output"
+    PATH="listeEtudiants.xhtml" TARGET="rules:listeEtudiants.xhtml"
+    TITLE="list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:modifEtudiant.xhtml"
+  PATH="modifEtudiant.xhtml" SHAPE="464,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:modifEtudiant.xhtml:0" NAME="item"
+   PATH="modifEtudiant.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="list::listeEtudiants.xhtml" NAME="output"
+    PATH="listeEtudiants.xhtml" TARGET="rules:listeEtudiants.xhtml"
+    TITLE="list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ajoutEntreprise.xhtml"
+  PATH="/ajoutEntreprise.xhtml" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#ajoutEntreprise.xhtml:0" NAME="item"
+   PATH="/ajoutEntreprise.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="listeEntreprise::#listeEntreprises.xhtml"
+    NAME="output" PATH="/listeEntreprises.xhtml"
+    TARGET="rules:#listeEntreprises.xhtml" TITLE="listeEntreprise" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#listeEntreprises.xhtml"
+  PATH="/listeEntreprises.xhtml" SHAPE="240,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#listeEntreprises.xhtml:0" NAME="item"
+   PATH="/listeEntreprises.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="editEntreprise::#modifEntreprise.xhtml"
+    NAME="output" PATH="/modifEntreprise.xhtml"
+    TARGET="rules:#modifEntreprise.xhtml" TITLE="editEntreprise" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#modifEntreprise.xhtml"
+  PATH="/modifEntreprise.xhtml" SHAPE="448,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#modifEntreprise.xhtml:0" NAME="item"
+   PATH="/modifEntreprise.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="listeEntreprise::#listeEntreprises.xhtml"
+    NAME="output" PATH="/listeEntreprises.xhtml"
+    TARGET="rules:#listeEntreprises.xhtml" TITLE="listeEntreprise" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:site.xhtml" PATH="site.xhtml"
+  SHAPE="216,40,50,25" model-entity="JSFProcessGroup"/>
+</PROCESS>

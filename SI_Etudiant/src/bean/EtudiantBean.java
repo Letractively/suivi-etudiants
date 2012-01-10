@@ -6,10 +6,16 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+
+import com.sun.jersey.spi.inject.Inject;
+import com.sun.xml.internal.ws.developer.Stateful;
 
 import ejb.EtudiantEJB;
 import entity.Etudiant;
@@ -33,8 +39,7 @@ public class EtudiantBean
 	@PostConstruct
 	public void init() 
 	{
-	    
-		etudiants = etudiantEJB.findAllEtudiants();
+	    etudiants = etudiantEJB.findAllEtudiants();
 	}  
 	public String doNewEtudiant() 
 	{
@@ -96,7 +101,7 @@ public class EtudiantBean
 	  }
 	  public void supprimer() 
 	  {
-		  	System.out.println("Test SVN sur internet lol ");
+		  	System.out.println("Test !!!!!!!!!");
 	        List<Etudiant> etudiantSelectionne = new ArrayList<Etudiant>();
 
 	        System.out.println("Test !!!!!!!!!");

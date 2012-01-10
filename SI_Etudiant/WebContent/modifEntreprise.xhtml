@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Suivi des etudiants</ui:define>
+
+    <ui:define name="content">
+    <h1>Modification de <h:outputText value="#{entrepriseBean.editEntreprise.nom}" /></h1>
+	    <h:form> 
+	    	<h:outputLabel for="nom" value="Nom : " />
+			<h:inputText id="nom" required="true" label="nom" value="#{entrepriseBean.editEntreprise.nom}" />
+			<br />
+			<h:outputLabel for="raisonsociale" value="Raison Sociale : " />
+			<h:inputText id="raisonsociale" required="true" label="raisonsociale" value="#{entrepriseBean.editEntreprise.raisonsociale}" />
+			<br />
+			<h:outputLabel for="secteuractivite" value="Secteur d'activité : " />
+			<h:inputText id="secteuractivite" required="true" label="secteuractivite" value="#{entrepriseBean.editEntreprise.secteuractivite}" />
+			<br />
+			<h:outputLabel for="mail" value="Mail : " />
+			<h:inputText id="mail" required="true" label="mail" value="#{entrepriseBean.editEntreprise.mail}"/>
+			<br />
+			<h:outputLabel for="tel" value="Tel : " />
+			<h:inputText id="tel" required="true" label="tel" value="#{entrepriseBean.editEntreprise.tel}"/>
+			<br />
+			<h:commandButton value="Modifier" action="#{entrepriseBean.modifier()}" />
+	    </h:form>  
+    </ui:define> 
+</ui:composition>
+</html>

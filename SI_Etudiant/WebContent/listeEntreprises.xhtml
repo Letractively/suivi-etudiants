@@ -12,54 +12,54 @@
 
     <ui:define name="content">
  
-    <h1>Liste des étudiants</h1>
+    <h1>Liste des entreprises</h1>
      <h:form>
-	    <h:dataTable value="#{etudiantBean.etudiants}" var="et" class="tab" >
+	    <h:dataTable value="#{entrepriseBean.entreprises}" var="entreprise" class="tab" >
 		    <h:column>
 		    	<f:facet name="header">
 		    		
 		    	</f:facet>
-		    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.id]}" />
+		    	<h:selectBooleanCheckbox title="supprimer" value="#{entrepriseBean.checked[entreprise.id]}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Nom" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.nom}" /> 	
+		    	<h:outputText value="#{entreprise.nom}" /> 	
 		    </h:column>	    
 		    <h:column>
 		    	<f:facet name="header">
-		    		<h:outputText value="Prenom" />
+		    		<h:outputText value="Raison Sociale" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.prenom}" />
+		    	<h:outputText value="#{entreprise.raisonsociale}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
-		    		<h:outputText value="Adresse" />
+		    		<h:outputText value="Secteur d'activité" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.adresse}" />
+		    	<h:outputText value="#{entreprise.secteuractivite}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Tel" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.tel}" />
+		    	<h:outputText value="#{entreprise.tel}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Mail" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.mail}" />
+		    	<h:outputText value="#{entreprise.mail}" />
 		    </h:column>
 		    <h:column>
-			    <h:commandButton value="Modifier" action="#{etudiantBean.edit()}">   
-	      			<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.editEtudiant}" />
+			    <h:commandButton value="Modifier" action="#{entrepriseBean.edit()}">   
+	      			<f:setPropertyActionListener value="#{entreprise}" target="#{entrepriseBean.editEntreprise}" />
 	    		</h:commandButton>
 	    	</h:column> 
 		    
 	    </h:dataTable>
 	    <br />
-		<h:commandButton value="Supprimer" action="#{etudiantBean.supprimer()}" />
+		<h:commandButton value="Supprimer" action="#{entrepriseBean.supprimer()}" />
 	</h:form>
     </ui:define> 
 

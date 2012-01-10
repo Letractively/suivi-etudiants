@@ -2,39 +2,39 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="title">Gestion des absences</ui:define>
+    <ui:define name="title">Suivi des etudiants</ui:define>
 
     <ui:define name="content">
  
     <h1>Liste des Utilisateurs</h1>
      <h:form>
-	    <h:dataTable value="#{utilisateurBean.utilisateurs}" var="u" class="tab" >
-		    <h:column>
-		    	<f:facet name="header">
-		    		
-		    	</f:facet>
-		    	<h:selectBooleanCheckbox title="supprimer" value="" />
-		    </h:column>
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Login" />
-		    	</f:facet>
-		    	<h:outputText value="#{u.login}" /> 	
-		    </h:column>	    
-		    <h:column>
-			    
-	    	</h:column> 
-		    
-	    </h:dataTable>
-	    <br />
-		<h:commandButton value="Supprimer" />
-	</h:form>
+            <h:dataTable value="#{utilisateurBean.utilisateurs}" var="u" class="tab" >
+                    <h:column>
+                        <f:facet name="header">
+                                
+                        </f:facet>
+                        <h:selectBooleanCheckbox title="supprimer" value="" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                                <h:outputText value="Login" />
+                        </f:facet>
+                        <h:outputText value="#{u.login}" />     
+                    </h:column>     
+                    <h:column>
+                            
+                </h:column> 
+                    
+            </h:dataTable>
+            <br />
+                <h:commandButton value="Supprimer" />
+        </h:form>
     </ui:define> 
 
 </ui:composition>
