@@ -95,7 +95,7 @@ public class EntrepriseBean {
 	        for (Entreprise unEntreprise : entreprises)
 	        {
 	        	
-	            if (checked.get(unEntreprise.getId())) 
+	            if (checked.get(unEntreprise.getIdentreprise())) 
 	            {
 	            	 System.out.println(unEntreprise.getNom());
 	            	
@@ -110,7 +110,7 @@ public class EntrepriseBean {
 	   }
 	  public String edit()
 	  {
-		  System.out.println(editEntreprise.getId());	
+		  System.out.println(editEntreprise.getIdentreprise());	
 		  return "editEntreprise";
 			
 	  }
