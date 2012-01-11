@@ -76,13 +76,7 @@ public class EtudiantBean
 		this.editEtudiant = editEtudiant;
 	}
 	public String ajout() 
-	  {
-		
-		
-		/*  System.out.println("nom : "+etudiant.getId()+"-----"+etudiant.getNom()+"prenom : "+
-		 * etudiant.getPrenom()+" mail : "+etudiant.getMail()+" adresse :"+etudiant.getAdresse()+
-		 * "cp : "+etudiant.getCodepostal()+"tel :" +
-			etudiant.getTel());*/	  
+	{
 		  this.etudiantEJB.createEtudiant(etudiant);  
 		  
 		  //si on est en session, sinon pas besoin...
@@ -94,13 +88,12 @@ public class EtudiantBean
 	  public void supprimer() 
 	  {
 		  	System.out.println("Test !!!!!!!!!");
-	        List<Etudiant> etudiantSelectionne = new ArrayList<Etudiant>();
-
 	        System.out.println("Test !!!!!!!!!");
+	        
 	        for (Etudiant unEtudiant : etudiants)
 	        {
 	        	
-	            if (checked.get(unEtudiant.getId())) 
+	            if (checked.get(unEtudiant.getIdetudiant())) 
 	            {
 	            	 System.out.println(unEtudiant.getNom());
 	            	
@@ -115,7 +108,7 @@ public class EtudiantBean
 	   }
 	  public String edit()
 	  {
-		  System.out.println(editEtudiant.getId());	
+		  System.out.println(editEtudiant.getIdetudiant());	
 		  return "edit";
 			
 	  }

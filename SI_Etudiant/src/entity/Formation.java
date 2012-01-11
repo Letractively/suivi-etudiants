@@ -15,27 +15,30 @@ public class Formation implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private long idformation;
 
 	private String etablissement;
 
-	private String nom;
-
-	private long typeformation;
+	private String nomformation;
 
 	//bi-directional many-to-one association to EtudiantFormation
 	@OneToMany(mappedBy="formation")
 	private Set<EtudiantFormation> etudiantFormations;
 
+	//bi-directional many-to-one association to Typeformation
+    @ManyToOne
+	@JoinColumn(name="IDTYPEFORMATION")
+	private Typeformation typeformation;
+
     public Formation() {
     }
 
-	public long getId() {
-		return this.id;
+	public long getIdformation() {
+		return this.idformation;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdformation(long idformation) {
+		this.idformation = idformation;
 	}
 
 	public String getEtablissement() {
@@ -46,20 +49,12 @@ public class Formation implements Serializable {
 		this.etablissement = etablissement;
 	}
 
-	public String getNom() {
-		return this.nom;
+	public String getNomformation() {
+		return this.nomformation;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public long getTypeformation() {
-		return this.typeformation;
-	}
-
-	public void setTypeformation(long typeformation) {
-		this.typeformation = typeformation;
+	public void setNomformation(String nomformation) {
+		this.nomformation = nomformation;
 	}
 
 	public Set<EtudiantFormation> getEtudiantFormations() {
@@ -68,6 +63,14 @@ public class Formation implements Serializable {
 
 	public void setEtudiantFormations(Set<EtudiantFormation> etudiantFormations) {
 		this.etudiantFormations = etudiantFormations;
+	}
+	
+	public Typeformation getTypeformation() {
+		return this.typeformation;
+	}
+
+	public void setTypeformation(Typeformation typeformation) {
+		this.typeformation = typeformation;
 	}
 	
 }

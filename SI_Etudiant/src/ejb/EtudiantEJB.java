@@ -30,12 +30,17 @@ public class EtudiantEJB
 	 }
 	 public void removeEtudiant(Etudiant etudiant) 
 	 {
-		 //em.merge(etudiant); =>entité doit être détaché du bean sinon cela ne fonctionne pas
+		 //em.merge(etudiant) => entité doit être détaché du bean sinon cela ne fonctionne pas
 		 em.remove(em.merge(etudiant));	
 	 }
 	 public void updateEtudiant(Etudiant etudiant) 
 	 {
 		 em.merge(etudiant);	
+	 }
+	 public Etudiant findEtudiantById(Long id) 
+	 {
+	    Etudiant results = (Etudiant) em.createQuery("select e from Etudiant e where e.idetudiant = :id").setParameter("id", id).getSingleResult();
+	    return results;
 	 }
 	 
 }

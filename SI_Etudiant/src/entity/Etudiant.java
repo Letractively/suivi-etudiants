@@ -15,13 +15,15 @@ public class Etudiant implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private long idetudiant;
 
 	private String adresse;
 
 	private String codepostal;
 
 	private String mail;
+
+	private String nationalite;
 
 	private String nom;
 
@@ -31,23 +33,23 @@ public class Etudiant implements Serializable {
 
 	private String tel;
 
+	//bi-directional many-to-one association to ActiviteProfessionnelle
+	@OneToMany(mappedBy="etudiant")
+	private Set<ActiviteProfessionnelle> activiteProfessionnelles;
+
 	//bi-directional many-to-one association to EtudiantFormation
 	@OneToMany(mappedBy="etudiant")
 	private Set<EtudiantFormation> etudiantFormations;
 
-	//bi-directional many-to-one association to EtudiantEntreprise
-	@OneToMany(mappedBy="etudiant")
-	private Set<EtudiantEntreprise> etudiantEntreprises;
-
     public Etudiant() {
     }
 
-	public long getId() {
-		return this.id;
+	public long getIdetudiant() {
+		return this.idetudiant;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdetudiant(long idetudiant) {
+		this.idetudiant = idetudiant;
 	}
 
 	public String getAdresse() {
@@ -72,6 +74,14 @@ public class Etudiant implements Serializable {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public String getNationalite() {
+		return this.nationalite;
+	}
+
+	public void setNationalite(String nationalite) {
+		this.nationalite = nationalite;
 	}
 
 	public String getNom() {
@@ -106,20 +116,20 @@ public class Etudiant implements Serializable {
 		this.tel = tel;
 	}
 
+	public Set<ActiviteProfessionnelle> getActiviteProfessionnelles() {
+		return this.activiteProfessionnelles;
+	}
+
+	public void setActiviteProfessionnelles(Set<ActiviteProfessionnelle> activiteProfessionnelles) {
+		this.activiteProfessionnelles = activiteProfessionnelles;
+	}
+	
 	public Set<EtudiantFormation> getEtudiantFormations() {
 		return this.etudiantFormations;
 	}
 
 	public void setEtudiantFormations(Set<EtudiantFormation> etudiantFormations) {
 		this.etudiantFormations = etudiantFormations;
-	}
-	
-	public Set<EtudiantEntreprise> getEtudiantEntreprises() {
-		return this.etudiantEntreprises;
-	}
-
-	public void setEtudiantEntreprises(Set<EtudiantEntreprise> etudiantEntreprises) {
-		this.etudiantEntreprises = etudiantEntreprises;
 	}
 	
 }

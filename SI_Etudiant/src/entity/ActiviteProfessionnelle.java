@@ -6,16 +6,16 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the ETUDIANT_ENTREPRISE database table.
+ * The persistent class for the ACTIVITE_PROFESSIONNELLE database table.
  * 
  */
 @Entity
-@Table(name="ETUDIANT_ENTREPRISE")
-public class EtudiantEntreprise implements Serializable {
+@Table(name="ACTIVITE_PROFESSIONNELLE")
+public class ActiviteProfessionnelle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private EtudiantEntreprisePK id;
+	private ActiviteProfessionnellePK id;
 
 	private String commentaire;
 
@@ -41,14 +41,14 @@ public class EtudiantEntreprise implements Serializable {
 	@JoinColumn(name="IDETUDIANT",nullable = false, insertable = false, updatable = false)
 	private Etudiant etudiant;
 
-    public EtudiantEntreprise() {
+    public ActiviteProfessionnelle() {
     }
 
-	public EtudiantEntreprisePK getId() {
+	public ActiviteProfessionnellePK getId() {
 		return this.id;
 	}
 
-	public void setId(EtudiantEntreprisePK id) {
+	public void setId(ActiviteProfessionnellePK id) {
 		this.id = id;
 	}
 	

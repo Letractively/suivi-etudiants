@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Gestion des absences</ui:define>
+
+    <ui:define name="content">
+	    <h1>Inscription</h1>
+	    <h:form>
+	    	
+	    	<h:outputLabel for="nom" value="Nom : " />
+			<h:inputText id="nom" required="true" label="nom"  />
+			<br />
+			<h:outputLabel for="entreprise" value="Entreprise : " />
+			<h:selectOneMenu>
+				<f:selectItems value="#{actionProfessionnelleBean.entreprisesItems}" />
+			</h:selectOneMenu>
+			<h:outputLabel for="dateDebut" value="Date Début : " />
+			<h:inputText id="dateDebut" required="true" label="dateDebut" value="#{activiteProBean.actionPro.datedebut}">
+				<f:convertDateTime pattern="yyyy-mm-dd"/>
+			</h:inputText>
+			<br />
+			<h:outputLabel for="dateFin" value="Date Fin : " />
+			<h:inputText id="dateFin" required="true" label="dateFin" value="#{activiteProBean.actionPro.datefin}">
+				<f:convertDateTime pattern="yyyy-mm-dd" />
+			</h:inputText>
+			<br />
+			<h:outputLabel for="description" value="Description : " />
+			<h:inputText id="description" required="true" label="description" value="#{activiteProBean.actionPro.description}"/>
+			<br />
+			<h:outputLabel for="poste" value="Poste : " />
+			<h:inputText id="poste" required="true" label="poste" value="#{activiteProBean.actionPro.posteoccupe}"/>
+			<br />
+			<h:outputLabel for="type" value="Type contrat : " />
+			<h:inputText id="type" required="true" label="type" value="#{activiteProBean.actionPro.typecontrat}"/>
+			<br />
+			
+			<h:commandButton value="Ajouter" action="#{activiteProBean.ajout()}" />
+	    
+	    </h:form>
+    
+    </ui:define> 
+
+</ui:composition>
+</html>

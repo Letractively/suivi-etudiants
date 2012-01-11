@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Set;
 
 
 /**
@@ -14,27 +15,39 @@ public class Typeformation implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private long idtypeformation;
 
-	private long libelle;
+	private String libelle;
+
+	//bi-directional many-to-one association to Formation
+	@OneToMany(mappedBy="typeformation")
+	private Set<Formation> formations;
 
     public Typeformation() {
     }
 
-	public long getId() {
-		return this.id;
+	public long getIdtypeformation() {
+		return this.idtypeformation;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdtypeformation(long idtypeformation) {
+		this.idtypeformation = idtypeformation;
 	}
 
-	public long getLibelle() {
+	public String getLibelle() {
 		return this.libelle;
 	}
 
-	public void setLibelle(long libelle) {
+	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
 
+	public Set<Formation> getFormations() {
+		return this.formations;
+	}
+
+	public void setFormations(Set<Formation> formations) {
+		this.formations = formations;
+	}
+	
 }

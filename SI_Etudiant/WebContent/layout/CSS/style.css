@@ -169,7 +169,7 @@ label
 	width: 150px;
 	text-align: right;
 }
-input[type="text"],input[type="password"]  
+input[type="text"],input[type="password"],select 
 {
 	margin-left: .5em;
 	float: left;

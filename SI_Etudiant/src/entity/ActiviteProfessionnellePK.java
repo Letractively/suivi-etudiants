@@ -4,27 +4,27 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the ETUDIANT_ENTREPRISE database table.
+ * The primary key class for the ACTIVITE_PROFESSIONNELLE database table.
  * 
  */
 @Embeddable
-public class EtudiantEntreprisePK implements Serializable {
+public class ActiviteProfessionnellePK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	private long id;
+	private long idactivitepro;
 
 	private long idetudiant;
 
 	private long identreprise;
 
-    public EtudiantEntreprisePK() {
+    public ActiviteProfessionnellePK() {
     }
-	public long getId() {
-		return this.id;
+	public long getIdactivitepro() {
+		return this.idactivitepro;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setIdactivitepro(long idactivitepro) {
+		this.idactivitepro = idactivitepro;
 	}
 	public long getIdetudiant() {
 		return this.idetudiant;
@@ -43,12 +43,12 @@ public class EtudiantEntreprisePK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof EtudiantEntreprisePK)) {
+		if (!(other instanceof ActiviteProfessionnellePK)) {
 			return false;
 		}
-		EtudiantEntreprisePK castOther = (EtudiantEntreprisePK)other;
+		ActiviteProfessionnellePK castOther = (ActiviteProfessionnellePK)other;
 		return 
-			(this.id == castOther.id)
+			(this.idactivitepro == castOther.idactivitepro)
 			&& (this.idetudiant == castOther.idetudiant)
 			&& (this.identreprise == castOther.identreprise);
 
@@ -57,7 +57,7 @@ public class EtudiantEntreprisePK implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + ((int) (this.id ^ (this.id >>> 32)));
+		hash = hash * prime + ((int) (this.idactivitepro ^ (this.idactivitepro >>> 32)));
 		hash = hash * prime + ((int) (this.idetudiant ^ (this.idetudiant >>> 32)));
 		hash = hash * prime + ((int) (this.identreprise ^ (this.identreprise >>> 32)));
 		

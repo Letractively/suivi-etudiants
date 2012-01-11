@@ -14,6 +14,7 @@ public class EtudiantFormation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
+	
 	private EtudiantFormationPK id;
 
 	//bi-directional many-to-one association to Etudiant

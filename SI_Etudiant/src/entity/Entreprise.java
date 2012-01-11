@@ -15,7 +15,7 @@ public class Entreprise implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private long identreprise;
 
 	private String mail;
 
@@ -27,27 +27,19 @@ public class Entreprise implements Serializable {
 
 	private String tel;
 
-	//bi-directional many-to-one association to EtudiantEntreprise
+	//bi-directional many-to-one association to ActiviteProfessionnelle
 	@OneToMany(mappedBy="entreprise")
-	private Set<EtudiantEntreprise> etudiantEntreprises;
+	private Set<ActiviteProfessionnelle> activiteProfessionnelles;
 
     public Entreprise() {
     }
 
-	public long getId() {
-		return this.id;
+	public long getIdentreprise() {
+		return this.identreprise;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getMail() {
-		return this.mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setIdentreprise(long identreprise) {
+		this.identreprise = identreprise;
 	}
 
 	public String getNom() {
@@ -74,20 +66,37 @@ public class Entreprise implements Serializable {
 		this.secteuractivite = secteuractivite;
 	}
 
-	public String getTel() {
+	public String getTelentreprise() {
 		return this.tel;
+	}
+
+	public void setTelentreprise(String telentreprise) {
+		this.tel = telentreprise;
+	}
+
+	public Set<ActiviteProfessionnelle> getActiviteProfessionnelles() {
+		return this.activiteProfessionnelles;
+	}
+
+	public void setActiviteProfessionnelles(Set<ActiviteProfessionnelle> activiteProfessionnelles) {
+		this.activiteProfessionnelles = activiteProfessionnelles;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getTel() {
+		return tel;
 	}
 
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
-	public Set<EtudiantEntreprise> getEtudiantEntreprises() {
-		return this.etudiantEntreprises;
-	}
-
-	public void setEtudiantEntreprises(Set<EtudiantEntreprise> etudiantEntreprises) {
-		this.etudiantEntreprises = etudiantEntreprises;
-	}
+	
 	
 }
