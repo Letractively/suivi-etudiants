@@ -27,7 +27,8 @@ public class EntrepriseBean {
 	public void init() 
 	{
 	    entreprises = entrepriseEJB.findAllEntreprises();
-	}  
+	}
+	
 	public String doNewEntreprise() 
 	{
 		return "newEntreprise.xhtml"; 
@@ -74,10 +75,7 @@ public class EntrepriseBean {
 	  {
 		
 		
-		/*  System.out.println("nom : "+etudiant.getId()+"-----"+etudiant.getNom()+"prenom : "+
-		 * etudiant.getPrenom()+" mail : "+etudiant.getMail()+" adresse :"+etudiant.getAdresse()+
-		 * "cp : "+etudiant.getCodepostal()+"tel :" +
-			etudiant.getTel());*/	  
+	  
 		  this.entrepriseEJB.createEntreprise(entreprise);  
 		  
 		  //si on est en session, sinon pas besoin...
@@ -92,16 +90,16 @@ public class EntrepriseBean {
 	        List<Entreprise> entrepriseSelectionne = new ArrayList<Entreprise>();
 
 	        System.out.println("Test !!!!!!!!!");
-	        for (Entreprise unEntreprise : entreprises)
+	        for (Entreprise uneEntreprise : entreprises)
 	        {
-	        	
-	            if (checked.get(unEntreprise.getIdentreprise())) 
+	            if (checked.get(uneEntreprise.getIdentreprise())) 
+	            if (checked.get(uneEntreprise.getIdentreprise()))
 	            {
-	            	 System.out.println(unEntreprise.getNom());
+	            	 System.out.println(uneEntreprise.getNom());
 	            	
 	            	//System.out.println("Selection : "+unEtudiant.getNom());
 	            	
-	            	 entrepriseEJB.removeEntreprise(unEntreprise);
+	            	 entrepriseEJB.removeEntreprise(uneEntreprise);
 	            	
 	            }
 	        }

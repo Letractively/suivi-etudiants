@@ -14,6 +14,7 @@ import ejb.EntrepriseEJB;
 import ejb.EtudiantEJB;
 import entity.ActiviteProfessionnelle;
 import entity.Entreprise;
+import entity.Etudiant;
 
 
 @ManagedBean(name = "activiteProBean")
@@ -36,7 +37,7 @@ public class ActiviteProfessionnelleBean
 
 
 	@PostConstruct
-	public void init() 
+	public void init()  
 	{  
 		entreprises = entrepriseEJB.findAllEntreprises();
 		
@@ -52,7 +53,7 @@ public class ActiviteProfessionnelleBean
 		return entreprisesItems;
 	}
 
-
+ 
 	public void setEntreprisesItems(List<SelectItem> entreprisesItems) {
 		this.entreprisesItems = entreprisesItems;
 	}
@@ -94,14 +95,19 @@ public class ActiviteProfessionnelleBean
 		//phase de test avec des valeur par défaut (non récupérer à partir des jsf)
 		
 		//Définition d'un étudiant
-		/*Etudiant etu = etudiantEJB.findEtudiantById(2L);
+		Etudiant etu = etudiantEJB.findEtudiantById(51L);
 		System.out.println("Le nom de l'étudiant est "+etu.getNom());
 		
-		Entreprise ent=entrepriseEJB.findEntrepriseById(1L);
-		System.out.println("Le nom de l'entreprise est "+ent.getNom());
+		//Entreprise ent=entrepriseEJB.findEntrepriseById(1L);
+		//System.out.println("Le nom de l'entreprise est "+ent.getNom());
 		
-		EtudiantEntreprisePK actionProPK= new EtudiantEntreprisePK();
-		*/
+		ActiviteProfessionnelle ac= new ActiviteProfessionnelle();
+		ac.setEtudiant(etu);
+		
+		//System.out.println("ttttt "+ac.getId().getIdetudiant());
+		
+		
+		
 		//actionProPK .setIdentreprise(1L);
 		//actionProPK.setIdentreprise(2L);
 		

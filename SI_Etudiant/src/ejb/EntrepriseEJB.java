@@ -36,5 +36,10 @@ public class EntrepriseEJB {
 	 {
 		 em.merge(entreprise);	
 	 }
+	 public Entreprise findEntrepriseById(Long id) 
+	 {
+		 Entreprise results = ( Entreprise) em.createQuery("select e from Entreprise e where e.identreprise = :id").setParameter("id", id).getSingleResult();
+	    return results;
+	 }
 
 }

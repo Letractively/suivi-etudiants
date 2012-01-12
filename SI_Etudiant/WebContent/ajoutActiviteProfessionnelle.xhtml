@@ -11,7 +11,7 @@
     <ui:define name="title">Gestion des absences</ui:define>
 
     <ui:define name="content">
-	    <h1>Inscription</h1>
+	    <h1>Activité Pro</h1>
 	    <h:form>
 	    	
 	    	<h:outputLabel for="nom" value="Nom : " />
@@ -19,7 +19,7 @@
 			<br />
 			<h:outputLabel for="entreprise" value="Entreprise : " />
 			<h:selectOneMenu>
-				<f:selectItems value="#{actionProfessionnelleBean.entreprisesItems}" />
+				<f:selectItems value="#{activiteProBean.entreprisesItems}" />
 			</h:selectOneMenu>
 			<h:outputLabel for="dateDebut" value="Date Début : " />
 			<h:inputText id="dateDebut" required="true" label="dateDebut" value="#{activiteProBean.actionPro.datedebut}">
