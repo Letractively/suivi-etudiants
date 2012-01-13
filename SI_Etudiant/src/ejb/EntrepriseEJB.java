@@ -21,8 +21,8 @@ public class EntrepriseEJB {
 	}
 
 	public Entreprise createEntreprise(Entreprise entreprise) {
-		em.persist(entreprise);
 		
+		em.persist(entreprise);
 		return entreprise;
 		
 	}

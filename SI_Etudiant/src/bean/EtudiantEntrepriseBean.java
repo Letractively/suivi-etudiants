@@ -8,18 +8,19 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import ejb.EntrepriseEJB;
 import ejb.EtudiantEJB;
-import entity.ActiviteProfessionnelle;
 import entity.Entreprise;
 import entity.Etudiant;
+import entity.EtudiantEntreprise;
 
 
-@ManagedBean(name = "activiteProBean")
+@ManagedBean(name = "etudiantEntrepriseBean")
 @RequestScoped
-public class ActiviteProfessionnelleBean 
+public class EtudiantEntrepriseBean 
 {
 	@EJB
 	private EtudiantEJB etudiantEJB;
@@ -27,7 +28,7 @@ public class ActiviteProfessionnelleBean
 	@EJB
 	private EntrepriseEJB entrepriseEJB;
 
-	private ActiviteProfessionnelle actionPro = new  ActiviteProfessionnelle();
+	private EtudiantEntreprise etudiantEntreprise = new  EtudiantEntreprise();
 	
 	private List<Entreprise> entreprises = new ArrayList<Entreprise>();
 	private List<SelectItem> entreprisesItems = new ArrayList<SelectItem>();
@@ -39,56 +40,55 @@ public class ActiviteProfessionnelleBean
 	@PostConstruct
 	public void init()  
 	{  
-		entreprises = entrepriseEJB.findAllEntreprises();
+		String id=null;
+		id=getPassedParameter();
 		
-		//Initialisation de la liste d'items 
-		for (Entreprise ent : entreprises)
+		if(id!=null)
 		{
-			entreprisesItems.add(new SelectItem(ent.getNom()+" - "+ent.getRaisonsociale()));
+			entreprises = entrepriseEJB.findAllEntreprises();
+			//Initialisation de la liste d'items 
+			for (Entreprise ent : entreprises)
+			{
+				entreprisesItems.add(new SelectItem(ent.getNom()+" - "+ent.getRaisonsociale()));
+			}
 		}
+		else
+		{
+			System.out.println("test");
+		}
+
+	}
+	public EtudiantEntreprise getEtudiantEntreprise() {
+		return etudiantEntreprise;
 	}
 
+	public void setEtudiantEntreprise(EtudiantEntreprise etudiantEntreprise) {
+		this.etudiantEntreprise = etudiantEntreprise;
+	}
 
 	public List<SelectItem> getEntreprisesItems() {
 		return entreprisesItems;
 	}
 
- 
 	public void setEntreprisesItems(List<SelectItem> entreprisesItems) {
 		this.entreprisesItems = entreprisesItems;
 	}
 
-	
-	
 	public EntrepriseEJB getEntrepriseEJB() {
 		return entrepriseEJB;
 	}
-
 
 	public void setEntrepriseEJB(EntrepriseEJB entrepriseEJB) {
 		this.entrepriseEJB = entrepriseEJB;
 	}
 
-
-	public ActiviteProfessionnelle getActionPro() {
-		return actionPro;
-	}
-
-
-	public void setActionPro(ActiviteProfessionnelle actionPro) {
-		this.actionPro = actionPro;
-	}
-
-
 	public List<Entreprise> getEntreprises() {
 		return entreprises;
 	}
 
-
 	public void setEntreprises(List<Entreprise> entreprises) {
 		this.entreprises = entreprises;
 	}
-
 
 	public String ajout() 
 	{
@@ -101,23 +101,23 @@ public class ActiviteProfessionnelleBean
 		//Entreprise ent=entrepriseEJB.findEntrepriseById(1L);
 		//System.out.println("Le nom de l'entreprise est "+ent.getNom());
 		
-		ActiviteProfessionnelle ac= new ActiviteProfessionnelle();
+		EtudiantEntreprise ac= new EtudiantEntreprise();
 		ac.setEtudiant(etu);
 		
 		//System.out.println("ttttt "+ac.getId().getIdetudiant());
-		
-		
-		
-		//actionProPK .setIdentreprise(1L);
-		//actionProPK.setIdentreprise(2L);
-		
-		//actionPro.setId(actionProPK);
-		
-		//System.out.println("Action Pro : "+actionPro.getEtudiant().getNom());
-		
-		
+
 		return "list";
 	
+	}
+	
+	public String getPassedParameter() 
+	{
+	
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String parametreId = (String) facesContext.getExternalContext().
+		getRequestParameterMap().get("id");
+		
+		return parametreId;
 	}
 }
 	

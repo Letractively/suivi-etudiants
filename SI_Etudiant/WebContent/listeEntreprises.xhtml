@@ -14,7 +14,7 @@
  
     <h1>Liste des entreprises</h1>
      <h:form>
-	    <h:dataTable value="#{entrepriseBean.entreprises}" var="entreprise" class="tab" >
+	    <h:dataTable value="#{entrepriseBean.entreprises}" var="en" class="tab" >
 		    <h:column>
 		    	<f:facet name="header">
 		    		
@@ -25,35 +25,53 @@
 		    	<f:facet name="header">
 		    		<h:outputText value="Nom" />
 		    	</f:facet>
-		    	<h:outputText value="#{entreprise.nom}" /> 	
+		    	<h:outputText value="#{en.nom}" /> 	
 		    </h:column>	    
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Raison Sociale" />
 		    	</f:facet>
-		    	<h:outputText value="#{entreprise.raisonsociale}" />
+		    	<h:outputText value="#{en.raisonsociale}" />
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Siret" />
+		    	</f:facet>
+		    	<h:outputText value="#{en.siret}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Secteur d'activité" />
 		    	</f:facet>
-		    	<h:outputText value="#{entreprise.secteuractivite}" />
+		    	<h:outputText value="#{en.secteuractivite}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Tel" />
 		    	</f:facet>
-		    	<h:outputText value="#{entreprise.tel}" />
+		    	<h:outputText value="#{en.contact.tel}" />
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Tel autre" />
+		    	</f:facet>
+		    	<h:outputText value="#{en.contact.telAutre}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Mail" />
 		    	</f:facet>
-		    	<h:outputText value="#{entreprise.mail}" />
+		    	<h:outputText value="#{en.contact.mail}" />
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Mail Autre" />
+		    	</f:facet>
+		    	<h:outputText value="#{en.contact.mailAutre}" />
 		    </h:column>
 		    <h:column>
 			    <h:commandButton value="Modifier" action="#{entrepriseBean.edit()}">   
-	      			<f:setPropertyActionListener value="#{entreprise}" target="#{entrepriseBean.editEntreprise}" />
+	      			<f:setPropertyActionListener value="#{en}" target="#{entrepriseBean.editEntreprise}" />
 	    		</h:commandButton>
 	    	</h:column> 
 		    

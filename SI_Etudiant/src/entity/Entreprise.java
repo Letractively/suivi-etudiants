@@ -1,102 +1,112 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
- * The persistent class for the ENTREPRISE database table.
+ * Entity implementation class for Entity: Entreprise
  * 
  */
 @Entity
+@Table(name = "ENTREPRISE")
 public class Entreprise implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue
-	private long identreprise;
+  private static final long serialVersionUID = 1L;
+  private long id;
+  private String nom;
+  private String raisonsociale;
+  private String secteuractivite;
+  private String siret;
+  private Adresse adresse;
+  private Contact contact;
+  private Set<EtudiantEntreprise> lesEtudiants = new HashSet<EtudiantEntreprise>();
 
-	private String mail;
+  
+  @OneToMany(mappedBy="entreprise")
+  public Set<EtudiantEntreprise> getLesEtudiants() {
+    return lesEtudiants;
+  }
 
-	private String nom;
+  public void setLesEtudiants(Set<EtudiantEntreprise> lesEtudiants) {
+    this.lesEtudiants = lesEtudiants;
+  }
 
-	private String raisonsociale;
+  @Column(length = 70)
+  public String getNom() {
+    return nom;
+  }
 
-	private String secteuractivite;
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 
-	private String tel;
+  @Column(length = 70)
+  public String getRaisonsociale() {
+    return raisonsociale;
+  }
 
-	//bi-directional many-to-one association to ActiviteProfessionnelle
-	@OneToMany(mappedBy="entreprise")
-	private Set<ActiviteProfessionnelle> activiteProfessionnelles;
+  public void setRaisonsociale(String raisonsociale) {
+    this.raisonsociale = raisonsociale;
+  }
 
-    public Entreprise() {
-    }
+  @Column(length = 70)
+  public String getSecteuractivite() {
+    return secteuractivite;
+  }
 
-	public long getIdentreprise() {
-		return this.identreprise;
-	}
+  public void setSecteuractivite(String secteuractivite) {
+    this.secteuractivite = secteuractivite;
+  }
 
-	public void setIdentreprise(long identreprise) {
-		this.identreprise = identreprise;
-	}
+  @Column(length = 70)
+  public String getSiret() {
+    return siret;
+  }
 
-	public String getNom() {
-		return this.nom;
-	}
+  public void setSiret(String siret) {
+    this.siret = siret;
+  }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+  @Embedded
+  public Adresse getAdresse() {
+    return adresse;
+  }
 
-	public String getRaisonsociale() {
-		return this.raisonsociale;
-	}
+  public void setAdresse(Adresse adresse) {
+    this.adresse = adresse;
+  }
 
-	public void setRaisonsociale(String raisonsociale) {
-		this.raisonsociale = raisonsociale;
-	}
+  @Embedded
+  public Contact getContact() {
+    return contact;
+  }
+  
+  public void setContact(Contact contact) {
+    this.contact = contact;
+  }
 
-	public String getSecteuractivite() {
-		return this.secteuractivite;
-	}
+  public Entreprise() {
+    super();
+  }
 
-	public void setSecteuractivite(String secteuractivite) {
-		this.secteuractivite = secteuractivite;
-	}
+  @GeneratedValue
+  @Id
+  @Column(name="ENTREPRISE_ID")
+  public long getId() {
+    return this.id;
+  }
 
-	public String getTelentreprise() {
-		return this.tel;
-	}
+  public void setId(long id) {
+    this.id = id;
+  }
 
-	public void setTelentreprise(String telentreprise) {
-		this.tel = telentreprise;
-	}
-
-	public Set<ActiviteProfessionnelle> getActiviteProfessionnelles() {
-		return this.activiteProfessionnelles;
-	}
-
-	public void setActiviteProfessionnelles(Set<ActiviteProfessionnelle> activiteProfessionnelles) {
-		this.activiteProfessionnelles = activiteProfessionnelles;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public String getTel() {
-		return tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	
-	
 }

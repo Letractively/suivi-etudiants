@@ -93,7 +93,7 @@ public class EtudiantBean
 	        for (Etudiant unEtudiant : etudiants)
 	        {
 	        	
-	            if (checked.get(unEtudiant.getIdetudiant())) 
+	            if (checked.get(unEtudiant.getId())) 
 	            {
 	            	 System.out.println(unEtudiant.getNom());
 	            	
@@ -108,7 +108,7 @@ public class EtudiantBean
 	   }
 	  public String edit()
 	  {
-		  System.out.println(editEtudiant.getIdetudiant());	
+		  System.out.println(editEtudiant.getId());	
 		  return "edit";
 			
 	  }

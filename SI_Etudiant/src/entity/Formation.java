@@ -1,76 +1,81 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
- * The persistent class for the FORMATION database table.
+ * Entity implementation class for Entity: Formation
  * 
  */
 @Entity
+@Table(name = "FORMATION")
 public class Formation implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue
-	private long idformation;
+  private long id;
+  private static final long serialVersionUID = 1L;
+  private String libelle;
+  private String libelleCourt;
+  private Etablissement etablissement;
+  private Set<EtudiantFormation> lesEtudiants = new HashSet<EtudiantFormation>();
 
-	private String etablissement;
+  @OneToMany(mappedBy = "formation")
+  public Set<EtudiantFormation> getLesEtudiants() {
+    return lesEtudiants;
+  }
 
-	private String nomformation;
+  public void setLesEtudiants(Set<EtudiantFormation> lesEtudiants) {
+    this.lesEtudiants = lesEtudiants;
+  }
 
-	//bi-directional many-to-one association to EtudiantFormation
-	@OneToMany(mappedBy="formation")
-	private Set<EtudiantFormation> etudiantFormations;
+  public Formation() {
+    super();
+  }
 
-	//bi-directional many-to-one association to Typeformation
-    @ManyToOne
-	@JoinColumn(name="IDTYPEFORMATION")
-	private Typeformation typeformation;
+  @GeneratedValue
+  @Id
+  @Column(name="FORMATION_ID")
+  public long getId() {
+    return this.id;
+  }
 
-    public Formation() {
-    }
+  @Column(length = 70)
+  public String getLibelle() {
+    return libelle;
+  }
 
-	public long getIdformation() {
-		return this.idformation;
-	}
+  public void setLibelle(String libelle) {
+    this.libelle = libelle;
+  }
 
-	public void setIdformation(long idformation) {
-		this.idformation = idformation;
-	}
+  @Column(length = 70)
+  public String getLibelleCourt() {
+    return libelleCourt;
+  }
 
-	public String getEtablissement() {
-		return this.etablissement;
-	}
+  public void setLibelleCourt(String libelleCourt) {
+    this.libelleCourt = libelleCourt;
+  }
 
-	public void setEtablissement(String etablissement) {
-		this.etablissement = etablissement;
-	}
+  @ManyToOne
+  public Etablissement getEtablissement() {
+    return etablissement;
+  }
 
-	public String getNomformation() {
-		return this.nomformation;
-	}
+  public void setEtablissement(Etablissement etablissement) {
+    this.etablissement = etablissement;
+  }
 
-	public void setNomformation(String nomformation) {
-		this.nomformation = nomformation;
-	}
+  public void setId(long id) {
+    this.id = id;
+  }
 
-	public Set<EtudiantFormation> getEtudiantFormations() {
-		return this.etudiantFormations;
-	}
-
-	public void setEtudiantFormations(Set<EtudiantFormation> etudiantFormations) {
-		this.etudiantFormations = etudiantFormations;
-	}
-	
-	public Typeformation getTypeformation() {
-		return this.typeformation;
-	}
-
-	public void setTypeformation(Typeformation typeformation) {
-		this.typeformation = typeformation;
-	}
-	
 }

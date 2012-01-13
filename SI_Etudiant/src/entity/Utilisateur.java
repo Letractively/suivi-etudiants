@@ -1,50 +1,79 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * The persistent class for the UTILISATEUR database table.
- * 
+ * Entity implementation class for Entity: Utilisateur
+ *
  */
 @Entity
+@Table(name = "UTILISATEUR")
 public class Utilisateur implements Serializable {
+
+	
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
+private long id;
+	private String nomComplet;
 	private String login;
+	private String motDePasse;
+	private String niveau;
 
-	private String motdepasse;
-
-	private int niveau;
-
-    public Utilisateur() {
-    }
-
-	public String getLogin() {
-		return this.login;
+	public Utilisateur() {
+		super();
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+  @Id
+  @GeneratedValue
+  public long getId() {
+    return id;
+  }
 
-	public String getMotdepasse() {
-		return this.motdepasse;
-	}
+  public void setId(long id) {
+    this.id = id;
+  }
 
-	public void setMotdepasse(String motdepasse) {
-		this.motdepasse = motdepasse;
-	}
+  @Column(length = 70)
+  public String getNomComplet() {
+    return nomComplet;
+  }
 
-	public int getNiveau() {
-		return this.niveau;
-	}
+  public void setNomComplet(String nomComplet) {
+    this.nomComplet = nomComplet;
+  }
 
-	public void setNiveau(int niveau) {
-		this.niveau = niveau;
-	}
+  @Column(length = 70)
+  public String getLogin() {
+    return login;
+  }
 
+  public void setLogin(String login) {
+    this.login = login;
+  }
+
+  @Column(length = 70)
+  public String getMotDePasse() {
+    return motDePasse;
+  }
+
+  public void setMotDePasse(String motDePasse) {
+    this.motDePasse = motDePasse;
+  }
+
+  @Column(length = 70)
+  public String getNiveau() {
+    return niveau;
+  }
+
+  public void setNiveau(String niveau) {
+    this.niveau = niveau;
+  }
+   
+	
+	
 }

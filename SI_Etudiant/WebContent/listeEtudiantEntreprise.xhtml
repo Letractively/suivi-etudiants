@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Suivi des etudiants</ui:define>
+
+    <ui:define name="content">
+ 
+    <h1>Liste des entreprises</h1>
+     <h:form>
+	    <h:dataTable value="#{activiteProBean.entreprises}" var="ent" class="tab" >
+		   
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Nom" />
+		    	</f:facet>
+		    	<h:outputText value="#{ent.nom}" /> 	
+		    </h:column>	    
+		    
+		    
+	    </h:dataTable>
+	    <br />
+		<h:commandButton value="Supprimer" action="#{entrepriseBean.supprimer()}" />
+	</h:form>
+    </ui:define> 
+
+</ui:composition>
+</html>

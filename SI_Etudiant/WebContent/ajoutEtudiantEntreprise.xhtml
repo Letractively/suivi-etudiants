@@ -11,7 +11,7 @@
     <ui:define name="title">Gestion des absences</ui:define>
 
     <ui:define name="content">
-	    <h1>Activité Pro</h1>
+	    <h1>Etudiant Entreprise</h1>
 	    <h:form>
 	    	
 	    	<h:outputLabel for="nom" value="Nom : " />
@@ -19,29 +19,29 @@
 			<br />
 			<h:outputLabel for="entreprise" value="Entreprise : " />
 			<h:selectOneMenu>
-				<f:selectItems value="#{activiteProBean.entreprisesItems}" />
+				<f:selectItems value="#{etudiantEntrepriseBean.entreprisesItems}" />
 			</h:selectOneMenu>
 			<h:outputLabel for="dateDebut" value="Date Début : " />
-			<h:inputText id="dateDebut" required="true" label="dateDebut" value="#{activiteProBean.actionPro.datedebut}">
+			<h:inputText id="dateDebut" required="true" label="dateDebut" value="#{etudiantEntrepriseBean.etudiantEntreprise.datedebut}">
 				<f:convertDateTime pattern="yyyy-mm-dd"/>
 			</h:inputText>
 			<br />
 			<h:outputLabel for="dateFin" value="Date Fin : " />
-			<h:inputText id="dateFin" required="true" label="dateFin" value="#{activiteProBean.actionPro.datefin}">
+			<h:inputText id="dateFin" required="true" label="dateFin" value="#{etudiantEntrepriseBean.etudiantEntreprise.datefin}">
 				<f:convertDateTime pattern="yyyy-mm-dd" />
 			</h:inputText>
 			<br />
 			<h:outputLabel for="description" value="Description : " />
-			<h:inputText id="description" required="true" label="description" value="#{activiteProBean.actionPro.description}"/>
+			<h:inputText id="description" required="true" label="description" value="#{etudiantEntrepriseBean.etudiantEntreprise.description}"/>
 			<br />
 			<h:outputLabel for="poste" value="Poste : " />
-			<h:inputText id="poste" required="true" label="poste" value="#{activiteProBean.actionPro.posteoccupe}"/>
+			<h:inputText id="poste" required="true" label="poste" value="#{etudiantEntrepriseBean.etudiantEntreprise.posteoccupe}"/>
 			<br />
 			<h:outputLabel for="type" value="Type contrat : " />
-			<h:inputText id="type" required="true" label="type" value="#{activiteProBean.actionPro.typecontrat}"/>
+			<h:inputText id="type" required="true" label="type" value="#{etudiantEntrepriseBean.etudiantEntreprise.typecontrat}"/>
 			<br />
 			
-			<h:commandButton value="Ajouter" action="#{activiteProBean.ajout()}" />
+			<h:commandButton value="Ajouter" action="#{etudiantEntrepriseBean.ajout()}" />
 	    
 	    </h:form>
     

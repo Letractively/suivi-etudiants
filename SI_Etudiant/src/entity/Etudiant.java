@@ -1,135 +1,111 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
- * The persistent class for the ETUDIANT database table.
+ * Entity implementation class for Entity: Etudiant
  * 
  */
 @Entity
+@Table(name = "ETUDIANT")
 public class Etudiant implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue
-	private long idetudiant;
+  private static final long serialVersionUID = 1L;
 
-	private String adresse;
+  private long id;
+  private String nom;
+  private String prenom;
+  private Adresse adresse;
+  private Contact contact;
+  private Set<EtudiantFormation> lesFormations = new HashSet<EtudiantFormation>();
+  private Set<EtudiantEntreprise> lesEntreprises = new HashSet<EtudiantEntreprise>();
 
-	private String codepostal;
+  // @OneToMany
+  // public List<Formation> getFormations() {
+  // return formations;
+  // }
+  //
+  // public void setFormations(List<Formation> formations) {
+  // this.formations = formations;
+  // }
 
-	private String mail;
+  public Etudiant() {
+    super();
+  }
 
-	private String nationalite;
+  @OneToMany(mappedBy = "etudiant")
+  public Set<EtudiantEntreprise> getLesEntreprises() {
+    return lesEntreprises;
+  }
 
-	private String nom;
+  public void setLesEntreprises(Set<EtudiantEntreprise> lesEntreprises) {
+    this.lesEntreprises = lesEntreprises;
+  }
 
-	private String prenom;
+  @OneToMany(mappedBy = "etudiant")
+  public Set<EtudiantFormation> getLesFormations() {
+    return lesFormations;
+  }
 
-	private String sexe;
+  public void setLesFormations(Set<EtudiantFormation> lesFormations) {
+    this.lesFormations = lesFormations;
+  }
 
-	private String tel;
+  @Id
+  @GeneratedValue
+  @Column(name="ETUDIANT_ID")
+  public long getId() {
+    return id;
+  }
 
-	//bi-directional many-to-one association to ActiviteProfessionnelle
-	@OneToMany(mappedBy="etudiant")
-	private Set<ActiviteProfessionnelle> activiteProfessionnelles;
+  public void setId(long id) {
+    this.id = id;
+  }
 
-	//bi-directional many-to-one association to EtudiantFormation
-	@OneToMany(mappedBy="etudiant")
-	private Set<EtudiantFormation> etudiantFormations;
+  @Column(length = 70)
+  public String getNom() {
+    return nom;
+  }
 
-    public Etudiant() {
-    }
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 
-	public long getIdetudiant() {
-		return this.idetudiant;
-	}
+  @Column(length = 70)
+  public String getPrenom() {
+    return prenom;
+  }
 
-	public void setIdetudiant(long idetudiant) {
-		this.idetudiant = idetudiant;
-	}
+  public void setPrenom(String prenom) {
+    this.prenom = prenom;
+  }
 
-	public String getAdresse() {
-		return this.adresse;
-	}
+  @Embedded
+  public Adresse getAdresse() {
+    return adresse;
+  }
 
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
-	}
+  @Embedded
+  public Contact getContact() {
+    return contact;
+  }
 
-	public String getCodepostal() {
-		return this.codepostal;
-	}
+  public void setContact(Contact contact) {
+    this.contact = contact;
+  }
 
-	public void setCodepostal(String codepostal) {
-		this.codepostal = codepostal;
-	}
+  public void setAdresse(Adresse adresse) {
+    this.adresse = adresse;
+  }
 
-	public String getMail() {
-		return this.mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public String getNationalite() {
-		return this.nationalite;
-	}
-
-	public void setNationalite(String nationalite) {
-		this.nationalite = nationalite;
-	}
-
-	public String getNom() {
-		return this.nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return this.prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getSexe() {
-		return this.sexe;
-	}
-
-	public void setSexe(String sexe) {
-		this.sexe = sexe;
-	}
-
-	public String getTel() {
-		return this.tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
-	public Set<ActiviteProfessionnelle> getActiviteProfessionnelles() {
-		return this.activiteProfessionnelles;
-	}
-
-	public void setActiviteProfessionnelles(Set<ActiviteProfessionnelle> activiteProfessionnelles) {
-		this.activiteProfessionnelles = activiteProfessionnelles;
-	}
-	
-	public Set<EtudiantFormation> getEtudiantFormations() {
-		return this.etudiantFormations;
-	}
-
-	public void setEtudiantFormations(Set<EtudiantFormation> etudiantFormations) {
-		this.etudiantFormations = etudiantFormations;
-	}
-	
 }

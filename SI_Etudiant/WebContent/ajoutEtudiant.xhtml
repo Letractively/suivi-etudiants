@@ -19,20 +19,32 @@
 			<h:outputLabel for="prenom" value="Prenom : " />
 			<h:inputText id="prenom" required="true" label="prenom" value="#{etudiantBean.etudiant.prenom}" />
 			<br />
-			<h:outputLabel for="sexe" value="Sexe : " />
-			<h:inputText id="sexe" required="true" label="sexe" value="#{etudiantBean.etudiant.sexe}" />
-			<br />
-			<h:outputLabel for="adresse" value="Adresse : " />
-			<h:inputText id="adresse" required="true" label="adresse" value="#{etudiantBean.etudiant.adresse}"/>
-			<br />
-			<h:outputLabel for="cp" value="Code Postal: " />
-			<h:inputText id="cp" required="true" label="cp" value="#{etudiantBean.etudiant.codepostal}"/>
-			<br />
 			<h:outputLabel for="mail" value="Mail : " />
-			<h:inputText id="mail" required="true" label="mail" value="#{etudiantBean.etudiant.mail}"/>
+			<h:inputText id="mail" required="true" label="mail" value="#{etudiantBean.etudiant.contact.mail}"/>
+			<br />
+			<h:outputLabel for="mailAutre" value="Mail Autre : " />
+			<h:inputText id="mailAutre" required="true" label="mailAutre" value="#{etudiantBean.etudiant.contact.mailAutre}"/>
 			<br />
 			<h:outputLabel for="tel" value="Tel : " />
-			<h:inputText id="tel" required="true" label="tel" value="#{etudiantBean.etudiant.tel}"/>
+			<h:inputText id="tel" label="tel" required="true" value="#{etudiantBean.etudiant.contact.tel}"/>
+			<br />
+			<h:outputLabel for="telAutre" value="Tel Autre : " />
+			<h:inputText id="telAutre" label="telAutre" value="#{etudiantBean.etudiant.contact.telAutre}"/>
+			<br />
+			<h:outputLabel for="adresse" value="Adresse : " />
+			<h:inputText id="adresse" label="adresse" value="#{etudiantBean.etudiant.adresse.adresse}"/>
+			<br />
+			<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
+			<h:inputText id="adresseSuite" label="adresseSuite" value="#{etudiantBean.etudiant.adresse.adresseSuite}"/>
+			<br />
+			<h:outputLabel for="cp" value="Code Postal : " />
+			<h:inputText id="cp" label="cp" value="#{etudiantBean.etudiant.adresse.codePostal}"/>
+			<h:outputLabel for="ville" value="Ville : " />
+			<h:inputText id="ville" label="ville" value="#{etudiantBean.etudiant.adresse.ville}"/>
+			<br />
+			<h:outputLabel for="pays" value="Pays : " />
+			<h:inputText id="pays" label="pays" value="#{etudiantBean.etudiant.adresse.pays}"/>
+			<br />
 			<br />
 			<h:commandButton value="Ajouter" action="#{etudiantBean.ajout()}" />
 	    </h:form>

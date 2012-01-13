@@ -19,14 +19,18 @@
 		    	<f:facet name="header">
 		    		
 		    	</f:facet>
-		    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.idetudiant]}" />
+		    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.id]}" />
 		    </h:column>
+		    
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Nom" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.nom}" /> 	
-		    </h:column>	    
+		    	<h:outputLink id="lien1" value="listeEtudiantEntreprise.faces">
+	  				<f:param name="id" value="#{et.id}" />
+	  				<h:outputText value="#{et.nom}" />
+				</h:outputLink>    		
+	    	</h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Prenom" />
@@ -37,22 +41,28 @@
 		    	<f:facet name="header">
 		    		<h:outputText value="Adresse" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.adresse}" />
+		    	<h:outputText value="#{et.adresse.adresse}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Tel" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.tel}" />
+		    	<h:outputText value="#{et.contact.tel}" />
 		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Mail" />
 		    	</f:facet>
-		    	<h:outputText value="#{et.mail}" />
+		    	<h:outputText value="#{et.contact.mail}" />
+		    </h:column>
+		     <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Adresse" />
+		    	</f:facet>
+		    	<h:outputText value="#{et.adresse.adresse}" />
 		    </h:column>
 		    <h:column>
-			    <h:commandButton value="Modifier" action="#{etudiantBean.edit()}">   
+			    <h:commandButton value="Modifier/Consulter" action="#{etudiantBean.edit()}">   
 	      			<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.editEtudiant}" />
 	    		</h:commandButton>
 	    	</h:column> 

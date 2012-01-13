@@ -66,7 +66,7 @@ public class Login {
 			try 
 			{
 				if (MD5Password.testPassword(password, results
-						.get(0).getMotdepasse()))
+						.get(0).getMotDePasse()))
 					utilisateur = results.get(0);
 				else
 					msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -101,7 +101,7 @@ public class Login {
 	public boolean isAdmin() 
 	{
 		utilisateur.getNiveau();
-		if(utilisateur.getNiveau()==0)
+		if(utilisateur.getNiveau()=="admin")
 		{
 			return true;
 		}

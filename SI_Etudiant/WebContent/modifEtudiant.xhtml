@@ -8,34 +8,48 @@
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="title">Suivi des etudiants</ui:define>
+    <ui:define name="title">Gestion des absences</ui:define>
 
     <ui:define name="content">
-    <h1>Modification de <h:outputText value="#{etudiantBean.editEtudiant.nom}" /></h1>
-	    <h:form> 
+	    <h1>Inscription</h1>
+	    <h:form>
 	    	<h:outputLabel for="nom" value="Nom : " />
 			<h:inputText id="nom" required="true" label="nom" value="#{etudiantBean.editEtudiant.nom}" />
 			<br />
 			<h:outputLabel for="prenom" value="Prenom : " />
 			<h:inputText id="prenom" required="true" label="prenom" value="#{etudiantBean.editEtudiant.prenom}" />
 			<br />
-			<h:outputLabel for="sexe" value="Sexe : " />
-			<h:inputText id="sexe" required="true" label="sexe" value="#{etudiantBean.editEtudiant.sexe}" />
-			<br />
-			<h:outputLabel for="adresse" value="Adresse : " />
-			<h:inputText id="adresse" required="true" label="adresse" value="#{etudiantBean.editEtudiant.adresse}"/>
-			<br />
-			<h:outputLabel for="cp" value="Code Postal:  : " />
-			<h:inputText id="cp" required="true" label="cp" value="#{etudiantBean.editEtudiant.codepostal}"/>
-			<br />
 			<h:outputLabel for="mail" value="Mail : " />
-			<h:inputText id="mail" required="true" label="mail" value="#{etudiantBean.editEtudiant.mail}"/>
+			<h:inputText id="mail" label="mail" value="#{etudiantBean.editEtudiant.contact.mail}"/>
+			<br />
+			<h:outputLabel for="mailAutre" value="Mail Autre : " />
+			<h:inputText id="mailAutre"  label="mailAutre" value="#{etudiantBean.editEtudiant.contact.mailAutre}"/>
 			<br />
 			<h:outputLabel for="tel" value="Tel : " />
-			<h:inputText id="tel" required="true" label="tel" value="#{etudiantBean.editEtudiant.tel}"/>
+			<h:inputText id="tel" label="tel" value="#{etudiantBean.editEtudiant.contact.tel}"/>
+			<br />
+			<h:outputLabel for="telAutre" value="Tel Autre : " />
+			<h:inputText id="telAutre" label="telAutre" value="#{etudiantBean.editEtudiant.contact.telAutre}"/>
+			<br />
+			<h:outputLabel for="adresse" value="Adresse : " />
+			<h:inputText id="adresse" label="adresse" value="#{etudiantBean.editEtudiant.adresse.adresse}"/>
+			<br />
+			<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
+			<h:inputText id="adresseSuite" label="adresseSuite" value="#{etudiantBean.editEtudiant.adresse.adresseSuite}"/>
+			<br />
+			<h:outputLabel for="cp" value="Code Postal : " />
+			<h:inputText id="cp" label="cp" value="#{etudiantBean.editEtudiant.adresse.codePostal}"/>
+			<h:outputLabel for="ville" value="Ville : " />
+			<h:inputText id="ville" label="ville" value="#{etudiantBean.editEtudiant.adresse.ville}"/>
+			<br />
+			<h:outputLabel for="pays" value="Pays : " />
+			<h:inputText id="pays" label="pays" value="#{etudiantBean.editEtudiant.adresse.pays}"/>
+			<br />
 			<br />
 			<h:commandButton value="Modifier" action="#{etudiantBean.modifier()}" />
-	    </h:form>  
+	    </h:form>
+    
     </ui:define> 
+
 </ui:composition>
 </html>

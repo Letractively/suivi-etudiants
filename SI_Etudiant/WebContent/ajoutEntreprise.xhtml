@@ -22,13 +22,37 @@
 			<h:outputLabel for="secteuractivite" value="Secteur s'activité : " />
 			<h:inputText id="secteuractivite" required="true" label="secteuractivite" value="#{entrepriseBean.entreprise.secteuractivite}" />
 			<br />
-			<h:outputLabel for="mail" value="Mail : " />
-			<h:inputText id="mail" required="true" label="mail" value="#{entrepriseBean.entreprise.mail}"/>
+			<h:outputLabel for="siret" value="Numero siret : " />
+			<h:inputText id="siret" label="siret" value="#{entrepriseBean.entreprise.siret}" />
 			<br />
-			<h:outputLabel for="tel" value="Tel. : " />
-			<h:inputText id="tel" required="true" label="tel" value="#{entrepriseBean.entreprise.tel}"/>
+			<h:outputLabel for="mail" value="Mail : " />
+			<h:inputText id="mail" required="true" label="mail" value="#{entrepriseBean.entreprise.contact.mail}"/>
+			<br />
+			<h:outputLabel for="mailAutre" value="Mail Autre : " />
+			<h:inputText id="mailAutre" required="true" label="mailAutre" value="#{entrepriseBean.entreprise.contact.mailAutre}"/>
+			<br />
+			<h:outputLabel for="tel" value="Tel : " />
+			<h:inputText id="tel" label="tel" required="true" value="#{entrepriseBean.entreprise.contact.tel}"/>
+			<br />
+			<h:outputLabel for="telAutre" value="Tel Autre : " />
+			<h:inputText id="telAutre" label="telAutre" value="#{entrepriseBean.entreprise.contact.telAutre}"/>
+			<br />
+			<h:outputLabel for="adresse" value="Adresse : " />
+			<h:inputText id="adresse" label="adresse" value="#{entrepriseBean.entreprise.adresse.adresse}"/>
+			<br />
+			<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
+			<h:inputText id="adresseSuite" label="adresseSuite" value="#{entrepriseBean.entreprise.adresse.adresseSuite}"/>
+			<br />
+			<h:outputLabel for="cp" value="Code Postal : " />
+			<h:inputText id="cp" label="cp" value="#{entrepriseBean.entreprise.adresse.codePostal}"/>
+			<h:outputLabel for="ville" value="Ville : " />
+			<h:inputText id="ville" label="ville" value="#{entrepriseBean.entreprise.adresse.ville}"/>
+			<br />
+			<h:outputLabel for="pays" value="Pays : " />
+			<h:inputText id="pays" label="pays" value="#{entrepriseBean.entreprise.adresse.pays}"/>
 			<br />
 			<h:commandButton value="Ajouter" action="#{entrepriseBean.ajout()}" />
+			
 	    </h:form>
     
     </ui:define> 
