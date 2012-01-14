@@ -3,7 +3,9 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Access;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,6 +20,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="ETUDIANT_ENTREPRISE")
+
 public class EtudiantEntreprise implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -31,7 +34,7 @@ public class EtudiantEntreprise implements Serializable {
   private EtudiantEntrepriseId id = new EtudiantEntrepriseId();
 
 
-  @Id
+  @EmbeddedId
   public EtudiantEntrepriseId getId() {
     return id;
   }

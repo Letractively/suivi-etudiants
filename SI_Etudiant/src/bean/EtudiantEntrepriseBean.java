@@ -30,14 +30,15 @@ public class EtudiantEntrepriseBean
 
 	private EtudiantEntreprise etudiantEntreprise = new  EtudiantEntreprise();
 	
-	private List<Entreprise> entreprises = new ArrayList<Entreprise>();
+	private List<EtudiantEntreprise> entreprises = new ArrayList<EtudiantEntreprise>();
 	private List<SelectItem> entreprisesItems = new ArrayList<SelectItem>();
 	
 	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
 
 
 	@PostConstruct
-	public void init() {  
+	public void init() 
+	{  
 		
 		/*
 		 *  On recupere l'id passe en parametre depuis l'autre page
@@ -46,8 +47,12 @@ public class EtudiantEntrepriseBean
 		Long id = Long.parseLong(this.getPassedParameter());
 		
 		if(id!=null) {
+			
 			// Je remplis ma liste d'entreprises grace a ma requete
 			entreprises = entrepriseEJB.findCompaniesByStudentId(id);
+			
+			//entreprises.get(0).getEntreprise().getNom();
+			
 		}
 		
 		/*if(id!=null) {
@@ -86,15 +91,16 @@ public class EtudiantEntrepriseBean
 		this.entrepriseEJB = entrepriseEJB;
 	}
 
-	public List<Entreprise> getEntreprises() {
+	public List<EtudiantEntreprise> getEntreprises() {
 		return entreprises;
 	}
 
-	public void setEntreprises(List<Entreprise> entreprises) {
+	public void setEntreprises(List<EtudiantEntreprise> entreprises) {
 		this.entreprises = entreprises;
 	}
 
-	public String ajout() {
+	public String ajout() 
+	{
 		//phase de test avec des valeur par défaut (non récupérer à partir des jsf)
 		
 		//Définition d'un étudiant
@@ -112,7 +118,8 @@ public class EtudiantEntrepriseBean
 		return "list";
 	}
 	
-	public String getPassedParameter() {
+	public String getPassedParameter() 
+	{
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String parametreId = (String) facesContext.getExternalContext().
 		getRequestParameterMap().get("id");

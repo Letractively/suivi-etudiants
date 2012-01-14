@@ -12,16 +12,40 @@
 
     <ui:define name="content">
  
-    <h1>Liste des entreprises</h1>
+    <h1>Liste des activités</h1>
      <h:form>
 	    <h:dataTable value="#{etudiantEntrepriseBean.entreprises}" var="ent" class="tab" >
 		   
 		    <h:column>
 		    	<f:facet name="header">
-		    		<h:outputText value="Nom" />
+		    		<h:outputText value="Entreprise" />
 		    	</f:facet>
-		    	<h:outputText value="#{ent.nom}" /> 	
-		    </h:column>	    
+		    	<h:outputText value="#{ent.entreprise.nom}" /> 	
+		    </h:column>
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Date début" />
+		    	</f:facet>
+		    	<h:outputText value="#{ent.datedebut}" /> 	
+		    </h:column> 
+		     <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Date Fin" />
+		    	</f:facet>
+		    	<h:outputText value="#{ent.datefin}" /> 	
+		    </h:column> 
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Poste occupé" />
+		    	</f:facet>
+		    	<h:outputText value="#{ent.posteoccupe}" /> 	
+		    </h:column>  
+		    <h:column>
+		    	<f:facet name="header">
+		    		<h:outputText value="Type contrat" />
+		    	</f:facet>
+		    	<h:outputText value="#{ent.typecontrat}" /> 	
+		    </h:column> 
 		    
 		    
 	    </h:dataTable>

@@ -11,12 +11,12 @@
          <class>entity.Utilisateur</class>
         <class>entity.Etudiant</class>
         <class>entity.Entreprise</class>
-        <class>entity.ActiviteProfessionnelle</class>
+        <class>entity.EtudiantEntreprise</class>
         <class>entity.EtudiantFormation</class>
         <class>entity.EtudiantFormationPK</class>
-        <class>entity.ActiviteProfessionnellePK</class>
+        <class>entity.EtudiantEntreprisePK</class>
         <class>entity.Formation</class>
-        <class>entity.TypeFormation</class>           
+        <class>entity.TypeFormation</class>          
          <properties>
             <property name="eclipselink.logging.level" value="FINE"/>
         </properties>

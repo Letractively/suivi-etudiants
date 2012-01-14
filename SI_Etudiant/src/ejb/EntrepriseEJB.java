@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import entity.Entreprise;
+import entity.EtudiantEntreprise;
 
 @Stateless 
 public class EntrepriseEJB {
@@ -58,9 +59,9 @@ public class EntrepriseEJB {
 	  * Retourne l'ensemble des entreprises rattachees a un etudiant (identifiant)
 	  */
 	 @SuppressWarnings("unchecked") 
-	 public List<Entreprise> findCompaniesByStudentId(Long idEtudiant) {
-		 List<Entreprise> results = em.createQuery(
-				 "select ent from Entreprise ent, Etudiant e where e.id =:id").setParameter("id", idEtudiant).getResultList();
+	 public List<EtudiantEntreprise> findCompaniesByStudentId(Long idEtudiant) {
+		 List<EtudiantEntreprise> results = em.createQuery(
+				 "select etuEnt from EtudiantEntreprise etuEnt where etuEnt.id.etudiantId =:id").setParameter("id", idEtudiant).getResultList();
 		 return results;
 	 }
 }

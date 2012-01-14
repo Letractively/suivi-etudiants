@@ -1,6 +1,6 @@
 drop table ETUDIANT_ENTREPRISE;
 drop table ETUDIANT_FORMATION;
-drop table ENTREPRISE.
+drop table ENTREPRISE;
 drop table ETABLISSEMENT;
 drop table FORMATION;
 drop table ETUDIANT;
@@ -66,7 +66,6 @@ primary key (ETUDIANT_ID));
 
 create table ETUDIANT_ENTREPRISE
 (
-ID BIGINT not null,
 ENTREPRISE_ID BIGINT not null,
 ETUDIANT_ID BIGINT not null,
 datedebut date,
@@ -74,8 +73,9 @@ datefin date,
 description varchar(255),
 posteoccupe varchar(70),
 typecontrat varchar(70),
-primary key (ENTREPRISE_ID, ETUDIANT_ID)
+primary key (ENTREPRISE_ID, ETUDIANT_ID,datedebut)
 );
+
 
 create table ETUDIANT_FORMATION (
 ETUDIANT_ID  BIGINT not null,
@@ -115,10 +115,6 @@ INSERT INTO UTILISATEUR VALUES (1,'alex','534b44a19bf18d20b71ecc4eb77c572f','adm
 INSERT INTO UTILISATEUR VALUES (2,'romain','5026bc63b5418ffdb54f238db245ec01','admin','romain');
 INSERT INTO UTILISATEUR VALUES (3,'gerardo','4024fb06e1423da90b80f0274e8e4476','admin','alex');
 
-INSERT INTO ENTREPRISE VALUES (1,'alex','534b44a19bf18d20b71ecc4eb77c572f','admin','alex');
-INSERT INTO ENTREPRISE VALUES (2,'romain','5026bc63b5418ffdb54f238db245ec01','admin','romain');
-INSERT INTO ENTREPRISE VALUES (3,'gerardo','4024fb06e1423da90b80f0274e8e4476','admin','alex');
-
 INSERT INTO ENTREPRISE VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','GFI','sa','info','154564');
 INSERT INTO ENTREPRISE VALUES (2,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Norsys','sa','info','154564');
 INSERT INTO ENTREPRISE VALUES (3,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','logica','sa','info','154564');
@@ -127,3 +123,7 @@ INSERT INTO ETUDIANT VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0
 INSERT INTO ETUDIANT VALUES (2,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Alex ','HANOCK');
 INSERT INTO ETUDIANT VALUES (3,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Romain','MORIVAL');
 
+insert into ETUDIANT_ENTREPRISE values (1,1,'2012-05-01','2012-06-01','blabla','analyste programmeur','cdi');
+insert into ETUDIANT_ENTREPRISE values (2,1,'2011-06-01','2012-08-01','blabla','ingénieur','intérimaire');
+insert into ETUDIANT_ENTREPRISE values (2,2,'2011-06-01','2013-08-01','blabla','ingénieur','stage');
+insert into ETUDIANT_ENTREPRISE values (1,3,'2011-06-01','2014-08-01','blabla','ingénieur','stage');
