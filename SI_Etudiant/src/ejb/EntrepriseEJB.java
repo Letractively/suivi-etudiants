@@ -14,32 +14,53 @@ public class EntrepriseEJB {
 	@PersistenceContext(unitName = "si_etu")
 	private EntityManager em;
 	
+	/*
+	 * Retourne toutes les entreprises
+	 */
 	@SuppressWarnings("unchecked") 
 	public List<Entreprise> findAllEntreprises() {
 		List<Entreprise> results = em.createQuery("select e from Entreprise e").getResultList();
 	    return results;		
 	}
 
+	/*
+	 * Cree une entreprise
+	 */
 	public Entreprise createEntreprise(Entreprise entreprise) {
-		
 		em.persist(entreprise);
 		return entreprise;
-		
 	}
 	
-	public void removeEntreprise(Entreprise entreprise) 
-	 {
+	/*
+	 * Supprime une entreprise
+	 */
+	public void removeEntreprise(Entreprise entreprise) {
 		 //em.merge(entreprise); =>entit� doit �tre d�tach� du bean sinon cela ne fonctionne pas
 		 em.remove(em.merge(entreprise));	
-	 }
-	 public void updateEntreprise(Entreprise entreprise) 
-	 {
+	}
+	
+	/*
+	 * Met a jour une entreprise
+	 */
+	 public void updateEntreprise(Entreprise entreprise) {
 		 em.merge(entreprise);	
 	 }
-	 public Entreprise findEntrepriseById(Long id) 
-	 {
+	 
+	 /*
+	  * Cherche et retourne une entreprise par son identifiant
+	  */
+	 public Entreprise findEntrepriseById(Long id) {
 		 Entreprise results = ( Entreprise) em.createQuery("select e from Entreprise e where e.identreprise = :id").setParameter("id", id).getSingleResult();
 	    return results;
 	 }
-
+	 
+	 /*
+	  * Retourne l'ensemble des entreprises rattachees a un etudiant (identifiant)
+	  */
+	 @SuppressWarnings("unchecked") 
+	 public List<Entreprise> findCompaniesByStudentId(Long idEtudiant) {
+		 List<Entreprise> results = em.createQuery(
+				 "select ent from Entreprise ent, Etudiant e where e.id =:id").setParameter("id", idEtudiant).getResultList();
+		 return results;
+	 }
 }

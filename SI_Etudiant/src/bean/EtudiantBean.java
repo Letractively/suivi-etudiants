@@ -24,8 +24,6 @@ public class EtudiantBean
 	private List<Etudiant> etudiants = new ArrayList<Etudiant>();
 	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
 	
-
-	
 	private Etudiant editEtudiant;//on instancie pas, c'est l'etudiant que l'on récupere à partir du jsf 
 	
 	@PostConstruct
