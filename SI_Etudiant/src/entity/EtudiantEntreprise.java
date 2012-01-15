@@ -24,7 +24,6 @@ import javax.persistence.TemporalType;
 public class EtudiantEntreprise implements Serializable {
 
   private static final long serialVersionUID = 1L;
-  private Date datedebut;
   private Date datefin;
   private String description;
   private String posteoccupe;
@@ -76,15 +75,6 @@ public class EtudiantEntreprise implements Serializable {
 
   public void setEntreprise(Entreprise entreprise) {
     this.entreprise = entreprise;
-  }
-
-  @Temporal(TemporalType.DATE)
-  public Date getDatedebut() {
-    return datedebut;
-  }
-
-  public void setDatedebut(Date datedebut) {
-    this.datedebut = datedebut;
   }
 
   @Temporal(TemporalType.DATE)

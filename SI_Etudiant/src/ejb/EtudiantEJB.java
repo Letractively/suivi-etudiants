@@ -53,7 +53,7 @@ public class EtudiantEJB
 	  * Cherche et retourne un etudiant par son identifiant
 	  */
 	 public Etudiant findEtudiantById(Long id) {
-	    Etudiant results = (Etudiant) em.createQuery("select e from Etudiant e where e.id = :id").setParameter("id", id).getSingleResult();
+	    Etudiant results = (Etudiant) em.find(Etudiant.class,id);
 	    return results;
 	 }
 }

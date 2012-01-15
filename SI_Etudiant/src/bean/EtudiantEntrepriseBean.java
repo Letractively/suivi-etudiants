@@ -7,12 +7,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import ejb.EntrepriseEJB;
 import ejb.EtudiantEJB;
+import ejb.EtudiantEntrepriseEJB;
 import entity.Entreprise;
 import entity.Etudiant;
 import entity.EtudiantEntreprise;
@@ -28,18 +30,24 @@ public class EtudiantEntrepriseBean
 	
 	@EJB
 	private EntrepriseEJB entrepriseEJB;
+	
+	@EJB
+	private EtudiantEntrepriseEJB etudiantEntrepriseEJB;
 
 		
 	private Etudiant etudiant = new Etudiant();
+	
 	private EtudiantEntreprise etudiantEntreprise = new  EtudiantEntreprise();
+	private EtudiantEntrepriseId etudiantEntrepriseId = new  EtudiantEntrepriseId();
 	
 	private List<EtudiantEntreprise> etudiantEntreprises = new ArrayList<EtudiantEntreprise>();
 	private List<Entreprise> entreprises = new ArrayList<Entreprise>();
 	
 	private List<SelectItem> entreprisesItems = new ArrayList<SelectItem>();
+	//c'est cette variable qui aura l'id de lentreprise selectionné via la liste déroulante 
 	private Long entrepriseItemSelect;
 		
-	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
+	private HashMap<EtudiantEntrepriseId, Boolean> checked = new HashMap<EtudiantEntrepriseId, Boolean>();
 
 
 	@PostConstruct
@@ -53,18 +61,16 @@ public class EtudiantEntrepriseBean
 		{
 			Long id = Long.parseLong(this.getPassedParameter());
 			// Je remplis ma liste d'etudiantEntreprises grace a ma requete
-			etudiantEntreprises = entrepriseEJB.findCompaniesByStudentId(id);
+			etudiantEntreprises = etudiantEntrepriseEJB.findCompaniesByStudentId(id);
 			
 			//Je recupere l'etudiant
 			etudiant=etudiantEJB.findEtudiantById(id);
-			
-			//Je remplis la liste d'entreprise pour la page d'ajout etudiantEntreprise..	
-			
-			//appel de la fonction qui initailise la liste d'item entreprise
-			creerListeItem();		
+									
 		}
-		
+		//Je remplis la liste d'entreprise pour la page d'ajout etudiantEntreprise..
 		entreprises=entrepriseEJB.findAllEntreprises();	
+		
+		//appel de la fonction qui initailise la liste d'item entreprise
 		creerListeItem();	
 		
 		
@@ -73,12 +79,24 @@ public class EtudiantEntrepriseBean
 		
 	public String ajout() 
 	{
-			
-		System.out.println("Le nom de l'étudiant est "+etudiant.getNom());
+		//pour recuper l'id de l'etudiant, j'ai mis un champ caché dans le formulaire jsf pour faire le traitement ici, dans la fonction
+		System.out.println("Le numero de l'étudiant est "+etudiant.getId());
 		
-		//System.out.println("Le numéro de l'entreprise selectionné est "+entrepriseItemSelect);
+		System.out.println("Le numéro de l'entreprise selectionné est "+entrepriseItemSelect);
 		
-		//EtudiantEntrepriseId id = new EtudiantEntrepriseId(etudiantEntreprise.getDatedebut(),etudiant.getId(),entrepriseItemSelect); 
+		etudiantEntrepriseId = new EtudiantEntrepriseId(etudiantEntrepriseId.getDatedebut(),etudiant.getId(),entrepriseItemSelect);
+		
+		
+		//mise en place de la clé primaire
+		etudiantEntreprise.setId(etudiantEntrepriseId);
+		
+		//On prévient l'objet. Si cette instruction n'est pas présente le nom n'est pas rafraichi dans le tableau etudiantEntreprise
+		etudiantEntreprise.setEntreprise(entrepriseEJB.findEntrepriseById(entrepriseItemSelect));
+				
+		//On ajoute étudiantEntrepise dans la BDD
+		etudiantEntrepriseEJB.createEtudiantEntreprise(etudiantEntreprise);
+		
+		
 		
 		return "list";
 	}
@@ -102,6 +120,24 @@ public class EtudiantEntrepriseBean
 		String parametreId = (String) facesContext.getExternalContext().
 		getRequestParameterMap().get("id");
 		return parametreId;
+	}
+	
+	public String supprimer()
+	{
+		
+				
+		for (EtudiantEntreprise unEtudiantEntreprise : etudiantEntreprises )
+        {
+			System.out.println("Test");
+			
+			if (checked.get(unEtudiantEntreprise.getId())) 
+            {
+				System.out.println("Test");
+				//etudiantEntrepriseEJB.removeEtudiantEntreprise(unEtudiantEntreprise);	
+            }
+        }
+		
+		return "test";
 	}
 	
 	
@@ -142,6 +178,20 @@ public class EtudiantEntrepriseBean
 	}
 	public void setEntrepriseItemSelect(Long entrepriseItemSelect) {
 		this.entrepriseItemSelect = entrepriseItemSelect;
+	}
+	public EtudiantEntrepriseId getEtudiantEntrepriseId() {
+		return etudiantEntrepriseId;
+	}
+	public void setEtudiantEntrepriseId(EtudiantEntrepriseId etudiantEntrepriseId) {
+		this.etudiantEntrepriseId = etudiantEntrepriseId;
+	}
+
+	public HashMap<EtudiantEntrepriseId, Boolean> getChecked() {
+		return checked;
+	}
+
+	public void setChecked(HashMap<EtudiantEntrepriseId, Boolean> checked) {
+		this.checked = checked;
 	}
 	
 	

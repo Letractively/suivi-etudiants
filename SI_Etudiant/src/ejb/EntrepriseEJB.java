@@ -36,7 +36,7 @@ public class EntrepriseEJB {
 	 * Supprime une entreprise
 	 */
 	public void removeEntreprise(Entreprise entreprise) {
-		 //em.merge(entreprise); =>entit� doit �tre d�tach� du bean sinon cela ne fonctionne pas
+		
 		 em.remove(em.merge(entreprise));	
 	}
 	
@@ -51,17 +51,9 @@ public class EntrepriseEJB {
 	  * Cherche et retourne une entreprise par son identifiant
 	  */
 	 public Entreprise findEntrepriseById(Long id) {
-		 Entreprise results = ( Entreprise) em.createQuery("select e from Entreprise e where e.identreprise = :id").setParameter("id", id).getSingleResult();
+		 Entreprise results = em.find(Entreprise.class, id);
 	    return results;
 	 }
 	 
-	 /*
-	  * Retourne l'ensemble des entreprises rattachees a un etudiant (identifiant)
-	  */
-	 @SuppressWarnings("unchecked") 
-	 public List<EtudiantEntreprise> findCompaniesByStudentId(Long idEtudiant) {
-		 List<EtudiantEntreprise> results = em.createQuery(
-				 "select etuEnt from EtudiantEntreprise etuEnt where etuEnt.id.etudiantId =:id").setParameter("id", idEtudiant).getResultList();
-		 return results;
-	 }
+	 
 }

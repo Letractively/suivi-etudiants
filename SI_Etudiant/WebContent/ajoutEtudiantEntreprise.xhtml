@@ -15,13 +15,13 @@
 	    	<h:outputText value="#{etudiantEntrepriseBean.etudiant}" />
 	    </h1>
 	    <h:form>
-	    	
+	    	<h:inputHidden id="etudiantCaché" value="#{etudiantEntrepriseBean.etudiant.id}" />
 	  		<h:outputLabel for="entreprise" value="Entreprise : " />
 			<h:selectOneMenu value="#{etudiantEntrepriseBean.entrepriseItemSelect}">
 				<f:selectItems value="#{etudiantEntrepriseBean.entreprisesItems}" />
 			</h:selectOneMenu>
 			<h:outputLabel for="dateDebut" value="Date Début : " />
-			<h:inputText id="dateDebut" required="true" label="dateDebut" value="#{etudiantEntrepriseBean.etudiantEntreprise.datedebut}">
+			<h:inputText id="dateDebut" required="true" label="dateDebut" value="#{etudiantEntrepriseBean.etudiantEntrepriseId.datedebut}">
 				<f:convertDateTime pattern="yyyy-mm-dd"/>
 			</h:inputText>
 			<br />

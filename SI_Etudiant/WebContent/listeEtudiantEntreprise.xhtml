@@ -15,7 +15,12 @@
     <h1>Liste des activités</h1>
      <h:form>
 	    <h:dataTable value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent" class="tab" >
-		   
+		   <h:column>
+		    	<f:facet name="header">
+		    		
+		    	</f:facet>
+		    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantEntrepriseBean.checked[ent.id]}" />
+		    </h:column>
 		    <h:column>
 		    	<f:facet name="header">
 		    		<h:outputText value="Entreprise" />
@@ -26,7 +31,7 @@
 		    	<f:facet name="header">
 		    		<h:outputText value="Date début" />
 		    	</f:facet>
-		    	<h:outputText value="#{ent.datedebut}" /> 	
+		    	<h:outputText value="#{ent.id.datedebut}" /> 	
 		    </h:column> 
 		     <h:column>
 		    	<f:facet name="header">
@@ -50,7 +55,8 @@
 		    
 	    </h:dataTable>
 	    <br />
-		<h:commandButton value="Supprimer" />
+		<h:commandButton value="Supprimer" action="#{etudiantEntrepriseBean.supprimer()}" />
+		<br />
 		<h:outputLink id="lien2" value="ajoutEtudiantEntreprise.faces">
 	  		<f:param name="id" value="#{etudiantEntrepriseBean.etudiant.id}" />
 	  			<h:outputText value="Ajouter une activité" />
