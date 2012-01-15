@@ -8,7 +8,7 @@
     <persistence-unit name="si_etu" transaction-type="JTA">
 <!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
         <jta-data-source>jdbc/gestionEtu</jta-data-source>
-         <class>entity.Utilisateur</class>
+        <class>entity.Utilisateur</class>
         <class>entity.Etudiant</class>
         <class>entity.Entreprise</class>
         <class>entity.EtudiantEntreprise</class>
@@ -16,8 +16,10 @@
         <class>entity.EtudiantFormationPK</class>
         <class>entity.EtudiantEntreprisePK</class>
         <class>entity.Formation</class>
-        <class>entity.TypeFormation</class>          
-         <properties>
+        <class>entity.Contact</class>
+        <class>entity.Adresse</class>
+        <class>entity.TypeFormation</class>  
+  <properties>
             <property name="eclipselink.logging.level" value="FINE"/>
         </properties>
     </persistence-unit>

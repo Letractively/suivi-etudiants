@@ -22,8 +22,8 @@ public class Etablissement implements Serializable {
   private Long id;
   private String nom;
   private String type;
-  private Adresse adresse;
-  private Contact contact;
+  private Adresse adresse=new Adresse();
+  private Contact contact=new Contact();
 
   public Etablissement() {
     super();

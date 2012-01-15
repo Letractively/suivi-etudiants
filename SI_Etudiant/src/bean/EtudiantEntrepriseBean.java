@@ -46,7 +46,8 @@ public class EtudiantEntrepriseBean
 		 */
 		Long id = Long.parseLong(this.getPassedParameter());
 		
-		if(id!=null) {
+		if(id!=null) 
+		{
 			
 			// Je remplis ma liste d'entreprises grace a ma requete
 			entreprises = entrepriseEJB.findCompaniesByStudentId(id);
@@ -54,18 +55,6 @@ public class EtudiantEntrepriseBean
 			//entreprises.get(0).getEntreprise().getNom();
 			
 		}
-		
-		/*if(id!=null) {
-			entreprises = entrepriseEJB.findAllEntreprises();
-			//Initialisation de la liste d'items 
-			for (Entreprise ent : entreprises) {
-				entreprisesItems.add(new SelectItem(ent.getNom()+" - "+ent.getRaisonsociale()));
-			}
-		}
-		else {
-			System.out.println("test");
-		}*/
-
 	}
 	public EtudiantEntreprise getEtudiantEntreprise() {
 		return etudiantEntreprise;

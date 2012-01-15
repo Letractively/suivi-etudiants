@@ -25,8 +25,8 @@ public class Etudiant implements Serializable {
   private long id;
   private String nom;
   private String prenom;
-  private Adresse adresse;
-  private Contact contact;
+  private Adresse adresse=new Adresse();
+  private Contact contact=new Contact();
   private Set<EtudiantFormation> lesFormations = new HashSet<EtudiantFormation>();
   private Set<EtudiantEntreprise> lesEntreprises = new HashSet<EtudiantEntreprise>();
 
@@ -41,6 +41,7 @@ public class Etudiant implements Serializable {
 
   public Etudiant() {
     super();
+    
   }
 
   @OneToMany(mappedBy = "etudiant")
@@ -99,7 +100,6 @@ public class Etudiant implements Serializable {
   public Contact getContact() {
     return contact;
   }
-
   public void setContact(Contact contact) {
     this.contact = contact;
   }

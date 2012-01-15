@@ -83,13 +83,13 @@ public class EntrepriseBean {
 	{
 		  
 		//System.out.println(entreprise.getContact().getMail());
-		/*this.entrepriseEJB.createEntreprise(entreprise);  
+		  this.entrepriseEJB.createEntreprise(entreprise);  
 		  
 		  //si on est en session, sinon pas besoin...
 		  entreprises = entrepriseEJB.findAllEntreprises();
-		  entreprise =new Entreprise();*/
+		  entreprise =new Entreprise();
 		  
-		  return "x";
+		  return "listeEntreprise";
 	  }
 	  public void supprimer() 
 	  {

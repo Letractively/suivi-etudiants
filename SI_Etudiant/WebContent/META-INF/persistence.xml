@@ -16,6 +16,8 @@
         <class>entity.EtudiantFormationPK</class>
         <class>entity.EtudiantEntreprisePK</class>
         <class>entity.Formation</class>
+        <class>entity.Contact</class>
+        <class>entity.Adresse</class>
         <class>entity.TypeFormation</class>          
          <properties>
             <property name="eclipselink.logging.level" value="FINE"/>

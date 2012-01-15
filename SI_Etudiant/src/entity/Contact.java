@@ -8,8 +8,13 @@ public class Contact {
   private String mail;
   private String mailAutre;
   private String tel;
-  
   private String telAutre;
+  
+  
+  
+  
+  
+  
   @Column(length = 70)
   public String getMail() {
     return mail;

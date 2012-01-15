@@ -26,8 +26,8 @@ public class Entreprise implements Serializable {
   private String raisonsociale;
   private String secteuractivite;
   private String siret;
-  private Adresse adresse;
-  private Contact contact;
+  private Adresse adresse = new Adresse();
+  private Contact contact=new Contact();
   private Set<EtudiantEntreprise> lesEtudiants = new HashSet<EtudiantEntreprise>();
 
   

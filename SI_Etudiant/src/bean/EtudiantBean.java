@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.sun.xml.registry.uddi.bindings_v2_2.Contact;
+
 import ejb.EtudiantEJB;
 import entity.Etudiant;
 
@@ -20,7 +22,8 @@ public class EtudiantBean
 	@EJB
 	private EtudiantEJB etudiantEJB;
   
-	private Etudiant etudiant =new Etudiant();;
+	private Etudiant etudiant =new Etudiant();
+	 
 	private List<Etudiant> etudiants = new ArrayList<Etudiant>();
 	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
 	
@@ -73,11 +76,13 @@ public class EtudiantBean
 	public void setEditEtudiant(Etudiant editEtudiant) {
 		this.editEtudiant = editEtudiant;
 	}
+		
 	public String ajout() 
 	{
 		  this.etudiantEJB.createEtudiant(etudiant);  
 		  
 		  //si on est en session, sinon pas besoin...
+		  
 		  etudiants = etudiantEJB.findAllEtudiants();
 		  etudiant =new Etudiant();
 		  
