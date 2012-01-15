@@ -14,7 +14,7 @@
  
     <h1>Liste des activités</h1>
      <h:form>
-	    <h:dataTable value="#{etudiantEntrepriseBean.entreprises}" var="ent" class="tab" >
+	    <h:dataTable value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent" class="tab" >
 		   
 		    <h:column>
 		    	<f:facet name="header">
@@ -50,7 +50,12 @@
 		    
 	    </h:dataTable>
 	    <br />
-		<h:commandButton value="Supprimer" action="#{entrepriseBean.supprimer()}" />
+		<h:commandButton value="Supprimer" />
+		<h:outputLink id="lien2" value="ajoutEtudiantEntreprise.faces">
+	  		<f:param name="id" value="#{etudiantEntrepriseBean.etudiant.id}" />
+	  			<h:outputText value="Ajouter une activité" />
+		</h:outputLink>
+
 	</h:form>
     </ui:define> 
 

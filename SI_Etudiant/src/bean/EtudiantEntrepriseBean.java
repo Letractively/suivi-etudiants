@@ -16,6 +16,7 @@ import ejb.EtudiantEJB;
 import entity.Entreprise;
 import entity.Etudiant;
 import entity.EtudiantEntreprise;
+import entity.EtudiantEntrepriseId;
 
 
 @ManagedBean(name = "etudiantEntrepriseBean")
@@ -28,84 +29,72 @@ public class EtudiantEntrepriseBean
 	@EJB
 	private EntrepriseEJB entrepriseEJB;
 
+		
+	private Etudiant etudiant = new Etudiant();
 	private EtudiantEntreprise etudiantEntreprise = new  EtudiantEntreprise();
 	
-	private List<EtudiantEntreprise> entreprises = new ArrayList<EtudiantEntreprise>();
-	private List<SelectItem> entreprisesItems = new ArrayList<SelectItem>();
+	private List<EtudiantEntreprise> etudiantEntreprises = new ArrayList<EtudiantEntreprise>();
+	private List<Entreprise> entreprises = new ArrayList<Entreprise>();
 	
+	private List<SelectItem> entreprisesItems = new ArrayList<SelectItem>();
+	private Long entrepriseItemSelect;
+		
 	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
 
 
 	@PostConstruct
 	public void init() 
 	{  
-		
 		/*
 		 *  On recupere l'id passe en parametre depuis l'autre page
 		 *  Attention : Il faut parser en type Long comme dans l'entite
-		 */
-		Long id = Long.parseLong(this.getPassedParameter());
-		
-		if(id!=null) 
+		 */		
+		if(this.getPassedParameter()!=null) 
 		{
+			Long id = Long.parseLong(this.getPassedParameter());
+			// Je remplis ma liste d'etudiantEntreprises grace a ma requete
+			etudiantEntreprises = entrepriseEJB.findCompaniesByStudentId(id);
 			
-			// Je remplis ma liste d'entreprises grace a ma requete
-			entreprises = entrepriseEJB.findCompaniesByStudentId(id);
+			//Je recupere l'etudiant
+			etudiant=etudiantEJB.findEtudiantById(id);
 			
-			//entreprises.get(0).getEntreprise().getNom();
+			//Je remplis la liste d'entreprise pour la page d'ajout etudiantEntreprise..	
 			
+			//appel de la fonction qui initailise la liste d'item entreprise
+			creerListeItem();		
 		}
+		
+		entreprises=entrepriseEJB.findAllEntreprises();	
+		creerListeItem();	
+		
+		
+		
 	}
-	public EtudiantEntreprise getEtudiantEntreprise() {
-		return etudiantEntreprise;
-	}
-
-	public void setEtudiantEntreprise(EtudiantEntreprise etudiantEntreprise) {
-		this.etudiantEntreprise = etudiantEntreprise;
-	}
-
-	public List<SelectItem> getEntreprisesItems() {
-		return entreprisesItems;
-	}
-
-	public void setEntreprisesItems(List<SelectItem> entreprisesItems) {
-		this.entreprisesItems = entreprisesItems;
-	}
-
-	public EntrepriseEJB getEntrepriseEJB() {
-		return entrepriseEJB;
-	}
-
-	public void setEntrepriseEJB(EntrepriseEJB entrepriseEJB) {
-		this.entrepriseEJB = entrepriseEJB;
-	}
-
-	public List<EtudiantEntreprise> getEntreprises() {
-		return entreprises;
-	}
-
-	public void setEntreprises(List<EtudiantEntreprise> entreprises) {
-		this.entreprises = entreprises;
-	}
-
+		
 	public String ajout() 
 	{
-		//phase de test avec des valeur par défaut (non récupérer à partir des jsf)
+			
+		System.out.println("Le nom de l'étudiant est "+etudiant.getNom());
 		
-		//Définition d'un étudiant
-		Etudiant etu = etudiantEJB.findEtudiantById(51L);
-		System.out.println("Le nom de l'étudiant est "+etu.getNom());
+		//System.out.println("Le numéro de l'entreprise selectionné est "+entrepriseItemSelect);
 		
-		//Entreprise ent=entrepriseEJB.findEntrepriseById(1L);
-		//System.out.println("Le nom de l'entreprise est "+ent.getNom());
+		//EtudiantEntrepriseId id = new EtudiantEntrepriseId(etudiantEntreprise.getDatedebut(),etudiant.getId(),entrepriseItemSelect); 
 		
-		EtudiantEntreprise ac= new EtudiantEntreprise();
-		ac.setEtudiant(etu);
-		
-		//System.out.println("ttttt "+ac.getId().getIdetudiant());
-
 		return "list";
 	}
+	
+	//création de la liste d'item Entreprise, necessaire pour la page ajouterEtudiantEntreprisexhtml
+	public List<SelectItem> creerListeItem()
+	{		
+		for(Entreprise ent : entreprises)
+		{
+			//identifiant,valeur
+			entreprisesItems.add(new SelectItem(ent.getId(),ent.getNom()+" "+ent.getSiret()));
+		}
+		
+		return entreprisesItems;			
+	}
+	
 	
 	public String getPassedParameter() 
 	{
@@ -114,5 +103,48 @@ public class EtudiantEntrepriseBean
 		getRequestParameterMap().get("id");
 		return parametreId;
 	}
+	
+	
+	//getter and setter
+	
+	public EtudiantEntreprise getEtudiantEntreprise() {
+		return etudiantEntreprise;
+	}
+	public void setEtudiantEntreprise(EtudiantEntreprise etudiantEntreprise) {
+		this.etudiantEntreprise = etudiantEntreprise;
+	}
+	public List<SelectItem> getEntreprisesItems() {
+		return entreprisesItems;
+	}
+	public void setEntreprisesItems(List<SelectItem> entreprisesItems) {
+		this.entreprisesItems = entreprisesItems;
+	}
+	public List<EtudiantEntreprise> getEtudiantEntreprises() {
+		return etudiantEntreprises;
+	}
+	public void setEtudiantEntreprises(List<EtudiantEntreprise> etudiantEntreprises) {
+		this.etudiantEntreprises = etudiantEntreprises;
+	}
+	public List<Entreprise> getEntreprises() {
+		return entreprises;
+	}
+	public void setEntreprises(List<Entreprise> entreprises) {
+		this.entreprises = entreprises;
+	}
+	public Etudiant getEtudiant() {
+		return etudiant;
+	}
+	public void setEtudiant(Etudiant etudiant) {
+		this.etudiant = etudiant;
+	}
+	public Long getEntrepriseItemSelect() {
+		return entrepriseItemSelect;
+	}
+	public void setEntrepriseItemSelect(Long entrepriseItemSelect) {
+		this.entrepriseItemSelect = entrepriseItemSelect;
+	}
+	
+	
+	
 }
 	

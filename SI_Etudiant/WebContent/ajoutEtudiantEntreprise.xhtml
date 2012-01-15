@@ -11,14 +11,13 @@
     <ui:define name="title">Gestion des absences</ui:define>
 
     <ui:define name="content">
-	    <h1>Etudiant Entreprise</h1>
+	    <h1>Ajouter une activité pour 
+	    	<h:outputText value="#{etudiantEntrepriseBean.etudiant}" />
+	    </h1>
 	    <h:form>
 	    	
-	    	<h:outputLabel for="nom" value="Nom : " />
-			<h:inputText id="nom" required="true" label="nom"  />
-			<br />
-			<h:outputLabel for="entreprise" value="Entreprise : " />
-			<h:selectOneMenu>
+	  		<h:outputLabel for="entreprise" value="Entreprise : " />
+			<h:selectOneMenu value="#{etudiantEntrepriseBean.entrepriseItemSelect}">
 				<f:selectItems value="#{etudiantEntrepriseBean.entreprisesItems}" />
 			</h:selectOneMenu>
 			<h:outputLabel for="dateDebut" value="Date Début : " />

@@ -107,5 +107,11 @@ public class Etudiant implements Serializable {
   public void setAdresse(Adresse adresse) {
     this.adresse = adresse;
   }
+  
+  public String toString()
+  {
+	 return nom+" "+prenom;  
+  }
+  
 
 }

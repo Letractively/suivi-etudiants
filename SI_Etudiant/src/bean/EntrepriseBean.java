@@ -30,102 +30,86 @@ public class EntrepriseBean {
 	public void init() 
 	{
 	    entreprises = entrepriseEJB.findAllEntreprises();
-	}
-	
-	public String doNewEntreprise() 
+	}	  
+
+	public String ajout() 
 	{
-		return "newEntreprise.xhtml"; 
+		this.entrepriseEJB.createEntreprise(entreprise);  
+		
+		//si on est en session, actualisation du la liste d'entreprises et de entreprise
+		entreprises = entrepriseEJB.findAllEntreprises();
+		entreprise =new Entreprise();
+		  
+		return "listeEntreprise";
 	}
 	
-	  public Entreprise getEntreprise() 
-	  {
-		  return entreprise;
-	  }
+	public void supprimer() 
+	{
+		List<Entreprise> entrepriseSelectionne = new ArrayList<Entreprise>();
+			
+		System.out.println("Test !!!!!!!!!");
+		for (Entreprise uneEntreprise : entreprises)
+		{
+			if (checked.get(uneEntreprise.getId()))
+			{
+				  entrepriseEJB.removeEntreprise(uneEntreprise);
+			}
+		}
+		//si on est en session, actualisation de la liste d'entreprises
+		entreprises=entrepriseEJB.findAllEntreprises();
+	}
 	
-	  public void setEntreprise(Entreprise entreprise) 
-	  {
-		  this.entreprise = entreprise;
-	  }
-	
-	  public List<Entreprise> getEntreprises() 
-	  {
-		  return entreprises;
-	  }
-	
-	  public void setEtudiants(List<Entreprise> entreprises) 
-	  {
-		  this.entreprises = entreprises;
-	  }
+	public String modifier() 
+	{
+		entrepriseEJB.updateEntreprise(editEntreprise);
+		
+		//si on est en session, actualisation de la liste d'entreprise
+		entreprises=entrepriseEJB.findAllEntreprises();
+		  
+		return "listeEntreprise";
+	}
+	  
+	public String edit()
+	{
+		System.out.println(editEntreprise.getId());	
+		return "editEntreprise";
+	}
 	  
 	  
-	  public HashMap<Long, Boolean> getChecked() 
-	  {
+	  //getter and setter
+	  
+	public Entreprise getEntreprise() 
+	{
+		return entreprise;
+	}
+	public void setEntreprise(Entreprise entreprise) 
+	{
+		this.entreprise = entreprise;
+	}
+	public List<Entreprise> getEntreprises() 
+	{
+		return entreprises;
+	}
+	public void setEtudiants(List<Entreprise> entreprises) 
+	{
+		this.entreprises = entreprises;
+	}
+	public HashMap<Long, Boolean> getChecked() 
+	{
 		return checked;
-	  }
-	  public void setChecked(HashMap<Long, Boolean> checked) 
-	  {
-		this.checked = checked;
-	  }
-	  
-	  
-	  public Entreprise getEditEntreprise() {
-		return editEntreprise;
 	}
-	  
+	public void setChecked(HashMap<Long, Boolean> checked) 
+	{
+		this.checked = checked;
+	}
+	public Entreprise getEditEntreprise() {
+		return editEntreprise;
+	}	  
 	public void setEditEntreprise(Entreprise editEntreprise) {
 		this.editEntreprise = editEntreprise;
 	}
 	public void setEntreprises(List<Entreprise> entreprises) {
 		this.entreprises = entreprises;
 	}
-
-	public String ajout() 
-	{
-		  
-		//System.out.println(entreprise.getContact().getMail());
-		  this.entrepriseEJB.createEntreprise(entreprise);  
-		  
-		  //si on est en session, sinon pas besoin...
-		  entreprises = entrepriseEJB.findAllEntreprises();
-		  entreprise =new Entreprise();
-		  
-		  return "listeEntreprise";
-	  }
-	  public void supprimer() 
-	  {
-		  	System.out.println("Test !!!!!!!!!");
-	        List<Entreprise> entrepriseSelectionne = new ArrayList<Entreprise>();
-
-	        System.out.println("Test !!!!!!!!!");
-	        for (Entreprise uneEntreprise : entreprises)
-	        {
-	            if (checked.get(uneEntreprise.getId())) 
-	            if (checked.get(uneEntreprise.getId()))
-	            {
-	            	 System.out.println(uneEntreprise.getNom());
-	            	
-	            	//System.out.println("Selection : "+unEtudiant.getNom());
-	            	
-	            	 entrepriseEJB.removeEntreprise(uneEntreprise);
-	            	
-	            }
-	        }
-	        entreprises=entrepriseEJB.findAllEntreprises();
-	        
-	   }
-	  public String edit()
-	  {
-		  System.out.println(editEntreprise.getId());	
-		  return "editEntreprise";
-			
-	  }
-	  public String modifier() 
-	  {
-		  entrepriseEJB.updateEntreprise(editEntreprise);
-		  
-		  entreprises=entrepriseEJB.findAllEntreprises();
-		  
-		  return "listeEntreprise";
-	  }
 
 }
