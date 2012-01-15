@@ -1,15 +1,13 @@
 drop table ETUDIANT_ENTREPRISE;
 drop table ETUDIANT_FORMATION;
 drop table ENTREPRISE;
-drop table ETABLISSEMENT;
 drop table FORMATION;
+drop table ETABLISSEMENT;
 drop table ETUDIANT;
 drop table UTILISATEUR;
 
-
 CREATE TABLE SEQUENCE (SEQ_NAME VARCHAR(50), SEQ_COUNT DECIMAL(15));
 INSERT INTO SEQUENCE(SEQ_NAME, SEQ_COUNT) values ('SEQ_GEN', 0);
-
 
 create table ENTREPRISE
 (
@@ -29,10 +27,6 @@ secteuractivite varchar(70),
 siret varchar(70),
 primary key (ENTREPRISE_ID)
 );
-
-INSERT INTO ENTREPRISE VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','GFI','sa','info','154564');
-INSERT INTO ENTREPRISE VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Norsys','sa','info','154564');
-INSERT INTO ENTREPRISE VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','logica','sa','info','154564');
 
 create table ETABLISSEMENT (
 ETABLISSEMENT_ID BIGINT not null,
@@ -76,7 +70,6 @@ typecontrat varchar(70),
 primary key (ENTREPRISE_ID, ETUDIANT_ID,datedebut)
 );
 
-
 create table ETUDIANT_FORMATION (
 ETUDIANT_ID  BIGINT not null,
 FORMATION_ID BIGINT not null,
@@ -110,18 +103,17 @@ alter table ETUDIANT_FORMATION add constraint FK1AC7716E10E34EC3 foreign key (FO
 alter table ETUDIANT_FORMATION add constraint FK1AC7716E102F4471 foreign key (ETUDIANT_ID) references ETUDIANT(ETUDIANT_ID);
 alter table FORMATION add constraint FK121298919D85AF8C foreign key (ETABLISSEMENT_ID) references ETABLISSEMENT(ETABLISSEMENT_ID);
 
-
-INSERT INTO UTILISATEUR VALUES (1,'alex','534b44a19bf18d20b71ecc4eb77c572f','admin','alex');
-INSERT INTO UTILISATEUR VALUES (2,'romain','5026bc63b5418ffdb54f238db245ec01','admin','romain');
-INSERT INTO UTILISATEUR VALUES (3,'gerardo','4024fb06e1423da90b80f0274e8e4476','admin','alex');
+INSERT INTO UTILISATEUR VALUES (1,'alex','534b44a19bf18d20b71ecc4eb77c572f',1,'alex');
+INSERT INTO UTILISATEUR VALUES (2,'romain','5026bc63b5418ffdb54f238db245ec01',1,'romain');
+INSERT INTO UTILISATEUR VALUES (3,'gerardo','4024fb06e1423da90b80f0274e8e4476',2,'gerardo');
 
 INSERT INTO ENTREPRISE VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','GFI','sa','info','154564');
 INSERT INTO ENTREPRISE VALUES (2,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Norsys','sa','info','154564');
 INSERT INTO ENTREPRISE VALUES (3,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','logica','sa','info','154564');
 
-INSERT INTO ETUDIANT VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Romain','BAVIER');
-INSERT INTO ETUDIANT VALUES (2,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Alex ','HANOCK');
-INSERT INTO ETUDIANT VALUES (3,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','Romain','MORIVAL');
+INSERT INTO ETUDIANT VALUES (1,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','BAVIER','Romain');
+INSERT INTO ETUDIANT VALUES (2,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','HANOCQ ','Alexandre');
+INSERT INTO ETUDIANT VALUES (3,'16 RUE','','62300','fr','LENS','toto@t.fr','','0608','0321','MORIVAL','Romain');
 
 insert into ETUDIANT_ENTREPRISE values (1,1,'2012-05-01','2012-06-01','blabla','analyste programmeur','cdi');
 insert into ETUDIANT_ENTREPRISE values (2,1,'2011-06-01','2012-08-01','blabla','ingénieur','intérimaire');
