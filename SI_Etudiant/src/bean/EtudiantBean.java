@@ -17,7 +17,7 @@ import entity.Etudiant;
 
 
 @ManagedBean(name = "etudiantBean")
-@RequestScoped
+@SessionScoped
 public class EtudiantBean 
 {
 	@EJB
@@ -116,5 +116,6 @@ public class EtudiantBean
 	  {
 		this.editEtudiant = editEtudiant;
 	  }
+	  
 	  
 }
