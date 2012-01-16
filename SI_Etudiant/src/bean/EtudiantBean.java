@@ -1,25 +1,53 @@
 package bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import com.sun.xml.registry.uddi.bindings_v2_2.Contact;
 
 import ejb.EtudiantEJB;
 import entity.Etudiant;
 
-
-@ManagedBean(name = "etudiantBean")
-@SessionScoped
-public class EtudiantBean 
+//named : propre à conversationScoped, ne surtout pas utiliser managedBean 
+@Named(value = "etudiantBean")  
+@ConversationScoped 
+public class EtudiantBean implements Serializable
 {
+	/* 
+	 * 
+	 * J'ai du ajouter le fichier beans.xml pour que la conversation fonctionne voir :
+	 *  
+	 * http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/Cours_composants_distribu%C3%A9s
+	 * _pour_l'entreprise_%2F%2F_EJB_2009/FAQ_JSF2_%3A_solutions_aux_erreurs_les_plus_courantes
+	 *
+	 * d'ailleur l'absence de implements serializable fait buggué le projet, impossible de le lancer 
+	 *
+	 * l’annotation @Inject permet l’injection et se base sur le type et non sur des expressions EL comme
+	 * l’annotation @ManagedProperty utilisée avec l’annotation @ManagedBean.
+	 * 
+	 * Donc 
+	 *
+	 * Inject si on est en named
+	 * 
+	 * Managed property si on est en managedBean
+	 * 
+	 * Inject permet d'injecter un autre bean
+	 * 
+	 * exemple : @inject EntrepriseBean entrepriseBean
+	
+	*/
+	@Inject  
+	Conversation conversation;  
+	
+	
 	@EJB
 	private EtudiantEJB etudiantEJB;
   
@@ -37,16 +65,20 @@ public class EtudiantBean
 	@PostConstruct
 	public void init() 
 	{
+		conversation.begin();
 	    etudiants = etudiantEJB.findAllEtudiants();
+	      
 	}
 	
 	public String ajout() 
 	{
 		  this.etudiantEJB.createEtudiant(etudiant);  
 		  
-		  //si on est en session, actualisation de la liste d'étudiant et de l'étudiant
+		  conversation.end();  
+		  
+		  /*si on est en session, actualisation de la liste d'étudiant et de l'étudiant
 		  etudiants = etudiantEJB.findAllEtudiants();
-		  etudiant =new Etudiant();
+		  etudiant =new Etudiant();*/
 		  
 		  return "list";
 	}
@@ -61,15 +93,16 @@ public class EtudiantBean
             	etudiantEJB.removeEtudiant(unEtudiant);	
             }
         }
-		
-		//si on est en session, actualisation de la liste d'étudiant
-		etudiants=etudiantEJB.findAllEtudiants();
+		conversation.end();  
+		/*si on est en session, actualisation de la liste d'étudiant
+		etudiants=etudiantEJB.findAllEtudiants();*/
 	}
 	    
 	//fonction permettant de modifier un etudiant => retourne list (voir face-config.xml) 
 	public String modifier() 
 	{
 		etudiantEJB.updateEtudiant(editEtudiant);
+		conversation.end();  
 		return "list";
 	}
 	

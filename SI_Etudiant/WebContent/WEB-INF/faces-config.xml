@@ -42,14 +42,6 @@
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
-  <from-view-id>/ajoutEtudiantEntreprise.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>list</from-outcome>
-   <to-view-id>/listeEtudiants.xhtml</to-view-id>
-  <redirect/>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
   <from-view-id>/listeEntreprises.xhtml</from-view-id>
   <navigation-case>
    <from-outcome>editEntreprise</from-outcome>

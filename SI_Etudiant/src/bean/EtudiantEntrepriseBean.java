@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -96,9 +97,17 @@ public class EtudiantEntrepriseBean
 		//On ajoute étudiantEntrepise dans la BDD
 		etudiantEntrepriseEJB.createEtudiantEntreprise(etudiantEntreprise);
 		
+		//redirection vers la liste des activités. Seul solution trouvé pour passé l'id en parametre
+		try 
+		{
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/SI_Etudiant/listeEtudiantEntreprise.faces?id="+etudiant.getId());
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		return "list";
+		return "test";
 	}
 	
 	//création de la liste d'item Entreprise, necessaire pour la page ajouterEtudiantEntreprisexhtml
