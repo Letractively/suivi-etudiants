@@ -1,6 +1,5 @@
 package bean;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,10 +7,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+
+import util.Redirection;
 
 import ejb.EntrepriseEJB;
 import ejb.EtudiantEJB;
@@ -60,13 +60,19 @@ public class EtudiantEntrepriseBean
 		 */		
 		if(this.getPassedParameter()!=null) 
 		{
-			Long id = Long.parseLong(this.getPassedParameter());
-			// Je remplis ma liste d'etudiantEntreprises grace a ma requete
-			etudiantEntreprises = etudiantEntrepriseEJB.findCompaniesByStudentId(id);
+			try
+			{
+				Long id = Long.parseLong(this.getPassedParameter());
+				// Je remplis ma liste d'etudiantEntreprises grace a ma requete
+				etudiantEntreprises = etudiantEntrepriseEJB.findCompaniesByStudentId(id);
 			
-			//Je recupere l'etudiant
-			etudiant=etudiantEJB.findEtudiantById(id);
-									
+				//Je recupere l'etudiant
+				etudiant=etudiantEJB.findEtudiantById(id);
+			}
+			catch(NumberFormatException e)
+			{
+				Redirection.erreurXhtml();
+			}
 		}
 		//Je remplis la liste d'entreprise pour la page d'ajout etudiantEntreprise..
 		entreprises=entrepriseEJB.findAllEntreprises();	
@@ -81,7 +87,8 @@ public class EtudiantEntrepriseBean
 	public String ajout() 
 	{
 		//pour recuper l'id de l'etudiant, j'ai mis un champ caché dans le formulaire jsf pour faire le traitement ici, dans la fonction
-		System.out.println("Le numero de l'étudiant est "+etudiant.getId());
+		
+		Long idEtudiant=etudiant.getId();		
 		
 		System.out.println("Le numéro de l'entreprise selectionné est "+entrepriseItemSelect);
 		
@@ -98,14 +105,7 @@ public class EtudiantEntrepriseBean
 		etudiantEntrepriseEJB.createEtudiantEntreprise(etudiantEntreprise);
 		
 		//redirection vers la liste des activités. Seul solution trouvé pour passé l'id en parametre
-		try 
-		{
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/SI_Etudiant/listeEtudiantEntreprise.faces?id="+etudiant.getId());
-		} catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Redirection.listeEtudiantEntreprise(idEtudiant);
 		
 		return "test";
 	}

@@ -1,22 +1,54 @@
 package bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
-import com.sun.xml.registry.uddi.bindings_v2_2.Contact;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import ejb.EntrepriseEJB;
 import entity.Entreprise;
 
-@ManagedBean(name = "entrepriseBean")
-@SessionScoped
-public class EntrepriseBean {
+//named : propre à conversationScoped, ne surtout pas utiliser managedBean 
+@Named(value = "entrepriseBean")  
+@ConversationScoped 
+public class EntrepriseBean implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	
+	/* 
+	 * 
+	 * J'ai du ajouter le fichier beans.xml pour que la conversation fonctionne voir :
+	 *  
+	 * http://miageprojet2.unice.fr/Intranet_de_Michel_Buffa/Cours_composants_distribu%C3%A9s
+	 * _pour_l'entreprise_%2F%2F_EJB_2009/FAQ_JSF2_%3A_solutions_aux_erreurs_les_plus_courantes
+	 *
+	 * d'ailleur l'absence de implements serializable fait buggué le projet, impossible de le lancer 
+	 *
+	 * l’annotation @Inject permet l’injection et se base sur le type et non sur des expressions EL comme
+	 * l’annotation @ManagedProperty utilisée avec l’annotation @ManagedBean.
+	 * 
+	 * Donc 
+	 *
+	 * Inject si on est en named
+	 * 
+	 * Managed property si on est en managedBean
+	 * 
+	 * Inject permet d'injecter un autre bean
+	 * 
+	 * exemple : @inject EntrepriseBean entrepriseBean
+	
+	*/
+	@Inject  
+	Conversation conversation;  
+	
+
 	@EJB
 	private EntrepriseEJB entrepriseEJB;
   
@@ -29,6 +61,7 @@ public class EntrepriseBean {
 	@PostConstruct
 	public void init() 
 	{
+		conversation.begin();
 	    entreprises = entrepriseEJB.findAllEntreprises();
 	}	  
 
@@ -36,18 +69,17 @@ public class EntrepriseBean {
 	{
 		this.entrepriseEJB.createEntreprise(entreprise);  
 		
-		//si on est en session, actualisation du la liste d'entreprises et de entreprise
+		 conversation.end(); 
+		
+		/*si on est en session, actualisation du la liste d'entreprises et de entreprise
 		entreprises = entrepriseEJB.findAllEntreprises();
-		entreprise =new Entreprise();
+		entreprise =new Entreprise();*/
 		  
 		return "listeEntreprise";
 	}
 	
 	public void supprimer() 
 	{
-		List<Entreprise> entrepriseSelectionne = new ArrayList<Entreprise>();
-			
-		System.out.println("Test !!!!!!!!!");
 		for (Entreprise uneEntreprise : entreprises)
 		{
 			if (checked.get(uneEntreprise.getId()))
@@ -63,15 +95,16 @@ public class EntrepriseBean {
 	{
 		entrepriseEJB.updateEntreprise(editEntreprise);
 		
-		//si on est en session, actualisation de la liste d'entreprise
-		entreprises=entrepriseEJB.findAllEntreprises();
+		conversation.end();  
+		
+		/*si on est en session, actualisation de la liste d'entreprise
+		entreprises=entrepriseEJB.findAllEntreprises();*/
 		  
 		return "listeEntreprise";
 	}
 	  
 	public String edit()
 	{
-		System.out.println(editEntreprise.getId());	
 		return "editEntreprise";
 	}
 	  

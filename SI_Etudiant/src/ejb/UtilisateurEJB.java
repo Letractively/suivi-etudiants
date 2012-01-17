@@ -3,6 +3,7 @@ package ejb;
 
 import java.util.List;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,4 +27,15 @@ public class UtilisateurEJB
         .getResultList();
     return results;
   }
+  public void updateUtilisateur(Utilisateur utilisateur) 
+  {
+		 em.merge(utilisateur);	
+  }
+	
+  public void removeUtilisateur(Utilisateur utilisateur)throws EJBException 
+  {
+	  em.remove(em.merge(utilisateur));	
+  }
+  
+  
 }

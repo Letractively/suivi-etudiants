@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import entity.Entreprise;
-import entity.EtudiantEntreprise;
 
 @Stateless 
 public class EntrepriseEJB {

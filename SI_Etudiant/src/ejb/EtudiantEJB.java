@@ -2,11 +2,11 @@ package ejb;
 
 import java.util.List;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import entity.Entreprise;
 import entity.Etudiant;
 
 @Stateless 
@@ -19,7 +19,7 @@ public class EtudiantEJB
 	  * Recupere tous les etudiants
 	  */
 	 @SuppressWarnings("unchecked") 
-	 public List<Etudiant> findAllEtudiants() {
+	 public List<Etudiant> findAllEtudiants() throws EJBException {
 		    List<Etudiant> results = em.createQuery("select e from Etudiant e").getResultList();
 		    return results;
 	 }
@@ -27,7 +27,7 @@ public class EtudiantEJB
 	 /*
 	  * Cree un etudiant dans la BDD
 	  */
-	 public Etudiant createEtudiant(Etudiant etudiant) {
+	 public Etudiant createEtudiant(Etudiant etudiant)throws EJBException {
 		 	
 		em.persist(etudiant);
 			
@@ -37,7 +37,7 @@ public class EtudiantEJB
 	 /*
 	  * Supprime un etudiant
 	  */
-	 public void removeEtudiant(Etudiant etudiant) {
+	 public void removeEtudiant(Etudiant etudiant)throws EJBException {
 		 //em.merge(etudiant) => entité doit être détaché du bean sinon cela ne fonctionne pas
 		 em.remove(em.merge(etudiant));	
 	 }

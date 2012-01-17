@@ -7,10 +7,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import util.Redirection;
 
 
 import ejb.EtudiantEJB;
@@ -21,6 +24,9 @@ import entity.Etudiant;
 @ConversationScoped 
 public class EtudiantBean implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
+
 	/* 
 	 * 
 	 * J'ai du ajouter le fichier beans.xml pour que la conversation fonctionne voir :
@@ -66,10 +72,16 @@ public class EtudiantBean implements Serializable
 	public void init() 
 	{
 		conversation.begin();
-	    etudiants = etudiantEJB.findAllEtudiants();
+	    try 
+	    {
+			etudiants = etudiantEJB.findAllEtudiants();
+		} catch (EJBException e) 
+		{
+			
+			Redirection.erreurXhtml();
+		}
 	      
 	}
-	
 	public String ajout() 
 	{
 		  this.etudiantEJB.createEtudiant(etudiant);  
@@ -80,7 +92,7 @@ public class EtudiantBean implements Serializable
 		  etudiants = etudiantEJB.findAllEtudiants();
 		  etudiant =new Etudiant();*/
 		  
-		  return "list";
+		  return "listEtudiant";
 	}
 	  
 	//procédure pemettant de supprimer les etudiants selectionnés de la liste checked
@@ -103,16 +115,14 @@ public class EtudiantBean implements Serializable
 	{
 		etudiantEJB.updateEtudiant(editEtudiant);
 		conversation.end();  
-		return "list";
+		return "listEtudiant";
 	}
 	
 	//fonction retournant edit (voir face-config.xml)
 	public String edit()
 	{	
 		  return "edit";	
-	}
-		
-	  
+	}	  
 
 	  //getter and setter  
 
