@@ -36,7 +36,7 @@ public class EtudiantEntrepriseBean
 	private EtudiantEntrepriseEJB etudiantEntrepriseEJB;
 
 		
-	private Etudiant etudiant = new Etudiant();
+	private Etudiant etudiantEnt = new Etudiant();
 	
 	private EtudiantEntreprise etudiantEntreprise = new  EtudiantEntreprise();
 	private EtudiantEntrepriseId etudiantEntrepriseId = new  EtudiantEntrepriseId();
@@ -66,13 +66,18 @@ public class EtudiantEntrepriseBean
 				// Je remplis ma liste d'etudiantEntreprises grace a ma requete
 				etudiantEntreprises = etudiantEntrepriseEJB.findCompaniesByStudentId(id);
 			
+
 				//Je recupere l'etudiant
-				etudiant=etudiantEJB.findEtudiantById(id);
+				etudiantEnt=etudiantEJB.findEtudiantById(id);
+					
+				//Je recupere l'etudiant
+				
 			}
 			catch(NumberFormatException e)
 			{
 				Redirection.erreurXhtml();
 			}
+
 		}
 		//Je remplis la liste d'entreprise pour la page d'ajout etudiantEntreprise..
 		entreprises=entrepriseEJB.findAllEntreprises();	
@@ -87,12 +92,14 @@ public class EtudiantEntrepriseBean
 	public String ajout() 
 	{
 		//pour recuper l'id de l'etudiant, j'ai mis un champ caché dans le formulaire jsf pour faire le traitement ici, dans la fonction
-		
-		Long idEtudiant=etudiant.getId();		
+
+		System.out.println("Le numero de l'étudiant est "+etudiantEnt.getNom());
+
+		Long idEtudiant=etudiantEnt.getId();		
 		
 		System.out.println("Le numéro de l'entreprise selectionné est "+entrepriseItemSelect);
 		
-		etudiantEntrepriseId = new EtudiantEntrepriseId(etudiantEntrepriseId.getDatedebut(),etudiant.getId(),entrepriseItemSelect);
+		/*etudiantEntrepriseId = new EtudiantEntrepriseId(etudiantEntrepriseId.getDatedebut(),idEtudiant,entrepriseItemSelect);
 		
 		
 		//mise en place de la clé primaire
@@ -106,8 +113,10 @@ public class EtudiantEntrepriseBean
 		
 		//redirection vers la liste des activités. Seul solution trouvé pour passé l'id en parametre
 		Redirection.listeEtudiantEntreprise(idEtudiant);
-		
-		return "test";
+
+		*/
+		return "listeEtudiant";
+
 	}
 	
 	//création de la liste d'item Entreprise, necessaire pour la page ajouterEtudiantEntreprisexhtml
@@ -176,11 +185,11 @@ public class EtudiantEntrepriseBean
 	public void setEntreprises(List<Entreprise> entreprises) {
 		this.entreprises = entreprises;
 	}
-	public Etudiant getEtudiant() {
-		return etudiant;
+	public Etudiant getEtudiantEnt() {
+		return etudiantEnt;
 	}
-	public void setEtudiant(Etudiant etudiant) {
-		this.etudiant = etudiant;
+	public void setEtudiantEnt(Etudiant etudiant) {
+		this.etudiantEnt = etudiant;
 	}
 	public Long getEntrepriseItemSelect() {
 		return entrepriseItemSelect;
@@ -206,4 +215,5 @@ public class EtudiantEntrepriseBean
 	
 	
 }
+	
 	

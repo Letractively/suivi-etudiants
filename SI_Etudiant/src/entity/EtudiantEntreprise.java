@@ -3,9 +3,11 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Access;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;

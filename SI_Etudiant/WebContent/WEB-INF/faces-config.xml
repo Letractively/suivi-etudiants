@@ -69,5 +69,21 @@
    <to-view-id>/listeEntreprises.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+ 
+ <navigation-rule>
+  <from-view-id>/listeEtudiantEntreprise.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>listeEtudiant</from-outcome>
+   <to-view-id>/listeEtudiants.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ 
+ <navigation-rule>
+  <from-view-id>/ajoutEtudiantEntreprise.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>listeEtudiant</from-outcome>
+   <to-view-id>/listeEtudiants.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
 
 </faces-config>

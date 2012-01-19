@@ -1,8 +1,8 @@
 drop table ETUDIANT_ENTREPRISE;
 drop table ETUDIANT_FORMATION;
 drop table ENTREPRISE;
-drop table FORMATION;
 drop table ETABLISSEMENT;
+drop table FORMATION;
 drop table ETUDIANT;
 drop table UTILISATEUR;
 

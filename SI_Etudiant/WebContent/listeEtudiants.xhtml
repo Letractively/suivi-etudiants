@@ -11,66 +11,70 @@
     <ui:define name="title">Suivi des etudiants</ui:define>
 
     <ui:define name="content">
+     <ui:fragment rendered="#{login.isLoggedIn()}"> 
  
-    <h1>Liste des étudiants</h1>
-     <h:form>
-	    <h:dataTable value="#{etudiantBean.etudiants}" var="et" class="tab" >
-		    <h:column>
-		    	<f:facet name="header">
-		    		
-		    	</f:facet>
-		    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.id]}" />
-		    </h:column>
-		    
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Nom" />
-		    	</f:facet>
-		    	<h:outputLink id="lien1" value="listeEtudiantEntreprise.faces">
-	  				<f:param name="id" value="#{et.id}" />
-	  				<h:outputText value="#{et.nom}" />
-				</h:outputLink>    		
-	    	</h:column>
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Prenom" />
-		    	</f:facet>
-		    	<h:outputText value="#{et.prenom}" />
-		    </h:column>
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Adresse" />
-		    	</f:facet>
-		    	<h:outputText value="#{et.adresse.adresse}" />
-		    </h:column>
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Tel" />
-		    	</f:facet>
-		    	<h:outputText value="#{et.contact.tel}" />
-		    </h:column>
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Mail" />
-		    	</f:facet>
-		    	<h:outputText value="#{et.contact.mail}" />
-		    </h:column>
-		     <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Adresse" />
-		    	</f:facet>
-		    	<h:outputText value="#{et.adresse.adresse}" />
-		    </h:column>
-		    <h:column>
-			    <h:commandButton value="Modifier/Consulter" action="#{etudiantBean.edit()}">   
-	      			<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.editEtudiant}" />
-	    		</h:commandButton>
-	    	</h:column> 
-		    
-	    </h:dataTable>
-	    <br />
-		<h:commandButton value="Supprimer" action="#{etudiantBean.supprimer()}" />
-	</h:form>
+		    <h1>Liste des étudiants</h1>
+		     <h:form>
+			    <h:dataTable value="#{etudiantBean.etudiants}" var="et" class="tab" >
+				   	
+				    <h:column rendered="#{login.isAdmin()}">
+				    	<f:facet name="header">
+				    	</f:facet>
+				    		<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.id]}" />
+				    </h:column>
+				    <h:column>
+				    	<f:facet name="header">
+				    		<h:outputText value="Nom" />
+				    	</f:facet>
+				    	<h:outputLink id="lien1" value="listeEtudiantEntreprise.faces">
+			  				<f:param name="id" value="#{et.id}" />
+			  				<h:outputText value="#{et.nom}" />
+						</h:outputLink>    		
+			    	</h:column>
+				    <h:column>
+				    	<f:facet name="header">
+				    		<h:outputText value="Prenom" />
+				    	</f:facet>
+				    	<h:outputText value="#{et.prenom}" />
+				    </h:column>
+				    <h:column>
+				    	<f:facet name="header">
+				    		<h:outputText value="Adresse" />
+				    	</f:facet>
+				    	<h:outputText value="#{et.adresse.adresse}" />
+				    </h:column>
+				    <h:column>
+				    	<f:facet name="header">
+				    		<h:outputText value="Tel" />
+				    	</f:facet>
+				    	<h:outputText value="#{et.contact.tel}" />
+				    </h:column>
+				    <h:column>
+				    	<f:facet name="header">
+				    		<h:outputText value="Mail" />
+				    	</f:facet>
+				    	<h:outputText value="#{et.contact.mail}" />
+				    </h:column>
+				     <h:column>
+				    	<f:facet name="header">
+				    		<h:outputText value="Adresse" />
+				    	</f:facet>
+				    	<h:outputText value="#{et.adresse.adresse}" />
+				    </h:column>
+				    
+			    	<h:column rendered="#{login.isAdmin()}">
+				    	<h:commandButton value="Modifier/Consulter" action="#{etudiantBean.edit()}">   
+		      				<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.editEtudiant}" />
+		    			</h:commandButton>
+		    		</h:column> 
+				   
+			    </h:dataTable>
+			    <br />
+			   
+				<h:commandButton rendered="#{login.isAdmin()}" value="Supprimer" action="#{etudiantBean.supprimer()}" />
+				
+			</h:form>
+		</ui:fragment>
     </ui:define> 
 
 </ui:composition>

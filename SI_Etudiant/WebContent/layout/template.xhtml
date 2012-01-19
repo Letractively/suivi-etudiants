@@ -8,7 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="layout/CSS/style.css" />
 	<title><ui:insert name="title">Suivi des étudiants</ui:insert></title>
 </head>
-<body>
+<h:body>
+   
 	<div id="topheader">
 		<h1>Suivi des étudiants</h1>
 	</div>
@@ -26,9 +27,14 @@
 		
 			<div class="gauche">
 				<div class="menu">
-					<ui:include src="/layout/menu.xhtml">
-						Default menu
-					</ui:include>
+					<div class="menu">
+						
+						<div class="menu">
+							<ui:include src="/layout/menu.xhtml">
+								Default menu Admin
+							</ui:include>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="milieu">
@@ -45,5 +51,5 @@
 			</div>
 				
 	</div>
-</body>
+</h:body>
 </html>

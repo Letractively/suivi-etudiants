@@ -11,30 +11,31 @@
     <ui:define name="title">Suivi des etudiants</ui:define>
 
     <ui:define name="content">
- 
-    <h1>Liste des Utilisateurs</h1>
-     <h:form>
-            <h:dataTable value="#{utilisateurBean.utilisateurs}" var="u" class="tab" >
-                    <h:column>
-                        <f:facet name="header">
-                                
-                        </f:facet>
-                        <h:selectBooleanCheckbox title="supprimer" value="" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                                <h:outputText value="Login" />
-                        </f:facet>
-                        <h:outputText value="#{u.login}" />     
-                    </h:column>     
-                    <h:column>
-                            
-                </h:column> 
-                    
-            </h:dataTable>
-            <br />
-                <h:commandButton value="Supprimer" />
-        </h:form>
+ 	 <ui:fragment rendered="#{login.isAdmin()}"> 
+		    <h1>Liste des Utilisateurs</h1>
+		     <h:form>
+		            <h:dataTable value="#{utilisateurBean.utilisateurs}" var="u" class="tab" >
+		                    <h:column>
+		                        <f:facet name="header">
+		                                
+		                        </f:facet>
+		                        <h:selectBooleanCheckbox title="supprimer" value="" />
+		                    </h:column>
+		                    <h:column>
+		                        <f:facet name="header">
+		                                <h:outputText value="Login" />
+		                        </f:facet>
+		                        <h:outputText value="#{u.login}" />     
+		                    </h:column>     
+		                    <h:column>
+		                            
+		                </h:column> 
+		                    
+		            </h:dataTable>
+		            <br />
+		                <h:commandButton value="Supprimer" />
+		        </h:form>
+		  </ui:fragment>
     </ui:define> 
 
 </ui:composition>

@@ -12,15 +12,25 @@
 				<li><a href="site.faces">Accueil</a></li>
 			</ui:fragment>
 			<ui:fragment rendered="#{login.loggedIn}">
-				<h:form>
-					<li>Bienvenue</li>
-					<li><a href="site.faces">Accueil</a></li>
-					<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
-					<li><a href="ajoutEtudiant.faces">Inscrire un étudiant</a></li>
-					<li><a href="listeEntreprises.faces">Liste des entreprises</a></li>
-					<li><a href="ajoutEntreprise.faces">Inscrire une entreprise</a></li>
-					<li><a href="listeUsers.faces">Liste des utilisateurs</a></li>
-				</h:form>
+				<ui:fragment rendered="#{login.isAdmin()}">
+					<h:form>
+						<li>Bienvenue</li>
+						<li><a href="site.faces">Accueil</a></li>
+						<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
+						<li><a href="ajoutEtudiant.faces">Inscrire un étudiant</a></li>
+						<li><a href="listeEntreprises.faces">Liste des entreprises</a></li>
+						<li><a href="ajoutEntreprise.faces">Inscrire une entreprise</a></li>
+						<li><a href="listeUsers.faces">Liste des utilisateurs</a></li>
+					</h:form>
+				</ui:fragment>
+				<ui:fragment rendered="#{!login.isAdmin()}">
+					<h:form>
+						<li>Bienvenue</li>
+						<li><a href="site.faces">Accueil</a></li>
+						<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
+						<li><a href="listeEntreprises.faces">Liste des entreprises</a></li>
+					</h:form>
+				</ui:fragment>
 			</ui:fragment>
 		</ul> 
 	</body>

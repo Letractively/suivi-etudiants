@@ -11,58 +11,61 @@
     <ui:define name="title">Suivi des etudiants</ui:define>
 
     <ui:define name="content">
+     <ui:fragment rendered="#{login.isLoggedIn()}"> 
  
-    <h1>Liste des activités</h1>
-     <h:form>
-	    <h:dataTable value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent" class="tab" >
-		   <h:column>
-		    	<f:facet name="header">
-		    		
-		    	</f:facet>
-		    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantEntrepriseBean.checked[ent.id]}" />
-		    </h:column>
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Entreprise" />
-		    	</f:facet>
-		    	<h:outputText value="#{ent.entreprise.nom}" /> 	
-		    </h:column>
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Date début" />
-		    	</f:facet>
-		    	<h:outputText value="#{ent.id.datedebut}" /> 	
-		    </h:column> 
-		     <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Date Fin" />
-		    	</f:facet>
-		    	<h:outputText value="#{ent.datefin}" /> 	
-		    </h:column> 
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Poste occupé" />
-		    	</f:facet>
-		    	<h:outputText value="#{ent.posteoccupe}" /> 	
-		    </h:column>  
-		    <h:column>
-		    	<f:facet name="header">
-		    		<h:outputText value="Type contrat" />
-		    	</f:facet>
-		    	<h:outputText value="#{ent.typecontrat}" /> 	
-		    </h:column> 
-		    
-		    
-	    </h:dataTable>
-	    <br />
-		<h:commandButton value="Supprimer" action="#{etudiantEntrepriseBean.supprimer()}" />
-		<br />
-		<h:outputLink id="lien2" value="ajoutEtudiantEntreprise.faces">
-	  		<f:param name="id" value="#{etudiantEntrepriseBean.etudiant.id}" />
-	  			<h:outputText value="Ajouter une activité" />
-		</h:outputLink>
-
-	</h:form>
+	    <h1>Liste des activités</h1>
+	     <h:form>
+		    <h:dataTable value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent" class="tab" >
+			   
+			   <h:column rendered="#{login.isAdmin()}">
+			    	<f:facet name="header">
+			    	</f:facet>
+			    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantEntrepriseBean.checked[ent.id]}" />
+			    </h:column>
+			
+			    <h:column>
+			    	<f:facet name="header">
+			    		<h:outputText value="Entreprise" />
+			    	</f:facet>
+			    	<h:outputText value="#{ent.entreprise.nom}" /> 	
+			    </h:column>			
+			    <h:column>
+			    	<f:facet name="header">
+			    		<h:outputText value="Date début" />
+			    	</f:facet>
+			    	<h:outputText value="#{ent.id.datedebut}" /> 	
+			    </h:column> 
+			     <h:column>
+			    	<f:facet name="header">
+			    		<h:outputText value="Date Fin" />
+			    	</f:facet>
+			    	<h:outputText value="#{ent.datefin}" /> 	
+			    </h:column> 
+			    <h:column>
+			    	<f:facet name="header">
+			    		<h:outputText value="Poste occupé" />
+			    	</f:facet>
+			    	<h:outputText value="#{ent.posteoccupe}" /> 	
+			    </h:column>  
+			    <h:column>
+			    	<f:facet name="header">
+			    		<h:outputText value="Type contrat" />
+			    	</f:facet>
+			    	<h:outputText value="#{ent.typecontrat}" /> 	
+			    </h:column> 
+			    
+			    
+		    </h:dataTable>
+		    <br />
+		  
+			<h:commandButton  rendered="#{login.isAdmin()}" value="Supprimer" action="#{etudiantEntrepriseBean.supprimer()}" />
+			<br />
+			<h:outputLink rendered="#{login.isAdmin()}" id="lien2" value="ajoutEtudiantEntreprise.faces">
+		  		<f:param name="id" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
+		  			<h:outputText value="Ajouter une activité" />
+			</h:outputLink>
+		</h:form>
+		</ui:fragment>	
     </ui:define> 
 
 </ui:composition>

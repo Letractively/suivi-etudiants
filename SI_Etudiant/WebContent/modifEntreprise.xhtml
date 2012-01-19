@@ -9,52 +9,52 @@
 <ui:composition template="layout/template.xhtml">
 
     <ui:define name="title">Modification</ui:define>
-
-    <ui:define name="content">
-	    <h1>Modification</h1>
-	    <h:form>
-	    	<h:outputLabel for="nom" value="Nom : " />
-			<h:inputText id="nom" required="true" label="nom" value="#{entrepriseBean.editEntreprise.nom}" />
-			<br />
-			<h:outputLabel for="raisonsociale" value="Raison Sociale : " />
-			<h:inputText id="raisonsociale" required="true" label="raisonsociale" value="#{entrepriseBean.editEntreprise.raisonsociale}" />
-			<br />
-			<h:outputLabel for="secteuractivite" value="Secteur s'activité : " />
-			<h:inputText id="secteuractivite" required="true" label="secteuractivite" value="#{entrepriseBean.editEntreprise.secteuractivite}" />
-			<br />
-			<h:outputLabel for="siret" value="Numero siret : " />
-			<h:inputText id="siret" label="siret" value="#{entrepriseBean.editEntreprise.siret}" />
-			<br />
-			<h:outputLabel for="mail" value="Mail : " />
-			<h:inputText id="mail" required="true" label="mail" value="#{entrepriseBean.editEntreprise.contact.mail}"/>
-			<br />
-			<h:outputLabel for="mailAutre" value="Mail Autre : " />
-			<h:inputText id="mailAutre" required="true" label="mailAutre" value="#{entrepriseBean.editEntreprise.contact.mailAutre}"/>
-			<br />
-			<h:outputLabel for="tel" value="Tel : " />
-			<h:inputText id="tel" label="tel" required="true" value="#{entrepriseBean.editEntreprise.contact.tel}"/>
-			<br />
-			<h:outputLabel for="telAutre" value="Tel Autre : " />
-			<h:inputText id="telAutre" label="telAutre" value="#{entrepriseBean.editEntreprise.contact.telAutre}"/>
-			<br />
-			<h:outputLabel for="adresse" value="Adresse : " />
-			<h:inputText id="adresse" label="adresse" value="#{entrepriseBean.editEntreprise.adresse.adresse}"/>
-			<br />
-			<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
-			<h:inputText id="adresseSuite" label="adresseSuite" value="#{entrepriseBean.editEntreprise.adresse.adresseSuite}"/>
-			<br />
-			<h:outputLabel for="cp" value="Code Postal : " />
-			<h:inputText id="cp" label="cp" value="#{entrepriseBean.editEntreprise.adresse.codePostal}"/>
-			<h:outputLabel for="ville" value="Ville : " />
-			<h:inputText id="ville" label="ville" value="#{entrepriseBean.editEntreprise.adresse.ville}"/>
-			<br />
-			<h:outputLabel for="pays" value="Pays : " />
-			<h:inputText id="pays" label="pays" value="#{entrepriseBean.editEntreprise.adresse.pays}"/>
-			<br />
-			<h:commandButton value="Ajouter" action="#{entrepriseBean.modifier()}" />
-			
-	    </h:form>
-    
+	     <ui:define name="content">
+	     <ui:fragment rendered="#{login.isAdmin()}"> 
+			    <h1>Modification</h1>
+			    <h:form>
+			    	<h:outputLabel for="nom" value="Nom : " />
+					<h:inputText id="nom" required="true" label="nom" value="#{entrepriseBean.editEntreprise.nom}" />
+					<br />
+					<h:outputLabel for="raisonsociale" value="Raison Sociale : " />
+					<h:inputText id="raisonsociale" required="true" label="raisonsociale" value="#{entrepriseBean.editEntreprise.raisonsociale}" />
+					<br />
+					<h:outputLabel for="secteuractivite" value="Secteur s'activité : " />
+					<h:inputText id="secteuractivite" required="true" label="secteuractivite" value="#{entrepriseBean.editEntreprise.secteuractivite}" />
+					<br />
+					<h:outputLabel for="siret" value="Numero siret : " />
+					<h:inputText id="siret" label="siret" value="#{entrepriseBean.editEntreprise.siret}" />
+					<br />
+					<h:outputLabel for="mail" value="Mail : " />
+					<h:inputText id="mail" required="true" label="mail" value="#{entrepriseBean.editEntreprise.contact.mail}"/>
+					<br />
+					<h:outputLabel for="mailAutre" value="Mail Autre : " />
+					<h:inputText id="mailAutre" required="true" label="mailAutre" value="#{entrepriseBean.editEntreprise.contact.mailAutre}"/>
+					<br />
+					<h:outputLabel for="tel" value="Tel : " />
+					<h:inputText id="tel" label="tel" required="true" value="#{entrepriseBean.editEntreprise.contact.tel}"/>
+					<br />
+					<h:outputLabel for="telAutre" value="Tel Autre : " />
+					<h:inputText id="telAutre" label="telAutre" value="#{entrepriseBean.editEntreprise.contact.telAutre}"/>
+					<br />
+					<h:outputLabel for="adresse" value="Adresse : " />
+					<h:inputText id="adresse" label="adresse" value="#{entrepriseBean.editEntreprise.adresse.adresse}"/>
+					<br />
+					<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
+					<h:inputText id="adresseSuite" label="adresseSuite" value="#{entrepriseBean.editEntreprise.adresse.adresseSuite}"/>
+					<br />
+					<h:outputLabel for="cp" value="Code Postal : " />
+					<h:inputText id="cp" label="cp" value="#{entrepriseBean.editEntreprise.adresse.codePostal}"/>
+					<h:outputLabel for="ville" value="Ville : " />
+					<h:inputText id="ville" label="ville" value="#{entrepriseBean.editEntreprise.adresse.ville}"/>
+					<br />
+					<h:outputLabel for="pays" value="Pays : " />
+					<h:inputText id="pays" label="pays" value="#{entrepriseBean.editEntreprise.adresse.pays}"/>
+					<br />
+					<h:commandButton value="Ajouter" action="#{entrepriseBean.modifier()}" />
+					
+			    </h:form>
+		</ui:fragment>    
     </ui:define> 
 
 </ui:composition>

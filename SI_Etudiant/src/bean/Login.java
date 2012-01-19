@@ -100,10 +100,13 @@ public class Login {
 	}
 	public boolean isAdmin() 
 	{
-		utilisateur.getNiveau();
-		if(utilisateur.getNiveau()=="admin")
+		if(utilisateur != null)
 		{
-			return true;
+			if(utilisateur.getNiveau().equals("admin"))
+			{
+				System.out.println("est passé dans la condition");
+				return true;
+			}
 		}
 		return false;
 	}
