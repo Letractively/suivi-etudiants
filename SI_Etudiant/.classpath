@@ -14,5 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSF 2.0 (Mojarra 2.0.3-FCS)"/>
+	<classpathentry kind="lib" path="C:/Users/Romain/Downloads/primefaces-3.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

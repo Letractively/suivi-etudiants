@@ -68,10 +68,15 @@ public class EtudiantBean implements Serializable
 	 */
 	private Etudiant editEtudiant;
 	
+	private Etudiant selectedEtudiant;
+	
 	@PostConstruct
 	public void init() 
 	{
-		conversation.begin();
+		if (conversation.isTransient()) 
+		{
+		      conversation.begin();
+		}
 	    try 
 	    {
 			etudiants = etudiantEJB.findAllEtudiants();
@@ -159,6 +164,13 @@ public class EtudiantBean implements Serializable
 	  {
 		this.editEtudiant = editEtudiant;
 	  }
+	public Etudiant getSelectedEtudiant() {
+		return selectedEtudiant;
+	}
+	public void setSelectedEtudiant(Etudiant selectedEtudiant) {
+		this.selectedEtudiant = selectedEtudiant;
+	}
+	  
 	  
 	  
 }

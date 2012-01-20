@@ -16,9 +16,6 @@
  	 <ui:fragment rendered="#{login.isLoggedIn()}"> 
 		    <h1>Liste des entreprises</h1>
 		     <h:form>		              
-	            <p:inputText id="firstname"   
-	                    value="toto" label="Firstname">
-	            </p:inputText> 
 			    <h:dataTable value="#{entrepriseBean.entreprises}" var="en" class="tab" >
 				    <h:column rendered="#{login.isAdmin()}">
 				    	<f:facet name="header">

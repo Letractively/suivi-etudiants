@@ -13,7 +13,7 @@ background-color: #F7FCF8;
 
 #topheader 
 {
-width: 1004px;
+width: 1002px;
 height: 146px;
 margin-top: 0;
 margin-right: auto;
@@ -27,11 +27,11 @@ font-weight: bold;
 font-variant: normal;
 text-transform: none;
 text-decoration: none;
-padding: 5px;
+padding-top: 5px;
 float: none;
 background-repeat: no-repeat;
 background-position: center;
-background-color:#CEDCD9;
+background-color:#C4C4C4;
 
 }
 #topheader h1
@@ -45,11 +45,9 @@ div, form, label, input, textarea, img, span{
 }
 #bandeau{
 	
-	width:1004px;
-	height:76px;
-	margin-top: 0;
+	width:1002px;
+	height:50px;
 	margin-right: auto;
-	margin-bottom: 0;
 	margin-left: auto;
 	font-family: Tahoma;
 	font-size: 12px;
@@ -68,7 +66,7 @@ div, form, label, input, textarea, img, span{
 
 #corps
 {
-	width:1004px;
+	width:1002px;
 	height:820px;
 	margin-top: 0;
 	margin-right: auto;
@@ -93,11 +91,10 @@ div, form, label, input, textarea, img, span{
 	float: left;
 	height: 820px;
 	width: 153px;
-	padding-top: 0px;
-	padding-right: 0px;
-	padding-bottom: 0px;
+	padding-top: 5px;
+	padding-right: 0PX;
+	padding-bottom: 5px;
 	padding-left: 60px;
-	overflow:hidden;
 	background-color:#CEDCD9;
 }
 .menu {
@@ -112,21 +109,11 @@ div, form, label, input, textarea, img, span{
 	margin: 0px;
 	float: left;
 	height: 820px;
-	width: 543px;
-	padding-top: 0px;
-	padding-right: 0px;
-	padding-bottom: 0px;
-	padding-left: 40px;
-	background-color:#CEDCD9;
+	width: 778px;
+	padding:5px;
+	background-color:#C4C4C4;
 }
-.droite {
-	margin: 0px;
-	padding: 0px;
-	float: left;
-	height: 820px;
-	width: 200px;
-	background-color:#CEDCD9;
-}
+
 .piedpage
 {
 	width:100%;
@@ -175,7 +162,7 @@ input[type="text"],input[type="password"],select
 	float: left;
 	border: 1px solid black;
 	margin-bottom: .5em;
-	width: 250px;
+	width: 500px;
 	background-color: #EDF7F2;
 	border-color: #9B9F9F;
 	border-image: initial;

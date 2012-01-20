@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"> 
 
 <ui:composition template="layout/template.xhtml">
 
@@ -15,63 +15,66 @@
  
 		    <h1>Liste des étudiants</h1>
 		     <h:form>
-			    <h:dataTable value="#{etudiantBean.etudiants}" var="et" class="tab" >
-				   	
-				    <h:column rendered="#{login.isAdmin()}">
+			    <p:dataTable var="et" value="#{etudiantBean.etudiants}"  paginator="true" rows="10"   >  
+			        <f:facet name="header">  
+			            Liste des étudiants 
+			        </f:facet>  
+			  		<p:column rendered="#{login.isAdmin()}">
 				    	<f:facet name="header">
 				    	</f:facet>
 				    		<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.id]}" />
-				    </h:column>
-				    <h:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Nom" />
-				    	</f:facet>
-				    	<h:outputLink id="lien1" value="listeEtudiantEntreprise.faces">
-			  				<f:param name="id" value="#{et.id}" />
-			  				<h:outputText value="#{et.nom}" />
-						</h:outputLink>    		
-			    	</h:column>
-				    <h:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Prenom" />
-				    	</f:facet>
-				    	<h:outputText value="#{et.prenom}" />
-				    </h:column>
-				    <h:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Adresse" />
-				    	</f:facet>
-				    	<h:outputText value="#{et.adresse.adresse}" />
-				    </h:column>
-				    <h:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Tel" />
-				    	</f:facet>
-				    	<h:outputText value="#{et.contact.tel}" />
-				    </h:column>
-				    <h:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Mail" />
-				    	</f:facet>
-				    	<h:outputText value="#{et.contact.mail}" />
-				    </h:column>
-				     <h:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Adresse" />
-				    	</f:facet>
-				    	<h:outputText value="#{et.adresse.adresse}" />
-				    </h:column>
-				    
-			    	<h:column rendered="#{login.isAdmin()}">
+				    </p:column>
+			  		<p:column sortBy="#{et.nom}">  
+			            
+			            
+			            
+			            <f:facet name="header">  
+			                <h:outputText value="Nom" />  
+			            </f:facet>
+			            <h:outputLink id="lien1" value="listeEtudiantEntreprise.faces">
+                               <f:param name="id" value="#{et.id}" />
+                               <h:outputText value="#{et.nom}" />
+                       </h:outputLink>                 
+			        </p:column>
+			        <p:column sortBy="#{et.prenom}">  
+			            <f:facet name="header">  
+			                <h:outputText value="Prénom" />  
+			            </f:facet>  
+			            <h:outputText value="#{et.prenom}" />  
+			        </p:column>
+			        <p:column style="width:40px">  
+             			
+	                 		<p:commandButton update=":form:display" oncomplete="etudiantDialog.show()" icon="ui-icon-search" title="plus">  
+	                     		<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.selectedEtudiant}" />  
+	                 		</p:commandButton>  
+             			
+        			</p:column>    
+			  		<p:column rendered="#{login.isAdmin()}">
 				    	<h:commandButton value="Modifier/Consulter" action="#{etudiantBean.edit()}">   
 		      				<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.editEtudiant}" />
 		    			</h:commandButton>
-		    		</h:column> 
-				   
-			    </h:dataTable>
-			    <br />
-			   
+		    		</p:column> 
+			        
+			    </p:dataTable>  
+			    
+			    <p:dialog header="Etudiant" widgetVar="etudiantDialog" resizable="false" id="etudiantId"  
+			                showEffect="fade" hideEffect="explode" modal="true">  
+			  
+			        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+			  			  
+			            <h:outputText value="Nom : " />  
+			            <h:outputText value="#{etudiantBean.selectedEtudiant.nom}" />  
+
+			        </h:panelGrid>  
+			  
+			    </p:dialog>  
+			    
+			  
 				<h:commandButton rendered="#{login.isAdmin()}" value="Supprimer" action="#{etudiantBean.supprimer()}" />
+				
+				
+				
+				
 				
 			</h:form>
 		</ui:fragment>
