@@ -1,5 +1,9 @@
 -- PostgreSQL
 
+/*
+ * Ajouter le .jar "postgresql-9.1-901.jdbc4" (selon la version de postgre) dans glassfish/lib 
+ * afin que le serveur puisse localiser la classe de la source de données pour établir la liaison */
+
 -- Configuration des Pools de connexions JDBC :
 -- Type de ressource : javax.sql.ConnectionPoolDataSource
 -- Nom de classe de la source de données : org.postgresql.ds.PGPoolingDataSource
