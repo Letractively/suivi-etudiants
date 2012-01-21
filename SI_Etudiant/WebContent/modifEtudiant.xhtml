@@ -11,7 +11,7 @@
 	
 	    <ui:define name="content">
 	    <ui:fragment rendered="#{login.isAdmin()}"> 
-		    <h1>Modification</h1>
+		    <h1>Modification de <h:outputText value="#{etudiantBean.editEtudiant}"  /></h1>
 		    <h:form>
 		    	<h:outputLabel for="nom" value="Nom : " />
 				<h:inputText id="nom" required="true" label="nom" value="#{etudiantBean.editEtudiant.nom}" />

@@ -78,6 +78,16 @@
   </navigation-case>
  </navigation-rule>
  
+<navigation-rule>
+  <from-view-id>/listeEtudiants.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>listeEtudiant</from-outcome>
+   <to-view-id>/listeEtudiants.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ 
+ 
  <navigation-rule>
   <from-view-id>/ajoutEtudiantEntreprise.xhtml</from-view-id>
   <navigation-case>

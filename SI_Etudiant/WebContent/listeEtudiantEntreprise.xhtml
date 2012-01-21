@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -13,53 +14,87 @@
     <ui:define name="content">
      <ui:fragment rendered="#{login.isLoggedIn()}"> 
  
-	    <h1>Liste des activités</h1>
 	     <h:form>
-		    <h:dataTable value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent" class="tab" >
+		    <p:growl id="msgs" showDetail="true" />
+		    
+		    <p:dataTable value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent">
 			   
-			   <h:column rendered="#{login.isAdmin()}">
+			   <f:facet name="header">  
+			            Liste des activités
+			   </f:facet> 
+			   
+			   <p:column rendered="#{login.isAdmin()}">
 			    	<f:facet name="header">
 			    	</f:facet>
 			    	<h:selectBooleanCheckbox title="supprimer" value="#{etudiantEntrepriseBean.checked[ent.id]}" />
-			    </h:column>
+			    </p:column>
 			
-			    <h:column>
+			    <p:column sortBy="#{ent.entreprise.nom}">
 			    	<f:facet name="header">
 			    		<h:outputText value="Entreprise" />
 			    	</f:facet>
 			    	<h:outputText value="#{ent.entreprise.nom}" /> 	
-			    </h:column>			
-			    <h:column>
+			    </p:column>			
+			    <p:column sortBy="#{ent.id.datedebut}">
 			    	<f:facet name="header">
 			    		<h:outputText value="Date début" />
 			    	</f:facet>
-			    	<h:outputText value="#{ent.id.datedebut}" /> 	
-			    </h:column> 
-			     <h:column>
+			    	<h:outputText value="#{ent.id.datedebut}">
+			    		<f:convertDateTime pattern="dd/MM/yyyy"/>
+			    	</h:outputText> 	
+			    </p:column> 
+			     <p:column sortBy="#{ent.datefin}">
 			    	<f:facet name="header">
 			    		<h:outputText value="Date Fin" />
 			    	</f:facet>
-			    	<h:outputText value="#{ent.datefin}" /> 	
-			    </h:column> 
-			    <h:column>
+			    	<h:outputText value="#{ent.datefin}" >
+			    		<f:convertDateTime pattern="dd/MM/yyyy"/>
+			    	</h:outputText> 	
+			    </p:column> 
+			    <p:column sortBy="#{ent.posteoccupe}">
 			    	<f:facet name="header">
 			    		<h:outputText value="Poste occupé" />
 			    	</f:facet>
 			    	<h:outputText value="#{ent.posteoccupe}" /> 	
-			    </h:column>  
-			    <h:column>
+			    </p:column>  
+			    <p:column sortBy="#{ent.typecontrat}">
 			    	<f:facet name="header">
 			    		<h:outputText value="Type contrat" />
 			    	</f:facet>
 			    	<h:outputText value="#{ent.typecontrat}" /> 	
-			    </h:column> 
+			    </p:column>
+			    
+			    <p:column style="width:40px">  
+	            			
+	                 		<p:commandButton update=":form:display" oncomplete="etudiantDialog.show()" icon="ui-icon-search" title="plus">  
+	                     		<f:setPropertyActionListener value="#{ent}" target="#{etudiantEntrepriseBean.selectedEtudiantEntreprise}" />  
+	                 		</p:commandButton>  
+	            			
+	       			</p:column>    
 			    
 			    
-		    </h:dataTable>
-		    <br />
-		  
-			<h:commandButton  rendered="#{login.isAdmin()}" value="Supprimer" action="#{etudiantEntrepriseBean.supprimer()}" />
-			<br />
+			    
+			    
+			    
+		    </p:dataTable>
+		    
+		    <p:dialog header="Etudiant" widgetVar="etudiantDialog" resizable="false" id="etudiantId"  
+			                showEffect="fade" hideEffect="explode" modal="true">  
+			  		<h:panelGrid id="display" columns="2" cellpadding="0" style="margin:0 auto;">  
+			  		 	<h:outputText value="#{etudiantEntrepriseBean.selectedEtudiantEntreprise.typecontrat}" style="font-weight:bold" />  
+			        </h:panelGrid>   
+			</p:dialog>
+			
+			<p:confirmDialog message="Etes vous sur de vouloir supprimer les activités selectionnées ? "  
+                	header="Attention" severity="alert" widgetVar="confirmation">            
+        			<p:commandButton value="Oui" update="messages" oncomplete="confirmation.hide()"  
+                    	actionListener="#{etudiantEntrepriseBean.supprimer()}" />  
+        			<p:commandButton value="Non" onclick="confirmation.hide()" type="button" />   
+            </p:confirmDialog>    
+		   
+		  <p:commandButton rendered="#{login.isAdmin()}" value="Supprimer" onclick="confirmation.show()" type="button"/>  		  		
+			
+		  <br />
 			<h:outputLink rendered="#{login.isAdmin()}" id="lien2" value="ajoutEtudiantEntreprise.faces">
 		  		<f:param name="id" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
 		  			<h:outputText value="Ajouter une activité" />

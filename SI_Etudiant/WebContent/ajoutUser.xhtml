@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Gestion des absences</ui:define>
+
+    <ui:define name="content">
+    	<h1>Inscrire un utilisateur</h1>
+	 	<h:outputLabel for="login" value="Login : " />
+		<h:inputText id="login" required="true" label="login" value="#{utilisateurBean.utilisateur.login}" />
+		<br />
+		<h:outputLabel for="mdp" value="Mot de passe : " />
+		<h:inputText id="mdp" required="true" label="mdp" value="#{utilisateurBean.utilisateur.motDePasse}" />
+		<br />
+		<h:outputLabel for="nomComplet" value="Nom complet : " />
+		<h:inputText id="nomComplet" required="true" label="nomComplet" value="#{utilisateurBean.utilisateur.nomComplet}" />
+		    	
+    </ui:define> 
+
+</ui:composition>
+</html>

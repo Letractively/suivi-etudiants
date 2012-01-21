@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -31,7 +33,7 @@ public class Entreprise implements Serializable {
   private Set<EtudiantEntreprise> lesEtudiants = new HashSet<EtudiantEntreprise>();
 
   
-  @OneToMany(mappedBy="entreprise")
+  @OneToMany(mappedBy="entreprise",cascade =  CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
   public Set<EtudiantEntreprise> getLesEtudiants() {
     return lesEtudiants;
   }

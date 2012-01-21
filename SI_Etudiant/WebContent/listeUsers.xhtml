@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core">
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -12,28 +13,46 @@
 
     <ui:define name="content">
  	 <ui:fragment rendered="#{login.isAdmin()}"> 
-		    <h1>Liste des Utilisateurs</h1>
 		     <h:form>
-		            <h:dataTable value="#{utilisateurBean.utilisateurs}" var="u" class="tab" >
-		                    <h:column>
-		                        <f:facet name="header">
-		                                
-		                        </f:facet>
-		                        <h:selectBooleanCheckbox title="supprimer" value="" />
-		                    </h:column>
-		                    <h:column>
-		                        <f:facet name="header">
-		                                <h:outputText value="Login" />
-		                        </f:facet>
-		                        <h:outputText value="#{u.login}" />     
-		                    </h:column>     
-		                    <h:column>
-		                            
-		                </h:column> 
-		                    
-		            </h:dataTable>
-		            <br />
-		                <h:commandButton value="Supprimer" />
+	            <p:dataTable value="#{utilisateurBean.utilisateurs}" var="u"  >
+                    <f:facet name="header">  
+	            		Liste des utilisateurs 
+	        		</f:facet>  
+                    
+                    
+                    <p:column>
+                        <f:facet name="header">
+                                
+                        </f:facet>
+                        <h:selectBooleanCheckbox title="supprimer" value="" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                                <h:outputText value="Login" />
+                        </f:facet>
+                        <h:outputText value="#{u.login}" />     
+                    </p:column>
+                    <p:column>
+                          <f:facet name="header">
+                                <h:outputText value="Nom complet" />
+                        </f:facet>
+                        <h:outputText value="#{u.nomComplet}" />    
+                	</p:column>     
+                    <p:column>
+                          <f:facet name="header">
+                                <h:outputText value="Niveau" />
+                        </f:facet>
+                        <h:outputText value="#{u.niveau}" />    
+                	</p:column> 
+		        </p:dataTable>
+		        <p:confirmDialog message="Etes vous sur de vouloir supprimer les utilisateurs selectionnés ? "  
+                	header="Attention" severity="alert" widgetVar="confirmation">            
+        			<p:commandButton value="Oui" update="messages" oncomplete="confirmation.hide()"  
+                    	actionListener="#{etudiantBean.supprimer()}" />  
+        			<p:commandButton value="Non" onclick="confirmation.hide()" type="button" />   
+                </p:confirmDialog>  
+		        <br />
+		        <p:commandButton value="Supprimer" onclick="confirmation.show()" type="button"/> 
 		        </h:form>
 		  </ui:fragment>
     </ui:define> 

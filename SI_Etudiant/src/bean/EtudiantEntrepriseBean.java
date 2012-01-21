@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
@@ -23,7 +23,7 @@ import entity.EtudiantEntrepriseId;
 
 
 @ManagedBean(name = "etudiantEntrepriseBean")
-@RequestScoped
+@ViewScoped
 public class EtudiantEntrepriseBean 
 {
 	@EJB
@@ -47,6 +47,8 @@ public class EtudiantEntrepriseBean
 	private List<SelectItem> entreprisesItems = new ArrayList<SelectItem>();
 	//c'est cette variable qui aura l'id de lentreprise selectionné via la liste déroulante 
 	private Long entrepriseItemSelect;
+	
+	private EtudiantEntreprise selectedEtudiantEntreprise;
 		
 	private HashMap<EtudiantEntrepriseId, Boolean> checked = new HashMap<EtudiantEntrepriseId, Boolean>();
 
@@ -211,6 +213,16 @@ public class EtudiantEntrepriseBean
 	public void setChecked(HashMap<EtudiantEntrepriseId, Boolean> checked) {
 		this.checked = checked;
 	}
+
+	public EtudiantEntreprise getSelectedEtudiantEntreprise() {
+		return selectedEtudiantEntreprise;
+	}
+
+	public void setSelectedEtudiantEntreprise(
+			EtudiantEntreprise selectedEtudiantEntreprise) {
+		this.selectedEtudiantEntreprise = selectedEtudiantEntreprise;
+	}
+	
 	
 	
 	

@@ -35,4 +35,15 @@ public class Redirection
 			e.printStackTrace();
 		}
 	 }
+	 public static void listeEtudiants()
+	 {
+		try 
+	 	{
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/"+domain+"/listeEtudiants.faces");
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 }
 }

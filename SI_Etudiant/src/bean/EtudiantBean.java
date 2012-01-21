@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -22,6 +23,7 @@ import entity.Etudiant;
 //named : propre à conversationScoped, ne surtout pas utiliser managedBean 
 @Named(value = "etudiantBean")  
 @ConversationScoped 
+@ViewScoped
 public class EtudiantBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -113,6 +115,8 @@ public class EtudiantBean implements Serializable
 		conversation.end();  
 		/*si on est en session, actualisation de la liste d'étudiant
 		etudiants=etudiantEJB.findAllEtudiants();*/
+		
+		Redirection.listeEtudiants();
 	}
 	    
 	//fonction permettant de modifier un etudiant => retourne list (voir face-config.xml) 
