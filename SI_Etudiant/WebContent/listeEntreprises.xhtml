@@ -27,49 +27,49 @@
 						<h:selectBooleanCheckbox title="supprimer"
 							value="#{entrepriseBean.checked[en.id]}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{en.nom}" >
 						<f:facet name="header">
 							<h:outputText value="Nom" />
 						</f:facet>
 						<h:outputText value="#{en.nom}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{en.raisonsociale}">
 						<f:facet name="header">
 							<h:outputText value="Raison Sociale" />
 						</f:facet>
 						<h:outputText value="#{en.raisonsociale}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{en.siret}" >
 						<f:facet name="header">
 							<h:outputText value="Siret" />
 						</f:facet>
 						<h:outputText value="#{en.siret}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{en.secteuractivite}">
 						<f:facet name="header">
 							<h:outputText value="Secteur d'activité" />
 						</f:facet>
 						<h:outputText value="#{en.secteuractivite}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{en.contact.tel}">
 						<f:facet name="header">
 							<h:outputText value="Tel" />
 						</f:facet>
 						<h:outputText value="#{en.contact.tel}" />
-					</p:column>
-					<p:column>
+					</p:column >
+					<p:column sortBy="#{en.contact.telAutre}">
 						<f:facet name="header">
 							<h:outputText value="Tel autre" />
 						</f:facet>
 						<h:outputText value="#{en.contact.telAutre}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{en.contact.mail}">
 						<f:facet name="header">
 							<h:outputText value="Mail" />
 						</f:facet>
 						<h:outputText value="#{en.contact.mail}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{en.contact.mailAutre}" >
 						<f:facet name="header">
 							<h:outputText value="Mail Autre" />
 						</f:facet>

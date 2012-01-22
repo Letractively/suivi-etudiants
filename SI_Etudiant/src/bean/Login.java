@@ -100,7 +100,6 @@ public class Login {
 	public boolean isAdmin() {
 		if (utilisateur != null) {
 			if (utilisateur.getNiveau().equals("1")) {
-				System.out.println("est passé dans la condition");
 				return true;
 			}
 		}

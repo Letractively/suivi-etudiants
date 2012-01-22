@@ -31,8 +31,8 @@
 				<f:selectItems value="#{utilisateurBean.niveauItems}" />
 			</h:selectOneMenu>
 			<br />
-			<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
-				action="#{utilisateurBean.ajout()}" type="button" />
+			<h:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+				action="#{utilisateurBean.ajout()}" />
 		</h:form>
 	</ui:define>
 

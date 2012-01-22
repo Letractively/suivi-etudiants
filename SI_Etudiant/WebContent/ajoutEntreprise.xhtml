@@ -69,8 +69,8 @@
 				<h:inputText id="pays" label="pays"
 					value="#{entrepriseBean.entreprise.adresse.pays}" />
 				<br />
-				<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
-					action="#{entrepriseBean.ajout()}" type="button" />
+				<h:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+					action="#{entrepriseBean.ajout()}" />
 			</h:form>
 		</ui:fragment>
 	</ui:define>

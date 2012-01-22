@@ -17,9 +17,9 @@
 	<div id="bandeau">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:outputText value="#{login.username}" />
-					[Connecte]
+					[Connecté]
 				<h:form>
-				<h:commandLink value="Deconnexion" actionListener="#{login.logout}" />
+				<h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
 			</h:form>
 			<a href="modifUser.faces">Gestion du compte</a>
 		</ui:fragment>
