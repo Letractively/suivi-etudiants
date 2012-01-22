@@ -60,7 +60,7 @@ INSERT INTO ENTREPRISE VALUES (2,'16 rue des eaux','','62300','France','Lens','c
 INSERT INTO ENTREPRISE VALUES (3,'16 rue des maux','','62000','France','Arras','contact@logica.fr','','0608','0321','Logica','SARL','SSII','15456412658545');
 
 INSERT INTO ETUDIANT VALUES (1,'16 rue des lilas','','62300','France','Lens','toto@t.fr','','0608','0321','BAVIER','Romain');
-INSERT INTO ETUDIANT VALUES (2,'16 rue du chardon','','62000','France','Arras','toto@t.fr','','0608','0321','HANOCQ ','Alexandre');
+INSERT INTO ETUDIANT VALUES (2,'16 rue du chardon','','62000','France','Arras','toto@t.fr','','0608','0321','HANOCQ','Alexandre');
 INSERT INTO ETUDIANT VALUES (3,'16 boulevard jean-jaurès','','62000','France','Arras','toto@t.fr','','0608','0321','MORIVAL','Romain');
 
 INSERT INTO ETABLISSEMENT VALUES (1,'1 rue de l''Universite','','62300','France','Lens','','','IUT Lens','IUT');

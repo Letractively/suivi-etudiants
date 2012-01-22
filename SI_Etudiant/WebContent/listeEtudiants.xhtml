@@ -4,74 +4,102 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"> 
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="title">Suivi des etudiants</ui:define>
+	<ui:define name="title">Suivi des etudiants</ui:define>
 
-    <ui:define name="content">
-     	<ui:fragment rendered="#{login.isLoggedIn()}"> 
-		     <h:form>
-			    <p:dataTable var="et" value="#{etudiantBean.etudiants}"  paginator="true" rows="10" >  
-			        <f:facet name="header">  
+	<ui:define name="content">
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+			<h:form>
+				<p:dataTable var="et" value="#{etudiantBean.etudiants}"
+					paginator="true" rows="10">
+					<f:facet name="header">  
 			            Liste des étudiants 
-			        </f:facet>  
-			  		<p:column rendered="#{login.isAdmin()}">
-				    	<f:facet name="header">
-				    	</f:facet>
-				    		<h:selectBooleanCheckbox title="supprimer" value="#{etudiantBean.checked[et.id]}" />
-				    </p:column>
-			  		<p:column sortBy="#{et.nom}">  
-			        
-			            <f:facet name="header">  
-			                <h:outputText value="Nom" />  
-			            </f:facet>
-			            <h:outputLink id="lien1" value="listeEtudiantEntreprise.faces">
-	                              <f:param name="id" value="#{et.id}" />
-	                              <h:outputText value="#{et.nom}" />
-	                      </h:outputLink>                 
-			        </p:column>
-			        <p:column sortBy="#{et.prenom}">  
-			            <f:facet name="header">  
-			                <h:outputText value="Prénom" />  
-			            </f:facet>  
-			            <h:outputText value="#{et.prenom}" />  
-			        </p:column>
-			        <p:column style="width:40px">  
-	            			
-	                 		<p:commandButton update=":form:display" oncomplete="etudiantDialog.show()" icon="ui-icon-search" title="plus">  
-	                     		<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.selectedEtudiant}" />  
-	                 		</p:commandButton>  
-	            			
-	       			</p:column>    
-			  		<p:column rendered="#{login.isAdmin()}">
-				    	<h:commandButton value="Modifier/Consulter" action="#{etudiantBean.edit()}">   
-		      				<f:setPropertyActionListener value="#{et}" target="#{etudiantBean.editEtudiant}" />
-		    			</h:commandButton>
-		    		</p:column> 
-			        
-			    </p:dataTable>  
-			    
-			    <p:dialog header="Etudiant" widgetVar="etudiantDialog" resizable="false" id="etudiantId"  
-			                showEffect="fade" hideEffect="explode" modal="true">  
-			        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
-			  		    <h:outputText value="Nom : " />  
-			            <h:outputText value="#{etudiantBean.selectedEtudiant.nom}" />  
+			        </f:facet>
+					<p:column rendered="#{login.isAdmin()}">
+						<f:facet name="header">
+						</f:facet>
+						<h:selectBooleanCheckbox title="supprimer"
+							value="#{etudiantBean.checked[et.id]}" />
+					</p:column>
+					<p:column sortBy="#{et.nom}">
+
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputLink id="lien1" value="listeEtudiantEntreprise.faces">
+							<f:param name="id" value="#{et.id}" />
+							<h:outputText value="#{et.nom}" />
+						</h:outputLink>
+					</p:column>
+					<p:column sortBy="#{et.prenom}">
+						<f:facet name="header">
+							<h:outputText value="Prénom" />
+						</f:facet>
+						<h:outputText value="#{et.prenom}" />
+					</p:column>
+					<p:column style="width:40px">
+
+						<p:commandButton update=":form:display"
+							oncomplete="etudiantDialog.show()" icon="ui-icon-search"
+							title="plus">
+							<f:setPropertyActionListener value="#{et}"
+								target="#{etudiantBean.selectedEtudiant}" />
+						</p:commandButton>
+
+					</p:column>
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Modifier/Consulter"
+							action="#{etudiantBean.edit()}">
+							<f:setPropertyActionListener value="#{et}"
+								target="#{etudiantBean.editEtudiant}" />
+						</h:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Etudiant" widgetVar="etudiantDialog"
+					resizable="false" id="etudiantId" showEffect="fade"
+					hideEffect="explode" modal="true">
+					<h:panelGrid id="display" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+						<h:outputText value="Nom : " />
+						<h:outputText value="#{etudiantBean.selectedEtudiant.nom}" />
 					</h:panelGrid>
-			    </p:dialog>  
-			       
-    			<p:confirmDialog message="Etes vous sur de vouloir supprimer les étudiants selectionnés ? "  
-                	header="Attention" severity="alert" widgetVar="confirmation">            
-        			<p:commandButton value="Oui" update="messages" oncomplete="confirmation.hide()"  
-                    	actionListener="#{etudiantBean.supprimer()}" />  
-        			<p:commandButton value="Non" onclick="confirmation.hide()" type="button" />   
-                  </p:confirmDialog>  
-			  
-				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer" onclick="confirmation.show()" type="button"/>  		  		
+				</p:dialog>
+
+				<p:confirmDialog
+					message="Etes vous sur de vouloir supprimer les étudiants selectionnés ? "
+					header="Confirmation de suppression" severity="alert"
+					widgetVar="confirmationSupression">
+					<p:commandButton value="Oui"
+						oncomplete="confirmationSupression.hide()"
+						actionListener="#{etudiantBean.supprimer()}" />
+					<p:commandButton value="Non" onclick="confirmationSupression.hide()"
+						type="button" />
+				</p:confirmDialog>
+
+				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
+					onclick="confirmationSupression.show()" type="button" />
+
+				<p:confirmDialog
+					message="Voulez vous generer un document PDF de tous les étudiants ?"
+					header="Information" severity="info" widgetVar="confirmationPDF">
+					<p:commandButton value="Oui"
+						oncomplete="confirmationPDF.hide()"
+						actionListener="#{etudiantBean.creerListeEtudiantsPDF()}" />
+					<p:commandButton value="Non" onclick="confirmationPDF.hide()"
+						type="button" />
+				</p:confirmDialog>
+
+
+				<p:commandButton rendered="#{login.isAdmin()}" value="Generer PDF"
+					onclick="confirmationPDF.show()" type="button" />
 			</h:form>
 		</ui:fragment>
-    </ui:define> 
+	</ui:define>
 
 </ui:composition>
 </html>

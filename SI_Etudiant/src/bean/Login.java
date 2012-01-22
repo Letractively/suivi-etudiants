@@ -27,13 +27,12 @@ public class Login {
 
 	private String username;
 	private String password;
-	
+
 	@EJB
 	private UtilisateurEJB utilisateurEJB;
 
-    private Logger logger = Logger.getLogger(Login.class.getName());
+	private Logger logger = Logger.getLogger(Login.class.getName());
 
-	
 	@NotNull
 	@Length(min = 3, max = 25)
 	public String getUsername() {
@@ -54,19 +53,17 @@ public class Login {
 		this.password = password;
 	}
 
-	public String login() 
-	{
+	public String login() {
 		logger.log(Level.WARNING, "DEMANDE DE CONNEXION");
 		FacesMessage msg = null;
 		String dest = "site";
-		List<Utilisateur> results = utilisateurEJB.findUtilisateurByLogin(username);
+		List<Utilisateur> results = utilisateurEJB
+				.findUtilisateurByLogin(username);
 		logger.log(Level.WARNING, "taille de la liste : " + results.size());
-		if (!results.isEmpty()) 
-		{
-			try 
-			{
-				if (MD5Password.testPassword(password, results
-						.get(0).getMotDePasse()))
+		if (!results.isEmpty()) {
+			try {
+				if (MD5Password.testPassword(password, results.get(0)
+						.getMotDePasse()))
 					utilisateur = results.get(0);
 				else
 					msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
@@ -75,35 +72,33 @@ public class Login {
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue " + username,
-					"connexion de " + username);
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue "
+					+ username, "connexion de " + username);
 		} else {
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreur Login",
 					"Authentification invalide");
-            dest = null;
+			dest = null;
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		return dest;
 	}
 
-	public String logout() 
-	{
+	public String logout() {
 		utilisateur = null;
-		FacesContext fc = FacesContext.getCurrentInstance();  
-        HttpSession session = (HttpSession)fc.getExternalContext().getSession(false);  
-        session.invalidate();  
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(
+				false);
+		session.invalidate();
 		return "logout";
 	}
 
 	public boolean isLoggedIn() {
 		return utilisateur != null;
 	}
-	public boolean isAdmin() 
-	{
-		if(utilisateur != null)
-		{
-			if(utilisateur.getNiveau().equals("1"))
-			{
+
+	public boolean isAdmin() {
+		if (utilisateur != null) {
+			if (utilisateur.getNiveau().equals("1")) {
 				System.out.println("est passé dans la condition");
 				return true;
 			}
