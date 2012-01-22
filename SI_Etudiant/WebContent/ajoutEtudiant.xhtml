@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -40,14 +41,16 @@
 				<br />
 				<h:outputLabel for="cp" value="Code Postal : " />
 				<h:inputText id="cp" label="cp" value="#{etudiantBean.etudiant.adresse.codePostal}"/>
+				<br />
 				<h:outputLabel for="ville" value="Ville : " />
 				<h:inputText id="ville" label="ville" value="#{etudiantBean.etudiant.adresse.ville}"/>
 				<br />
 				<h:outputLabel for="pays" value="Pays : " />
 				<h:inputText id="pays" label="pays" value="#{etudiantBean.etudiant.adresse.pays}"/>
-				<br />
-				<br />
-				<h:commandButton value="Ajouter" action="#{etudiantBean.ajout()}" />
+				<br/>
+				<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+					action="#{etudiantBean.ajout()}" type="button" />
+					
 		    </h:form>
     	</ui:fragment>    	    	
     </ui:define> 

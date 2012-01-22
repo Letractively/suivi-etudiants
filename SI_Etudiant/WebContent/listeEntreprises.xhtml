@@ -80,8 +80,22 @@
 			    	</p:column> 
 				    
 			    </p:dataTable>
-			    <br />
-				<h:commandButton rendered="#{login.isAdmin()}" value="Supprimer" action="#{entrepriseBean.supprimer()}" />
+				
+				<p:confirmDialog
+					message="Etes vous sur de vouloir supprimer la/les entreprise(s) selectionnées ? "
+					header="Confirmation de suppression" severity="alert"
+					widgetVar="confirmationSupression">
+					<p:commandButton value="Oui"
+						oncomplete="confirmationSupression.hide()"
+						actionListener="#{entrepriseBean.supprimer()}" />
+					<p:commandButton value="Non" onclick="confirmationSupression.hide()"
+						type="button" />
+				</p:confirmDialog>
+				<br/>
+				
+				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
+					onclick="confirmationSupression.show()" type="button" />
+					
 			</h:form>
 		</ui:fragment>
     </ui:define> 

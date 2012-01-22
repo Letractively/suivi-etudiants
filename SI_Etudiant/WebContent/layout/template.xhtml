@@ -10,47 +10,38 @@
 	<title><ui:insert name="title">Suivi des étudiants</ui:insert></title>
 </h:head>
 <h:body>
-   
+
 	<div id="topheader">
 		<h1>Suivi des étudiants</h1>
 	</div>
 	<div id="bandeau">
-		<ui:fragment rendered="#{login.isLoggedIn()}">
-					Connecté sous 
-					<h:outputText value="#{login.username}"/>
-					<h:form>
-						<h:commandLink value="Deconnexion" actionListener="#{login.logout}" />
-					</h:form>
-					<a href="modifUser.faces">Gestion du compte</a>	
-		</ui:fragment>	
+			<ui:fragment rendered="#{login.isLoggedIn()}">
+					<h:outputText value="#{login.username}" />
+					[Connecte]
+				<h:form>
+					<h:commandLink value="Deconnexion" actionListener="#{login.logout}" />
+				</h:form>
+				<a href="modifUser.faces">Gestion du compte</a>
+			</ui:fragment>
 	</div>
 	<div id="corps">
-		
-			<div class="gauche">
-				<div class="menu">
-					<div class="menu">
-						
-						<div class="menu">
-							<ui:include src="/layout/menu.xhtml">
-								Default menu Admin
-							</ui:include>
-						</div>
-					</div>
-				</div>
+
+		<div class="gauche">
+			<div id="onglets">
+				<ui:include src="/layout/menu.xhtml">
+				</ui:include>
 			</div>
-			<div class="milieu">
-				<div id="erreur">
-					 <h:messages id="messages" styleClass="errors" globalOnly="true" />
-				</div>
-				<ui:insert name="content">Default content</ui:insert>
+		</div>
+
+		<div class="milieu">
+			<div id="erreur">
+				<h:messages id="messages" styleClass="errors" globalOnly="true" />
 			</div>
-			<div class="droite">
-				
-			</div>
-			<div class="piedpage">
-				
-			</div>
-				
+			<ui:insert name="content">Default content</ui:insert>
+		</div>
+		<div class="droite"></div>
+		<div class="piedpage"></div>
+
 	</div>
 </h:body>
 </html>

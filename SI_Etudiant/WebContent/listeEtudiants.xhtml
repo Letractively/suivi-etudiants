@@ -79,24 +79,23 @@
 						actionListener="#{etudiantBean.supprimer()}" />
 					<p:commandButton value="Non" onclick="confirmationSupression.hide()"
 						type="button" />
-				</p:confirmDialog>
+				</p:confirmDialog><br/>
 
 				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
 					onclick="confirmationSupression.show()" type="button" />
 
 				<p:confirmDialog
-					message="Voulez vous generer un document PDF de tous les étudiants ?"
-					header="Information" severity="info" widgetVar="confirmationPDF">
-					<p:commandButton value="Oui"
+					message="Document PDF généré sur le bureau"
+					header="Information" severity="info"
+					widgetVar="confirmationPDF">
+					<p:commandButton value="Ok" 
 						oncomplete="confirmationPDF.hide()"
 						actionListener="#{etudiantBean.creerListeEtudiantsPDF()}" />
-					<p:commandButton value="Non" onclick="confirmationPDF.hide()"
-						type="button" />
 				</p:confirmDialog>
-
 
 				<p:commandButton rendered="#{login.isAdmin()}" value="Generer PDF"
 					onclick="confirmationPDF.show()" type="button" />
+					
 			</h:form>
 		</ui:fragment>
 	</ui:define>

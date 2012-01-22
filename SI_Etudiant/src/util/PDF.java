@@ -10,13 +10,13 @@ import java.util.List;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import entity.Etudiant;
 
 public class PDF {
+
+	private Date d = new Date();
 
 	public PDF() {
 
@@ -29,7 +29,8 @@ public class PDF {
 	 */
 	public void CreerListeEtudiantsPDF(List<Etudiant> etudiants) {
 
-		// On teste si l'utilisateur est sous Windows pour le chemin de stockage du PDF
+		// On teste si l'utilisateur est sous Windows pour le chemin de stockage
+		// du PDF
 		if (this.isWindows()) {
 
 			// PDF sur le bureau par defaut
@@ -52,20 +53,27 @@ public class PDF {
 				document.addCreationDate();
 				// Titre du PDF
 				document.addTitle("Liste des etudiants");
+				// Ajout d'une entete
+				Paragraph entete = new Paragraph(
+						"Liste des etudiants");
 				// Parcours de boucle, pour chaque etudiant de la liste
 				for (Etudiant etu : etudiants) {
 					// On ajoute des elements au paragraphe
 					Paragraph p = new Paragraph();
-					p.add(etu.getNom().toString());
-					p.add(etu.getPrenom().toString());
-					p.add(etu.getAdresse().getAdresse().toString());
+					p.add(etu.getNom().toString() + " ");
+					p.add(etu.getPrenom().toString() + " ");
+					p.add(etu.getAdresse().getAdresse().toString() + " ");
 					// Ajout du paragraphe au document
 					document.add(p);
-				}		
+				}
 				// Fermeture du document
 				document.close();
 				// Fermeture du flux IO fichier
 				file.close();
+				
+				// Ouvrir mon fichier
+				this.ouvrirPDF(chemin);
+				
 				// Attrapper les diverses exceptions, fichier, document et IO
 			} catch (FileNotFoundException fe) {
 				System.out.println(fe);
@@ -103,6 +111,21 @@ public class PDF {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	/*
+	 * Ouvre un fichier automatiquement sous Windows
+	 * @param chemin du fichier
+	 */
+	public void ouvrirPDF(String chemin) {
+		if (this.isWindows()) {
+			Runtime runtime = Runtime.getRuntime();
+			try {
+				runtime.exec("cmd /c " + chemin);
+			} catch (IOException e) {
+				System.out.println(e);
+			}
 		}
 	}
 }
