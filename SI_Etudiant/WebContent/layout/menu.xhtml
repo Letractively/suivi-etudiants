@@ -5,33 +5,34 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-	<body>
-		<ul>
-			<ui:fragment rendered="#{!login.loggedIn}">
-				<li><a href="login.faces">Connexion</a></li>
-				<li><a href="site.faces">Accueil</a></li>
+<body>
+	<ul>
+		<ui:fragment rendered="#{!login.loggedIn}">
+			<li><a href="login.faces">Connexion</a></li>
+			<li><a href="site.faces">Accueil</a></li>
+		</ui:fragment>
+		<ui:fragment rendered="#{login.loggedIn}">
+			<ui:fragment rendered="#{login.isAdmin()}">
+				<h:form>
+					<li><a href="site.faces">Accueil</a></li>
+					<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
+					<li><a href="ajoutEtudiant.faces">Inscrire un étudiant</a></li>
+					<li><a href="listeEntreprises.faces">Liste des entreprises</a></li>
+					<li><a href="ajoutEntreprise.faces">Inscrire une
+							entreprise</a></li>
+					<li><a href="listeUsers.faces">Liste des utilisateurs</a></li>
+					<li><a href="ajoutUser.faces">Inscrire un utilisateur</a></li>
+				</h:form>
 			</ui:fragment>
-			<ui:fragment rendered="#{login.loggedIn}">
-				<ui:fragment rendered="#{login.isAdmin()}">
-					<h:form>
-						<li><a href="site.faces">Accueil</a></li>
-						<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
-						<li><a href="ajoutEtudiant.faces">Inscrire un étudiant</a></li>
-						<li><a href="listeEntreprises.faces">Liste des entreprises</a></li>
-						<li><a href="ajoutEntreprise.faces">Inscrire une entreprise</a></li>
-						<li><a href="listeUsers.faces">Liste des utilisateurs</a></li>
-						<li><a href="ajoutUser.faces">Inscrire un utilisateur</a></li>
-					</h:form>
-				</ui:fragment>
-				<ui:fragment rendered="#{!login.isAdmin()}">
-					<h:form>
-						<li>Bienvenue</li>
-						<li><a href="site.faces">Accueil</a></li>
-						<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
-						<li><a href="listeEntreprises.faces">Liste des entreprises</a></li>
-					</h:form>
-				</ui:fragment>
+			<ui:fragment rendered="#{!login.isAdmin()}">
+				<h:form>
+					<li>Bienvenue</li>
+					<li><a href="site.faces">Accueil</a></li>
+					<li><a href="listeEtudiants.faces">Liste des étudiants</a></li>
+					<li><a href="listeEntreprises.faces">Liste des entreprises</a></li>
+				</h:form>
 			</ui:fragment>
-		</ul> 
-	</body>
+		</ui:fragment>
+	</ul>
+</body>
 </html>

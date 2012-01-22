@@ -8,46 +8,55 @@
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="title">Gestion des absences</ui:define>
+	<ui:define name="title">Gestion des absences</ui:define>
 
-    <ui:define name="content">
-    
-      <ui:fragment rendered="#{login.isAdmin()}"> 
-		    <h1>Ajouter une activité pour 
-		    	<h:outputText value="#{etudiantEntrepriseBean.etudiantEnt}" />
-		    </h1>
-		    <h:form>
-		    	<h:inputHidden id="etudiantCaché" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
-		  		<h:outputLabel for="entreprise" value="Entreprise : " />
-				<h:selectOneMenu value="#{etudiantEntrepriseBean.entrepriseItemSelect}">
+	<ui:define name="content">
+
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h1>
+				Ajouter une activité pour
+				<h:outputText value="#{etudiantEntrepriseBean.etudiantEnt}" />
+			</h1>
+			<h:form>
+				<h:inputHidden id="etudiantCaché"
+					value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
+				<h:outputLabel for="entreprise" value="Entreprise : " />
+				<h:selectOneMenu
+					value="#{etudiantEntrepriseBean.entrepriseItemSelect}">
 					<f:selectItems value="#{etudiantEntrepriseBean.entreprisesItems}" />
 				</h:selectOneMenu>
 				<h:outputLabel for="dateDebut" value="Date Début : " />
-				<h:inputText id="dateDebut" required="true" label="dateDebut" value="#{etudiantEntrepriseBean.etudiantEntrepriseId.datedebut}">
-					<f:convertDateTime pattern="yyyy-mm-dd"/>
+				<h:inputText id="dateDebut" required="true" label="dateDebut"
+					value="#{etudiantEntrepriseBean.etudiantEntrepriseId.datedebut}">
+					<f:convertDateTime pattern="yyyy-mm-dd" />
 				</h:inputText>
 				<br />
 				<h:outputLabel for="dateFin" value="Date Fin : " />
-				<h:inputText id="dateFin" required="true" label="dateFin" value="#{etudiantEntrepriseBean.etudiantEntreprise.datefin}">
+				<h:inputText id="dateFin" required="true" label="dateFin"
+					value="#{etudiantEntrepriseBean.etudiantEntreprise.datefin}">
 					<f:convertDateTime pattern="yyyy-mm-dd" />
 				</h:inputText>
 				<br />
 				<h:outputLabel for="description" value="Description : " />
-				<h:inputText id="description" required="true" label="description" value="#{etudiantEntrepriseBean.etudiantEntreprise.description}"/>
+				<h:inputText id="description" required="true" label="description"
+					value="#{etudiantEntrepriseBean.etudiantEntreprise.description}" />
 				<br />
 				<h:outputLabel for="poste" value="Poste : " />
-				<h:inputText id="poste" required="true" label="poste" value="#{etudiantEntrepriseBean.etudiantEntreprise.posteoccupe}"/>
+				<h:inputText id="poste" required="true" label="poste"
+					value="#{etudiantEntrepriseBean.etudiantEntreprise.posteoccupe}" />
 				<br />
 				<h:outputLabel for="type" value="Type contrat : " />
-				<h:inputText id="type" required="true" label="type" value="#{etudiantEntrepriseBean.etudiantEntreprise.typecontrat}"/>
+				<h:inputText id="type" required="true" label="type"
+					value="#{etudiantEntrepriseBean.etudiantEntreprise.typecontrat}" />
 				<br />
-				
-				<h:commandButton value="Ajouter" action="#{etudiantEntrepriseBean.ajout()}" />
+
+				<h:commandButton value="Ajouter"
+					action="#{etudiantEntrepriseBean.ajout()}" />
 			</h:form>
-	    </ui:fragment>
-	    
-    
-    </ui:define> 
+		</ui:fragment>
+
+
+	</ui:define>
 
 </ui:composition>
 </html>

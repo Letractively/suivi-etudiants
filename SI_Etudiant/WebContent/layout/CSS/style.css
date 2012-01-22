@@ -110,7 +110,6 @@ div,form,label,input,textarea,img,span {
 /*
  * #onglets correspond au menu personnalisé
  */
- 
 #onglets {
 	font: bold 13px Batang, arial, serif;
 	text-align: center;
@@ -204,20 +203,19 @@ label {
 	border-color: #9B9F9F;
 	border-image: initial;
 }*/
-
-input[type="text"], input[type="password"], select {
-	width: 250px; 
-	color: #555; 
-	padding: 4px; 
-	border: 1px solid #B5B8C8; 
-	font-size: 14px;	
+input[type="text"],input[type="password"],select {
+	width: 250px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 14px;
 	margin-top: 4px;
-	display : block; 
+	display: block;
 	margin-bottom: 5px;
 }
 
 label {
-	float: none; 
+	float: none;
 	text-align: inherit;
 	width: auto;
 }
@@ -229,4 +227,10 @@ ul,li {
 .piedpage {
 	background-color: #424548;
 	margin-top: 3px;
+}
+
+.errors {
+	background: url("../CSS/images/cross.png") 10px center no-repeat;
+	padding: 0 0 0 30px;
+	color: #FF5B5B;
 }

@@ -15,14 +15,14 @@
 		<h1>Suivi des étudiants</h1>
 	</div>
 	<div id="bandeau">
-			<ui:fragment rendered="#{login.isLoggedIn()}">
-					<h:outputText value="#{login.username}" />
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+			<h:outputText value="#{login.username}" />
 					[Connecte]
 				<h:form>
-					<h:commandLink value="Deconnexion" actionListener="#{login.logout}" />
-				</h:form>
-				<a href="modifUser.faces">Gestion du compte</a>
-			</ui:fragment>
+				<h:commandLink value="Deconnexion" actionListener="#{login.logout}" />
+			</h:form>
+			<a href="modifUser.faces">Gestion du compte</a>
+		</ui:fragment>
 	</div>
 	<div id="corps">
 

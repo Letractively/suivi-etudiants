@@ -6,81 +6,85 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="title">Suivi des etudiants</ui:define>
+	<ui:define name="title">Suivi des etudiants</ui:define>
 
-    <ui:define name="content">
- 	 <ui:fragment rendered="#{login.isLoggedIn()}"> 
-		     <h:form>		              
-			    <p:dataTable value="#{entrepriseBean.entreprises}" var="en" scrollWidth="400" resizableColumns="true">
-				    <f:facet name="header">  
+	<ui:define name="content">
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+			<h:form>
+				<p:dataTable value="#{entrepriseBean.entreprises}" var="en"
+					scrollWidth="400" resizableColumns="true">
+					<f:facet name="header">  
 			            Liste des entreprises 
 			        </f:facet>
-				    
-				    <p:column rendered="#{login.isAdmin()}">
-				    	<f:facet name="header">
-				    	</f:facet>
-				    	<h:selectBooleanCheckbox title="supprimer" value="#{entrepriseBean.checked[en.id]}" />
-				    </p:column>
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Nom" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.nom}" /> 	
-				    </p:column>	    
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Raison Sociale" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.raisonsociale}" />
-				    </p:column>
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Siret" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.siret}" />
-				    </p:column>
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Secteur d'activité" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.secteuractivite}" />
-				    </p:column>
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Tel" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.contact.tel}" />
-				    </p:column>
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Tel autre" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.contact.telAutre}" />
-				    </p:column>
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Mail" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.contact.mail}" />
-				    </p:column>
-				    <p:column>
-				    	<f:facet name="header">
-				    		<h:outputText value="Mail Autre" />
-				    	</f:facet>
-				    	<h:outputText value="#{en.contact.mailAutre}" />
-				    </p:column>
-				    <p:column rendered="#{login.isAdmin()}" >
-					    <h:commandButton value="Modifier" action="#{entrepriseBean.edit()}">   
-			      			<f:setPropertyActionListener value="#{en}" target="#{entrepriseBean.editEntreprise}" />
-			    		</h:commandButton>
-			    	</p:column> 
-				    
-			    </p:dataTable>
-				
+
+					<p:column rendered="#{login.isAdmin()}">
+						<f:facet name="header">
+						</f:facet>
+						<h:selectBooleanCheckbox title="supprimer"
+							value="#{entrepriseBean.checked[en.id]}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputText value="#{en.nom}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Raison Sociale" />
+						</f:facet>
+						<h:outputText value="#{en.raisonsociale}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Siret" />
+						</f:facet>
+						<h:outputText value="#{en.siret}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Secteur d'activité" />
+						</f:facet>
+						<h:outputText value="#{en.secteuractivite}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Tel" />
+						</f:facet>
+						<h:outputText value="#{en.contact.tel}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Tel autre" />
+						</f:facet>
+						<h:outputText value="#{en.contact.telAutre}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Mail" />
+						</f:facet>
+						<h:outputText value="#{en.contact.mail}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Mail Autre" />
+						</f:facet>
+						<h:outputText value="#{en.contact.mailAutre}" />
+					</p:column>
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Modifier"
+							action="#{entrepriseBean.edit()}">
+							<f:setPropertyActionListener value="#{en}"
+								target="#{entrepriseBean.editEntreprise}" />
+						</h:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer la/les entreprise(s) selectionnées ? "
 					header="Confirmation de suppression" severity="alert"
@@ -88,17 +92,17 @@
 					<p:commandButton value="Oui"
 						oncomplete="confirmationSupression.hide()"
 						actionListener="#{entrepriseBean.supprimer()}" />
-					<p:commandButton value="Non" onclick="confirmationSupression.hide()"
-						type="button" />
+					<p:commandButton value="Non"
+						onclick="confirmationSupression.hide()" type="button" />
 				</p:confirmDialog>
-				<br/>
-				
+				<br />
+
 				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
 					onclick="confirmationSupression.show()" type="button" />
-					
+
 			</h:form>
 		</ui:fragment>
-    </ui:define> 
+	</ui:define>
 
 </ui:composition>
 </html>

@@ -4,30 +4,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="content">
+	<ui:define name="content">
 
-    <h1>Identification</h1>
+		<h1>Identification</h1>
 
-	<h:form>
-		<h:panelGrid columns="3" cellpadding="5">
-			<h:outputLabel for="username" value="Login : *" />
-			<h:inputText value="#{login.username}"	id="username" required="true" label="username" />
-			<h:message class="errors" for="username" />
-			
-			<h:outputLabel for="password" value="Mot de passe : * " />
-			<h:inputSecret value="#{login.password}" 
-					id="password" required="true" label="password" /><h:message class="errors" for="password" />
-			
-			<f:facet name="footer">
-				<h:commandButton value="Connexion" action="#{login.login}" />
-			</f:facet>
-		</h:panelGrid>
-		
-	</h:form>
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="2">
+				<h:outputLabel for="username" value="Login : *" />
+				<h:inputText value="#{login.username}" id="username" required="true"
+					label="Login" /><br/><br/>
+				<h:message class="errors" for="username" />
 
-    </ui:define>
-</ui:composition></html>
+				<h:outputLabel for="password" value="Mot de passe : * " />
+				<h:inputSecret value="#{login.password}" id="password"
+					required="true" label="Mot de passe" /><br/>
+				<h:message class="errors" for="password" />
+
+				<f:facet name="footer">
+					<h:commandButton value="Connexion" action="#{login.login}" />
+				</f:facet>
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
