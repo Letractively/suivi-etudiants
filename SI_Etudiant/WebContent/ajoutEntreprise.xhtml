@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -13,7 +14,7 @@
     <ui:define name="content">
       <ui:fragment rendered="#{login.isAdmin()}"> 
 	    	    
-		    <h1>Inscription</h1>
+		    <h1>Inscrire une entreprise</h1>
 		    <h:form>
 		    	<h:outputLabel for="nom" value="Nom : " />
 				<h:inputText id="nom" required="true" label="nom" value="#{entrepriseBean.entreprise.nom}" />
@@ -53,8 +54,8 @@
 				<h:outputLabel for="pays" value="Pays : " />
 				<h:inputText id="pays" label="pays" value="#{entrepriseBean.entreprise.adresse.pays}"/>
 				<br />
-				<h:commandButton value="Ajouter" action="#{entrepriseBean.ajout()}" />
-				
+				<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+					action="#{entrepriseBean.ajout()}" type="button" />
 		    </h:form>
 		</ui:fragment>    
     </ui:define> 

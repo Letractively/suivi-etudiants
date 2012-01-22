@@ -13,7 +13,7 @@
 
     <ui:define name="content">
 	    <ui:fragment rendered="#{login.isAdmin()}"> 
-		    <h1>Inscription</h1>
+		    <h1>Inscrire un etudiant</h1>
 		    <h:form>
 		    	<h:outputLabel for="nom" value="Nom : " />
 				<h:inputText id="nom" required="true" label="nom" value="#{etudiantBean.etudiant.nom}" />

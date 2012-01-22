@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -26,7 +27,9 @@
 			<h:selectOneMenu value="#{utilisateurBean.niveauItemSelect}">
 				<f:selectItems value="#{utilisateurBean.niveauItems}" />
 			</h:selectOneMenu> 
-			<h:commandButton value="Ajouter" action="#{utilisateurBean.ajout()}" /> 
+			<br/>
+			<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+					action="#{utilisateurBean.ajout()}" type="button" />
 		</h:form>			  	
     </ui:define> 
 
