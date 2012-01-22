@@ -26,13 +26,13 @@
 					<h:inputText id="siret" label="siret" value="#{entrepriseBean.editEntreprise.siret}" />
 					<br />
 					<h:outputLabel for="mail" value="Mail : " />
-					<h:inputText id="mail" required="true" label="mail" value="#{entrepriseBean.editEntreprise.contact.mail}"/>
+					<h:inputText id="mail"  label="mail" value="#{entrepriseBean.editEntreprise.contact.mail}"/>
 					<br />
 					<h:outputLabel for="mailAutre" value="Mail Autre : " />
-					<h:inputText id="mailAutre" required="true" label="mailAutre" value="#{entrepriseBean.editEntreprise.contact.mailAutre}"/>
+					<h:inputText id="mailAutre" label="mailAutre" value="#{entrepriseBean.editEntreprise.contact.mailAutre}"/>
 					<br />
 					<h:outputLabel for="tel" value="Tel : " />
-					<h:inputText id="tel" label="tel" required="true" value="#{entrepriseBean.editEntreprise.contact.tel}"/>
+					<h:inputText id="tel" label="tel" value="#{entrepriseBean.editEntreprise.contact.tel}"/>
 					<br />
 					<h:outputLabel for="telAutre" value="Tel Autre : " />
 					<h:inputText id="telAutre" label="telAutre" value="#{entrepriseBean.editEntreprise.contact.telAutre}"/>
@@ -51,7 +51,7 @@
 					<h:outputLabel for="pays" value="Pays : " />
 					<h:inputText id="pays" label="pays" value="#{entrepriseBean.editEntreprise.adresse.pays}"/>
 					<br />
-					<h:commandButton value="Ajouter" action="#{entrepriseBean.modifier()}" />
+					<h:commandButton value="Modifier" action="#{entrepriseBean.modifier()}" />
 					
 			    </h:form>
 		</ui:fragment>    

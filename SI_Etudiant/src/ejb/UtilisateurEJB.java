@@ -36,6 +36,12 @@ public class UtilisateurEJB
   {
 	  em.remove(em.merge(utilisateur));	
   }
-  
+  public Utilisateur createUtilisateur(Utilisateur utilisateur)throws EJBException {
+	 	
+		em.persist(utilisateur);
+			
+		return utilisateur;
+	 }
+	 
   
 }

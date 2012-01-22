@@ -12,15 +12,22 @@
 
     <ui:define name="content">
     	<h1>Inscrire un utilisateur</h1>
-	 	<h:outputLabel for="login" value="Login : " />
-		<h:inputText id="login" required="true" label="login" value="#{utilisateurBean.utilisateur.login}" />
-		<br />
-		<h:outputLabel for="mdp" value="Mot de passe : " />
-		<h:inputText id="mdp" required="true" label="mdp" value="#{utilisateurBean.utilisateur.motDePasse}" />
-		<br />
-		<h:outputLabel for="nomComplet" value="Nom complet : " />
-		<h:inputText id="nomComplet" required="true" label="nomComplet" value="#{utilisateurBean.utilisateur.nomComplet}" />
-		    	
+    	<h:form>
+		 	<h:outputLabel for="login" value="Login : " />
+			<h:inputText id="login" required="true" label="login" value="#{utilisateurBean.utilisateur.login}" />
+			<br />
+			<h:outputLabel for="mdp" value="Mot de passe : " />
+			<h:inputText id="mdp" required="true" label="mdp" value="#{utilisateurBean.utilisateur.motDePasse}" />
+			<br />
+			<h:outputLabel for="nomComplet" value="Nom complet : " />
+			<h:inputText id="nomComplet" required="true" label="nomComplet" value="#{utilisateurBean.utilisateur.nomComplet}" />
+			<br />
+			<h:outputLabel for="niveau" value="Niveau : " />
+			<h:selectOneMenu value="#{utilisateurBean.niveauItemSelect}">
+				<f:selectItems value="#{utilisateurBean.niveauItems}" />
+			</h:selectOneMenu> 
+			<h:commandButton value="Ajouter" action="#{utilisateurBean.ajout()}" /> 
+		</h:form>			  	
     </ui:define> 
 
 </ui:composition>

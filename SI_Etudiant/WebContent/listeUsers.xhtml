@@ -24,7 +24,7 @@
                         <f:facet name="header">
                                 
                         </f:facet>
-                        <h:selectBooleanCheckbox title="supprimer" value="" />
+                        <h:selectBooleanCheckbox title="supprimer" value="{utilisateutBean.checked[u.id]}" />
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -48,7 +48,7 @@
 		        <p:confirmDialog message="Etes vous sur de vouloir supprimer les utilisateurs selectionnés ? "  
                 	header="Attention" severity="alert" widgetVar="confirmation">            
         			<p:commandButton value="Oui" update="messages" oncomplete="confirmation.hide()"  
-                    	actionListener="#{etudiantBean.supprimer()}" />  
+                    	actionListener="#{utilisateurBean.supprimer()}" />  
         			<p:commandButton value="Non" onclick="confirmation.hide()" type="button" />   
                 </p:confirmDialog>  
 		        <br />
