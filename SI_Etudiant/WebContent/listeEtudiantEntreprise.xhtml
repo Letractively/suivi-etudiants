@@ -21,8 +21,9 @@
 					var="ent">
 
 					<f:facet name="header">  
-			            Liste des activités
-			   </f:facet>
+			            Liste des activités professionnelle de
+			             <h:outputText value="#{etudiantEntrepriseBean.etudiantEnt}" />
+			        </f:facet>
 
 					<p:column rendered="#{login.isAdmin()}">
 						<f:facet name="header">

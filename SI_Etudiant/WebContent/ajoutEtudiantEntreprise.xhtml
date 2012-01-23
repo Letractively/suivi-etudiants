@@ -46,8 +46,9 @@
 					value="#{etudiantEntrepriseBean.etudiantEntreprise.posteoccupe}" />
 				<br />
 				<h:outputLabel for="type" value="Type contrat : " />
-				<h:inputText id="type" required="true" label="type"
-					value="#{etudiantEntrepriseBean.etudiantEntreprise.typecontrat}" />
+				<h:selectOneMenu value="#{etudiantEntrepriseBean.contratItemSelect}">
+					<f:selectItems value="#{etudiantEntrepriseBean.contratsItems}" />
+				</h:selectOneMenu>	
 				<br />
 
 				<h:commandButton value="Ajouter"

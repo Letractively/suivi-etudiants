@@ -45,8 +45,12 @@ public class EtudiantEntrepriseBean
 	private List<Entreprise> entreprises = new ArrayList<Entreprise>();
 	
 	private List<SelectItem> entreprisesItems = new ArrayList<SelectItem>();
+	private List<SelectItem> contratsItems = new ArrayList<SelectItem>();	
+	
+	
 	//c'est cette variable qui aura l'id de lentreprise selectionné via la liste déroulante 
 	private Long entrepriseItemSelect;
+	private String contratItemSelect;
 	
 	private EtudiantEntreprise selectedEtudiantEntreprise;
 		
@@ -71,8 +75,7 @@ public class EtudiantEntrepriseBean
 
 				//Je recupere l'etudiant
 				etudiantEnt=etudiantEJB.findEtudiantById(id);
-					
-				//Je recupere l'etudiant
+				
 				
 			}
 			catch(NumberFormatException e)
@@ -85,9 +88,8 @@ public class EtudiantEntrepriseBean
 		entreprises=entrepriseEJB.findAllEntreprises();	
 		
 		//appel de la fonction qui initailise la liste d'item entreprise
-		creerListeItem();	
-		
-		
+		creerListeItemEntreprise();
+		creerListeItemContrat();
 		
 	}
 		
@@ -95,17 +97,19 @@ public class EtudiantEntrepriseBean
 	{
 		//pour recuper l'id de l'etudiant, j'ai mis un champ caché dans le formulaire jsf pour faire le traitement ici, dans la fonction
 
-		System.out.println("Le numero de l'étudiant est "+etudiantEnt.getNom());
-
-		Long idEtudiant=etudiantEnt.getId();		
-		
-		System.out.println("Le numéro de l'entreprise selectionné est "+entrepriseItemSelect);
-		
-		/*etudiantEntrepriseId = new EtudiantEntrepriseId(etudiantEntrepriseId.getDatedebut(),idEtudiant,entrepriseItemSelect);
+		Long idEtudiant=etudiantEnt.getId();
+		System.out.println(contratItemSelect);
 		
 		
-		//mise en place de la clé primaire
+		//j'instancie ma clé primaire
+		etudiantEntrepriseId = new EtudiantEntrepriseId(etudiantEntrepriseId.getDatedebut(),idEtudiant,entrepriseItemSelect);
+		
+		
+		//mise en place de la clé primaire pour etudiatentreprise
 		etudiantEntreprise.setId(etudiantEntrepriseId);
+		
+		//je donne le contrat selectionné à l'étudiant (cat il n'est pas rataché directement dans le jsf)
+		etudiantEntreprise.setTypecontrat(contratItemSelect);
 		
 		//On prévient l'objet. Si cette instruction n'est pas présente le nom n'est pas rafraichi dans le tableau etudiantEntreprise
 		etudiantEntreprise.setEntreprise(entrepriseEJB.findEntrepriseById(entrepriseItemSelect));
@@ -113,16 +117,15 @@ public class EtudiantEntrepriseBean
 		//On ajoute étudiantEntrepise dans la BDD
 		etudiantEntrepriseEJB.createEtudiantEntreprise(etudiantEntreprise);
 		
-		//redirection vers la liste des activités. Seul solution trouvé pour passé l'id en parametre
+		//redirection vers la liste des activités. Seul solution trouvée pour passé l'id en parametre
 		Redirection.listeEtudiantEntreprise(idEtudiant);
 
-		*/
-		return "listeEtudiant";
+		return "tlisteEtudiant";
 
 	}
 	
 	//création de la liste d'item Entreprise, necessaire pour la page ajouterEtudiantEntreprisexhtml
-	public List<SelectItem> creerListeItem()
+	public List<SelectItem> creerListeItemEntreprise()
 	{		
 		for(Entreprise ent : entreprises)
 		{
@@ -131,6 +134,19 @@ public class EtudiantEntrepriseBean
 		}
 		
 		return entreprisesItems;			
+	}
+	public List<SelectItem> creerListeItemContrat()
+	{
+	
+		contratsItems.add(new SelectItem("CDI","CDI"));
+		contratsItems.add(new SelectItem("CDD","CDD"));
+		contratsItems.add(new SelectItem("Intérim","Intérim"));
+		contratsItems.add(new SelectItem("Stage","Stage"));
+		contratsItems.add(new SelectItem("Contrat de professionnalisation","Contrat de professionnalisation"));
+		contratsItems.add(new SelectItem("Contrat d'apprentissage","Contrat d'apprentissage"));
+		contratsItems.add(new SelectItem("Autre","Autre"));
+		
+		return contratsItems;
 	}
 	
 	
@@ -222,6 +238,24 @@ public class EtudiantEntrepriseBean
 			EtudiantEntreprise selectedEtudiantEntreprise) {
 		this.selectedEtudiantEntreprise = selectedEtudiantEntreprise;
 	}
+
+	public String getContratItemSelect() {
+		return contratItemSelect;
+	}
+
+	public void setContratItemSelect(String contratItemSelect) {
+		this.contratItemSelect = contratItemSelect;
+	}
+
+	public List<SelectItem> getContratsItems() {
+		return contratsItems;
+	}
+
+	public void setContratsItems(List<SelectItem> contratsItems) {
+		this.contratsItems = contratsItems;
+	}
+	
+	
 	
 	
 	
