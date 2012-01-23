@@ -4,7 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
 
 <ui:composition template="layout/template.xhtml">
 
@@ -26,16 +28,20 @@
 					<f:selectItems value="#{etudiantEntrepriseBean.entreprisesItems}" />
 				</h:selectOneMenu>
 				<h:outputLabel for="dateDebut" value="Date Début : " />
-				<h:inputText id="dateDebut" required="true" label="dateDebut"
-					value="#{etudiantEntrepriseBean.etudiantEntrepriseId.datedebut}">
+				
+				<p:calendar id="dateDebut" value="#{etudiantEntrepriseBean.etudiantEntrepriseId.datedebut}" navigator="true"
+					locale="fr" pattern="yyyy-MM-dd" >
 					<f:convertDateTime pattern="yyyy-mm-dd" />
-				</h:inputText>
+				</p:calendar>
+				
 				<br />
 				<h:outputLabel for="dateFin" value="Date Fin : " />
-				<h:inputText id="dateFin" required="true" label="dateFin"
-					value="#{etudiantEntrepriseBean.etudiantEntreprise.datefin}">
+				
+				<p:calendar id="dateFin" value="#{etudiantEntrepriseBean.etudiantEntreprise.datefin}" navigator="true"
+					locale="fr" pattern="yyyy-MM-dd" >
 					<f:convertDateTime pattern="yyyy-mm-dd" />
-				</h:inputText>
+				</p:calendar>
+				
 				<br />
 				<h:outputLabel for="description" value="Description : " />
 				<h:inputText id="description" required="true" label="description"
