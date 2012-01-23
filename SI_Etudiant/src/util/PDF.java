@@ -27,61 +27,51 @@ public class PDF {
 	 * 
 	 * @param : Liste d'etudiants
 	 */
-	public void CreerListeEtudiantsPDF(List<Etudiant> etudiants) {
+	public void CreerListeEtudiantsPDF(List<Etudiant> etudiants, String nomPDF) {
 
-		// On teste si l'utilisateur est sous Windows pour le chemin de stockage
-		// du PDF
-		if (this.isWindows()) {
-
-			// PDF sur le bureau par defaut
-			String chemin = "C:\\Users\\" + this.userName()
-					+ "\\Desktop\\listeEtudiants.pdf";
-
-			try {
-				// Flux de sortie -> Fichier
-				OutputStream file = new FileOutputStream(new File(chemin));
-				// Creation d'un document
-				Document document = new Document();
-				// On recupere l'instance de la classe permettant d'ecrire et on
-				// lui passe le fichier et le document
-				PdfWriter.getInstance(document, file);
-				// Ouverture du document
-				document.open();
-				// Nom de l'auteur du PDF (celui qui utilise la machine)
-				document.addAuthor(this.userName());
-				// Date de creation
-				document.addCreationDate();
-				// Titre du PDF
-				document.addTitle("Liste des etudiants");
-				// Ajout d'une entete
-				Paragraph entete = new Paragraph(
-						"Liste des etudiants");
-				// Parcours de boucle, pour chaque etudiant de la liste
-				for (Etudiant etu : etudiants) {
-					// On ajoute des elements au paragraphe
-					Paragraph p = new Paragraph();
-					p.add(etu.getNom().toString() + " ");
-					p.add(etu.getPrenom().toString() + " ");
-					p.add(etu.getAdresse().getAdresse().toString() + " ");
-					// Ajout du paragraphe au document
-					document.add(p);
-				}
-				// Fermeture du document
-				document.close();
-				// Fermeture du flux IO fichier
-				file.close();
-				
-				// Ouvrir mon fichier
-				this.ouvrirPDF(chemin);
-				
-				// Attrapper les diverses exceptions, fichier, document et IO
-			} catch (FileNotFoundException fe) {
-				System.out.println(fe);
-			} catch (DocumentException de) {
-				System.out.println(de);
-			} catch (IOException ioe) {
-				System.out.println(ioe);
+		try {
+			// Flux de sortie -> Fichier
+			OutputStream file = new FileOutputStream(new File(this.cheminPDF(nomPDF)));
+			// Creation d'un document
+			Document document = new Document();
+			// On recupere l'instance de la classe permettant d'ecrire et on
+			// lui passe le fichier et le document
+			PdfWriter.getInstance(document, file);
+			// Ouverture du document
+			document.open();
+			// Nom de l'auteur du PDF (celui qui utilise la machine)
+			document.addAuthor(this.userName());
+			// Date de creation
+			document.addCreationDate();
+			// Titre du PDF
+			document.addTitle("Liste des etudiants");
+			// Ajout d'une entete
+			Paragraph entete = new Paragraph("Liste des etudiants");
+			// Parcours de boucle, pour chaque etudiant de la liste
+			for (Etudiant etu : etudiants) {
+				// On ajoute des elements au paragraphe
+				Paragraph p = new Paragraph();
+				p.add(etu.getNom().toString() + " ");
+				p.add(etu.getPrenom().toString() + " ");
+				p.add(etu.getAdresse().getAdresse().toString() + " ");
+				// Ajout du paragraphe au document
+				document.add(p);
 			}
+			// Fermeture du document
+			document.close();
+			// Fermeture du flux IO fichier
+			file.close();
+
+			// Ouvrir mon fichier
+			this.ouvrirPDF(this.cheminPDF(nomPDF));
+
+			// Attrapper les diverses exceptions, fichier, document et IO
+		} catch (FileNotFoundException fe) {
+			System.out.println(fe);
+		} catch (DocumentException de) {
+			System.out.println(de);
+		} catch (IOException ioe) {
+			System.out.println(ioe);
 		}
 	}
 
@@ -112,6 +102,23 @@ public class PDF {
 		} else {
 			return false;
 		}
+	}
+
+	/*
+	 * Chemin de mon PDF
+	 */
+	public String cheminPDF(String nomPDF) {
+		String chemin = "";
+		if (this.isWindows()) {
+			chemin = "C:\\Users\\" + this.userName() + "\\Desktop\\" + nomPDF
+					+ ".pdf";
+		} else {
+			if (this.osName().equals("Ubuntu")) {
+				System.out.println(this.osName());
+				chemin = "/home/" + this.userName();
+			}
+		}
+		return chemin;
 	}
 
 	/*

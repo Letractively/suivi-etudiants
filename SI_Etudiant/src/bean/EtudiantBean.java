@@ -137,8 +137,8 @@ public class EtudiantBean implements Serializable {
 	public void creerListeEtudiantsPDF() {
 		// Instancier sinon nullPointerException
 		pdf = new PDF();
-		// Appeler la procédure
-		pdf.CreerListeEtudiantsPDF(etudiants);
+		// Appeler la procédure pour creer mon PDF d'etudiants
+		pdf.CreerListeEtudiantsPDF(etudiants, "listeEtudiants");
 	}
 
 	/*
