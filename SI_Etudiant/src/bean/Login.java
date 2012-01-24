@@ -72,9 +72,8 @@ public class Login {
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
-			/*msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue "
-					+ username, "connexion de " + username);*/
-			  msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "");
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue "
+					+ username + ", pour actualiser le menu veuillez cliquer sur 'Accueil'", "connexion de " + username);
 		} else {
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreur Login",
 					"Authentification invalide");

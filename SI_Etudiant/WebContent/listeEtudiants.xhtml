@@ -13,7 +13,7 @@
 	<ui:define name="content">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:form>
-				<p:dataTable var="et" value="#{etudiantBean.etudiants}"
+				<p:dataTable id="tabEtu" var="et" value="#{etudiantBean.etudiants}"
 					paginator="true" rows="10">
 					<f:facet name="header">  
 			            Liste des étudiants 

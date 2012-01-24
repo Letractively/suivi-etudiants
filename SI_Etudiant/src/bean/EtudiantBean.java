@@ -11,6 +11,9 @@ import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -91,9 +94,13 @@ public class EtudiantBean implements Serializable {
 	}
 
 	public String ajout() {
+		// Message d'ajout
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Etudiant ajouté"));
+		// Ajout
 		this.etudiantEJB.createEtudiant(etudiant);
-
+		// Fin
 		conversation.end();
+		
 
 		/*
 		 * si on est en session, actualisation de la liste d'étudiant et de

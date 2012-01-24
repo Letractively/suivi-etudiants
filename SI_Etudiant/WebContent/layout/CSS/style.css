@@ -49,9 +49,6 @@ div,form,label,input,textarea,img,span {
 	margin-left: auto;
 	font: bold 13px Batang, arial, serif;
 	color: #F4F9FD;
-	/*font-family: Tahoma;
-	font-size: 12px;
-	font-style: normal;*/
 	line-height: normal;
 	font-weight: bold;
 	font-variant: normal;
@@ -107,40 +104,10 @@ div,form,label,input,textarea,img,span {
 	background-color: #424548;
 }
 
-/*
- * #onglets correspond au menu personnalisé
- */
 #onglets {
 	font: bold 13px Batang, arial, serif;
-	text-align: center;
-	list-style-type: none;
-	padding-bottom: 30px;
-	/* Amodifier suivant la taille de la police ET de la hauteur de l'onglet dans #onglets li */
 	margin-left: -30px;
-}
-
-#onglets li {
-	float: left;
-	background-color: #303030;
-	height: 24px;
-	/* Amodifier suivant la taille de la police pour centrer le texte dans l'onglet */
-	margin: 2px 2px 0 2px; /* Pour les navigateurs autre que IE */
-	margin: 1px 2px 0 2px; /* Pour IE  */
-	width: 190px;
-}
-
-#onglets a {
-	display: block;
-	color: #F4F9FD;
-	text-decoration: none;
-	border-style: outset;
-	padding: 4px;
-}
-
-#onglets a:hover {
-	background-color: #DCDCDC;
-	color: #303030;
-	border-style: inset;
+	margin-top : -10px;
 }
 
 .milieu {
@@ -193,16 +160,6 @@ label {
 	text-align: right;
 }
 
-/*input[type="text"],input[type="password"],select {
-	margin-left: .5em;
-	float: left;
-	border: 1px solid black;
-	margin-bottom: .5em;
-	width: 500px;
-	background-color: #EDF7F2;
-	border-color: #9B9F9F;
-	border-image: initial;
-}*/
 input[type="text"],input[type="password"],select {
 	width: 250px;
 	color: #555;

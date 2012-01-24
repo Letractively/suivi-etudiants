@@ -11,24 +11,34 @@
 
 	<ui:define name="content">
 
-		<h1>Identification</h1>
-
 		<h:form>
-			<h:panelGrid columns="2" cellpadding="2">
-				<h:outputLabel for="username" value="Login : *" />
-				<h:inputText value="#{login.username}" id="username" required="true"
-					label="Login" /><br/><br/>
-				<h:message class="errors" for="username" />
 
-				<h:outputLabel for="password" value="Mot de passe : * " />
-				<h:inputSecret value="#{login.password}" id="password"
-					required="true" label="Mot de passe" /><br/>
-				<h:message class="errors" for="password" />
+			<p:panel id="panneauLogin" header="Identification">
+				<p:focus context="panneauLogin" />
+				<p:messages />
+				<h:panelGrid columns="4">
 
-				<f:facet name="footer">
-					<h:commandButton value="Connexion" action="#{login.login}" />
-				</f:facet>
-			</h:panelGrid>
+					<h:outputLabel for="Login" value="Login : " />
+
+					<p:inputText id="login" required="true" label="login"
+						value="#{login.username}" />
+					<br />
+					<br />
+					<p:message for="login" />
+
+					<h:outputLabel for="Passe" value="Passe : " />
+
+					<p:inputText id="Passe" feedback="false" required="true"
+						label="Passe" value="#{login.password}" />
+					<br />
+					<p:message for="Passe" />
+
+				</h:panelGrid>
+
+				<p:commandButton value="Connexion" update="panneauLogin"
+					actionListener="#{login.login}" />
+
+			</p:panel>
 
 		</h:form>
 

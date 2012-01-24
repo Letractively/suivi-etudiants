@@ -13,60 +13,72 @@
 
 	<ui:define name="content">
 		<ui:fragment rendered="#{login.isAdmin()}">
-			<h1>Inscrire un etudiant</h1>
 			<h:form>
-				<h:outputLabel for="nom" value="Nom : " />
-				<h:inputText id="nom" required="true" label="nom"
-					value="#{etudiantBean.etudiant.nom}" />
-				<br />
-				<h:outputLabel for="prenom" value="Prenom : " />
-				<h:inputText id="prenom" required="true" label="prenom"
-					value="#{etudiantBean.etudiant.prenom}" />
-				<br />
-				<h:outputLabel for="mail" value="Mail : " />
-				<h:inputText id="mail" required="true" label="mail"
-					value="#{etudiantBean.etudiant.contact.mail}" />
-				<br />
-				<h:outputLabel for="mailAutre" value="Mail Autre : " />
-				<h:inputText id="mailAutre" required="true" label="mailAutre"
-					value="#{etudiantBean.etudiant.contact.mailAutre}" />
-				<br />
-				<h:outputLabel for="tel" value="Tel : " />
-				<h:inputText id="tel" label="tel" required="true"
-					value="#{etudiantBean.etudiant.contact.tel}" />
-				<br />
-				<h:outputLabel for="telAutre" value="Tel Autre : " />
-				<h:inputText id="telAutre" label="telAutre"
-					value="#{etudiantBean.etudiant.contact.telAutre}" />
-				<br />
-				<h:outputLabel for="adresse" value="Adresse : " />
-				<h:inputText id="adresse" label="adresse"
-					value="#{etudiantBean.etudiant.adresse.adresse}" />
-				<br />
-				<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
-				<h:inputText id="adresseSuite" label="adresseSuite"
-					value="#{etudiantBean.etudiant.adresse.adresseSuite}" />
-				<br />
-				<h:outputLabel for="cp" value="Code Postal : " />
-				<h:inputText id="cp" label="cp"
-					value="#{etudiantBean.etudiant.adresse.codePostal}" />
-				<br />
-				<h:outputLabel for="ville" value="Ville : " />
-				<h:inputText id="ville" label="ville"
-					value="#{etudiantBean.etudiant.adresse.ville}" />
-				<br />
-				<h:outputLabel for="pays" value="Pays : " />
-				<h:inputText id="pays" label="pays"
-					value="#{etudiantBean.etudiant.adresse.pays}" />
-				<br />
-				<p:confirmDialog message="Etudiant ajouté"
-					header="Information" severity="info" widgetVar="confirmationAjoutEtudiant">
-					<p:commandButton value="Ok" oncomplete="confirmationAjoutEtudiant.hide()"
-						actionListener="#{etudiantBean.ajout()}" />
-				</p:confirmDialog>
-				<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
-					onclick="confirmationAjoutEtudiant.show()" type="button" />
+				<p:panel id="panneauEtudiant" header="Inscrire un etudiant">
+					<p:focus context="panneauEtudiant" />
+					<p:messages />
+					<h:panelGrid columns="4">
 
+						<h:outputLabel for="nom" value="Nom : " />
+						<p:inputText id="nom" required="true" label="nom"
+							value="#{etudiantBean.etudiant.nom}" />
+						<p:message for="nom" />
+						<br />
+						<h:outputLabel for="prenom" value="Prenom : " />
+						<p:inputText id="prenom" required="true" label="prenom"
+							value="#{etudiantBean.etudiant.prenom}" />
+						<p:message for="prenom" />
+						<br />
+						<h:outputLabel for="mail" value="Mail : " />
+						<p:inputText id="mail" required="true" label="mail"
+							value="#{etudiantBean.etudiant.contact.mail}" />
+						<p:message for="mail" />
+						<br />
+						<h:outputLabel for="mailAutre" value="Mail Autre : " />
+						<p:inputText id="mailAutre" required="true" label="mailAutre"
+							value="#{etudiantBean.etudiant.contact.mailAutre}" />
+						<p:message for="mailAutre" />
+						<br />
+						<h:outputLabel for="tel" value="Tel : " />
+						<p:inputText id="tel" label="tel" required="true"
+							value="#{etudiantBean.etudiant.contact.tel}" />
+						<p:message for="tel" />
+						<br />
+						<h:outputLabel for="telAutre" value="Tel Autre : " />
+						<p:inputText id="telAutre" label="telAutre"
+							value="#{etudiantBean.etudiant.contact.telAutre}" />
+						<p:message for="telAutre" />
+						<br />
+						<h:outputLabel for="adresse" value="Adresse : " />
+						<p:inputText id="adresse" label="adresse"
+							value="#{etudiantBean.etudiant.adresse.adresse}" />
+						<p:message for="adresse" />
+						<br />
+						<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
+						<p:inputText id="adresseSuite" label="adresseSuite"
+							value="#{etudiantBean.etudiant.adresse.adresseSuite}" />
+						<p:message for="adresseSuite" />
+						<br />
+						<h:outputLabel for="cp" value="Code Postal : " />
+						<p:inputText id="cp" label="cp"
+							value="#{etudiantBean.etudiant.adresse.codePostal}" />
+						<p:message for="cp" />
+						<br />
+						<h:outputLabel for="ville" value="Ville : " />
+						<p:inputText id="ville" label="ville"
+							value="#{etudiantBean.etudiant.adresse.ville}" />
+						<p:message for="ville" />
+						<br />
+						<h:outputLabel for="pays" value="Pays : " />
+						<p:inputText id="pays" label="pays"
+							value="#{etudiantBean.etudiant.adresse.pays}" />
+						<p:message for="pays" />
+						<br />
+					</h:panelGrid>
+					<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+						update="panneauEtudiant" actionListener="#{etudiantBean.ajout()}" />
+
+				</p:panel>
 			</h:form>
 		</ui:fragment>
 	</ui:define>
