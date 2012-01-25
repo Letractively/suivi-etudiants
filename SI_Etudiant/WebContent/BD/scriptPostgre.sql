@@ -34,6 +34,11 @@ drop table ETABLISSEMENT;
 drop table ETUDIANT;
 drop table UTILISATEUR;
 
+CREATE TABLE SEQUENCE (SEQ_NAME VARCHAR(50), SEQ_COUNT DECIMAL(15));
+INSERT INTO SEQUENCE(SEQ_NAME, SEQ_COUNT) values ('SEQ_GEN', 0);
+
+-- UPDATE SEQUENCE SET SEQ_COUNT = 3;
+
 -- Creation des tables
 create table ENTREPRISE (ENTREPRISE_ID int not null, adresse varchar(70), adresseSuite varchar(70), codePostal varchar(70), pays varchar(70), ville varchar(70), mail varchar(70), mailAutre varchar(70), tel varchar(70), telAutre varchar(70), nom varchar(70), raisonsociale varchar(70), secteuractivite varchar(70), siret varchar(70), primary key (ENTREPRISE_ID));
 create table ETABLISSEMENT (ETABLISSEMENT_ID int not null, adresse varchar(70), adresseSuite varchar(70), codePostal varchar(70), pays varchar(70), ville varchar(70), mail varchar(70), mailAutre varchar(70), tel varchar(70), telAutre varchar(70), nom varchar(70), typeEtab varchar(70), primary key (ETABLISSEMENT_ID));

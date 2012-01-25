@@ -28,6 +28,7 @@ body {
 #enveloppe #entete #menu {
 	margin-left: 540px;
 }
+
 #enveloppe #entete #menu ul {
 	padding-top: 0px;
 	padding-right: 5px;
@@ -55,6 +56,7 @@ body {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
 #enveloppe #corps #contenu {
 	float: left;
 	width: 525px;
@@ -63,12 +65,12 @@ body {
 #enveloppe #corps p {
 	color: #666666;
 	margin-bottom: 20px;
-	font-size: 110%; 
-	line-height: 21px; 
+	font-size: 110%;
+	line-height: 21px;
 	text-align: justify;
 }
 
-#corps h1, #corps h2, #corps h3, #corps h4, #corps h5 {
+#corps h1,#corps h2,#corps h3,#corps h4,#corps h5 {
 	color: #000000;
 	font-family: Arial, Helvetica, sans-serif;
 	display: block;
@@ -105,4 +107,14 @@ input[type="text"],input[type="password"],select {
 	margin-top: 4px;
 	display: block;
 	margin-bottom: 5px;
+}
+
+#enveloppe a {
+	color: #030301;
+	font-weight: bold;
+}
+
+#enveloppe a:hover {
+	font-weight: none;
+	text-transform: uppercase;
 }

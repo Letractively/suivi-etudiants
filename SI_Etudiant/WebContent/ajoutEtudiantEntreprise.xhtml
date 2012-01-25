@@ -28,20 +28,22 @@
 					<f:selectItems value="#{etudiantEntrepriseBean.entreprisesItems}" />
 				</h:selectOneMenu>
 				<h:outputLabel for="dateDebut" value="Date Début : " />
-				
-				<p:calendar id="dateDebut" value="#{etudiantEntrepriseBean.etudiantEntrepriseId.datedebut}" navigator="true"
-					locale="fr" pattern="yyyy-MM-dd" >
+
+				<p:calendar id="dateDebut"
+					value="#{etudiantEntrepriseBean.etudiantEntrepriseId.datedebut}"
+					navigator="true" locale="fr" pattern="yyyy-MM-dd">
 					<f:convertDateTime pattern="yyyy-mm-dd" />
 				</p:calendar>
-				
+
 				<br />
 				<h:outputLabel for="dateFin" value="Date Fin : " />
-				
-				<p:calendar id="dateFin" value="#{etudiantEntrepriseBean.etudiantEntreprise.datefin}" navigator="true"
-					locale="fr" pattern="yyyy-MM-dd" >
+
+				<p:calendar id="dateFin"
+					value="#{etudiantEntrepriseBean.etudiantEntreprise.datefin}"
+					navigator="true" locale="fr" pattern="yyyy-MM-dd">
 					<f:convertDateTime pattern="yyyy-mm-dd" />
 				</p:calendar>
-				
+
 				<br />
 				<h:outputLabel for="description" value="Description : " />
 				<h:inputText id="description" required="true" label="description"
@@ -54,7 +56,7 @@
 				<h:outputLabel for="type" value="Type contrat : " />
 				<h:selectOneMenu value="#{etudiantEntrepriseBean.contratItemSelect}">
 					<f:selectItems value="#{etudiantEntrepriseBean.contratsItems}" />
-				</h:selectOneMenu>	
+				</h:selectOneMenu>
 				<br />
 
 				<h:commandButton value="Ajouter"

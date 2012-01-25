@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -12,16 +13,18 @@
 
 	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isAdmin()}">
-			<h1>Modification de votre compte</h1>
 			<h:form>
-				<h:outputLabel for="mdp" value="Mot de passe : " />
-				<h:inputSecret id="mdp" required="true" label="mdp" value="" />
-				<br />
-				<h:outputLabel for="mdp2" value="Répéter mot de passe : " />
-				<h:inputSecret id="mdp2" required="true" label="mdp2" value="" />
-				<br />
-				<h:commandButton value="Modifier"
-					action="#{etudiantBean.modifier()}" />
+				<p:growl id="modifPasse" sticky="true" />
+				<p:panel header="Modification de votre compte">
+					<h:outputLabel for="mdp" value="Mot de passe : " />
+					<p:password id="mdp" required="true" label="mdp" value="" match="mdp2" />
+					<br />
+					<h:outputLabel for="mdp2" value="Répéter mot de passe : " />
+					<p:password id="mdp2" required="true" label="mdp2" value="" />
+					<br />
+					<p:commandButton value="Modifier" update="modifPasse"
+						actionListener="#{utilisateurBean.modifier()}" />
+				</p:panel>
 			</h:form>
 		</ui:fragment>
 	</ui:define>

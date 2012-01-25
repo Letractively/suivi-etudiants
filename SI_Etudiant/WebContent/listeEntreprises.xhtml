@@ -27,7 +27,7 @@
 						<h:selectBooleanCheckbox title="supprimer"
 							value="#{entrepriseBean.checked[en.id]}" />
 					</p:column>
-					<p:column sortBy="#{en.nom}" >
+					<p:column sortBy="#{en.nom}">
 						<f:facet name="header">
 							<h:outputText value="Nom" />
 						</f:facet>
@@ -39,7 +39,7 @@
 						</f:facet>
 						<h:outputText value="#{en.raisonsociale}" />
 					</p:column>
-					<p:column sortBy="#{en.siret}" >
+					<p:column sortBy="#{en.siret}">
 						<f:facet name="header">
 							<h:outputText value="Siret" />
 						</f:facet>
@@ -56,7 +56,7 @@
 							<h:outputText value="Tel" />
 						</f:facet>
 						<h:outputText value="#{en.contact.tel}" />
-					</p:column >
+					</p:column>
 					<p:column sortBy="#{en.contact.telAutre}">
 						<f:facet name="header">
 							<h:outputText value="Tel autre" />
@@ -69,7 +69,7 @@
 						</f:facet>
 						<h:outputText value="#{en.contact.mail}" />
 					</p:column>
-					<p:column sortBy="#{en.contact.mailAutre}" >
+					<p:column sortBy="#{en.contact.mailAutre}">
 						<f:facet name="header">
 							<h:outputText value="Mail Autre" />
 						</f:facet>

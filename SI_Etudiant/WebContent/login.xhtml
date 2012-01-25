@@ -12,10 +12,13 @@
 	<ui:define name="contenu">
 
 		<h:form>
-			<p:panel id="panneauLogin" header="Identification">
+
+			<p:growl id="panneauLogin" sticky="true" />
+
+			<p:panel header="Identification">
 				<p:focus context="panneauLogin" />
-				<p:messages />
-				<h:panelGrid columns="4">
+
+				<h:panelGrid columns="3">
 
 					<h:outputLabel for="Login" value="Login : " />
 
@@ -23,14 +26,13 @@
 						value="#{login.username}" />
 					<br />
 					<br />
-					<p:message for="login" />
 
 					<h:outputLabel for="Passe" value="Passe : " />
 
 					<h:inputSecret id="Passe" feedback="false" required="true"
 						label="Passe" value="#{login.password}" />
 					<br />
-					<p:message for="Passe" />
+					<br />
 
 				</h:panelGrid>
 

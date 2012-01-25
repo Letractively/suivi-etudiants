@@ -13,8 +13,9 @@
 	<ui:define name="content">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:form id="formEtab">
-				<p:dataTable var="et" id="tabEtab" value="#{etablissementBean.etablissements}"
-					paginator="true" rows="10">
+				<p:dataTable var="et" id="tabEtab"
+					value="#{etablissementBean.etablissements}" paginator="true"
+					rows="10">
 					<f:facet name="header">  
 			            Liste des etablissements
 			        </f:facet>
@@ -60,25 +61,31 @@
 
 				</p:dataTable>
 
-				 <p:dialog header="Etablissement" widgetVar="etablissementDialog"
-                                        resizable="false" id="etablissementId" showEffect="fade"
-                                        hideEffect="explode" modal="true">
-                                        <h:panelGrid id="display" columns="2" cellpadding="4"
-                                                style="margin:0 auto;">
-                                                <h:outputText value="Nom : " />
-                                                <h:outputText value="#{etablissementBean.selectedEtablissement.nom}" />
-                                                <h:outputText value="Type d'etablissement : " />
-                                                <h:outputText value="#{etablissementBean.selectedEtablissement.typeEtab}" />
-                                                <h:outputText value="Adresse : " />
-                                                <h:outputText value="#{etablissementBean.selectedEtablissement.adresse.adresse}" />
-                                                <h:outputText value="Ville : " />
-                                                <h:outputText value="#{etablissementBean.selectedEtablissement.adresse.ville}" />
-                                                <h:outputText value="Tel : " />
-                                                <h:outputText value="#{etablissementBean.selectedEtablissement.contact.tel}" />
-                                                <h:outputText value="Mail : " />
-                                                <h:outputText value="#{etablissementBean.selectedEtablissement.contact.mail}" />
-                                        </h:panelGrid>
-                                </p:dialog>
+				<p:dialog header="Etablissement" widgetVar="etablissementDialog"
+					resizable="false" id="etablissementId" showEffect="fade"
+					hideEffect="explode" modal="true">
+					<h:panelGrid id="display" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+						<h:outputText value="Nom : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.nom}" />
+						<h:outputText value="Type d'etablissement : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.typeEtab}" />
+						<h:outputText value="Adresse : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.adresse.adresse}" />
+						<h:outputText value="Ville : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.adresse.ville}" />
+						<h:outputText value="Tel : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.contact.tel}" />
+						<h:outputText value="Mail : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.contact.mail}" />
+					</h:panelGrid>
+				</p:dialog>
 
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer les etablissements selectionnés ? "

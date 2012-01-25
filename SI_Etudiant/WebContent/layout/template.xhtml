@@ -18,33 +18,37 @@
 			<h1>
 				GESTION <span>ETUDIANTS</span>
 			</h1>
-			<ui:fragment rendered="#{login.isLoggedIn()}">
-				<h:outputText value="#{login.username}" />
-					[Connecté]
-					<h:form>
-					<h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
-				</h:form>
-				<a href="modifUser.faces">Gestion du compte</a>
-			</ui:fragment>
+
 		</div>
-		
+
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+			<h:form>
+				<h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
+			</h:form>
+			<a href="modifUser.faces">Gestion du compte</a>
+		</ui:fragment>
+
 		<div id="entete">
 			<div id="menu">
 				<ui:include src="/layout/menu.xhtml" />
 			</div>
 		</div>
-		
+
 		<div id="corps">
-				<ui:insert name="contenu"></ui:insert>
+			<ui:insert name="contenu"></ui:insert>
 		</div>
-		
+
 	</div>
-	
+
 	<div id="piedpage">
 		<div id="contenupiedpage">
-			<p>Gestion des etudiants &copy; All rights reserved | Valid XHTML | Powered by Alex, Romain et Gerardo |<a href="#">Put</a> | <a href="#">Any</a> | <a href="#">Links </a>| <a href="#">Here </a></p>
+			<p>
+				Gestion des etudiants &copy; All rights reserved | Valid XHTML |
+				Powered by Alex, Romain et Gerardo |<a href="#">Put</a> | <a
+					href="#">Any</a> | <a href="#">Links </a>| <a href="#">Here </a>
+			</p>
 		</div>
 	</div>
-	
+
 </h:body>
 </html>

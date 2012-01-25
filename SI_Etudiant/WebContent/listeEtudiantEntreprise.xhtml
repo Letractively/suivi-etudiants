@@ -22,8 +22,9 @@
 
 					<f:facet name="header">  
 			            Liste des activités professionnelle de
-			             <h:outputText value="#{etudiantEntrepriseBean.etudiantEnt}" />
-			        </f:facet>
+			             <h:outputText
+							value="#{etudiantEntrepriseBean.etudiantEnt}" />
+					</f:facet>
 
 					<p:column rendered="#{login.isAdmin()}">
 						<f:facet name="header">
@@ -114,13 +115,13 @@
 					<f:param name="id" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
 					<h:outputText value="Ajouter une activité" />
 				</h:outputLink>
-			</h:form>			
-			
+			</h:form>
+
 		</ui:fragment>
-		
-		<br/>
-		<br/>
-		<br/>
+
+		<br />
+		<br />
+		<br />
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 
 			<h:form>
@@ -132,7 +133,7 @@
 					<f:facet name="header">  
 			            Liste des formations de
 			             <h:outputText value="#{etudiantFormationBean.etudiant}" />
-			        </f:facet>
+					</f:facet>
 
 					<p:column rendered="#{login.isAdmin()}">
 						<f:facet name="header">
@@ -169,7 +170,7 @@
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					
+
 					<p:column style="width:40px">
 
 						<p:commandButton update=":form:display"
@@ -213,10 +214,10 @@
 					<f:param name="id" value="#{etudiantFormationBean.etudiant.id}" />
 					<h:outputText value="Ajouter une formation" />
 				</h:outputLink>
-			</h:form>			
-			
+			</h:form>
+
 		</ui:fragment>
-		
+
 	</ui:define>
 
 </ui:composition>

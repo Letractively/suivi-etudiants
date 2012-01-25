@@ -8,25 +8,26 @@
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="title">Modification</ui:define>
-	     <ui:define name="content">
-	     <ui:fragment rendered="#{login.isAdmin()}"> 
-			    <h1>Modification</h1>
-			    <h:form>
-			    	<h:outputLabel for="libelle" value="Libellé : " />
-					<h:inputText id="libelle" required="true" label="libelle" 
+	<ui:define name="title">Modification</ui:define>
+	<ui:define name="content">
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h1>Modification</h1>
+			<h:form>
+				<h:outputLabel for="libelle" value="Libellé : " />
+				<h:inputText id="libelle" required="true" label="libelle"
 					value="#{formationBean.editFormation.libelle}" />
-					<br />
-					<h:outputLabel for="libelleCourt" value="Libellé Court : " />
-					<h:inputText id="libelleCourt" required="true" label="libelleCourt" 
+				<br />
+				<h:outputLabel for="libelleCourt" value="Libellé Court : " />
+				<h:inputText id="libelleCourt" required="true" label="libelleCourt"
 					value="#{formationBean.editFormation.libelleCourt}" />
-					<br />
-					
-					<h:commandButton value="Modifier" action="#{formationBean.modifier()}" />
-					
-			    </h:form>
-		</ui:fragment>    
-    </ui:define> 
+				<br />
+
+				<h:commandButton value="Modifier"
+					action="#{formationBean.modifier()}" />
+
+			</h:form>
+		</ui:fragment>
+	</ui:define>
 
 </ui:composition>
 </html>

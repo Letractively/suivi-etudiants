@@ -9,55 +9,64 @@
 
 <ui:composition template="layout/template.xhtml">
 
-    <ui:define name="title">Gestion des absences</ui:define>
+	<ui:define name="title">Gestion des absences</ui:define>
 
-    <ui:define name="content">
-    
-      <ui:fragment rendered="#{login.isAdmin()}"> 
-		    <h1>Ajouter une formation pour 
-		    	<h:outputText value="#{etudiantFormationBean.etudiant}" />
-		    </h1>
-		    <h:form>
-		    	<h:inputHidden id="etudiantCaché" value="#{etudiantFormationBean.etudiant.id}" />
-		    	
-		  		<h:outputLabel for="etablissement" value="Etablissement : " />
-				<h:selectOneMenu value="#{etudiantFormationBean.etablissementItemSelect}">
+	<ui:define name="content">
+
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h1>
+				Ajouter une formation pour
+				<h:outputText value="#{etudiantFormationBean.etudiant}" />
+			</h1>
+			<h:form>
+				<h:inputHidden id="etudiantCaché"
+					value="#{etudiantFormationBean.etudiant.id}" />
+
+				<h:outputLabel for="etablissement" value="Etablissement : " />
+				<h:selectOneMenu
+					value="#{etudiantFormationBean.etablissementItemSelect}">
 					<f:selectItems value="#{etudiantFormationBean.etablissementsItems}" />
 				</h:selectOneMenu>
-				<br/>
+				<br />
 				<h:outputLabel for="formation" value="Formation : " />
-				<h:selectOneMenu value="#{etudiantFormationBean.formationItemSelect}">
+				<h:selectOneMenu
+					value="#{etudiantFormationBean.formationItemSelect}">
 					<f:selectItems value="#{etudiantFormationBean.formationsItems}" />
 				</h:selectOneMenu>
-				<br/>
+				<br />
 				<h:outputLabel for="dateDebut" value="Date Debut : " />
-				<p:calendar id="dateDebut" value="#{etudiantFormationBean.etudiantFormationId.datedebut}" navigator="true"
-					locale="fr" pattern="yyyy-MM-dd" >
+				<p:calendar id="dateDebut"
+					value="#{etudiantFormationBean.etudiantFormationId.datedebut}"
+					navigator="true" locale="fr" pattern="yyyy-MM-dd">
 					<f:convertDateTime pattern="yyyy-mm-dd" />
 				</p:calendar>
-				
+
 				<br />
 				<h:outputLabel for="dateFin" value="Date Fin : " />
-				
-				<p:calendar id="dateFin" value="#{etudiantFormationBean.etudiantFormation.datefin}" navigator="true"
-					locale="fr" pattern="yyyy-MM-dd" >
+
+				<p:calendar id="dateFin"
+					value="#{etudiantFormationBean.etudiantFormation.datefin}"
+					navigator="true" locale="fr" pattern="yyyy-MM-dd">
 					<f:convertDateTime pattern="yyyy-mm-dd" />
 				</p:calendar>
-				
+
 				<br />
 				<h:outputLabel for="description" value="Description : " />
-				<h:inputText id="description" required="true" label="description" value="#{etudiantFormationBean.etudiantFormation.description}"/>
+				<h:inputText id="description" required="true" label="description"
+					value="#{etudiantFormationBean.etudiantFormation.description}" />
 				<br />
 				<h:outputLabel for="resultat" value="Resultat : " />
-				<h:inputText id="resultat" required="true" label="resultat" value="#{etudiantFormationBean.etudiantFormation.resultat}"/>
+				<h:inputText id="resultat" required="true" label="resultat"
+					value="#{etudiantFormationBean.etudiantFormation.resultat}" />
 				<br />
-				
-				<h:commandButton value="Ajouter" action="#{etudiantFormationBean.ajout()}" />
+
+				<h:commandButton value="Ajouter"
+					action="#{etudiantFormationBean.ajout()}" />
 			</h:form>
-	    </ui:fragment>
-	    
-    
-    </ui:define> 
+		</ui:fragment>
+
+
+	</ui:define>
 
 </ui:composition>
 </html>
