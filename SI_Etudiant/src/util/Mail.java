@@ -13,8 +13,8 @@ public class Mail {
 
 	// Variables concernant celui qui envoie le mail ou serveur de messagerie
 	private static final String SERVEUR_DE_MESSAGERIE = "smtp.gmail.com"; // Le smtp, ex : smtp.gmail.com
-	private static final String COMPTE_UTILISATEUR = "Lightawk@gmail.com"; // @mail
-	private static final String MOT_DE_PASSE = "jdrmfp799"; // MDP
+	private static final String COMPTE_UTILISATEUR = ""; // @mail
+	private static final String MOT_DE_PASSE = ""; // MDP
 
 	/*
 	 * Envoie un mail à l'adresse mail passee en parametre
