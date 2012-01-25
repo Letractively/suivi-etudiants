@@ -19,7 +19,7 @@ import ejb.UtilisateurEJB;
 import entity.Utilisateur;
 import util.MD5Password;
 
-@ManagedBean(name="login")
+@ManagedBean(name = "login")
 @SessionScoped
 public class Login {
 
@@ -63,17 +63,23 @@ public class Login {
 		if (!results.isEmpty()) {
 			try {
 				if (MD5Password.testPassword(password, results.get(0)
-						.getMotDePasse()))
+						.getMotDePasse())) {
 					utilisateur = results.get(0);
-				else
+					msg = new FacesMessage(
+							FacesMessage.SEVERITY_INFO,
+							"Bienvenue "
+									+ username
+									+ ", pour actualiser le menu veuillez cliquer sur 'Accueil'",
+							"connexion de " + username);
+				} else {
 					msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Erreur Login", "Authentification invalide");
-				dest = null;
+					dest = null;
+				}
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenue "
-					+ username + ", pour actualiser le menu veuillez cliquer sur 'Accueil'", "connexion de " + username);
+
 		} else {
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreur Login",
 					"Authentification invalide");
