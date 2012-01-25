@@ -12,27 +12,51 @@
 	<ui:define name="title">Gestion des absences</ui:define>
 
 	<ui:define name="contenu">
-		<h1>Inscrire un utilisateur</h1>
 		<h:form>
-			<h:outputLabel for="login" value="Login : " />
-			<h:inputText id="login" required="true" label="login"
-				value="#{utilisateurBean.utilisateur.login}" />
-			<br />
-			<h:outputLabel for="mdp" value="Mot de passe : " />
-			<h:inputText id="mdp" required="true" label="mdp"
-				value="#{utilisateurBean.utilisateur.motDePasse}" />
-			<br />
-			<h:outputLabel for="nomComplet" value="Nom complet : " />
-			<h:inputText id="nomComplet" required="true" label="nomComplet"
-				value="#{utilisateurBean.utilisateur.nomComplet}" />
-			<br />
-			<h:outputLabel for="niveau" value="Niveau : " />
-			<h:selectOneMenu value="#{utilisateurBean.niveauItemSelect}">
-				<f:selectItems value="#{utilisateurBean.niveauItems}" />
-			</h:selectOneMenu>
-			<br />
-			<h:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
-				action="#{utilisateurBean.ajout()}" />
+			<p:panel id="panneauUtilisateur"
+				header="Inscription d'un utilisateur">
+				<p:focus context="panneauUtilisateur" />
+				<p:messages />
+				<h:outputLabel for="login" value="Login : " />
+				<p:inputText id="login" required="true" label="login"
+					value="#{utilisateurBean.utilisateur.login}" />
+				<p:message for="login" />
+				<br />
+				<h:outputLabel for="mdp" value="Mot de passe : " />
+				<p:password id="mdp" required="true" label="mdp"
+					value="#{utilisateurBean.utilisateur.motDePasse}" />
+				<p:message for="mdp" />
+				<br />
+				<h:outputLabel for="nomComplet" value="Nom complet : " />
+				<p:inputText id="nomComplet" required="true" label="nomComplet"
+					value="#{utilisateurBean.utilisateur.nomComplet}" />
+				<p:message for="nomComplet" />
+				<br />
+				<h:outputLabel for="mail" value="Mail : " />
+				<p:inputText id="mail" required="true" label="mail"
+					value="#{utilisateurBean.utilisateur.mail}" />
+				<p:message for="mail" />
+				<br />
+				<h:outputLabel for="niveau" value="Niveau : " />
+				<h:selectOneMenu value="#{utilisateurBean.niveauItemSelect}">
+					<f:selectItems value="#{utilisateurBean.niveauItems}" />
+				</h:selectOneMenu>
+				<br />
+				<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+					update="panneauUtilisateur"
+					actionListener="#{utilisateurBean.ajout()}" />
+
+				<p:commandButton rendered="#{login.isAdmin()}"
+					value="Generer un mot de passe" update="ale"
+					onclick="mdpGenere.show()" />
+
+				<p:confirmDialog message="#{utilisateurBean.genererMDP()}"
+					header="Votre mot de passe généré" severity="info"
+					widgetVar="mdpGenere">
+					<p:commandButton value="Ok" oncomplete="mdpGenere.hide()" />
+				</p:confirmDialog>
+
+			</p:panel>
 		</h:form>
 	</ui:define>
 

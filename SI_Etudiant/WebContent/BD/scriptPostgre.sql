@@ -46,7 +46,7 @@ create table ETUDIANT (ETUDIANT_ID int not null, adresse varchar(70), adresseSui
 create table ETUDIANT_ENTREPRISE (datedebut date not null, ENTREPRISE_ID int not null, ETUDIANT_ID int not null, commentaire varchar(255), datefin date, description varchar(255), posteoccupe varchar(70), typecontrat varchar(70), primary key (datedebut, ENTREPRISE_ID, ETUDIANT_ID));
 create table ETUDIANT_FORMATION (ETUDIANT_ID int not null, FORMATION_ID int not null, datedebut date, datefin date, description varchar(255), resultat varchar(70), primary key (ETUDIANT_ID, FORMATION_ID, datedebut));
 create table FORMATION (FORMATION_ID int not null, libelle varchar(70), libelleCourt varchar(70), etablissement_ETABLISSEMENT_ID int, primary key (FORMATION_ID));
-create table UTILISATEUR (id int not null, login varchar(70), motDePasse varchar(70), niveau varchar(70), nomComplet varchar(70), primary key (id));
+create table UTILISATEUR (id int not null, login varchar(70), motDePasse varchar(70), niveau varchar(70), nomComplet varchar(70), mail varchar(70) primary key (id));
 
 -- Creation des contraintes
 alter table ETUDIANT_ENTREPRISE add constraint FK_ETUDIANT_ENTREPRISE_ETUDIANT foreign key (ETUDIANT_ID) references ETUDIANT;

@@ -7,12 +7,16 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.inject.Any;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import util.MD5Password;
+import util.Mail;
+import util.MotDePasseAleatoire;
 import ejb.UtilisateurEJB;
 import entity.Utilisateur;
 
@@ -31,6 +35,8 @@ public class UtilisateurBean {
 
 	private List<SelectItem> niveauItems = new ArrayList<SelectItem>();
 	private String niveauItemSelect;
+
+	private MotDePasseAleatoire mdpAle;
 
 	@PostConstruct
 	public void init() {
@@ -55,6 +61,16 @@ public class UtilisateurBean {
 	}
 
 	public String ajout() {
+		// Message d'ajout
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage("Utilisateur ajouté"));
+
+		/*
+		 *  Envoi du mail -- Ok
+		 *  Le faire avant de crypter le mot de passe sinon l'utilisateur va recevoir
+		 *  le hash MD5 et pas son vrai mot de passe !
+		 */
+		Mail.autoMail(utilisateur.getMail(), utilisateur.getMotDePasse());
 
 		String mdpMD5 = MD5Password.getEncodedPassword(utilisateur
 				.getMotDePasse());
@@ -66,9 +82,18 @@ public class UtilisateurBean {
 
 		return "listeUser";
 	}
-	
+
 	public void modifier() {
-		
+
+	}
+
+	public String genererMDP() {
+		mdpAle = new MotDePasseAleatoire();
+		return mdpAle.genererMotDePasse();
+	}
+
+	public void envoyerMail() {
+
 	}
 
 	// getters and setters
