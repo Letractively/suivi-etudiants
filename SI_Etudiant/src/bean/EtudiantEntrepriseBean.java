@@ -98,8 +98,6 @@ public class EtudiantEntrepriseBean
 		//pour recuper l'id de l'etudiant, j'ai mis un champ caché dans le formulaire jsf pour faire le traitement ici, dans la fonction
 
 		Long idEtudiant=etudiantEnt.getId();
-		System.out.println(contratItemSelect);
-		
 		
 		//j'instancie ma clé primaire
 		etudiantEntrepriseId = new EtudiantEntrepriseId(etudiantEntrepriseId.getDatedebut(),idEtudiant,entrepriseItemSelect);

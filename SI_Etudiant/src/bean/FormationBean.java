@@ -27,7 +27,6 @@ import entity.Formation;
 //named : propre � conversationScoped, ne surtout pas utiliser managedBean 
 @Named(value = "formationBean")  
 @ConversationScoped 
-@ViewScoped
 public class FormationBean  implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -57,7 +56,11 @@ public class FormationBean  implements Serializable{
 	@PostConstruct
 	public void init() 
 	{  
-		conversation.begin();
+		if (conversation.isTransient()) 
+		{
+			conversation.begin();
+		
+		}
 
 		/*
 		 *  On recupere l'id passe en parametre depuis l'autre page
@@ -68,11 +71,9 @@ public class FormationBean  implements Serializable{
 			try
 			{
 				Long id = Long.parseLong(this.getPassedParameter());
-				// Je remplis ma liste d'etudiantEntreprises grace a ma requete
+				
 				formations = formationEJB.findFormationsByEtablissementId(id);
 				
-			
-
 				//Je recupere l'etudiant
 				etablissement = etablissementEJB.findEtablissementById(id);
 					
@@ -84,7 +85,6 @@ public class FormationBean  implements Serializable{
 			}
 
 		}
-		//Je remplis la liste d'entreprise pour la page d'ajout etudiantEntreprise..
 		etablissements=etablissementEJB.findAllEtablissements();
 		
 		//appel de la fonction qui initailise la liste d'item entreprise
@@ -135,7 +135,7 @@ public class FormationBean  implements Serializable{
 	{
 		
 				
-		for (Formation uneFormation : formations )
+		for (Formation uneFormation : formations)
         {
 			
 			if (checked.get(uneFormation.getId())) 
@@ -143,14 +143,23 @@ public class FormationBean  implements Serializable{
 				formationEJB.removeFormation(uneFormation);
             }
         }
+		conversation.end();
 		
 		return "test";
 	}
 	
-	public String edit()
+	public void edit()
 	{
-		return "editFormation";
+		System.out.println("fregergerg");
+		
+		//Redirection.modifFormation();
 	}
+	
+	
+	
+	
+	
+	
 	
 	public String modifier() 
 	{

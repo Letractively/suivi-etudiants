@@ -29,7 +29,7 @@ public class UtilisateurEJB {
 				.setParameter("login", login).getResultList();
 		return results;
 	}
-
+ 
 	public void updateUtilisateur(Utilisateur utilisateur) {
 		em.merge(utilisateur);
 	}

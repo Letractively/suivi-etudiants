@@ -11,6 +11,7 @@ import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,7 +24,6 @@ import entity.Etudiant;
 //named : propre ï¿½ conversationScoped, ne surtout pas utiliser managedBean 
 @Named(value = "etablissementBean")  
 @ConversationScoped 
-@ViewScoped
 public class EtablissementBean implements Serializable
 {
 	
@@ -66,17 +66,24 @@ private static final long serialVersionUID = 1L;
 	private Etablissement editEtablissement;//on instancie pas, c'est l'etablissement que l'on rï¿½cupere ï¿½ partir du jsf 
 
 	private Etablissement selectedEtablissement;
-
+	
+	private List<SelectItem> typeEtablissementItems = new ArrayList<SelectItem>();	
+	private String typeEtablissementSelected;
 
 
 	@PostConstruct
 	public void init() 
 	{
-		if (conversation.isTransient()) {
-		conversation.begin();
+		if (conversation.isTransient()) 
+		{
+			conversation.begin();
 		}
-		try {
+		try 
+		{
 			etablissements=etablissementEJB.findAllEtablissements();
+			creerListeTypeEtablissement();
+					
+			
 		} catch (EJBException e) {
 
 			Redirection.erreurXhtml();
@@ -85,14 +92,12 @@ private static final long serialVersionUID = 1L;
 	
 	public String ajout() 
 	{
+		this.etablissement.setTypeEtab(typeEtablissementSelected);
+		
 		this.etablissementEJB.createEtablissement(etablissement);  
 		
 		 conversation.end(); 
 		
-		/*si on est en session, actualisation du la liste d'entreprises et de entreprise
-		entreprises = entrepriseEJB.findAllEntreprises();
-		entreprise =new Entreprise();*/
-		  
 		return "listeEtablissement";
 	}
 	
@@ -111,6 +116,8 @@ private static final long serialVersionUID = 1L;
 	
 	public String modifier() 
 	{
+		this.editEtablissement.setTypeEtab(typeEtablissementSelected);
+		
 		etablissementEJB.updateEtablissement(editEtablissement);
 		
 		conversation.end();  
@@ -120,12 +127,26 @@ private static final long serialVersionUID = 1L;
 		  
 		return "listeEtablissement";
 	}
+	
+	public List<SelectItem> creerListeTypeEtablissement()
+	{
+	
+		typeEtablissementItems.add(new SelectItem("Lycee","Lycee"));
+		typeEtablissementItems.add(new SelectItem("IUT","IUT"));
+		typeEtablissementItems.add(new SelectItem("Faculté","Faculté"));
+		
+		
+		return typeEtablissementItems;
+	}
 	  
 	public String edit()
 	{
 		return "editEtablissement";
 	}
 
+	
+	
+	
 
 	public Etablissement getEtablissement() {
 		return etablissement;
@@ -170,4 +191,21 @@ private static final long serialVersionUID = 1L;
 	public void setSelectedEtablissement(Etablissement selectedEtablissement) {
 		this.selectedEtablissement = selectedEtablissement;
 	}
+
+	public List<SelectItem> getTypeEtablissementItems() {
+		return typeEtablissementItems;
+	}
+
+	public void setTypeEtablissementItems(List<SelectItem> typeEtablissementItems) {
+		this.typeEtablissementItems = typeEtablissementItems;
+	}
+
+	public String getTypeEtablissementSelected() {
+		return typeEtablissementSelected;
+	}
+
+	public void setTypeEtablissementSelected(String typeEtablissementSelected) {
+		this.typeEtablissementSelected = typeEtablissementSelected;
+	}
+	
 }

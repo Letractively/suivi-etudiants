@@ -10,7 +10,7 @@
 
 	<ui:define name="title">Suivi des etudiants</ui:define>
 
-	<ui:define name="content">
+	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isAdmin()}">
 
 			<h1>Inscription</h1>
@@ -20,8 +20,9 @@
 					value="#{etablissementBean.etablissement.nom}" />
 				<br />
 				<h:outputLabel for="typee" value="Type Etablissement : " />
-				<h:inputText id="typee" required="true" label="typee"
-					value="#{etablissementBean.etablissement.typeEtab}" />
+				<h:selectOneMenu value="#{etablissementBean.typeEtablissementSelected}">
+					<f:selectItems value="#{etablissementBean.typeEtablissementItems}" />
+				</h:selectOneMenu>	
 				<br />
 				<h:outputLabel for="adresse" value="Adresse : " />
 				<h:inputText id="adresse" required="true" label="adresse"
@@ -43,10 +44,12 @@
 					value="#{etablissementBean.etablissement.adresse.pays}" />
 				<br />
 				<h:outputLabel for="mail" value="Mail : " />
-				<h:inputText id="mail" required="true" label="mail"
+
+				<h:inputText id="mail" label="mail"
 					value="#{etablissementBean.etablissement.contact.mail}" />
 				<br />
 				<h:outputLabel for="mailAutre" value="Mail Autre : " />
+		
 				<h:inputText id="mailAutre" required="true" label="mailAutre"
 					value="#{etablissementBean.etablissement.contact.mailAutre}" />
 				<br />

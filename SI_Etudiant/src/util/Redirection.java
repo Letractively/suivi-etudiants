@@ -46,11 +46,24 @@ public class Redirection
 			e.printStackTrace();
 		}
 	 }
+	 
 	 public static void listeFormations(long idEtablissement)
 	 {
 		 try
 		 {
 			 FacesContext.getCurrentInstance().getExternalContext().redirect("/"+domain+"/listeFormations.faces?id="+idEtablissement);
+		 }
+		 catch(IOException e)
+		 {
+			 e.printStackTrace();
+		 }
+	 }
+	 //redirection sur modifformation car il y a un pb dans le facesconfig (passage de parametre)
+	 public static void modifFormation()
+	 {
+		 try
+		 {
+			 FacesContext.getCurrentInstance().getExternalContext().redirect("/"+domain+"/modifFormation.faces");
 		 }
 		 catch(IOException e)
 		 {

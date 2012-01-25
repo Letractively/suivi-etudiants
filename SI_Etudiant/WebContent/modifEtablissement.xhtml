@@ -9,7 +9,7 @@
 <ui:composition template="layout/template.xhtml">
 
 	<ui:define name="title">Modification</ui:define>
-	<ui:define name="content">
+	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isAdmin()}">
 			<h1>Modification</h1>
 			<h:form>
@@ -55,7 +55,6 @@
 				<h:inputText id="telAutre" label="telAutre"
 					value="#{etablissementBean.editEtablissement.contact.telAutre}" />
 				<br />
-
 				<h:commandButton value="Modifier"
 					action="#{etablissementBean.modifier()}" />
 

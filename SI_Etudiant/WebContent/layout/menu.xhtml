@@ -2,83 +2,83 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
 <body>
-	<ul>
-		<ui:fragment rendered="#{!login.loggedIn}">
+        <ul>
+                <ui:fragment rendered="#{!login.loggedIn}">
 
 
-			<p:menu type="sliding" style="width:234px; height: 150px;">
-				<p:menuitem value="Accueil" url="site.faces" />
-				<p:menuitem value="Connexion" url="login.faces" />
-			</p:menu>
+                        <p:menu type="sliding" style="width:234px; height: 150px;">
+                                <p:menuitem value="Accueil" url="site.faces" />
+                                <p:menuitem value="Connexion" url="login.faces" />
+                        </p:menu>
 
-		</ui:fragment>
+                </ui:fragment>
 
-		<ui:fragment rendered="#{login.loggedIn}">
+                <ui:fragment rendered="#{login.loggedIn}">
 
-			<ui:fragment rendered="#{login.isAdmin()}">
+                        <ui:fragment rendered="#{login.isAdmin()}">
 
-				<h:form>
+                                <h:form>
 
-					<p:growl id="messages" />
-
-
-					<p:menu type="sliding" style="width:234px; height: 155px;">
+                                        <p:growl id="messages" />
 
 
-						<p:menuitem value="Accueil" url="site.faces" />
+                                        <p:menu type="sliding" style="width:234px; height: 155px;">
 
 
-						<p:submenu label="Etudiants">
-							<p:menuitem value="Liste Etudiants" url="listeEtudiants.faces" />
-							<p:menuitem value="Ajouter Etudiant" url="ajoutEtudiant.faces" />
-						</p:submenu>
-
-						<p:submenu label="Entreprises">
-							<p:menuitem value="Liste Entreprises"
-								url="listeEntreprises.faces" />
-							<p:menuitem value="Ajouter Entreprise"
-								url="ajoutEntreprise.faces" />
-						</p:submenu>
-
-						<p:submenu label="Utilisateurs">
-							<p:menuitem value="Liste Utilisateurs" url="listeUsers.faces" />
-							<p:menuitem value="Ajouter Utilisateur" url="ajoutUser.faces" />
-						</p:submenu>
-
-						<p:submenu label="Etablissements">
-							<p:menuitem value="Liste Etablissements" url="#" />
-							<p:menuitem value="Ajouter Etablissement" url="#" />
-						</p:submenu>
-
-					</p:menu>
-				</h:form>
-
-			</ui:fragment>
-
-			<ui:fragment rendered="#{!login.isAdmin()}">
-
-				<h:form>
+                                                <p:menuitem value="Accueil" url="site.faces" />
 
 
-					<p:menu type="sliding" style="width:234px; height: 150px;">
+                                                <p:submenu label="Etudiants">
+                                                        <p:menuitem value="Liste Etudiants" url="listeEtudiants.faces" />
+                                                        <p:menuitem value="Ajouter Etudiant" url="ajoutEtudiant.faces" />
+                                                </p:submenu>
 
-						<p:menuitem value="Accueil" url="site.faces" />
+                                                <p:submenu label="Entreprises">
+                                                        <p:menuitem value="Liste Entreprises"
+                                                                url="listeEntreprises.faces" />
+                                                        <p:menuitem value="Ajouter Entreprise"
+                                                                url="ajoutEntreprise.faces" />
+                                                </p:submenu>
 
-						<p:submenu label="Etudiants">
-							<p:menuitem value="Liste" url="listeEtudiants.faces" />
-						</p:submenu>
+                                                <p:submenu label="Utilisateurs">
+                                                        <p:menuitem value="Liste Utilisateurs" url="listeUsers.faces" />
+                                                        <p:menuitem value="Ajouter Utilisateur" url="ajoutUser.faces" />
+                                                </p:submenu>
 
-					</p:menu>
-				</h:form>
+                                                <p:submenu label="Etablissements">
+                                                        <p:menuitem value="Liste Etablissements" url="listeEtablissements.faces" />
+                                                        <p:menuitem value="Ajouter Etablissement" url="ajoutEtablissement.faces" />
+                                                </p:submenu>
 
-			</ui:fragment>
+                                        </p:menu>
+                                </h:form>
 
-		</ui:fragment>
-	</ul>
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{!login.isAdmin()}">
+
+                                <h:form>
+
+
+                                        <p:menu type="sliding" style="width:234px; height: 150px;">
+
+                                                <p:menuitem value="Accueil" url="site.faces" />
+
+                                                <p:submenu label="Etudiants">
+                                                        <p:menuitem value="Liste" url="listeEtudiants.faces" />
+                                                </p:submenu>
+
+                                        </p:menu>
+                                </h:form>
+
+                        </ui:fragment>
+
+                </ui:fragment>
+        </ul>
 </body>
 </html>
