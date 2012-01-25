@@ -10,7 +10,7 @@
 
 	<ui:define name="title">Suivi des etudiants</ui:define>
 
-	<ui:define name="content">
+	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:form id="formEtu">
 				<p:dataTable id="tabEtu" var="et" value="#{etudiantBean.etudiants}"

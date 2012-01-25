@@ -4,20 +4,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
 	<ui:define name="title">Suivi des Etudiants</ui:define>
 
-	<ui:define name="content">
+	<ui:define name="contenu">
 
-		<h1>Accueil</h1>
+		<p:panel header="Accueil" >
 
-		<p>Cette application permet de suivre la scolarité de chacun des
-			etudiants de notre iut.</p>
-
+			<p>Cette application permet de suivre la scolarité de chacun des
+				etudiants de notre iut à travers leur parcours professionnel, les
+				formations qu'ils ont pu suivre et les differents etablissements qu'ils ont
+				fréquenté.</p>
+				
+		</p:panel>
+		
 	</ui:define>
+	
 </ui:composition>
 
 </html>

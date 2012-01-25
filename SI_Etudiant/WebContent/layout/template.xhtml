@@ -9,39 +9,42 @@
 	<link rel="stylesheet" type="text/css" href="layout/CSS/style.css" />
 	<title><ui:insert name="title">Suivi des étudiants</ui:insert></title>
 </h:head>
+
 <h:body>
 
-	<div id="topheader">
-		<h1>Suivi des étudiants</h1>
-	</div>
-	<div id="bandeau">
-		<ui:fragment rendered="#{login.isLoggedIn()}">
-			<h:outputText value="#{login.username}" />
+	<div id="enveloppe">
+
+		<div id="logo">
+			<h1>
+				GESTION <span>ETUDIANTS</span>
+			</h1>
+			<ui:fragment rendered="#{login.isLoggedIn()}">
+				<h:outputText value="#{login.username}" />
 					[Connecté]
-				<h:form>
-				<h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
-			</h:form>
-			<a href="modifUser.faces">Gestion du compte</a>
-		</ui:fragment>
-	</div>
-	<div id="corps">
-
-		<div class="gauche">
-			<div id="onglets">
-				<ui:include src="/layout/menu.xhtml">
-				</ui:include>
+					<h:form>
+					<h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
+				</h:form>
+				<a href="modifUser.faces">Gestion du compte</a>
+			</ui:fragment>
+		</div>
+		
+		<div id="entete">
+			<div id="menu">
+				<ui:include src="/layout/menu.xhtml" />
 			</div>
 		</div>
-
-		<div class="milieu">
-			<div id="erreur">
-				<h:messages id="messages" styleClass="errors" globalOnly="true" />
-			</div>
-			<ui:insert name="content">Default content</ui:insert>
+		
+		<div id="corps">
+				<ui:insert name="contenu"></ui:insert>
 		</div>
-		<div class="droite"></div>
-		<div class="piedpage"></div>
-
+		
 	</div>
+	
+	<div id="piedpage">
+		<div id="contenupiedpage">
+			<p>Gestion des etudiants &copy; All rights reserved | Valid XHTML | Powered by Alex, Romain et Gerardo |<a href="#">Put</a> | <a href="#">Any</a> | <a href="#">Links </a>| <a href="#">Here </a></p>
+		</div>
+	</div>
+	
 </h:body>
 </html>

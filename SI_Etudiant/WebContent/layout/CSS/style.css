@@ -1,163 +1,99 @@
 body {
-	margin: 0;
-	padding-top: 0px;
-	padding-right: 0;
-	padding-bottom: 0;
-	padding-left: 0;
-	background-attachment: scroll;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #FFFFFF;
+	background-image: url(images/bg.jpg);
 	background-repeat: repeat-x;
-	background-position: top;
-	background-color: #F7FCF8;
 }
 
-#topheader {
-	width: 1002px;
-	height: 146px;
-	margin-top: 0;
-	margin-right: auto;
-	margin-bottom: 0;
-	margin-left: auto;
-	font-family: Tahoma;
-	font-size: 12px;
-	font-style: normal;
-	line-height: normal;
-	font-weight: bold;
-	font-variant: normal;
-	text-transform: none;
-	text-decoration: none;
-	padding-top: 5px;
-	float: none;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-color: #C4C4C4;
-}
-
-#topheader h1 {
-	font-size: 55px;
-	text-align: center;
-}
-
-div,form,label,input,textarea,img,span {
-	margin: 0;
-	padding: 0;
-}
-
-#bandeau {
-	width: 992px;
-	height: 50px;
+#enveloppe {
+	width: 794px;
 	margin-right: auto;
 	margin-left: auto;
-	font: bold 13px Batang, arial, serif;
-	color: #F4F9FD;
-	line-height: normal;
-	font-weight: bold;
-	font-variant: normal;
-	text-transform: none;
-	text-decoration: none;
-	padding: 5px;
-	float: none;
-	background-color: #424548;
-	margin-top: 3px;
 }
 
-#bandeau a {
-	color: #F4F9FD;
-	text-decoration: underline;
+#enveloppe #logo {
+	height: 65px;
 }
 
-#bandeau a:hover {
-	background-color: #DCDCDC;
-	color: #303030;
-	text-decoration: none;
-}
-
-#corps {
-	width: 1002px;
-	height: 820px;
-	margin-top: 3px;
-	margin-right: auto;
-	margin-left: auto;
-	font-family: Tahoma;
-	font-size: 12px;
-	font-style: normal;
-	line-height: normal;
-	font-weight: bold;
-	font-variant: normal;
-	text-transform: none;
-	text-decoration: none;
-	float: none;
-	padding-top: 0px;
-	padding-right: 0px;
+#enveloppe #logo h1 {
+	font-size: 35px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	display: block;
+	padding-top: 20px;
 	padding-bottom: 0px;
-	padding-left: 0px;
 }
 
-.gauche {
-	margin: 0px;
-	float: left;
-	height: 1020px;
-	width: 213px;
-	padding-top: 5px;
-	padding-right: 0PX;
+#enveloppe #entete #menu {
+	margin-left: 540px;
+}
+#enveloppe #entete #menu ul {
+	padding-top: 0px;
+	padding-right: 5px;
 	padding-bottom: 5px;
-	margin-right: 3px;
-	background-color: #424548;
+	padding-left: 10px;
 }
 
-#onglets {
-	font: bold 13px Batang, arial, serif;
-	margin-left: -30px;
-	margin-top : -10px;
-}
-
-.milieu {
-	margin: 0px;
-	float: left;
-	height: 1020px;
-	width: 775px;
-	padding: 5px;
-	background-color: #C4C4C4;
-}
-
-.piedpage {
-	width: 100%;
-	margin-top: 0;
-	margin-right: auto;
-	margin-bottom: 0;
-	margin-left: auto;
-	font-family: "Trebuchet MS";
-	font-size: 11px;
-	font-style: normal;
-	line-height: normal;
+#enveloppe #entete #menu a {
+	font-size: 12px;
 	font-weight: bold;
-	font-variant: normal;
-	text-transform: none;
-	color: #c5a873;
-	text-decoration: none;
-	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#enveloppe #logo span {
+	color: #999900;
+}
+
+#enveloppe #entete {
+	background-image: url(images/header.jpg);
+	background-repeat: no-repeat;
+	height: 168px;
+}
+
+#enveloppe #corps {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#enveloppe #corps #contenu {
 	float: left;
-	height: 123px;
-	background-image: url(images/fotter.jpg);
+	width: 525px;
+}
+
+#enveloppe #corps p {
+	color: #666666;
+	margin-bottom: 20px;
+	font-size: 110%; 
+	line-height: 21px; 
+	text-align: justify;
+}
+
+#corps h1, #corps h2, #corps h3, #corps h4, #corps h5 {
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	display: block;
+	padding-left: 5px;
+	margin-bottom: 15px;
+	font-weight: normal;
+}
+
+#piedpage {
+	background-color: #FFFFFF;
+	background-image: url(images/footerbg.gif);
 	background-repeat: repeat-x;
-	background-position: top;
-	background-attachment: scroll;
+	background-position: left bottom;
+	height: 140px;
 }
 
-.tab {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.tab th,.tab td {
-	border: 1px solid black;
-	padding: 5px;
-	height: 50px;
-}
-
-label {
-	float: left;
-	width: 150px;
-	text-align: right;
+#piedpage #contenupiedpage {
+	width: 794px;
+	margin-top: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 35px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
 }
 
 input[type="text"],input[type="password"],select {
@@ -169,25 +105,4 @@ input[type="text"],input[type="password"],select {
 	margin-top: 4px;
 	display: block;
 	margin-bottom: 5px;
-}
-
-label {
-	float: none;
-	text-align: inherit;
-	width: auto;
-}
-
-ul,li {
-	list-style: none;
-}
-
-.piedpage {
-	background-color: #424548;
-	margin-top: 3px;
-}
-
-.errors {
-	background: url("../CSS/images/cross.png") 10px center no-repeat;
-	padding: 0 0 0 30px;
-	color: #FF5B5B;
 }
