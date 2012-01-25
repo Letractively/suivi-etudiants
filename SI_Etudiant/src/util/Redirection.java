@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javax.faces.context.FacesContext;
 
-/*Cette classe à pour but de rediger l'utilisateur en cas d'erreur de l'application.
- * Cette classe est une alternative à face-config.xml car passege de parametre impossible est impossible
+/*Cette classe ï¿½ pour but de rediger l'utilisateur en cas d'erreur de l'application.
+ * Cette classe est une alternative ï¿½ face-config.xml car passege de parametre impossible est impossible
 
  */
 	
@@ -46,4 +46,16 @@ public class Redirection
 			e.printStackTrace();
 		}
 	 }
+	 public static void listeFormations(long idEtablissement)
+	 {
+		 try
+		 {
+			 FacesContext.getCurrentInstance().getExternalContext().redirect("/"+domain+"/listeFormations.faces?id="+idEtablissement);
+		 }
+		 catch(IOException e)
+		 {
+			 e.printStackTrace();
+		 }
+	 }
+	 
 }

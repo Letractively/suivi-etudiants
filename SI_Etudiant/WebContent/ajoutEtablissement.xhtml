@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Suivi des etudiants</ui:define>
+
+    <ui:define name="content">
+      <ui:fragment rendered="#{login.isAdmin()}"> 
+	    	    
+		    <h1>Inscription</h1>
+		    <h:form>
+		    	<h:outputLabel for="nom" value="Nom : " />
+				<h:inputText id="nom" required="true" label="nom" value="#{etablissementBean.etablissement.nom}" />
+				<br />
+				<h:outputLabel for="typee" value="Type Etablissement : " />
+				<h:inputText id="typee" required="true" label="typee" value="#{etablissementBean.etablissement.typeEtab}" />
+				<br />
+				<h:outputLabel for="adresse" value="Adresse : " />
+				<h:inputText id="adresse" required="true" label="adresse" value="#{etablissementBean.etablissement.adresse.adresse}" />
+				<br />
+				<h:outputLabel for="adressesuite" value="Adresse Suite : " />
+				<h:inputText id="adressesuite" label="adressesuite" value="#{etablissementBean.etablissement.adresse.adresseSuite}" />
+				<br />
+				<h:outputLabel for="cp" value="Code Postal : " />
+				<h:inputText id="cp" label="cp" value="#{etablissementBean.etablissement.adresse.codePostal}"/>
+				<h:outputLabel for="ville" value="Ville : " />
+				<h:inputText id="ville" label="ville" value="#{etablissementBean.etablissement.adresse.ville}"/>
+				<br />
+				<h:outputLabel for="pays" value="Pays : " />
+				<h:inputText id="pays" label="pays" value="#{etablissementBean.etablissement.adresse.pays}"/>
+				<br />
+				<h:outputLabel for="mail" value="Mail : " />
+				<h:inputText id="mail" required="true" label="mail" value="#{etablissementBean.etablissement.contact.mail}"/>
+				<br />
+				<h:outputLabel for="mailAutre" value="Mail Autre : " />
+				<h:inputText id="mailAutre" required="true" label="mailAutre" value="#{etablissementBean.etablissement.contact.mailAutre}"/>
+				<br />
+				<h:outputLabel for="tel" value="Tel : " />
+				<h:inputText id="tel" label="tel" required="true" value="#{etablissementBean.etablissement.contact.tel}"/>
+				<br />
+				<h:outputLabel for="telAutre" value="Tel Autre : " />
+				<h:inputText id="telAutre" label="telAutre" value="#{etablissementBean.etablissement.contact.telAutre}"/>
+				<br />
+				<h:commandButton value="Ajouter" action="#{etablissementBean.ajout()}" />
+				
+		    </h:form>
+		</ui:fragment>    
+    </ui:define> 
+
+</ui:composition>
+</html>

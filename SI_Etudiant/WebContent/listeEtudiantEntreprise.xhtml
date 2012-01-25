@@ -114,8 +114,109 @@
 					<f:param name="id" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
 					<h:outputText value="Ajouter une activité" />
 				</h:outputLink>
-			</h:form>
+			</h:form>			
+			
 		</ui:fragment>
+		
+		<br/>
+		<br/>
+		<br/>
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+
+			<h:form>
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:dataTable value="#{etudiantFormationBean.etudiantFormations}"
+					var="ef">
+
+					<f:facet name="header">  
+			            Liste des formations de
+			             <h:outputText value="#{etudiantFormationBean.etudiant}" />
+			        </f:facet>
+
+					<p:column rendered="#{login.isAdmin()}">
+						<f:facet name="header">
+						</f:facet>
+						<h:selectBooleanCheckbox title="supprimer"
+							value="#{etudiantFormationBean.checked[ef.id]}" />
+					</p:column>
+
+					<p:column sortBy="#{ef.etablissement.nom}">
+						<f:facet name="header">
+							<h:outputText value="Etablissement" />
+						</f:facet>
+						<h:outputText value="#{ef.formation.etablissement.nom}" />
+					</p:column>
+					<p:column sortBy="#{ef.formation.libelle}">
+						<f:facet name="header">
+							<h:outputText value="Libellé" />
+						</f:facet>
+						<h:outputText value="#{ef.formation.libelle}" />
+					</p:column>
+					<p:column sortBy="#{ef.id.datedebut}">
+						<f:facet name="header">
+							<h:outputText value="Date début" />
+						</f:facet>
+						<h:outputText value="#{ef.id.datedebut}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column sortBy="#{ef.datefin}">
+						<f:facet name="header">
+							<h:outputText value="Date Fin" />
+						</f:facet>
+						<h:outputText value="#{ef.datefin}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column style="width:40px">
+
+						<p:commandButton update=":form:display"
+							oncomplete="etudiantFormationDialog.show()" icon="ui-icon-search"
+							title="plus">
+							<f:setPropertyActionListener value="#{ent}"
+								target="#{etudiantFormationBean.selectedEtudiantFormation}" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Etudiant" widgetVar="etudiantDialog"
+					resizable="false" id="etudiantId" showEffect="fade"
+					hideEffect="explode" modal="true">
+					<h:panelGrid id="display" columns="2" cellpadding="0"
+						style="margin:0 auto;">
+						<h:outputText
+							value="#{etudiantFormationBean.selectedEtudiantFormation.libelle}"
+							style="font-weight:bold" />
+					</h:panelGrid>
+				</p:dialog>
+
+				<p:confirmDialog
+					message="Etes vous sur de vouloir supprimer les formations selectionnées ? "
+					header="Attention" severity="alert" widgetVar="confirmation">
+					<p:commandButton value="Oui" update="messages"
+						oncomplete="confirmation.hide()"
+						actionListener="#{etudiantFormationBean.supprimer()}" />
+					<p:commandButton value="Non" onclick="confirmation.hide()"
+						type="button" />
+				</p:confirmDialog>
+
+				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
+					onclick="confirmation.show()" type="button" />
+
+				<br />
+				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
+					value="ajoutEtudiantFormation.faces">
+					<f:param name="id" value="#{etudiantFormationBean.etudiant.id}" />
+					<h:outputText value="Ajouter une formation" />
+				</h:outputLink>
+			</h:form>			
+			
+		</ui:fragment>
+		
 	</ui:define>
 
 </ui:composition>

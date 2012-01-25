@@ -21,7 +21,7 @@ public class Etablissement implements Serializable {
   private static final long serialVersionUID = 1L;
   private Long id;
   private String nom;
-  private String type;
+  private String typeEtab;
   private Adresse adresse=new Adresse();
   private Contact contact=new Contact();
 
@@ -45,14 +45,7 @@ public class Etablissement implements Serializable {
     this.nom = nom;
   }
 
-  @Column(length = 70)
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
+ 
 
   @Embedded
   public Adresse getAdresse() {
@@ -74,6 +67,15 @@ public class Etablissement implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
+  }
+  
+  @Column(length = 70)
+  public String getTypeEtab() {
+	return typeEtab;
+  }
+
+  public void setTypeEtab(String typeEtab) {
+	this.typeEtab = typeEtab;
   }
 
 }

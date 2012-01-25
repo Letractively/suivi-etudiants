@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+
+    <ui:define name="title">Suivi des Etudiants- Ajout Formation</ui:define>
+
+    <ui:define name="content">
+     <ui:fragment rendered="#{login.isAdmin()}"> 
+    <h1>Inscrire un formation à <h:outputText value="#{formationBean.etablissement.nom}" /></h1>
+    <h:form>
+    			    	
+    	<h:inputHidden id="etablissementCaché" value="#{formationBean.etablissement.id}" />
+	 	<h:outputLabel for="libelle" value="Libellé : " />
+		<h:inputText id="libelle" required="true" label="login" value="#{formationBean.formation.libelle}" />
+		<br />
+		<h:outputLabel for="libelleCourt" value="Libellé Court : " />
+		<h:inputText id="libelleCourt" required="true" label="libelleCourt" value="#{formationBean.formation.libelleCourt}" />
+		<br />
+		<h:commandButton value="Ajouter" action="#{formationBean.ajout()}" />
+    </h:form>
+    </ui:fragment>      	
+    </ui:define> 
+
+</ui:composition>
+</html>

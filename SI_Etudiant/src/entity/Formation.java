@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -68,6 +69,7 @@ public class Formation implements Serializable {
   }
 
   @ManyToOne
+  @JoinColumn(name = "ETABLISSEMENT_ETABLISSEMENT_ID", insertable = true, updatable = false)
   public Etablissement getEtablissement() {
     return etablissement;
   }
