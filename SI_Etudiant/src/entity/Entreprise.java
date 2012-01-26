@@ -1,7 +1,9 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 /**
  * Entity implementation class for Entity: Entreprise
@@ -113,9 +116,19 @@ public class Entreprise implements Serializable {
   
   
   public int nbEtudiant()
-  {
-	  return lesEtudiants.size();
-			  
+  {	  
+	  List<Etudiant> lEtu= new ArrayList<Etudiant>();
+	  
+	  for (EtudiantEntreprise etu: lesEtudiants)
+	  {
+		  lEtu.add(etu.getEtudiant());
+	  }
+	  Set set = new HashSet() ;
+	  
+	  set.addAll(lEtu) ;
+	  ArrayList distinctList = new ArrayList(set) ;
+
+	  return distinctList.size();  
   }
 
 }
