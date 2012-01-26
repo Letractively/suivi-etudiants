@@ -16,9 +16,8 @@
                                 <p:dataTable id="tabForma" var="forma"
                                         value="#{formationBean.formations}" paginator="true" rows="10">
                                         <f:facet name="header">  
-                                    Liste des formations à <h:outputText
-                                                        value="#{formationBean.etablissement.nom}" />
-                                        </f:facet>
+                                    Liste des formations à <h:outputText value="#{formationBean.etablissement.nom}" />
+                                </f:facet>
                                         <p:column rendered="#{login.isAdmin()}">
                                                 <f:facet name="header">
                                                 </f:facet>
@@ -32,7 +31,7 @@
                                                 </f:facet>
                                                 <h:outputText value="#{forma.libelle}" />
                                         </p:column>
-                                        <p:column sortBy="#{forma.libelleCour}">
+                                        <p:column sortBy="#{forma.libelleCourt}">
                                                 <f:facet name="header">
                                                         <h:outputText value="Libellé Court" />
                                                 </f:facet>
@@ -42,9 +41,9 @@
                                         <p:column rendered="#{login.isAdmin()}">
                                                 <h:commandButton value="Modifier/Consulter"
                                                         action="#{formationBean.edit()}">
-                                                        <f:param name="id" value="#{forma.id}" />
                                                         <f:setPropertyActionListener value="#{forma}"
                                                                 target="#{formationBean.editFormation}" />
+                                                           <f:param name="id" value="#{forma.etablissement.id}"/>               
                                                 </h:commandButton>
                                         </p:column>
 
@@ -57,7 +56,9 @@
                                         widgetVar="confirmationSupression">
                                         <p:commandButton value="Oui"
                                                 oncomplete="confirmationSupression.hide()"
-                                                actionListener="#{formationBean.supprimer()}" />
+                                                actionListener="#{formationBean.supprimer()}" >
+                                                <f:param name="id" value="#{formationBean.etablissement.id}" />
+                                       </p:commandButton>
                                         <p:commandButton value="Non"
                                                 onclick="confirmationSupression.hide()" type="button" />
                                 </p:confirmDialog>

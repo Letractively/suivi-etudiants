@@ -97,6 +97,7 @@
                 <navigation-case>
                         <from-outcome>editEtablissement</from-outcome>
                         <to-view-id>/modifEtablissement.xhtml</to-view-id>
+                          <redirect />
                 </navigation-case>
         </navigation-rule>
         <navigation-rule>
@@ -111,6 +112,7 @@
                 <navigation-case>
                         <from-outcome>editFormation</from-outcome>
                         <to-view-id>/modifFormation.xhtml</to-view-id>
+                         <redirect />
                 </navigation-case>
         </navigation-rule>
         <navigation-rule>

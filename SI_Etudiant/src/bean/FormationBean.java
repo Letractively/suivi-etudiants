@@ -24,173 +24,125 @@ import ejb.FormationEJB;
 import entity.Etablissement;
 import entity.Formation;
 
-//named : propre ï¿½ conversationScoped, ne surtout pas utiliser managedBean 
-@Named(value = "formationBean")  
-@ConversationScoped 
-public class FormationBean  implements Serializable{
-	
+@Named(value = "formationBean")
+@ConversationScoped
+public class FormationBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	@Inject  
-	Conversation conversation;  
-	
+
+	@Inject
+	Conversation conversation;
+
 	@EJB
 	private FormationEJB formationEJB;
-	
+
 	@EJB
 	private EtablissementEJB etablissementEJB;
-	
+
 	private Etablissement etablissement = new Etablissement();
-	
-	private Formation formation = new  Formation();
-	
+	private Formation formation = new Formation();
+
 	private List<Formation> formations = new ArrayList<Formation>();
 	private List<Etablissement> etablissements = new ArrayList<Etablissement>();
+
 	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
+
 	private Formation editFormation;
-	
+
 	private List<SelectItem> etablissementsItems = new ArrayList<SelectItem>();
-	//c'est cette variable qui aura l'id de lentreprise selectionnï¿½ via la liste dï¿½roulante 
+
 	private Long etablissementItemSelect;
-	
+
+
 	@PostConstruct
-	public void init() 
-	{  
-		if (conversation.isTransient()) 
-		{
+	public void init() {
+		if (conversation.isTransient()) {
 			conversation.begin();
-		
 		}
 
-		/*
-		 *  On recupere l'id passe en parametre depuis l'autre page
-		 *  Attention : Il faut parser en type Long comme dans l'entite
-		 */		
-		if(this.getPassedParameter()!=null) 
-		{
-			try
-			{
+		if (this.getPassedParameter() != null) {
+			
 				Long id = Long.parseLong(this.getPassedParameter());
-				
+
 				formations = formationEJB.findFormationsByEtablissementId(id);
-				
-				//Je recupere l'etudiant
 				etablissement = etablissementEJB.findEtablissementById(id);
-					
-				
-			}
-			catch(NumberFormatException e)
-			{
-				Redirection.erreurXhtml();
-			}
-
+			
 		}
-		etablissements=etablissementEJB.findAllEtablissements();
-		
-		//appel de la fonction qui initailise la liste d'item entreprise
-		creerListeItem();	
-		
-		
-		
+
+		// appel de la fonction qui initailise la liste d'item etablissement
+		// pour la liste déroulante de ajoutFormation
+		creerListeItem();
+
 	}
-	
-	public String ajout() 
-	{
-		//pour recuper l'id de l'etudiant, j'ai mis un champ cachï¿½ dans le formulaire jsf pour faire le traitement ici, dans la fonction
 
-
-		Long idEtablissement=etablissement.getId();
-		this.formation.setEtablissement(etablissementEJB.findEtablissementById(idEtablissement));		
-		this.formationEJB.createFormation(formation);  
-		Redirection.listeFormations(idEtablissement);
-
-		/*si on est en session, actualisation du la liste d'entreprises et de entreprise
-		entreprises = entrepriseEJB.findAllEntreprises();
-		entreprise =new Entreprise();*/
-		  
-		return "listeEtablissement";
-		
-	}
-	
-	public List<SelectItem> creerListeItem()
-	{		
-		for(Etablissement eta : etablissements)
-		{
-			//identifiant,valeur
-			etablissementsItems.add(new SelectItem(eta.getId(),eta.getNom()));
+	public List<SelectItem> creerListeItem() {
+		for (Etablissement eta : etablissements) {
+			etablissementsItems.add(new SelectItem(eta.getId(), eta.getNom()));
 		}
-		
-		return etablissementsItems;			
+
+		return etablissementsItems;
 	}
-	
-	public String getPassedParameter() 
-	{
+
+	public void ajout() {
+		this.formation.setEtablissement(etablissementEJB
+				.findEtablissementById(etablissement.getId()));
+		this.formationEJB.createFormation(formation);
+
+		conversation.end();
+
+		Redirection.listeFormations(etablissement.getId());
+	}
+
+	public void supprimer() {
+
+		for (Formation uneFormation : formations) {
+			if (checked.get(uneFormation.getId())) {
+				formationEJB.removeFormation(uneFormation);
+			}
+		}
+		conversation.end();
+
+		Redirection.listeFormations(etablissement.getId());
+	}
+
+	public void modifier() {
+		formationEJB.updateFormation(editFormation);
+
+		conversation.end();
+
+		Redirection.listeFormations(editFormation.getEtablissement().getId());
+	}
+
+	public String edit() {
+
+		return "editFormation";
+	}
+
+	public String getPassedParameter() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String parametreId = (String) facesContext.getExternalContext().
-		getRequestParameterMap().get("id");
+		String parametreId = (String) facesContext.getExternalContext()
+				.getRequestParameterMap().get("id");
 		return parametreId;
 	}
-	
-	public String supprimer()
-	{
-		
-				
-		for (Formation uneFormation : formations)
-        {
-			
-			if (checked.get(uneFormation.getId())) 
-            {
-				formationEJB.removeFormation(uneFormation);
-            }
-        }
-		conversation.end();
-		
-		return "test";
-	}
-	
-	public void edit()
-	{
-		System.out.println("fregergerg");
-		
-		//Redirection.modifFormation();
-	}
-	
-	
-	
-	
-	
-	
-	
-	public String modifier() 
-	{
-		formationEJB.updateFormation(editFormation);
-		
-		conversation.end();  
-		
-		/*si on est en session, actualisation de la liste d'entreprise
-		entreprises=entrepriseEJB.findAllEntreprises();*/
-		  
-		return "listeEtablissement";
-	}
+
+	// getters and setters
 
 	public List<Etablissement> getEtablissements() {
 		return etablissements;
 	}
 
-
 	public void setEtablissements(List<Etablissement> etablissements) {
 		this.etablissements = etablissements;
 	}
-	
+
 	public List<Formation> getFormations() {
 		return formations;
 	}
 
-
 	public void setFormations(List<Formation> formations) {
 		this.formations = formations;
 	}
-	
+
 	public Etablissement getEtablissement() {
 		return etablissement;
 	}
@@ -214,26 +166,29 @@ public class FormationBean  implements Serializable{
 	public void setEtablissementItemSelect(Long etablissementItemSelect) {
 		this.etablissementItemSelect = etablissementItemSelect;
 	}
+
 	public List<SelectItem> getEtablissementsItems() {
 		return etablissementsItems;
 	}
+
 	public void setEtablissementsItems(List<SelectItem> etablissementsItems) {
 		this.etablissementsItems = etablissementsItems;
 	}
-	
+
 	public HashMap<Long, Boolean> getChecked() {
 		return checked;
 	}
+
 	public void setChecked(HashMap<Long, Boolean> checked) {
 		this.checked = checked;
 	}
-	
+
 	public Formation getEditFormation() {
 		return editFormation;
-	}	  
+	}
+
 	public void setEditFormation(Formation editFormation) {
 		this.editFormation = editFormation;
 	}
-
 
 }

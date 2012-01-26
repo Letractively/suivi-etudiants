@@ -58,7 +58,7 @@ public class FormationEJB {
 
 	@SuppressWarnings("unchecked")
 	public List<Formation> findFormationsByEtablissementId(Long id) {
-		// TODO Auto-generated method stub
+
 		List<Formation> results = em.createQuery("select forma from Formation forma where forma.etablissement.id=:id").setParameter("id", id).getResultList();
 		return results;
 	}

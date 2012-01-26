@@ -58,17 +58,6 @@ public class Redirection
 			 e.printStackTrace();
 		 }
 	 }
-	 //redirection sur modifformation car il y a un pb dans le facesconfig (passage de parametre)
-	 public static void modifFormation()
-	 {
-		 try
-		 {
-			 FacesContext.getCurrentInstance().getExternalContext().redirect("/"+domain+"/modifFormation.faces");
-		 }
-		 catch(IOException e)
-		 {
-			 e.printStackTrace();
-		 }
-	 }
+	
 	 
 }
