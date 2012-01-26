@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Length;
 import ejb.UtilisateurEJB;
 import entity.Utilisateur;
 import util.MD5Password;
+import util.Redirection;
 
 @ManagedBean(name = "login")
 @SessionScoped
@@ -65,12 +66,11 @@ public class Login {
 				if (MD5Password.testPassword(password, results.get(0)
 						.getMotDePasse())) {
 					utilisateur = results.get(0);
-					msg = new FacesMessage(
-							FacesMessage.SEVERITY_INFO,
-							"Bienvenue "
-									+ username
-									+ ", pour actualiser le menu veuillez cliquer sur 'Accueil'",
-							"connexion de " + username);
+					/*
+					 *  Si la tentative de connexion fonctionne, on redirige l'utilisateur
+					 *  pour actualiser le menu
+					 */
+					Redirection.log();
 				} else {
 					msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Erreur Login", "Authentification invalide");

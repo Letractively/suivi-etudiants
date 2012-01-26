@@ -92,7 +92,7 @@
 					message="Etes vous sur de vouloir supprimer les etablissements selectionnés ? "
 					header="Confirmation de suppression" severity="alert"
 					widgetVar="confirmationSupression">
-					<p:commandButton value="Oui"
+					<p:commandButton value="Oui" update="tabEtab"
 						oncomplete="confirmationSupression.hide()"
 						actionListener="#{etablissementBean.supprimer()}" />
 					<p:commandButton value="Non"

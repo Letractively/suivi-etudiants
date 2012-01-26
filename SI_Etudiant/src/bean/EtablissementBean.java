@@ -10,7 +10,9 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,7 +42,7 @@ public class EtablissementBean implements Serializable {
 	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
 	private Etablissement editEtablissement;// on instancie pas, c'est
 											// l'etablissement que l'on
-											// r�cupere � partir du jsf
+											// recupere a partir du jsf
 
 	private Etablissement selectedEtablissement;
 
@@ -63,12 +65,13 @@ public class EtablissementBean implements Serializable {
 	}
 
 	public String ajout() {
+
 		this.etablissement.setTypeEtab(typeEtablissementSelected);
 
 		this.etablissementEJB.createEtablissement(etablissement);
 
 		conversation.end();
-
+		Redirection.listeEtablissements();
 		return "listeEtablissement";
 	}
 

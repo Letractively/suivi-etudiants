@@ -14,11 +14,11 @@
 	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 
-			<h:form>
+			<h:form id="formEtuEnt">
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable value="#{etudiantEntrepriseBean.etudiantEntreprises}"
-					var="ent">
+				<p:dataTable id="tabEtuEnt"
+					value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent">
 
 					<f:facet name="header">  
 			            Liste des activités professionnelle de
@@ -70,7 +70,7 @@
 
 					<p:column style="width:40px">
 
-						<p:commandButton update=":form:display"
+						<p:commandButton update=":formEtuEnt:display"
 							oncomplete="etudiantDialog.show()" icon="ui-icon-search"
 							title="plus">
 							<f:setPropertyActionListener value="#{ent}"
@@ -78,10 +78,6 @@
 						</p:commandButton>
 
 					</p:column>
-
-
-
-
 
 				</p:dataTable>
 
@@ -98,18 +94,20 @@
 
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer les activités selectionnées ? "
-					header="Attention" severity="alert" widgetVar="confirmation">
-					<p:commandButton value="Oui" update="messages"
-						oncomplete="confirmation.hide()"
+					header="Attention" severity="alert" widgetVar="confirmationSupActivite">
+					<p:commandButton value="Oui" update="tabEtuEnt"
+						oncomplete="confirmationSupActivite.hide()"
 						actionListener="#{etudiantEntrepriseBean.supprimer()}" />
-					<p:commandButton value="Non" onclick="confirmation.hide()"
+					<p:commandButton value="Non" onclick="confirmationSupActivite.hide()"
 						type="button" />
 				</p:confirmDialog>
-
+				
+				<br/>
 				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
-					onclick="confirmation.show()" type="button" />
+					onclick="confirmationSupActivite.show()" type="button" />
 
 				<br />
+				<br/>
 				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
 					value="ajoutEtudiantEntreprise.faces">
 					<f:param name="id" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
@@ -127,7 +125,8 @@
 			<h:form>
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable value="#{etudiantFormationBean.etudiantFormations}"
+				<p:dataTable id="tabEtuForm" 
+					value="#{etudiantFormationBean.etudiantFormations}"
 					var="ef">
 
 					<f:facet name="header">  
@@ -197,18 +196,20 @@
 
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer les formations selectionnées ? "
-					header="Attention" severity="alert" widgetVar="confirmation">
-					<p:commandButton value="Oui" update="messages"
-						oncomplete="confirmation.hide()"
+					header="Attention" severity="alert" widgetVar="confirmationSupFormation">
+					<p:commandButton value="Oui" update="tabEtuForm"
+						oncomplete="confirmationSupFormation.hide()"
 						actionListener="#{etudiantFormationBean.supprimer()}" />
-					<p:commandButton value="Non" onclick="confirmation.hide()"
+					<p:commandButton value="Non" onclick="confirmationSupFormation.hide()"
 						type="button" />
 				</p:confirmDialog>
 
+				<br/>
 				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
-					onclick="confirmation.show()" type="button" />
+					onclick="confirmationSupFormation.show()" type="button" />
 
 				<br />
+				<br/>
 				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
 					value="ajoutEtudiantFormation.faces">
 					<f:param name="id" value="#{etudiantFormationBean.etudiant.id}" />

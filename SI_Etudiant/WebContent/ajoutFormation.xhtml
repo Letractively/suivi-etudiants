@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -17,18 +18,25 @@
 				<h:outputText value="#{formationBean.etablissement.nom}" />
 			</h1>
 			<h:form>
-
-				<h:inputHidden id="etablissementCaché"
-					value="#{formationBean.etablissement.id}" />
-				<h:outputLabel for="libelle" value="Libellé : " />
-				<h:inputText id="libelle" required="true" label="login"
-					value="#{formationBean.formation.libelle}" />
-				<br />
-				<h:outputLabel for="libelleCourt" value="Libellé Court : " />
-				<h:inputText id="libelleCourt" required="true" label="libelleCourt"
-					value="#{formationBean.formation.libelleCourt}" />
-				<br />
-				<h:commandButton value="Ajouter" action="#{formationBean.ajout()}" />
+				<p:panel id="panneauFormation" header="Inscrire une formation">
+					<p:focus context="panneauFormation" />
+					<p:messages />
+					<h:inputHidden id="etablissementCaché"
+						value="#{formationBean.etablissement.id}" />
+					<h:outputLabel for="libelle" value="Libellé : " />
+					<p:inputText id="libelle" required="true" label="login"
+						value="#{formationBean.formation.libelle}" />
+					<p:message for="libelle" />
+					<br />
+					<h:outputLabel for="libelleCourt" value="Libellé Court : " />
+					<p:inputText id="libelleCourt" required="true" label="libelleCourt"
+						value="#{formationBean.formation.libelleCourt}" />
+					<p:message for="libelleCourt" />
+					<br />
+					<p:commandButton value="Ajouter" rendered="#{login.isAdmin()}"
+						update="panneauFormation"
+						actionListener="#{formationBean.ajout()}" />
+				</p:panel>
 			</h:form>
 		</ui:fragment>
 	</ui:define>

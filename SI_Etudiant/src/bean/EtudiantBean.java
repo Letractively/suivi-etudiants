@@ -107,7 +107,7 @@ public class EtudiantBean implements Serializable {
 		 * l'étudiant etudiants = etudiantEJB.findAllEtudiants(); etudiant =new
 		 * Etudiant();
 		 */
-
+		Redirection.listeEtudiants();
 		return "listEtudiant";
 	}
 

@@ -87,14 +87,14 @@
 					message="Etes vous sur de vouloir supprimer les étudiants selectionnés ? "
 					header="Confirmation de suppression" severity="alert"
 					widgetVar="confirmationSupression">
-					<p:commandButton value="Oui"
+					<p:commandButton value="Oui" update="tabEtu"
 						oncomplete="confirmationSupression.hide()"
 						actionListener="#{etudiantBean.supprimer()}" />
 					<p:commandButton value="Non"
 						onclick="confirmationSupression.hide()" type="button" />
 				</p:confirmDialog>
 				<br />
-
+			
 				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
 					onclick="confirmationSupression.show()" type="button" />
 

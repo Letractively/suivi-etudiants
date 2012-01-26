@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
@@ -13,57 +14,66 @@
 	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isAdmin()}">
 
-			<h1>Inscription</h1>
 			<h:form>
-				<h:outputLabel for="nom" value="Nom : " />
-				<h:inputText id="nom" required="true" label="nom"
-					value="#{etablissementBean.etablissement.nom}" />
-				<br />
-				<h:outputLabel for="typee" value="Type Etablissement : " />
-				<h:selectOneMenu value="#{etablissementBean.typeEtablissementSelected}">
-					<f:selectItems value="#{etablissementBean.typeEtablissementItems}" />
-				</h:selectOneMenu>	
-				<br />
-				<h:outputLabel for="adresse" value="Adresse : " />
-				<h:inputText id="adresse" required="true" label="adresse"
-					value="#{etablissementBean.etablissement.adresse.adresse}" />
-				<br />
-				<h:outputLabel for="adressesuite" value="Adresse Suite : " />
-				<h:inputText id="adressesuite" label="adressesuite"
-					value="#{etablissementBean.etablissement.adresse.adresseSuite}" />
-				<br />
-				<h:outputLabel for="cp" value="Code Postal : " />
-				<h:inputText id="cp" label="cp"
-					value="#{etablissementBean.etablissement.adresse.codePostal}" />
-				<h:outputLabel for="ville" value="Ville : " />
-				<h:inputText id="ville" label="ville"
-					value="#{etablissementBean.etablissement.adresse.ville}" />
-				<br />
-				<h:outputLabel for="pays" value="Pays : " />
-				<h:inputText id="pays" label="pays"
-					value="#{etablissementBean.etablissement.adresse.pays}" />
-				<br />
-				<h:outputLabel for="mail" value="Mail : " />
+				<p:panel id="panneauEtablissement"
+					header="Inscrire un etablissement">
+					<p:focus context="panneauEtablissement" />
+					<p:messages />
 
-				<h:inputText id="mail" label="mail"
-					value="#{etablissementBean.etablissement.contact.mail}" />
-				<br />
-				<h:outputLabel for="mailAutre" value="Mail Autre : " />
-		
-				<h:inputText id="mailAutre" label="mailAutre"
-					value="#{etablissementBean.etablissement.contact.mailAutre}" />
-				<br />
-				<h:outputLabel for="tel" value="Tel : " />
-				<h:inputText id="tel" label="tel" required="true"
-					value="#{etablissementBean.etablissement.contact.tel}" />
-				<br />
-				<h:outputLabel for="telAutre" value="Tel Autre : " />
-				<h:inputText id="telAutre" label="telAutre"
-					value="#{etablissementBean.etablissement.contact.telAutre}" />
-				<br />
-				<h:commandButton value="Ajouter"
-					action="#{etablissementBean.ajout()}" />
+					<h:outputLabel for="nom" value="Nom : " />
+					<p:inputText id="nom" required="true" label="nom"
+						value="#{etablissementBean.etablissement.nom}" />
+					<p:message for="nom" />
+					<br />
+					<h:outputLabel for="typee" value="Type Etablissement : " />
+					<h:selectOneMenu
+						value="#{etablissementBean.typeEtablissementSelected}">
+						<f:selectItems value="#{etablissementBean.typeEtablissementItems}" />
+					</h:selectOneMenu>
+					<br />
+					<h:outputLabel for="adresse" value="Adresse : " />
+					<p:inputText id="adresse" required="true" label="adresse"
+						value="#{etablissementBean.etablissement.adresse.adresse}" />
+					<p:message for="adresse" />
+					<br />
+					<h:outputLabel for="adressesuite" value="Adresse Suite : " />
+					<p:inputText id="adressesuite" label="adressesuite"
+						value="#{etablissementBean.etablissement.adresse.adresseSuite}" />
+					<br />
+					<h:outputLabel for="cp" value="Code Postal : " />
+					<p:inputText id="cp" label="cp"
+						value="#{etablissementBean.etablissement.adresse.codePostal}" />
+					<h:outputLabel for="ville" value="Ville : " />
+					<p:inputText id="ville" label="ville"
+						value="#{etablissementBean.etablissement.adresse.ville}" />
+					<br />
+					<h:outputLabel for="pays" value="Pays : " />
+					<p:inputText id="pays" label="pays"
+						value="#{etablissementBean.etablissement.adresse.pays}" />
+					<br />
+					<h:outputLabel for="mail" value="Mail : " />
 
+					<p:inputText id="mail" label="mail"
+						value="#{etablissementBean.etablissement.contact.mail}" />
+					<br />
+					<h:outputLabel for="mailAutre" value="Mail Autre : " />
+
+					<p:inputText id="mailAutre" label="mailAutre"
+						value="#{etablissementBean.etablissement.contact.mailAutre}" />
+					<br />
+					<h:outputLabel for="tel" value="Tel : " />
+					<p:inputText id="tel" label="tel"
+						value="#{etablissementBean.etablissement.contact.tel}" />
+					<br />
+					<h:outputLabel for="telAutre" value="Tel Autre : " />
+					<p:inputText id="telAutre" label="telAutre"
+						value="#{etablissementBean.etablissement.contact.telAutre}" />
+					<br />
+
+					<p:commandButton value="Ajouter" update="panneauEtablissement"
+						rendered="#{login.isAdmin()}"
+						actionListener="#{etablissementBean.ajout()}" />
+				</p:panel>
 			</h:form>
 		</ui:fragment>
 	</ui:define>

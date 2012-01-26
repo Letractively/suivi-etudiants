@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import util.Redirection;
+
 import ejb.EntrepriseEJB;
 import entity.Entreprise;
 
@@ -69,7 +71,6 @@ public class EntrepriseBean implements Serializable {
 	}
 
 	public String ajout() {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Entreprise ajoutée"));
 		this.entrepriseEJB.createEntreprise(entreprise);
 
 		conversation.end();
@@ -79,7 +80,7 @@ public class EntrepriseBean implements Serializable {
 		 * entreprise entreprises = entrepriseEJB.findAllEntreprises();
 		 * entreprise =new Entreprise();
 		 */
-
+		Redirection.listeEntreprises();
 		return "listeEntreprise";
 	}
 

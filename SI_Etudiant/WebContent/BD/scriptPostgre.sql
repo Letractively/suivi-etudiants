@@ -16,7 +16,7 @@
 -- databaseName : gestionEtu
 -- PortNumber : 5432
 
--- Schema public (par d�faut)
+-- Schema public (par defaut)
 
 -- Suppression des contraintes
 /*alter table ETUDIANT_ENTREPRISE drop constraint FK_ETUDIANT_ENTREPRISE_ETUDIANT;
@@ -33,6 +33,7 @@ drop table FORMATION;
 drop table ETABLISSEMENT;
 drop table ETUDIANT;
 drop table UTILISATEUR;
+DROP table SEQUENCE;
 
 CREATE TABLE SEQUENCE (SEQ_NAME VARCHAR(50), SEQ_COUNT DECIMAL(15));
 INSERT INTO SEQUENCE(SEQ_NAME, SEQ_COUNT) values ('SEQ_GEN', 0);
@@ -68,8 +69,8 @@ INSERT INTO ETUDIANT VALUES (1,'16 rue des lilas','','62300','France','Lens','to
 INSERT INTO ETUDIANT VALUES (2,'16 rue du chardon','','62000','France','Arras','toto@t.fr','','0608','0321','HANOCQ','Alexandre');
 INSERT INTO ETUDIANT VALUES (3,'16 boulevard jean-jaur�s','','62000','France','Arras','toto@t.fr','','0608','0321','MORIVAL','Romain');
 
-INSERT INTO ETABLISSEMENT VALUES (1,'1 rue de l''Universite','','62300','France','Lens','','','IUT Lens','IUT');
-INSERT INTO ETABLISSEMENT VALUES (2,'22 route du puits','','62000','France','Arras','','','Lycee Guy Mollet','Lycee');
+INSERT INTO ETABLISSEMENT VALUES (1,'1 rue de l''Universite','','62300','France','Lens','','','','','IUT Lens','IUT');
+INSERT INTO ETABLISSEMENT VALUES (2,'22 route du puits','','62000','France','Arras','','','','','Lycee Guy Mollet','Lycee');
 
 INSERT INTO FORMATION VALUES (1,'Gestion des Entreprises et Administrations','DUT GEA',1);
 INSERT INTO FORMATION VALUES (2,'Information de Gestion','BTS IG',2);
@@ -80,6 +81,6 @@ INSERT INTO ETUDIANT_FORMATION VALUES (1,2,'2007-09-01','2009-06-30','','Passabl
 INSERT INTO ETUDIANT_FORMATION VALUES (2,3,'2009-09-01','2011-06-30','','Tres bien');
 
 INSERT INTO ETUDIANT_ENTREPRISE VALUES ('2012-05-01',1,1,'Aucun','2012-06-01','Analyse les besoins du client et met en place le developpement','Analyste Programmeur','CDI');
-INSERT INTO ETUDIANT_ENTREPRISE VALUES ('2011-06-01',2,1,'Aucun','2012-08-01','Analyse les besoins du client et met en place le developpement','Ing�nieur Etudes et Developpement','INTERIM');
-INSERT INTO ETUDIANT_ENTREPRISE VALUES ('2011-06-01',2,2,'Aucun','2013-08-01','Met en place le reseau de l''entreprise','Ing�nieur Systemes et Reseaux','STAGE');
+INSERT INTO ETUDIANT_ENTREPRISE VALUES ('2011-06-01',2,1,'Aucun','2012-08-01','Analyse les besoins du client et met en place le developpement','Ingenieur Etudes et Developpement','INTERIM');
+INSERT INTO ETUDIANT_ENTREPRISE VALUES ('2011-06-01',2,2,'Aucun','2013-08-01','Met en place le reseau de l''entreprise','Ingenieur Systemes et Reseaux','STAGE');
 INSERT INTO ETUDIANT_ENTREPRISE VALUES ('2011-06-01',1,3,'Aucun','2014-08-01','Developpe des applications J2EE','Developpeur J2EE','STAGE');

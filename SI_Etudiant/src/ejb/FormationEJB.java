@@ -15,7 +15,7 @@ public class FormationEJB {
 	private EntityManager em;
 	
 	/*
-	 * Retourne toutes les entreprises
+	 * Retourne toutes les formations
 	 */
 	@SuppressWarnings("unchecked") 
 	public List<Formation> findAllFormations() {
@@ -25,7 +25,7 @@ public class FormationEJB {
 	
 
 	/*
-	 * Cree une entreprise
+	 * Cree une formation
 	 */
 	public Formation createFormation(Formation formation) {
 		em.persist(formation);
@@ -33,7 +33,7 @@ public class FormationEJB {
 	}
 	
 	/*
-	 * Supprime une entreprise
+	 * Supprime une formation
 	 */
 	public void removeFormation(Formation formation) {
 		
@@ -41,14 +41,14 @@ public class FormationEJB {
 	}
 	
 	/*
-	 * Met a jour une entreprise
+	 * Met a jour une formation
 	 */
 	 public void updateFormation(Formation formation) {
 		 em.merge(formation);	
 	 }
 	 
 	 /*
-	  * Cherche et retourne une entreprise par son identifiant
+	  * Cherche et retourne une formation par son identifiant
 	  */
 	 public Formation findFormationById(Long id) {
 		 Formation results = em.find(Formation.class, id);

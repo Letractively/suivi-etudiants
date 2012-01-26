@@ -1,89 +1,91 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="layout/template.xhtml">
 
-        <ui:define name="title">Suivi des etudiants</ui:define>
+	<ui:define name="title">Suivi des etudiants</ui:define>
 
-        <ui:define name="contenu">
-                <ui:fragment rendered="#{login.isLoggedIn()}">
-                        <h:form id="formForma">
-                                <p:dataTable id="tabForma" var="forma"
-                                        value="#{formationBean.formations}" paginator="true" rows="10">
-                                        <f:facet name="header">  
-                                    Liste des formations à <h:outputText value="#{formationBean.etablissement.nom}" />
-                                </f:facet>
-                                        <p:column rendered="#{login.isAdmin()}">
-                                                <f:facet name="header">
-                                                </f:facet>
-                                                <h:selectBooleanCheckbox title="supprimer"
-                                                        value="#{formationBean.checked[forma.id]}" />
-                                        </p:column>
-                                        <p:column sortBy="#{forma.libelle}">
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+			<h:form id="formForma">
+				<p:dataTable id="tabForma" var="forma"
+					value="#{formationBean.formations}" paginator="true" rows="10">
+					<f:facet name="header">  
+                                    Liste des formations à <h:outputText
+							value="#{formationBean.etablissement.nom}" />
+					</f:facet>
+					<p:column rendered="#{login.isAdmin()}">
+						<f:facet name="header">
+						</f:facet>
+						<h:selectBooleanCheckbox title="supprimer"
+							value="#{formationBean.checked[forma.id]}" />
+					</p:column>
+					<p:column sortBy="#{forma.libelle}">
 
-                                                <f:facet name="header">
-                                                        <h:outputText value="Libellé" />
-                                                </f:facet>
-                                                <h:outputText value="#{forma.libelle}" />
-                                        </p:column>
-                                        <p:column sortBy="#{forma.libelleCourt}">
-                                                <f:facet name="header">
-                                                        <h:outputText value="Libellé Court" />
-                                                </f:facet>
-                                                <h:outputText value="#{forma.libelleCourt}" />
-                                        </p:column>
+						<f:facet name="header">
+							<h:outputText value="Libellé" />
+						</f:facet>
+						<h:outputText value="#{forma.libelle}" />
+					</p:column>
+					<p:column sortBy="#{forma.libelleCourt}">
+						<f:facet name="header">
+							<h:outputText value="Libellé Court" />
+						</f:facet>
+						<h:outputText value="#{forma.libelleCourt}" />
+					</p:column>
 
-                                        <p:column rendered="#{login.isAdmin()}">
-                                                <h:commandButton value="Modifier/Consulter"
-                                                        action="#{formationBean.edit()}">
-                                                        <f:setPropertyActionListener value="#{forma}"
-                                                                target="#{formationBean.editFormation}" />
-                                                           <f:param name="id" value="#{forma.etablissement.id}"/>               
-                                                </h:commandButton>
-                                        </p:column>
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Modifier/Consulter"
+							action="#{formationBean.edit()}">
+							<f:setPropertyActionListener value="#{forma}"
+								target="#{formationBean.editFormation}" />
+							<f:param name="id" value="#{forma.etablissement.id}" />
+						</h:commandButton>
+					</p:column>
 
-                                </p:dataTable>
+				</p:dataTable>
 
 
-                                <p:confirmDialog
-                                        message="Etes vous sur de vouloir supprimer les formations selectionnés ? "
-                                        header="Confirmation de suppression" severity="alert"
-                                        widgetVar="confirmationSupression">
-                                        <p:commandButton value="Oui"
-                                                oncomplete="confirmationSupression.hide()"
-                                                actionListener="#{formationBean.supprimer()}" >
-                                                <f:param name="id" value="#{formationBean.etablissement.id}" />
-                                       </p:commandButton>
-                                        <p:commandButton value="Non"
-                                                onclick="confirmationSupression.hide()" type="button" />
-                                </p:confirmDialog>
-                                <br />
+				<p:confirmDialog
+					message="Etes vous sur de vouloir supprimer les formations selectionnés ? "
+					header="Confirmation de suppression" severity="alert"
+					widgetVar="confirmationSupression">
+					<p:commandButton value="Oui" update="tabForma"
+						oncomplete="confirmationSupression.hide()"
+						actionListener="#{formationBean.supprimer()}">
+						<f:param name="id" value="#{formationBean.etablissement.id}" />
+					</p:commandButton>
+					<p:commandButton value="Non"
+						onclick="confirmationSupression.hide()" type="button" />
+				</p:confirmDialog>
+				<br />
 
-                                <p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
-                                        onclick="confirmationSupression.show()" type="button" />
+				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
+					onclick="confirmationSupression.show()" type="button" />
 
-                                <p:confirmDialog message="Document PDF généré sur le bureau"
-                                        header="Information" severity="info" widgetVar="confirmationPDF">
-                                        <p:commandButton value="Ok" oncomplete="confirmationPDF.hide()"
-                                                actionListener="#{formationBean.creerListeFormationsPDF()}" />
-                                </p:confirmDialog>
+				<p:confirmDialog message="Document PDF généré sur le bureau"
+					header="Information" severity="info" widgetVar="confirmationPDF">
+					<p:commandButton value="Ok" oncomplete="confirmationPDF.hide()"
+						actionListener="#{formationBean.creerListeFormationsPDF()}" />
+				</p:confirmDialog>
 
-                                <p:commandButton rendered="#{login.isAdmin()}" value="Generer PDF"
-                                        onclick="confirmationPDF.show()" type="button" />
-                                <br />
-                                <h:outputLink id="lien1" value="ajoutFormation.faces">
-                                        <f:param name="id" value="#{formationBean.etablissement.id}" />
-                                        <h:outputText value="Ajouter Formation à l'etablissement" />
-                                </h:outputLink>
+				<p:commandButton rendered="#{login.isAdmin()}" value="Generer PDF"
+					onclick="confirmationPDF.show()" type="button" />
+				<br />
+				<br />
+				<h:outputLink id="lien1" value="ajoutFormation.faces">
+					<f:param name="id" value="#{formationBean.etablissement.id}" />
+					<h:outputText value="Ajouter Formation à l'etablissement" />
+				</h:outputLink>
 
-                        </h:form>
-                </ui:fragment>
-        </ui:define>
+			</h:form>
+		</ui:fragment>
+	</ui:define>
 
 </ui:composition>
-</html> 
+</html>
