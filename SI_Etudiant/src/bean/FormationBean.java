@@ -126,6 +126,18 @@ public class FormationBean implements Serializable {
 		return parametreId;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// getters and setters
 
 	public List<Etablissement> getEtablissements() {

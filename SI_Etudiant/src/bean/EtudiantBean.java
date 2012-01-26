@@ -10,10 +10,8 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,7 +24,6 @@ import entity.Etudiant;
 //named : propre à conversationScoped, ne surtout pas utiliser managedBean 
 @Named(value = "etudiantBean")
 @ConversationScoped
-@ViewScoped
 public class EtudiantBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -84,9 +81,23 @@ public class EtudiantBean implements Serializable {
 		if (conversation.isTransient()) {
 			conversation.begin();
 		}
-		try {
-			etudiants = etudiantEJB.findAllEtudiants();
-		} catch (EJBException e) {
+		try 
+		{
+			//si l'on récupére ent dans l'url, alors la liste d'étudiant affichée est la liste d'étudiant de lentreprise 
+			if (this.getPassedParameter()!= null)
+			{
+				Long ent = Long.parseLong(this.getPassedParameter());
+				
+				etudiants=etudiantEJB.findAllEtudiantsByEnt(ent);
+			}
+			else
+			{
+				etudiants = etudiantEJB.findAllEtudiants();
+			}
+			
+			
+		} 
+		catch (EJBException e) {
 
 			Redirection.erreurXhtml();
 		}
@@ -147,6 +158,15 @@ public class EtudiantBean implements Serializable {
 		// Appeler la procédure pour creer mon PDF d'etudiants
 		pdf.CreerListeEtudiantsPDF(etudiants, "listeEtudiants");
 	}
+	public String getPassedParameter() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String parametreId = (String) facesContext.getExternalContext()
+				.getRequestParameterMap().get("ent");
+		return parametreId;
+	}
+	
+	
+	
 
 	/*
 	 * Getters & Setters

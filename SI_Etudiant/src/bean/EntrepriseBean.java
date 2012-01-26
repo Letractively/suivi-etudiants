@@ -61,8 +61,9 @@ public class EntrepriseBean implements Serializable {
 
 	private List<Entreprise> entreprises = new ArrayList<Entreprise>();
 	private HashMap<Long, Boolean> checked = new HashMap<Long, Boolean>();
-	private Entreprise editEntreprise;// on instancie pas, c'est l'entreprise
-										// que l'on rï¿½cupere ï¿½ partir du jsf
+	private Entreprise editEntreprise;// on instancie pas, c'est l'entreprise que l'on récupere à partir du jsf
+	
+	private Entreprise selectedEntreprise;
 
 	@PostConstruct
 	public void init() {
@@ -148,5 +149,14 @@ public class EntrepriseBean implements Serializable {
 	public void setEntreprises(List<Entreprise> entreprises) {
 		this.entreprises = entreprises;
 	}
+
+	public Entreprise getSelectedEntreprise() {
+		return selectedEntreprise;
+	}
+
+	public void setSelectedEntreprise(Entreprise selectedEntreprise) {
+		this.selectedEntreprise = selectedEntreprise;
+	}
+	
 
 }

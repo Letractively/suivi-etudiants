@@ -110,5 +110,12 @@ public class Entreprise implements Serializable {
   public void setId(long id) {
     this.id = id;
   }
+  
+  
+  public int nbEtudiant()
+  {
+	  return lesEtudiants.size();
+			  
+  }
 
 }
