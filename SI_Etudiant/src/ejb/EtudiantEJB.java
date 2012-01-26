@@ -59,7 +59,7 @@ public class EtudiantEJB {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Etudiant> findAllEtudiantsByEnt(Long ent) throws EJBException {
-		List<Etudiant> results = em.createQuery("select e from Etudiant e, EtudiantEntreprise ent where e.id=ent.id.etudiantId and ent.id.entrepriseId=:ent").setParameter("ent", ent).getResultList();
+		List<Etudiant> results = em.createQuery("select DISTINCT e from Etudiant e, EtudiantEntreprise ent where e.id=ent.id.etudiantId and ent.id.entrepriseId=:ent").setParameter("ent", ent).getResultList();
 		return results;
 	}
 }
