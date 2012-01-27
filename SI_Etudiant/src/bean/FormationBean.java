@@ -10,8 +10,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
@@ -33,6 +31,9 @@ public class FormationBean implements Serializable {
 
 	@Inject
 	Conversation conversation;
+	
+	@Inject
+	EtablissementBean et;
 
 	@EJB
 	private FormationEJB formationEJB;
@@ -54,7 +55,6 @@ public class FormationBean implements Serializable {
 
 	private Long etablissementItemSelect;
 
-
 	@PostConstruct
 	public void init() {
 		if (conversation.isTransient()) {
@@ -62,12 +62,12 @@ public class FormationBean implements Serializable {
 		}
 
 		if (this.getPassedParameter() != null) {
-			
-				Long id = Long.parseLong(this.getPassedParameter());
 
-				formations = formationEJB.findFormationsByEtablissementId(id);
-				etablissement = etablissementEJB.findEtablissementById(id);
-			
+			Long id = Long.parseLong(this.getPassedParameter());
+
+			formations = formationEJB.findFormationsByEtablissementId(id);
+			etablissement = etablissementEJB.findEtablissementById(id);
+
 		}
 
 		// appel de la fonction qui initailise la liste d'item etablissement
@@ -87,9 +87,11 @@ public class FormationBean implements Serializable {
 	public void ajout() {
 		this.formation.setEtablissement(etablissementEJB
 				.findEtablissementById(etablissement.getId()));
+		
 		this.formationEJB.createFormation(formation);
 
 		conversation.end();
+		//et.getConversation().end();
 
 		Redirection.listeFormations(etablissement.getId());
 	}
@@ -99,10 +101,15 @@ public class FormationBean implements Serializable {
 		for (Formation uneFormation : formations) {
 			if (checked.get(uneFormation.getId())) {
 				formationEJB.removeFormation(uneFormation);
+				
 			}
 		}
+		//fin de la conversation de établissement pour mettre à jour
+		//
+		
 		conversation.end();
-
+		//et.getConversation().end();
+		
 		Redirection.listeFormations(etablissement.getId());
 	}
 
@@ -126,18 +133,6 @@ public class FormationBean implements Serializable {
 		return parametreId;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// getters and setters
 
 	public List<Etablissement> getEtablissements() {

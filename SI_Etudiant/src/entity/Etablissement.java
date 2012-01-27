@@ -98,5 +98,9 @@ public void setLesFormations(Set<Formation> lesFormations) {
   public void setTypeEtab(String typeEtab) {
 	this.typeEtab = typeEtab;
   }
+  public int nbFormations()
+  {
+	  return lesFormations.size();
+  }
 
 }

@@ -124,7 +124,6 @@ public class Entreprise implements Serializable {
 		  lEtu.add(etu.getEtudiant());
 	  }
 	  Set set = new HashSet() ;
-	  
 	  set.addAll(lEtu) ;
 	  ArrayList distinctList = new ArrayList(set) ;
 

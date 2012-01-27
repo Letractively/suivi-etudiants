@@ -7,20 +7,16 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.inject.Named;
-
 import ejb.EtablissementEJB;
 import ejb.EtudiantEJB;
 import ejb.EtudiantFormationEJB;
 import ejb.FormationEJB;
 import entity.Etablissement;
 import entity.Etudiant;
-import entity.EtudiantEntreprise;
 import entity.EtudiantFormation;
 import entity.EtudiantFormationId;
 import entity.Formation;
@@ -59,13 +55,13 @@ public class EtudiantFormationBean implements Serializable {
 	private HashMap<EtudiantFormationId, Boolean> checked = new HashMap<EtudiantFormationId, Boolean>();
 
 	private List<SelectItem> etablissementsItems = new ArrayList<SelectItem>();
-	// c'est cette variable qui aura l'id de lentreprise selectionnï¿½ via la
-	// liste dï¿½roulante
+	// c'est cette variable qui aura l'id de l'établissement selectionné via la
+	// liste déroulante
 	private Long etablissementItemSelect;
 
 	private List<SelectItem> formationsItems = new ArrayList<SelectItem>();
-	// c'est cette variable qui aura l'id de lentreprise selectionnï¿½ via la
-	// liste dï¿½roulante
+	// c'est cette variable qui aura l'id de la formation selectionné via la
+	// liste déroulante
 	private Long formationItemSelect;
 
 	private EtudiantFormation selectedEtudiantFormation;
@@ -106,12 +102,11 @@ public class EtudiantFormationBean implements Serializable {
 
 		// appel de la fonction qui initailise la liste d'item entreprise
 		creerListeItem();
-		creerListeItemFormation();
 
 	}
 
 	public String ajout() {
-		// pour recuper l'id de l'etudiant, j'ai mis un champ cachï¿½ dans le
+		// pour recuper l'id de l'etudiant, j'ai mis un champ caché dans le
 		// formulaire jsf pour faire le traitement ici, dans la fonction
 
 		Long idEtudiant = etudiant.getId();
@@ -130,6 +125,69 @@ public class EtudiantFormationBean implements Serializable {
 
 	}
 
+	public void supprimer() {
+		
+		Long idEtu=selectedEtudiantFormation.getEtudiant().getId();
+		etudiantFormationEJB.removeEtudiantFormation(selectedEtudiantFormation);
+		Redirection.listeEtudiantEntreprise(idEtu);
+		
+	}
+	
+	//procédure permettant de mettre à jour la liste de formation lorsque établissement selectionné
+	//j'aurais voulu manipuller directement un etablissement, mais dans la combo ça marche pas si on passe comme id un etablissement au lieu d'un entier
+	public List<SelectItem> doSelectedEtab()
+	{
+		System.out.println("Entré dans la procédure");
+		
+		Long idEtab=etablissementItemSelect;
+		
+		System.out.println("idEtab select : "+idEtab);
+		
+		if (etablissementItemSelect != null && !etablissementItemSelect.equals("")) 
+		{
+
+			System.out.println("idEtab select : "+idEtab);
+			
+			//code utilisé pour l'instant, j'aurais voulais éviter cela, en récupérant directement l'établissement au lieu du nombre
+			Etablissement et;
+			et=etablissementEJB.findEtablissementById(etablissementItemSelect);
+			et.getLesFormations();
+			
+			//on supprime les éléments de la liste formation
+			formationsItems.removeAll(formationsItems);
+			
+			
+			//conversion de la liste hashset en arrayliste formation
+			formations = new ArrayList<Formation>(et.getLesFormations());
+			System.out.println("Taille formations : "+formations.size());
+					
+		}
+		
+		 return creerListeItemFormation();
+	}
+	
+	
+	public List<SelectItem> creerListeItem() {
+		for (Etablissement eta : etablissements) {
+			// identifiant,valeur
+			etablissementsItems.add(new SelectItem(eta.getId(), eta.getNom()));
+			
+			
+		}
+
+		return etablissementsItems;
+	}
+
+	public List<SelectItem> creerListeItemFormation() {
+		
+		for (Formation forma : formations) {
+			formationsItems.add(new SelectItem(forma.getId(), forma
+					.getLibelle()));
+		}
+
+		return formationsItems;
+	}
+
 	public String getPassedParameter() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String parametreId = (String) facesContext.getExternalContext()
@@ -137,38 +195,11 @@ public class EtudiantFormationBean implements Serializable {
 		return parametreId;
 	}
 
-	public List<SelectItem> creerListeItem() {
-		for (Etablissement eta : etablissements) {
-			// identifiant,valeur
-			etablissementsItems.add(new SelectItem(eta.getId(), eta.getNom()));
-		}
-
-		return etablissementsItems;
-	}
-
-	public List<SelectItem> creerListeItemFormation() {
-		for (Formation forma : formations) 
-		{
-			formationsItems.add(new SelectItem(forma.getId(), forma
-					.getLibelle() + " " + forma.getLibelleCourt()));
-		}
-
-		return formationsItems;
-	}
-
-	public void supprimer() {
-
-		for (EtudiantFormation unEtudiantFormation : etudiantFormations) {
-			System.out.println("Test");
-
-			if (checked.get(unEtudiantFormation.getId())) {
-				System.out.println("Test");
-				// etudiantFormationEJB.removeEtudiantFormation(unEtudiantFormation);
-			}
-		}
-	}
 	
-	//getters and setters
+	
+	
+	
+	// getters and setters
 
 	public Etudiant getEtudiant() {
 		return etudiant;

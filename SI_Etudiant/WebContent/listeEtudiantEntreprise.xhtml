@@ -26,13 +26,6 @@
 							value="#{etudiantEntrepriseBean.etudiantEnt}" />
 					</f:facet>
 
-					<p:column rendered="#{login.isAdmin()}">
-						<f:facet name="header">
-						</f:facet>
-						<h:selectBooleanCheckbox title="supprimer"
-							value="#{etudiantEntrepriseBean.checked[ent.id]}" />
-					</p:column>
-
 					<p:column sortBy="#{ent.entreprise.nom}">
 						<f:facet name="header">
 							<h:outputText value="Entreprise" />
@@ -71,43 +64,37 @@
 					<p:column style="width:40px">
 
 						<p:commandButton update=":formEtuEnt:display"
-							oncomplete="etudiantDialog.show()" icon="ui-icon-search"
+							oncomplete="activiteDialog.show()" icon="ui-icon-search"
 							title="plus">
 							<f:setPropertyActionListener value="#{ent}"
 								target="#{etudiantEntrepriseBean.selectedEtudiantEntreprise}" />
 						</p:commandButton>
 
 					</p:column>
-
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Supprimer"
+							action="#{etudiantEntrepriseBean.supprimer()}">
+							<f:setPropertyActionListener value="#{ent}"
+								target="#{etudiantEntrepriseBean.selectedEtudiantEntreprise}" />
+						</h:commandButton>
+					</p:column>
 				</p:dataTable>
 
-				<p:dialog header="Etudiant" widgetVar="etudiantDialog"
-					resizable="false" id="etudiantId" showEffect="fade"
+				<p:dialog header="Description" widgetVar="activiteDialog"
+					resizable="false" id="activiteDialogId" showEffect="fade"
 					hideEffect="explode" modal="true">
 					<h:panelGrid id="display" columns="2" cellpadding="0"
 						style="margin:0 auto;">
 						<h:outputText
-							value="#{etudiantEntrepriseBean.selectedEtudiantEntreprise.typecontrat}"
+							value="#{etudiantEntrepriseBean.selectedEtudiantEntreprise.description}"
 							style="font-weight:bold" />
 					</h:panelGrid>
 				</p:dialog>
 
-				<p:confirmDialog
-					message="Etes vous sur de vouloir supprimer les activités selectionnées ? "
-					header="Attention" severity="alert" widgetVar="confirmationSupActivite">
-					<p:commandButton value="Oui" update="tabEtuEnt"
-						oncomplete="confirmationSupActivite.hide()"
-						actionListener="#{etudiantEntrepriseBean.supprimer()}" />
-					<p:commandButton value="Non" onclick="confirmationSupActivite.hide()"
-						type="button" />
-				</p:confirmDialog>
-				
-				<br/>
-				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
-					onclick="confirmationSupActivite.show()" type="button" />
+				<br />
 
 				<br />
-				<br/>
+				<br />
 				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
 					value="ajoutEtudiantEntreprise.faces">
 					<f:param name="id" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
@@ -115,31 +102,20 @@
 				</h:outputLink>
 			</h:form>
 
-		</ui:fragment>
+			<br />
+			<br />
+			<br />
 
-		<br />
-		<br />
-		<br />
-		<ui:fragment rendered="#{login.isLoggedIn()}">
-
-			<h:form>
+			<h:form id="formFormaEnt">
 				<p:growl id="msgs" showDetail="true" />
 
-				<p:dataTable id="tabEtuForm" 
-					value="#{etudiantFormationBean.etudiantFormations}"
-					var="ef">
+				<p:dataTable id="tabEtuForm"
+					value="#{etudiantFormationBean.etudiantFormations}" var="ef">
 
 					<f:facet name="header">  
 			            Liste des formations de
 			             <h:outputText value="#{etudiantFormationBean.etudiant}" />
 					</f:facet>
-
-					<p:column rendered="#{login.isAdmin()}">
-						<f:facet name="header">
-						</f:facet>
-						<h:selectBooleanCheckbox title="supprimer"
-							value="#{etudiantFormationBean.checked[ef.id]}" />
-					</p:column>
 
 					<p:column sortBy="#{ef.etablissement.nom}">
 						<f:facet name="header">
@@ -172,44 +148,55 @@
 
 					<p:column style="width:40px">
 
-						<p:commandButton update=":form:display"
+						<p:commandButton update=":formFormaEnt:display"
 							oncomplete="etudiantFormationDialog.show()" icon="ui-icon-search"
 							title="plus">
-							<f:setPropertyActionListener value="#{ent}"
+							<f:setPropertyActionListener value="#{ef}"
 								target="#{etudiantFormationBean.selectedEtudiantFormation}" />
 						</p:commandButton>
 
 					</p:column>
 
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Supprimer"
+							action="#{etudiantFormationBean.supprimer()}">
+							<f:setPropertyActionListener value="#{ef}"
+								target="#{etudiantFormationBean.selectedEtudiantFormation}" />
+						</h:commandButton>
+					</p:column>
+
 				</p:dataTable>
 
-				<p:dialog header="Etudiant" widgetVar="etudiantDialog"
-					resizable="false" id="etudiantId" showEffect="fade"
+				<p:dialog header="Formation" widgetVar="etudiantFormationDialog"
+					resizable="false" id="formationId" showEffect="fade"
 					hideEffect="explode" modal="true">
 					<h:panelGrid id="display" columns="2" cellpadding="0"
 						style="margin:0 auto;">
 						<h:outputText
-							value="#{etudiantFormationBean.selectedEtudiantFormation.libelle}"
+							value="#{etudiantFormationBean.selectedEtudiantFormation.description}"
+							style="font-weight:bold" />
+						<br />
+						<h:outputText
+							value="#{etudiantFormationBean.selectedEtudiantFormation.resultat}"
 							style="font-weight:bold" />
 					</h:panelGrid>
 				</p:dialog>
 
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer les formations selectionnées ? "
-					header="Attention" severity="alert" widgetVar="confirmationSupFormation">
+					header="Attention" severity="alert"
+					widgetVar="confirmationSupFormation">
 					<p:commandButton value="Oui" update="tabEtuForm"
 						oncomplete="confirmationSupFormation.hide()"
 						actionListener="#{etudiantFormationBean.supprimer()}" />
-					<p:commandButton value="Non" onclick="confirmationSupFormation.hide()"
-						type="button" />
+					<p:commandButton value="Non"
+						onclick="confirmationSupFormation.hide()" type="button" />
 				</p:confirmDialog>
 
-				<br/>
-				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
-					onclick="confirmationSupFormation.show()" type="button" />
+				<br />
 
 				<br />
-				<br/>
+				<br />
 				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
 					value="ajoutEtudiantFormation.faces">
 					<f:param name="id" value="#{etudiantFormationBean.etudiant.id}" />

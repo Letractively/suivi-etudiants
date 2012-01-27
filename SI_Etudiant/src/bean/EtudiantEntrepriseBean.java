@@ -1,7 +1,6 @@
 package bean;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -50,8 +49,6 @@ public class EtudiantEntrepriseBean {
 	private String contratItemSelect;
 
 	private EtudiantEntreprise selectedEtudiantEntreprise;
-
-	private HashMap<EtudiantEntrepriseId, Boolean> checked = new HashMap<EtudiantEntrepriseId, Boolean>();
 
 	@PostConstruct
 	public void init() {
@@ -118,16 +115,29 @@ public class EtudiantEntrepriseBean {
 
 	public void supprimer() {
 
-		for (EtudiantEntreprise unEtudiantEntreprise : etudiantEntreprises) {
-			System.out.println("Test");
-
-			if (checked.get(unEtudiantEntreprise.getId())) {
-				System.out.println("Test");
-				// etudiantEntrepriseEJB.removeEtudiantEntreprise(unEtudiantEntreprise);
-			}
-		}
+		//on récupére l'id de l'étudiant de cette manière avant de le supprimer
+		Long idEtu=selectedEtudiantEntreprise.getEtudiant().getId();
+		
+		System.out.println(idEtu);
+		
+		etudiantEntrepriseEJB
+				.removeEtudiantEntreprise(selectedEtudiantEntreprise);
+		
+		Redirection.listeEtudiantEntreprise(idEtu);
+		
+		
+		/**
+		 * for (EtudiantEntreprise unEtudiantEntreprise : etudiantEntreprises) {
+		 * System.out.println("Test");
+		 * 
+		 * if (checked.get(unEtudiantEntreprise.getId())) {
+		 * System.out.println("Test"); //
+		 * etudiantEntrepriseEJB.removeEtudiantEntreprise(unEtudiantEntreprise);
+		 * } }
+		 */
+				
 	}
-	
+
 	// création de la liste d'item Entreprise, necessaire pour la page
 	// ajouterEtudiantEntreprisexhtml
 	public List<SelectItem> creerListeItemEntreprise() {
@@ -162,10 +172,7 @@ public class EtudiantEntrepriseBean {
 		return parametreId;
 	}
 
-	
-	
-	
-	//getters and setters
+	// getters and setters
 
 	public EtudiantEntreprise getEtudiantEntreprise() {
 		return etudiantEntreprise;
@@ -223,14 +230,6 @@ public class EtudiantEntrepriseBean {
 	public void setEtudiantEntrepriseId(
 			EtudiantEntrepriseId etudiantEntrepriseId) {
 		this.etudiantEntrepriseId = etudiantEntrepriseId;
-	}
-
-	public HashMap<EtudiantEntrepriseId, Boolean> getChecked() {
-		return checked;
-	}
-
-	public void setChecked(HashMap<EtudiantEntrepriseId, Boolean> checked) {
-		this.checked = checked;
 	}
 
 	public EtudiantEntreprise getSelectedEtudiantEntreprise() {

@@ -10,9 +10,6 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,7 +18,6 @@ import util.Redirection;
 
 import ejb.EtablissementEJB;
 import entity.Etablissement;
-import entity.Etudiant;
 
 //named : propre � conversationScoped, ne surtout pas utiliser managedBean 
 @Named(value = "etablissementBean")
@@ -165,5 +161,14 @@ public class EtablissementBean implements Serializable {
 	public void setTypeEtablissementSelected(String typeEtablissementSelected) {
 		this.typeEtablissementSelected = typeEtablissementSelected;
 	}
+
+	public Conversation getConversation() {
+		return conversation;
+	}
+
+	public void setConversation(Conversation conversation) {
+		this.conversation = conversation;
+	}
+	
 
 }
