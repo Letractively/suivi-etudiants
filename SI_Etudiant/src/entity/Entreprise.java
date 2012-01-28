@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  * Entity implementation class for Entity: Entreprise
  * 
@@ -25,109 +24,104 @@ import javax.persistence.Table;
 @Table(name = "ENTREPRISE")
 public class Entreprise implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  private long id;
-  private String nom;
-  private String raisonsociale;
-  private String secteuractivite;
-  private String siret;
-  private Adresse adresse = new Adresse();
-  private Contact contact=new Contact();
-  private Set<EtudiantEntreprise> lesEtudiants = new HashSet<EtudiantEntreprise>();
+	private static final long serialVersionUID = 1L;
+	private long id;
+	private String nom;
+	private String raisonsociale;
+	private String secteuractivite;
+	private String siret;
+	private Adresse adresse = new Adresse();
+	private Contact contact = new Contact();
+	private Set<EtudiantEntreprise> lesEtudiants = new HashSet<EtudiantEntreprise>();
 
-  
-  @OneToMany(mappedBy="entreprise",cascade =  CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-  public Set<EtudiantEntreprise> getLesEtudiants() {
-    return lesEtudiants;
-  }
+	@OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	public Set<EtudiantEntreprise> getLesEtudiants() {
+		return lesEtudiants;
+	}
 
-  public void setLesEtudiants(Set<EtudiantEntreprise> lesEtudiants) {
-    this.lesEtudiants = lesEtudiants;
-  }
+	public void setLesEtudiants(Set<EtudiantEntreprise> lesEtudiants) {
+		this.lesEtudiants = lesEtudiants;
+	}
 
-  @Column(length = 70)
-  public String getNom() {
-    return nom;
-  }
+	@Column(length = 70)
+	public String getNom() {
+		return nom;
+	}
 
-  public void setNom(String nom) {
-    this.nom = nom;
-  }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-  @Column(length = 70)
-  public String getRaisonsociale() {
-    return raisonsociale;
-  }
+	@Column(length = 70)
+	public String getRaisonsociale() {
+		return raisonsociale;
+	}
 
-  public void setRaisonsociale(String raisonsociale) {
-    this.raisonsociale = raisonsociale;
-  }
+	public void setRaisonsociale(String raisonsociale) {
+		this.raisonsociale = raisonsociale;
+	}
 
-  @Column(length = 70)
-  public String getSecteuractivite() {
-    return secteuractivite;
-  }
+	@Column(length = 70)
+	public String getSecteuractivite() {
+		return secteuractivite;
+	}
 
-  public void setSecteuractivite(String secteuractivite) {
-    this.secteuractivite = secteuractivite;
-  }
+	public void setSecteuractivite(String secteuractivite) {
+		this.secteuractivite = secteuractivite;
+	}
 
-  @Column(length = 70)
-  public String getSiret() {
-    return siret;
-  }
+	@Column(length = 70)
+	public String getSiret() {
+		return siret;
+	}
 
-  public void setSiret(String siret) {
-    this.siret = siret;
-  }
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
-  @Embedded
-  public Adresse getAdresse() {
-    return adresse;
-  }
+	@Embedded
+	public Adresse getAdresse() {
+		return adresse;
+	}
 
-  public void setAdresse(Adresse adresse) {
-    this.adresse = adresse;
-  }
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
 
-  @Embedded
-  public Contact getContact() {
-    return contact;
-  }
-  
-  public void setContact(Contact contact) {
-    this.contact = contact;
-  }
+	@Embedded
+	public Contact getContact() {
+		return contact;
+	}
 
-  public Entreprise() {
-    super();
-  }
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
 
-  @GeneratedValue
-  @Id
-  @Column(name="ENTREPRISE_ID")
-  public long getId() {
-    return this.id;
-  }
+	public Entreprise() {
+		super();
+	}
 
-  public void setId(long id) {
-    this.id = id;
-  }
-  
-  
-  public int nbEtudiant()
-  {	  
-	  List<Etudiant> lEtu= new ArrayList<Etudiant>();
-	  
-	  for (EtudiantEntreprise etu: lesEtudiants)
-	  {
-		  lEtu.add(etu.getEtudiant());
-	  }
-	  Set set = new HashSet() ;
-	  set.addAll(lEtu) ;
-	  ArrayList distinctList = new ArrayList(set) ;
+	@GeneratedValue
+	@Id
+	@Column(name = "ENTREPRISE_ID")
+	public long getId() {
+		return this.id;
+	}
 
-	  return distinctList.size();  
-  }
+	public void setId(long id) {
+		this.id = id;
+	}
 
+	public int nbEtudiant() {
+		List<Etudiant> lEtu = new ArrayList<Etudiant>();
+
+		for (EtudiantEntreprise etu : lesEtudiants) {
+			lEtu.add(etu.getEtudiant());
+		}
+		Set set = new HashSet();
+		set.addAll(lEtu);
+		ArrayList distinctList = new ArrayList(set);
+
+		return distinctList.size();
+	}
 }

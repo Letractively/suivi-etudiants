@@ -15,8 +15,8 @@
 	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:form id="formEnt">
-				<p:dataTable id="tabEnt" value="#{entrepriseBean.entreprises}" var="en"
-					>
+				<p:dataTable id="tabEnt" value="#{entrepriseBean.entreprises}"
+					var="en">
 					<f:facet name="header">  
 			            Liste des entreprises 
 			        </f:facet>
@@ -58,8 +58,8 @@
 						<h:outputLink id="lien1" value="listeEtudiants.faces">
 							<h:outputText value="#{en.nbEtudiant()}" />
 							<f:param name="ent" value="#{en.id}" />
-						</h:outputLink>							
-					</p:column>	
+						</h:outputLink>
+					</p:column>
 					<p:column style="width:40px">
 
 						<p:commandButton update=":formEnt:display"
@@ -69,7 +69,7 @@
 								target="#{entrepriseBean.selectedEntreprise}" />
 						</p:commandButton>
 
-					</p:column>					
+					</p:column>
 					<p:column rendered="#{login.isAdmin()}">
 						<h:commandButton value="Modifier"
 							action="#{entrepriseBean.edit()}">
@@ -85,31 +85,36 @@
 					hideEffect="explode" modal="true">
 					<h:panelGrid id="display" columns="2" cellpadding="4"
 						style="margin:0 auto;">
-						
-						
+
+
 						<h:outputText value="Adresse : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.adresse.adresse}" />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.adresse}" />
 						<h:outputText value="Adresse Suite : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.adresse.adresseSuite}" />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.adresseSuite}" />
 						<h:outputText value="Code Postal : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.adresse.codePostal}" />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.codePostal}" />
 						<h:outputText value="Ville : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.adresse.ville}" />
-						
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.ville}" />
+
 						<h:outputText value="Tel : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.contact.tel}" />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.tel}" />
 						<h:outputText value="Tel Autre : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.contact.telAutre}" />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.telAutre}" />
 						<h:outputText value="Mail : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.contact.mail}" />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.mail}" />
 						<h:outputText value="MailAutre : " />
-						<h:outputText value="#{entrepriseBean.selectedEntreprise.contact.mailAutre}" />
-						
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.mailAutre}" />
+
 					</h:panelGrid>
 				</p:dialog>
-
-
-
 
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer la/les entreprise(s) selectionnées ? "
@@ -120,8 +125,6 @@
 						actionListener="#{entrepriseBean.supprimer()}" />
 					<p:commandButton value="Non"
 						onclick="confirmationSupression.hide()" type="button" />
-				
-				
 				</p:confirmDialog>
 				<br />
 

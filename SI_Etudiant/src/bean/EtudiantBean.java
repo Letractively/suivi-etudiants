@@ -81,23 +81,18 @@ public class EtudiantBean implements Serializable {
 		if (conversation.isTransient()) {
 			conversation.begin();
 		}
-		try 
-		{
-			//si l'on récupére ent dans l'url, alors la liste d'étudiant affichée est la liste d'étudiant de lentreprise 
-			if (this.getPassedParameter()!= null)
-			{
+		try {
+			// si l'on récupére ent dans l'url, alors la liste d'étudiant
+			// affichée est la liste d'étudiant de lentreprise
+			if (this.getPassedParameter() != null) {
 				Long ent = Long.parseLong(this.getPassedParameter());
-				
-				etudiants=etudiantEJB.findAllEtudiantsByEnt(ent);
-			}
-			else
-			{
+
+				etudiants = etudiantEJB.findAllEtudiantsByEnt(ent);
+			} else {
 				etudiants = etudiantEJB.findAllEtudiants();
 			}
-			
-			
-		} 
-		catch (EJBException e) {
+
+		} catch (EJBException e) {
 
 			Redirection.erreurXhtml();
 		}
@@ -105,13 +100,10 @@ public class EtudiantBean implements Serializable {
 	}
 
 	public String ajout() {
-		// Message d'ajout
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Etudiant ajouté"));
 		// Ajout
 		this.etudiantEJB.createEtudiant(etudiant);
 		// Fin
 		conversation.end();
-		
 
 		/*
 		 * si on est en session, actualisation de la liste d'étudiant et de
@@ -151,22 +143,18 @@ public class EtudiantBean implements Serializable {
 	public String edit() {
 		return "edit";
 	}
-	
+
 	public void creerListeEtudiantsPDF() {
-		// Instancier sinon nullPointerException
-		pdf = new PDF();
 		// Appeler la procédure pour creer mon PDF d'etudiants
-		pdf.CreerListeEtudiantsPDF(etudiants, "listeEtudiants");
+		PDF.CreerListeEtudiantsPDF(etudiants, "liste_etudiants");
 	}
+
 	public String getPassedParameter() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String parametreId = (String) facesContext.getExternalContext()
 				.getRequestParameterMap().get("ent");
 		return parametreId;
 	}
-	
-	
-	
 
 	/*
 	 * Getters & Setters

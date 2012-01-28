@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
- 
+
 /**
  * Entity implementation class for Entity: Etablissement
  * 
@@ -23,84 +23,76 @@ import javax.persistence.Table;
 @Table(name = "ETABLISSEMENT")
 public class Etablissement implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  private Long id;
-  private String nom;
-  private String typeEtab;
-  private Adresse adresse=new Adresse();
-  private Contact contact=new Contact();
-  
-  private Set<Formation> lesFormations = new HashSet<Formation>();
+	private static final long serialVersionUID = 1L;
+	private Long id;
+	private String nom;
+	private String typeEtab;
+	private Adresse adresse = new Adresse();
+	private Contact contact = new Contact();
 
-  public Etablissement() {
-    super();
-  }
-  
-  
-  @OneToMany(mappedBy = "etablissement",cascade =  CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-  public Set<Formation> getLesFormations() {
-	return lesFormations;
-  }
+	private Set<Formation> lesFormations = new HashSet<Formation>();
 
+	public Etablissement() {
+		super();
+	}
 
+	@OneToMany(mappedBy = "etablissement", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	public Set<Formation> getLesFormations() {
+		return lesFormations;
+	}
 
-public void setLesFormations(Set<Formation> lesFormations) {
-	this.lesFormations = lesFormations;
-}
+	public void setLesFormations(Set<Formation> lesFormations) {
+		this.lesFormations = lesFormations;
+	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ETABLISSEMENT_ID")
+	public Long getId() {
+		return this.id;
+	}
 
+	@Column(length = 70)
+	public String getNom() {
+		return nom;
+	}
 
-@Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name="ETABLISSEMENT_ID")
-  public Long getId() {
-    return this.id;
-  }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-  @Column(length = 70)
-  public String getNom() {
-    return nom;
-  }
+	@Embedded
+	public Adresse getAdresse() {
+		return adresse;
+	}
 
-  public void setNom(String nom) {
-    this.nom = nom;
-  }
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
 
- 
+	@Embedded
+	public Contact getContact() {
+		return contact;
+	}
 
-  @Embedded
-  public Adresse getAdresse() {
-    return adresse;
-  }
-  
-  public void setAdresse(Adresse adresse) {
-    this.adresse = adresse;
-  }
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
 
-  @Embedded
-  public Contact getContact() {
-    return contact;
-  }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  public void setContact(Contact contact) {
-    this.contact = contact;
-  }
+	@Column(length = 70)
+	public String getTypeEtab() {
+		return typeEtab;
+	}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-  
-  @Column(length = 70)
-  public String getTypeEtab() {
-	return typeEtab;
-  }
+	public void setTypeEtab(String typeEtab) {
+		this.typeEtab = typeEtab;
+	}
 
-  public void setTypeEtab(String typeEtab) {
-	this.typeEtab = typeEtab;
-  }
-  public int nbFormations()
-  {
-	  return lesFormations.size();
-  }
-
+	public int nbFormations() {
+		return lesFormations.size();
+	}
 }

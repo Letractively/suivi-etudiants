@@ -22,98 +22,96 @@ import javax.persistence.Table;
 @Table(name = "ETUDIANT")
 public class Etudiant implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  private long id;
-  private String nom;
-  private String prenom;
-  private Adresse adresse=new Adresse();
-  private Contact contact=new Contact();
-  private Set<EtudiantFormation> lesFormations = new HashSet<EtudiantFormation>();
-  private Set<EtudiantEntreprise> lesEntreprises = new HashSet<EtudiantEntreprise>();
+	private long id;
+	private String nom;
+	private String prenom;
+	private Adresse adresse = new Adresse();
+	private Contact contact = new Contact();
+	private Set<EtudiantFormation> lesFormations = new HashSet<EtudiantFormation>();
+	private Set<EtudiantEntreprise> lesEntreprises = new HashSet<EtudiantEntreprise>();
 
-  // @OneToMany
-  // public List<Formation> getFormations() {
-  // return formations;
-  // }
-  //
-  // public void setFormations(List<Formation> formations) {
-  // this.formations = formations;
-  // }
+	// @OneToMany
+	// public List<Formation> getFormations() {
+	// return formations;
+	// }
+	//
+	// public void setFormations(List<Formation> formations) {
+	// this.formations = formations;
+	// }
 
-  public Etudiant() {
-    super();
-    
-  }
+	public Etudiant() {
+		super();
 
-  @OneToMany(mappedBy = "etudiant",cascade =  CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-  public Set<EtudiantEntreprise> getLesEntreprises() {
-    return lesEntreprises;
-  }
+	}
 
-  public void setLesEntreprises(Set<EtudiantEntreprise> lesEntreprises) {
-    this.lesEntreprises = lesEntreprises;
-  }
+	@OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	public Set<EtudiantEntreprise> getLesEntreprises() {
+		return lesEntreprises;
+	}
 
-  @OneToMany(mappedBy = "etudiant",cascade =  CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-  public Set<EtudiantFormation> getLesFormations() {
-    return lesFormations;
-  }
+	public void setLesEntreprises(Set<EtudiantEntreprise> lesEntreprises) {
+		this.lesEntreprises = lesEntreprises;
+	}
 
-  public void setLesFormations(Set<EtudiantFormation> lesFormations) {
-    this.lesFormations = lesFormations;
-  }
+	@OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	public Set<EtudiantFormation> getLesFormations() {
+		return lesFormations;
+	}
 
-  @Id
-  @GeneratedValue
-  @Column(name="ETUDIANT_ID")
-  public long getId() {
-    return id;
-  }
+	public void setLesFormations(Set<EtudiantFormation> lesFormations) {
+		this.lesFormations = lesFormations;
+	}
 
-  public void setId(long id) {
-    this.id = id;
-  }
+	@Id
+	@GeneratedValue
+	@Column(name = "ETUDIANT_ID")
+	public long getId() {
+		return id;
+	}
 
-  @Column(length = 70)
-  public String getNom() {
-    return nom;
-  }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-  public void setNom(String nom) {
-    this.nom = nom;
-  }
+	@Column(length = 70)
+	public String getNom() {
+		return nom;
+	}
 
-  @Column(length = 70)
-  public String getPrenom() {
-    return prenom;
-  }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-  public void setPrenom(String prenom) {
-    this.prenom = prenom;
-  }
+	@Column(length = 70)
+	public String getPrenom() {
+		return prenom;
+	}
 
-  @Embedded
-  public Adresse getAdresse() {
-    return adresse;
-  }
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 
-  @Embedded
-  public Contact getContact() {
-    return contact;
-  }
-  public void setContact(Contact contact) {
-    this.contact = contact;
-  }
+	@Embedded
+	public Adresse getAdresse() {
+		return adresse;
+	}
 
-  public void setAdresse(Adresse adresse) {
-    this.adresse = adresse;
-  }
-  
-  public String toString()
-  {
-	 return nom+" "+prenom;  
-  }
-  
+	@Embedded
+	public Contact getContact() {
+		return contact;
+	}
 
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	public String toString() {
+		return nom + " " + prenom;
+	}
 }

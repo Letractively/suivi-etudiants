@@ -118,6 +118,7 @@ public class EtudiantEntrepriseBean {
 		//on récupére l'id de l'étudiant de cette manière avant de le supprimer
 		Long idEtu=selectedEtudiantEntreprise.getEtudiant().getId();
 		
+		System.out.println("COUCOU");
 		System.out.println(idEtu);
 		
 		etudiantEntrepriseEJB

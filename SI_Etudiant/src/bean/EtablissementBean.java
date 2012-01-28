@@ -19,7 +19,7 @@ import util.Redirection;
 import ejb.EtablissementEJB;
 import entity.Etablissement;
 
-//named : propre � conversationScoped, ne surtout pas utiliser managedBean 
+//named : propre a conversationScoped, ne surtout pas utiliser managedBean 
 @Named(value = "etablissementBean")
 @ConversationScoped
 public class EtablissementBean implements Serializable {
@@ -169,6 +169,5 @@ public class EtablissementBean implements Serializable {
 	public void setConversation(Conversation conversation) {
 		this.conversation = conversation;
 	}
-	
 
 }

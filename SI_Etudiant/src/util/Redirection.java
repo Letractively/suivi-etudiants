@@ -44,30 +44,30 @@ public class Redirection {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void listeEntreprises() {
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/" + domain + "/listeEntreprises.faces");
-		}
-		catch (IOException e) {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("/" + domain + "/listeEntreprises.faces");
+		} catch (IOException e) {
 			System.out.println(e);
 		}
 	}
-	
+
 	public static void listeEtablissements() {
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/" + domain + "/listeEtablissements.faces");
-		}
-		catch (IOException e) {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("/" + domain + "/listeEtablissements.faces");
+		} catch (IOException e) {
 			System.out.println(e);
 		}
 	}
-	
+
 	public static void log() {
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/" + domain + "/site.faces");
-		}
-		catch (IOException e) {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("/" + domain + "/site.faces");
+		} catch (IOException e) {
 			System.out.println(e);
 		}
 	}

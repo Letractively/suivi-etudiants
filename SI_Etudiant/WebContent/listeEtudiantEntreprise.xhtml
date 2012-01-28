@@ -92,9 +92,6 @@
 				</p:dialog>
 
 				<br />
-
-				<br />
-				<br />
 				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
 					value="ajoutEtudiantEntreprise.faces">
 					<f:param name="id" value="#{etudiantEntrepriseBean.etudiantEnt.id}" />
@@ -103,9 +100,6 @@
 			</h:form>
 
 			<br />
-			<br />
-			<br />
-
 			<h:form id="formFormaEnt">
 				<p:growl id="msgs" showDetail="true" />
 
@@ -175,7 +169,6 @@
 						<h:outputText
 							value="#{etudiantFormationBean.selectedEtudiantFormation.description}"
 							style="font-weight:bold" />
-						<br />
 						<h:outputText
 							value="#{etudiantFormationBean.selectedEtudiantFormation.resultat}"
 							style="font-weight:bold" />
@@ -193,9 +186,6 @@
 						onclick="confirmationSupFormation.hide()" type="button" />
 				</p:confirmDialog>
 
-				<br />
-
-				<br />
 				<br />
 				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
 					value="ajoutEtudiantFormation.faces">

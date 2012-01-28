@@ -155,6 +155,4 @@ public class EntrepriseBean implements Serializable {
 	public void setSelectedEntreprise(Entreprise selectedEntreprise) {
 		this.selectedEntreprise = selectedEntreprise;
 	}
-	
-
 }
