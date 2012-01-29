@@ -115,73 +115,72 @@ public class EtudiantFormationBean implements Serializable {
 				formationItemSelect, etudiantFormationId.getDatedebut());
 
 		this.etudiantFormation.setId(etudiantFormationId);
-		
 		this.etudiantFormation.setFormation(formationEJB
 				.findFormationById(formationItemSelect));
 		this.etudiantFormation.setEtudiant(etudiantEJB
 				.findEtudiantById(idEtudiant));
 		this.etudiantFormationEJB.createEtudiantFormation(etudiantFormation);
-		
 		Redirection.listeEtudiantEntreprise(idEtudiant);
 		return "listeEtudiant";
 
 	}
 
 	public void supprimer() {
-		
-		Long idEtu=selectedEtudiantFormation.getEtudiant().getId();
+
+		Long idEtu = selectedEtudiantFormation.getEtudiant().getId();
 		etudiantFormationEJB.removeEtudiantFormation(selectedEtudiantFormation);
 		Redirection.listeEtudiantEntreprise(idEtu);
-		
-	}
-	
-	//procédure permettant de mettre à jour la liste de formation lorsque établissement selectionné
-	//j'aurais voulu manipuller directement un etablissement, mais dans la combo ça marche pas si on passe comme id un etablissement au lieu d'un entier
-	public List<SelectItem> doSelectedEtab()
-	{
-		System.out.println("Entré dans la procédure");
-		
-		Long idEtab=etablissementItemSelect;
-		
-		System.out.println("idEtab select : "+idEtab);
-		
-		if (etablissementItemSelect != null && !etablissementItemSelect.equals("")) 
-		{
 
-			System.out.println("idEtab select : "+idEtab);
-			
-			//code utilisé pour l'instant, j'aurais voulais éviter cela, en récupérant directement l'établissement au lieu du nombre
-			Etablissement et;
-			et=etablissementEJB.findEtablissementById(etablissementItemSelect);
-			et.getLesFormations();
-			
-			//on supprime les éléments de la liste formation
-			formationsItems.removeAll(formationsItems);
-			
-			
-			//conversion de la liste hashset en arrayliste formation
-			formations = new ArrayList<Formation>(et.getLesFormations());
-			System.out.println("Taille formations : "+formations.size());
-					
-		}
-		
-		 return creerListeItemFormation();
 	}
-	
-	
+
+	// procédure permettant de mettre à jour la liste de formation lorsque
+	// établissement selectionné
+	// j'aurais voulu manipuller directement un etablissement, mais dans la
+	// combo ça marche pas si on passe comme id un etablissement au lieu d'un
+	// entier
+	public List<SelectItem> doSelectedEtab() {
+		System.out.println("Entré dans la procédure");
+
+		Long idEtab = etablissementItemSelect;
+
+		System.out.println("idEtab select : " + idEtab);
+
+		if (etablissementItemSelect != null
+				&& !etablissementItemSelect.equals("")) {
+
+			System.out.println("idEtab select : " + idEtab);
+
+			// code utilisé pour l'instant, j'aurais voulais éviter cela, en
+			// récupérant directement l'établissement au lieu du nombre
+			Etablissement et;
+			et = etablissementEJB
+					.findEtablissementById(etablissementItemSelect);
+			et.getLesFormations();
+
+			// on supprime les éléments de la liste formation
+			formationsItems.removeAll(formationsItems);
+
+			// conversion de la liste hashset en arrayliste formation
+			formations = new ArrayList<Formation>(et.getLesFormations());
+			System.out.println("Taille formations : " + formations.size());
+
+		}
+
+		return creerListeItemFormation();
+	}
+
 	public List<SelectItem> creerListeItem() {
 		for (Etablissement eta : etablissements) {
 			// identifiant,valeur
 			etablissementsItems.add(new SelectItem(eta.getId(), eta.getNom()));
-			
-			
+
 		}
 
 		return etablissementsItems;
 	}
 
 	public List<SelectItem> creerListeItemFormation() {
-		
+
 		for (Formation forma : formations) {
 			formationsItems.add(new SelectItem(forma.getId(), forma
 					.getLibelle()));
@@ -197,10 +196,6 @@ public class EtudiantFormationBean implements Serializable {
 		return parametreId;
 	}
 
-	
-	
-	
-	
 	// getters and setters
 
 	public Etudiant getEtudiant() {

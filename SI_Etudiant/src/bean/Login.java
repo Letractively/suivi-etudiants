@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,9 +21,9 @@ import entity.Utilisateur;
 import util.MD5Password;
 import util.Redirection;
 
-@ManagedBean(name = "login")
+@ManagedBean(name="login")
 @SessionScoped
-public class Login {
+public class Login implements Serializable{
 
 	private Utilisateur utilisateur;
 

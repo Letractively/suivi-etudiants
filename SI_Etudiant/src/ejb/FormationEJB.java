@@ -30,8 +30,6 @@ public class FormationEJB {
 	public Formation createFormation(Formation formation) {
 		
 		em.persist(formation);
-		em.flush();
-		
 		
 		return formation;
 	}

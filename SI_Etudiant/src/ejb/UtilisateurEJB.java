@@ -34,7 +34,7 @@ public class UtilisateurEJB {
 		em.merge(utilisateur);
 	}
 
-	public void removeUtilisateur(Utilisateur utilisateur) throws EJBException {
+	public void removeUtilisateur(Utilisateur utilisateur) {
 		em.remove(em.merge(utilisateur));
 	}
 

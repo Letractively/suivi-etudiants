@@ -1,5 +1,6 @@
 package bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
@@ -19,8 +21,14 @@ import ejb.UtilisateurEJB;
 import entity.Utilisateur;
 
 @ManagedBean(name = "utilisateurBean")
-@RequestScoped
-public class UtilisateurBean {
+@ViewScoped
+public class UtilisateurBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	// récupération du bean login
+	@ManagedProperty(value = "#{login}")
+	private Login login;
 
 	@EJB
 	private UtilisateurEJB utilisateurEJB;
@@ -50,12 +58,16 @@ public class UtilisateurBean {
 		return niveauItems;
 	}
 
-	public void supprimer() {
+	public String supprimer() {
+
 		for (Utilisateur unUtilisateur : utilisateurs) {
+
 			if (checked.get(unUtilisateur.getId())) {
 				utilisateurEJB.removeUtilisateur(unUtilisateur);
+
 			}
 		}
+		return "listeUser";
 	}
 
 	public String ajout() {
@@ -64,9 +76,8 @@ public class UtilisateurBean {
 				new FacesMessage("Utilisateur ajouté"));
 
 		/*
-		 *  Envoi du mail -- Ok
-		 *  Le faire avant de crypter le mot de passe sinon l'utilisateur va recevoir
-		 *  le hash MD5 et pas son vrai mot de passe !
+		 * Envoi du mail -- Ok Le faire avant de crypter le mot de passe sinon
+		 * l'utilisateur va recevoir le hash MD5 et pas son vrai mot de passe !
 		 */
 		Mail.autoMail(utilisateur.getMail(), utilisateur.getMotDePasse());
 
@@ -82,6 +93,28 @@ public class UtilisateurBean {
 	}
 
 	public void modifier() {
+
+		System.out.println("Modifier");
+		System.out.println("Session : "
+				+ login.getUtilisateur().getNomComplet());
+
+		// recuperation de la session
+		Utilisateur user = login.getUtilisateur();
+
+		// Mail.autoMail(user.getMail(), utilisateur.getMotDePasse());
+
+		String mdpMD5 = MD5Password.getEncodedPassword(utilisateur
+				.getMotDePasse());
+
+		// modification du mot de passe : on met le mot de passe de utilisateur
+		// dans user
+		user.setMotDePasse(mdpMD5);
+
+		// on persiste dans la bd
+		utilisateurEJB.updateUtilisateur(user);
+
+		// déconnexion automatique en appelant la fonction logout
+		login.logout();
 
 	}
 
@@ -133,6 +166,14 @@ public class UtilisateurBean {
 
 	public void setChecked(HashMap<Long, Boolean> checked) {
 		this.checked = checked;
+	}
+
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 
 }

@@ -30,10 +30,11 @@ public class Etablissement implements Serializable {
 	private Adresse adresse = new Adresse();
 	private Contact contact = new Contact();
 
-	private Set<Formation> lesFormations = new HashSet<Formation>();
+	private Set<Formation> lesFormations;
 
 	public Etablissement() {
 		super();
+		lesFormations = new HashSet<Formation>();
 	}
 
 	@OneToMany(mappedBy = "etablissement", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

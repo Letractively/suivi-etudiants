@@ -25,7 +25,7 @@
 
 						</f:facet>
 						<h:selectBooleanCheckbox title="supprimer"
-							value="{utilisateutBean.checked[u.id]}" />
+							value="#{utilisateurBean.checked[u.id]}" />
 					</p:column>
 					<p:column>
 						<f:facet name="header">
@@ -56,8 +56,8 @@
 						type="button" />
 				</p:confirmDialog>
 				<br />
-				<p:commandButton value="Supprimer" onclick="confirmation.show()"
-					type="button" />
+				<h:commandButton value="Supprimer" action="#{utilisateurBean.supprimer()}" 
+					/>
 			</h:form>
 		</ui:fragment>
 	</ui:define>

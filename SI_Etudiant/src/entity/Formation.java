@@ -40,9 +40,7 @@ public class Formation implements Serializable {
   }
 
   public Formation() {
-    super();
-    
-    
+    super();  
     
   }
 
@@ -72,7 +70,7 @@ public class Formation implements Serializable {
   }
 
   @ManyToOne
-  @JoinColumn(name = "ETABLISSEMENT_ETABLISSEMENT_ID", insertable = true, updatable = false)
+  @JoinColumn(name = "ETABLISSEMENT_ETABLISSEMENT_ID", insertable = true, updatable = true)
   public Etablissement getEtablissement() {
     return etablissement;
   }

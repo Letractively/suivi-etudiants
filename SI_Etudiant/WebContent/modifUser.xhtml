@@ -17,18 +17,20 @@
 				<p:growl id="modifPasse" sticky="true" />
 				<p:panel header="Modification de votre compte">
 					<h:outputLabel for="mdp" value="Mot de passe : " />
-					<p:password id="mdp" required="true" label="mdp" value=""
-						match="mdp2" />
-					<br />
+					<p:password id="mdp" required="true" label="mdp"
+						value="#{utilisateurBean.utilisateur.motDePasse}" />
 					<h:outputLabel for="mdp2" value="Répéter mot de passe : " />
-					<p:password id="mdp2" required="true" label="mdp2" value="" />
+					<p:password id="mdp2" required="true" label="mdp2" />
 					<br />
-					<p:commandButton rendered="#{login.isAdmin()}" value="Modifier"
-						update="modifPasse" actionListener="#{utilisateurBean.modifier()}" />
 
-					<p:commandButton rendered="#{login.isAdmin()}"
-						value="Generer un mot de passe" update="ale"
+					<h:commandButton value="Modifier"
+						action="#{utilisateurBean.modifier()}" />
+					<br />
+					<br />
+
+					<p:commandButton value="Generer un mot de passe" update="ale"
 						onclick="mdpGenere.show()" />
+
 
 					<p:confirmDialog message="#{utilisateurBean.genererMDP()}"
 						header="Votre mot de passe généré" severity="info"

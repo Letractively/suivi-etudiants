@@ -122,4 +122,11 @@
                         <to-view-id>/listeEtablissements.xhtml</to-view-id>
                 </navigation-case>
         </navigation-rule>
+        <navigation-rule>
+                <from-view-id>/listeUsers.xhtml</from-view-id>
+                <navigation-case>
+                        <from-outcome>listeUser</from-outcome>
+                        <to-view-id>/listeUsers.xhtml</to-view-id>
+                </navigation-case>
+        </navigation-rule>
 </faces-config>
