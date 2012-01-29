@@ -115,11 +115,13 @@ public class EtudiantFormationBean implements Serializable {
 				formationItemSelect, etudiantFormationId.getDatedebut());
 
 		this.etudiantFormation.setId(etudiantFormationId);
+		
 		this.etudiantFormation.setFormation(formationEJB
 				.findFormationById(formationItemSelect));
 		this.etudiantFormation.setEtudiant(etudiantEJB
 				.findEtudiantById(idEtudiant));
 		this.etudiantFormationEJB.createEtudiantFormation(etudiantFormation);
+		
 		Redirection.listeEtudiantEntreprise(idEtudiant);
 		return "listeEtudiant";
 

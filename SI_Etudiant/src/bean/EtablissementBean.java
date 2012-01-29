@@ -47,9 +47,9 @@ public class EtablissementBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		if (conversation.isTransient()) {
+		
 			conversation.begin();
-		}
+		
 		try {
 			etablissements = etablissementEJB.findAllEtablissements();
 			creerListeTypeEtablissement();
@@ -58,6 +58,7 @@ public class EtablissementBean implements Serializable {
 
 			Redirection.erreurXhtml();
 		}
+		//System.out.println(etablissements.get(2).getNom()+" : "+etablissements.get(2).getLesFormations().size());
 	}
 
 	public String ajout() {

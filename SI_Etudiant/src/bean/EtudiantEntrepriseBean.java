@@ -48,7 +48,7 @@ public class EtudiantEntrepriseBean {
 	private Long entrepriseItemSelect;
 	private String contratItemSelect;
 
-	private EtudiantEntreprise selectedEtudiantEntreprise;
+	private EtudiantEntreprise selectedEtudiantEntreprise=new EtudiantEntreprise();
 
 	@PostConstruct
 	public void init() {
@@ -99,17 +99,20 @@ public class EtudiantEntrepriseBean {
 		// rataché directement dans le jsf)
 		etudiantEntreprise.setTypecontrat(contratItemSelect);
 
-		// On prévient l'objet. Si cette instruction n'est pas présente le nom
-		// n'est pas rafraichi dans le tableau etudiantEntreprise
+	
 		etudiantEntreprise.setEntreprise(entrepriseEJB
-				.findEntrepriseById(entrepriseItemSelect));
+				.findEntrepriseById(entrepriseItemSelect));	
+		etudiantEntreprise.setEtudiant(etudiantEJB.
+				findEtudiantById(idEtudiant));
 
 		// On ajoute étudiantEntrepise dans la BDD
 		etudiantEntrepriseEJB.createEtudiantEntreprise(etudiantEntreprise);
-
+		
 		// redirection vers la liste des activités. Seul solution trouvée pour
 		// passé l'id en parametre
 		Redirection.listeEtudiantEntreprise(idEtudiant);
+		
+		
 
 	}
 

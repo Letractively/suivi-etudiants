@@ -87,13 +87,16 @@ public class FormationBean implements Serializable {
 	public void ajout() {
 		this.formation.setEtablissement(etablissementEJB
 				.findEtablissementById(etablissement.getId()));
-		
 		this.formationEJB.createFormation(formation);
+		formation.getEtablissement().getLesFormations().add(formation);
+		
+		
+		System.out.println(formation.getEtablissement().getNom()+" : "+formation.getEtablissement().getLesFormations().size());
 
 		conversation.end();
-		//et.getConversation().end();
+		//et.getConversation().isTransient();
 
-		Redirection.listeFormations(etablissement.getId());
+		//Redirection.listeFormations(etablissement.getId());
 	}
 
 	public void supprimer() {

@@ -41,6 +41,9 @@ public class Formation implements Serializable {
 
   public Formation() {
     super();
+    
+    
+    
   }
 
   @GeneratedValue

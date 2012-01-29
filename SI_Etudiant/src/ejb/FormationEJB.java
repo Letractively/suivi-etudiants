@@ -28,7 +28,11 @@ public class FormationEJB {
 	 * Cree une formation
 	 */
 	public Formation createFormation(Formation formation) {
+		
 		em.persist(formation);
+		em.flush();
+		
+		
 		return formation;
 	}
 	
@@ -36,8 +40,9 @@ public class FormationEJB {
 	 * Supprime une formation
 	 */
 	public void removeFormation(Formation formation) {
+		 
+		 em.remove(em.merge(formation)); 
 		
-		 em.remove(em.merge(formation));	
 	}
 	
 	/*
@@ -45,6 +50,7 @@ public class FormationEJB {
 	 */
 	 public void updateFormation(Formation formation) {
 		 em.merge(formation);	
+		 
 	 }
 	 
 	 /*
