@@ -81,7 +81,17 @@ public class Redirection {
 							"/" + domain + "/listeFormations.faces?id="
 									+ idEtablissement);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e);
+		}
+	}
+	
+	public static void listeUtilisateurs() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+			.redirect("/" + domain + "/listeUsers.faces");
+		}
+		catch(IOException e) {
+			System.out.println(e);
 		}
 	}
 }

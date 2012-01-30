@@ -17,6 +17,7 @@ import javax.faces.model.SelectItem;
 import util.MD5Password;
 import util.Mail;
 import util.MotDePasseAleatoire;
+import util.Redirection;
 import ejb.UtilisateurEJB;
 import entity.Utilisateur;
 
@@ -41,8 +42,8 @@ public class UtilisateurBean implements Serializable {
 
 	private List<SelectItem> niveauItems = new ArrayList<SelectItem>();
 	private String niveauItemSelect;
-
-	private MotDePasseAleatoire mdpAle;
+	
+	private Utilisateur editUtilisateur;
 
 	@PostConstruct
 	public void init() {
@@ -71,10 +72,6 @@ public class UtilisateurBean implements Serializable {
 	}
 
 	public String ajout() {
-		// Message d'ajout
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Utilisateur ajouté"));
-
 		/*
 		 * Envoi du mail -- Ok Le faire avant de crypter le mot de passe sinon
 		 * l'utilisateur va recevoir le hash MD5 et pas son vrai mot de passe !
@@ -85,23 +82,38 @@ public class UtilisateurBean implements Serializable {
 				.getMotDePasse());
 
 		this.utilisateur.setMotDePasse(mdpMD5);
+		
+		/*
+		 * Changer la chaine niveauItemSelect pour la BDD
+		 */
+		if(niveauItemSelect.equals("Lecture")) {
+			niveauItemSelect = "2";
+		}
+		else {
+			if(niveauItemSelect.equals("Administrateur")) {
+				niveauItemSelect = "1";
+			}
+		}
+		
 		this.utilisateur.setNiveau(niveauItemSelect);
-
+		
 		this.utilisateurEJB.createUtilisateur(utilisateur);
 
+		Redirection.listeUtilisateurs();
 		return "listeUser";
 	}
 
 	public void modifier() {
-
+		// Message de modif
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage("Votre mot de passe a bien été modifié"));
+		
 		System.out.println("Modifier");
 		System.out.println("Session : "
 				+ login.getUtilisateur().getNomComplet());
 
 		// recuperation de la session
 		Utilisateur user = login.getUtilisateur();
-
-		// Mail.autoMail(user.getMail(), utilisateur.getMotDePasse());
 
 		String mdpMD5 = MD5Password.getEncodedPassword(utilisateur
 				.getMotDePasse());
@@ -114,17 +126,12 @@ public class UtilisateurBean implements Serializable {
 		utilisateurEJB.updateUtilisateur(user);
 
 		// déconnexion automatique en appelant la fonction logout
-		login.logout();
+		//login.logout();
 
 	}
 
 	public String genererMDP() {
-		mdpAle = new MotDePasseAleatoire();
-		return mdpAle.genererMotDePasse();
-	}
-
-	public void envoyerMail() {
-
+		return MotDePasseAleatoire.genererMotDePasse();
 	}
 
 	// getters and setters
@@ -168,6 +175,14 @@ public class UtilisateurBean implements Serializable {
 		this.checked = checked;
 	}
 
+	public Utilisateur getEditUtilisateur() {
+		return editUtilisateur;
+	}
+
+	public void setEditUtilisateur(Utilisateur editUtilisateur) {
+		this.editUtilisateur = editUtilisateur;
+	}
+
 	public Login getLogin() {
 		return login;
 	}
@@ -175,5 +190,4 @@ public class UtilisateurBean implements Serializable {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-
 }

@@ -14,30 +14,30 @@
 	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isAdmin()}">
 			<h:form>
-				<p:growl id="modifPasse" sticky="true" />
-				<p:panel header="Modification de votre compte">
+				<p:panel id="panneauPasse" header="Modification de votre compte">
+					<p:focus context="panneauPasse" />
+					<p:messages />
 					<h:outputLabel for="mdp" value="Mot de passe : " />
-					<p:password id="mdp" required="true" label="mdp"
-						value="#{utilisateurBean.utilisateur.motDePasse}" />
+					<p:password id="mdp" required="true" label="Mot de passe"
+						value="#{utilisateurBean.utilisateur.motDePasse}" match="mdp2" />
+					<p:message for="mdp" />
+					<br />
 					<h:outputLabel for="mdp2" value="Répéter mot de passe : " />
-					<p:password id="mdp2" required="true" label="mdp2" />
+					<p:password id="mdp2" required="true" label="Repeter mot de passe"
+						value="#{utilisateurBean.utilisateur.motDePasse}" />
+					<p:message for="mdp2" />
+						
 					<br />
-
-					<h:commandButton value="Modifier"
-						action="#{utilisateurBean.modifier()}" />
-					<br />
-					<br />
-
+					<p:commandButton rendered="#{login.isAdmin()}" value="Modifier"
+						update="panneauPasse" actionListener="#{utilisateurBean.modifier()}" />
 					<p:commandButton value="Generer un mot de passe" update="ale"
 						onclick="mdpGenere.show()" />
-
 
 					<p:confirmDialog message="#{utilisateurBean.genererMDP()}"
 						header="Votre mot de passe généré" severity="info"
 						widgetVar="mdpGenere">
 						<p:commandButton value="Ok" oncomplete="mdpGenere.hide()" />
 					</p:confirmDialog>
-
 				</p:panel>
 			</h:form>
 		</ui:fragment>

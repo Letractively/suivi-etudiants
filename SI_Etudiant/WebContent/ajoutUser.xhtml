@@ -16,24 +16,23 @@
 			<p:panel id="panneauUtilisateur"
 				header="Inscription d'un utilisateur">
 				<p:focus context="panneauUtilisateur" />
-				<p:messages />
 				<h:outputLabel for="login" value="Login : " />
-				<p:inputText id="login" required="true" label="login"
+				<p:inputText id="login" required="true" label="Login"
 					value="#{utilisateurBean.utilisateur.login}" />
 				<p:message for="login" />
 				<br />
 				<h:outputLabel for="mdp" value="Mot de passe : " />
-				<p:password id="mdp" required="true" label="mdp"
+				<p:password id="mdp" required="true" label="Mot de passe"
 					value="#{utilisateurBean.utilisateur.motDePasse}" />
 				<p:message for="mdp" />
 				<br />
 				<h:outputLabel for="nomComplet" value="Nom complet : " />
-				<p:inputText id="nomComplet" required="true" label="nomComplet"
+				<p:inputText id="nomComplet" required="true" label="Nom complet"
 					value="#{utilisateurBean.utilisateur.nomComplet}" />
 				<p:message for="nomComplet" />
 				<br />
 				<h:outputLabel for="mail" value="Mail : " />
-				<p:inputText id="mail" required="true" label="mail"
+				<p:inputText id="mail" required="true" label="Mail"
 					value="#{utilisateurBean.utilisateur.mail}" />
 				<p:message for="mail" />
 				<br />

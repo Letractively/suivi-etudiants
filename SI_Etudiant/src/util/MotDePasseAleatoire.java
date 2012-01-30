@@ -13,7 +13,7 @@ public class MotDePasseAleatoire {
 	/*
 	 * Genere un mot de passe aleatoire de 8 caracteres
 	 */
-	public String genererMotDePasse() {
+	public static String genererMotDePasse() {
 		
 		Random rand = new Random();
 		String motDePasse = "";
@@ -45,9 +45,8 @@ public class MotDePasseAleatoire {
 	 * Methode main pour tester
 	 */
 	public static void main(String args[]) {
-		MotDePasseAleatoire s = new MotDePasseAleatoire();
 		for(int i = 1; i < 10; i++) {
-			System.out.println(s.genererMotDePasse());
+			System.out.println(MotDePasseAleatoire.genererMotDePasse());
 		}
 	}
 }

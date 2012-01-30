@@ -45,5 +45,4 @@ public class UtilisateurEJB {
 
 		return utilisateur;
 	}
-
 }

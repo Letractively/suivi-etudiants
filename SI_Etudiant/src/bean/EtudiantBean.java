@@ -73,7 +73,6 @@ public class EtudiantBean implements Serializable {
 
 	private Etudiant selectedEtudiant;
 
-
 	@PostConstruct
 	public void init() {
 		if (conversation.isTransient()) {

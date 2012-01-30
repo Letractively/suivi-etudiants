@@ -17,73 +17,72 @@
 
 				<p:panel id="panneauEntreprise" header="Inscrire une entreprise">
 					<p:focus context="panneauEntreprise" />
-					<p:messages />
 					<h:panelGrid columns="4">
 
 						<h:outputLabel for="nom" value="Nom : " />
-						<p:inputText id="nom" required="true" label="nom"
+						<p:inputText id="nom" required="true" label="Nom"
 							value="#{entrepriseBean.entreprise.nom}" />
 						<p:message for="nom" />
 						<br />
 						<h:outputLabel for="raisonsociale" value="Raison  Sociale : " />
 						<p:inputText id="raisonsociale" required="true"
-							label="raisonsociale"
+							label="Raison Sociale"
 							value="#{entrepriseBean.entreprise.raisonsociale}" />
 						<p:message for="raisonsociale" />
 						<br />
 						<h:outputLabel for="secteuractivite" value="Secteur d'activité : " />
 						<p:inputText id="secteuractivite" required="true"
-							label="secteuractivite"
+							label="Secteur Activite"
 							value="#{entrepriseBean.entreprise.secteuractivite}" />
 						<p:message for="secteuractivite" />
 						<br />
 						<h:outputLabel for="siret" value="Numero siret : " />
-						<p:inputText id="siret" label="siret" required="true"
+						<p:inputText id="siret" label="Siret" required="true"
 							value="#{entrepriseBean.entreprise.siret}" />
 						<p:message for="siret" />
 						<br />
 						<h:outputLabel for="mail" value="Mail : " />
-						<p:inputText id="mail" label="mail"
+						<p:inputText id="mail" label="Mail"
 							value="#{entrepriseBean.entreprise.contact.mail}" />
 						<p:message for="mail" />
 						<br />
-						<h:outputLabel for="mailAutre" value="Mail Autre : " />
-						<p:inputText id="mailAutre" label="mailAutre"
+						<h:outputLabel for="mailAutre" value="Autre mail : " />
+						<p:inputText id="mailAutre" label="Autre mail"
 							value="#{entrepriseBean.entreprise.contact.mailAutre}" />
 						<p:message for="mailAutre" />
 						<br />
 						<h:outputLabel for="tel" value="Tel : " />
-						<p:inputText id="tel" label="tel"
+						<p:inputText id="tel" label="Tel"
 							value="#{entrepriseBean.entreprise.contact.tel}" />
 						<p:message for="tel" />
 						<br />
-						<h:outputLabel for="telAutre" value="Tel Autre : " />
-						<p:inputText id="telAutre" label="telAutre"
+						<h:outputLabel for="telAutre" value="Autre tel : " />
+						<p:inputText id="telAutre" label="Autre tel"
 							value="#{entrepriseBean.entreprise.contact.telAutre}" />
 						<p:message for="telAutre" />
 						<br />
 						<h:outputLabel for="adresse" value="Adresse : " />
-						<p:inputText id="adresse" label="adresse"
+						<p:inputText id="adresse" label="Adresse"
 							value="#{entrepriseBean.entreprise.adresse.adresse}" />
 						<p:message for="adresse" />
 						<br />
 						<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
-						<p:inputText id="adresseSuite" label="adresseSuite"
+						<p:inputText id="adresseSuite" label="Adresse Suite"
 							value="#{entrepriseBean.entreprise.adresse.adresseSuite}" />
 						<p:message for="adresseSuite" />
 						<br />
 						<h:outputLabel for="cp" value="Code Postal : " />
-						<p:inputText id="cp" label="cp"
+						<p:inputText id="cp" label="Code Postal"
 							value="#{entrepriseBean.entreprise.adresse.codePostal}" />
 						<p:message for="cp" />
 						<br />
 						<h:outputLabel for="ville" value="Ville : " />
-						<p:inputText id="ville" label="ville"
+						<p:inputText id="ville" label="Ville"
 							value="#{entrepriseBean.entreprise.adresse.ville}" />
 						<p:message for="ville" />
 						<br />
 						<h:outputLabel for="pays" value="Pays : " />
-						<p:inputText id="pays" label="pays"
+						<p:inputText id="pays" label="Pays"
 							value="#{entrepriseBean.entreprise.adresse.pays}" />
 						<p:message for="pays" />
 						<br />
