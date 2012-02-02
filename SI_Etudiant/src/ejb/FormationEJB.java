@@ -2,14 +2,17 @@ package ejb;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ejbInterface.FormationEJBInterface;
 import entity.Formation;
 
+@LocalBean
 @Stateless
-public class FormationEJB {
+public class FormationEJB implements FormationEJBInterface{
 	
 	@PersistenceContext(unitName = "si_etu")
 	private EntityManager em;
@@ -30,6 +33,7 @@ public class FormationEJB {
 	public Formation createFormation(Formation formation) {
 		
 		em.persist(formation);
+		em.flush();
 		
 		return formation;
 	}

@@ -25,6 +25,13 @@
 						<h:selectBooleanCheckbox title="supprimer"
 							value="#{formationBean.checked[forma.id]}" />
 					</p:column>
+					<p:column >
+
+						<f:facet name="header">
+							<h:outputText value="etab" />
+						</f:facet>
+						<h:outputText value="#{forma.etablissement.nom}" />
+					</p:column>
 					<p:column sortBy="#{forma.libelle}">
 
 						<f:facet name="header">

@@ -108,9 +108,8 @@ public class UtilisateurBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Votre mot de passe a bien été modifié"));
 		
-		System.out.println("Modifier");
-		System.out.println("Session : "
-				+ login.getUtilisateur().getNomComplet());
+		//Mail.autoMail(utilisateur.getMail(), utilisateur.getMotDePasse());
+		
 
 		// recuperation de la session
 		Utilisateur user = login.getUtilisateur();

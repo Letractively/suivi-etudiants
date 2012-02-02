@@ -87,10 +87,9 @@ public class FormationBean implements Serializable {
 	public void ajout() {
 		this.formation.setEtablissement(etablissementEJB
 				.findEtablissementById(etablissement.getId()));
+		formation.getEtablissement().getLesFormations().add(formation);
 		this.formationEJB.createFormation(formation);
 		
-		//formation.getEtablissement().getLesFormations().add(formation);
-
 		System.out.println(formation.getEtablissement().getNom()+" : "+formation.getEtablissement().getLesFormations().size());
 
 		conversation.end();
