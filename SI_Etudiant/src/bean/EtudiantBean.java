@@ -14,7 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import util.PDF;
+import util.GenereDocument;
 import util.Redirection;
 
 import ejb.EtudiantEJB;
@@ -147,7 +147,7 @@ public class EtudiantBean implements Serializable {
 
 	public void creerListeEtudiantsPDF() {
 		// Appeler la procédure pour creer mon PDF d'etudiants
-		PDF.CreerListeEtudiantsPDF(etudiants, "liste_etudiants");
+		GenereDocument.creerListeEtudiantsPDF(etudiants, "liste_etudiants");
 	}
 
 	public String getPassedParameter() {

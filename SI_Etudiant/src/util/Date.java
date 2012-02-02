@@ -19,6 +19,10 @@ public class Date {
 	public Date() {
 
 	}
+	
+	public static String format(java.util.Date date) {
+		return DateFormat.getDateInstance( DateFormat.MEDIUM ).format(date);
+	}
 
 	public static String date() {
 		String dat = dateFormat.format(actuelle);

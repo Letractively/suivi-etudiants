@@ -6,10 +6,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import com.sun.jersey.spi.inject.Inject;
+
+import util.GenereDocument;
 import util.Redirection;
 
 import ejb.EntrepriseEJB;
@@ -33,6 +37,9 @@ public class EtudiantEntrepriseBean {
 	private EtudiantEntrepriseEJB etudiantEntrepriseEJB;
 
 	private Etudiant etudiantEnt = new Etudiant();
+	
+	//@ManagedProperty(value = "#{etudiantFormationBean}")
+	//private EtudiantFormationBean efb;
 
 	private EtudiantEntreprise etudiantEntreprise = new EtudiantEntreprise();
 	private EtudiantEntrepriseId etudiantEntrepriseId = new EtudiantEntrepriseId();
@@ -140,6 +147,13 @@ public class EtudiantEntrepriseBean {
 		 * } }
 		 */
 				
+	}
+	
+	/*
+	 * Genere un PDF pour l'etudiant selectionne avec ses entreprises et ses formations
+	 */
+	public void creerEtudiantPDF() {
+		GenereDocument.creerEtudiantPDF(etudiantEnt, etudiantEntreprises, "etudiant");
 	}
 
 	// création de la liste d'item Entreprise, necessaire pour la page
