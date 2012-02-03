@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import ejbInterface.FormationEJBInterface;
+import ejb.implement.FormationEJBInterface;
 import entity.Formation;
 
 @LocalBean

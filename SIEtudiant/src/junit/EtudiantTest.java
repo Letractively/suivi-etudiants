@@ -1,4 +1,4 @@
-package TestUnit;
+package junit;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ import org.junit.Test;
 import util.UtilTest;
 
 import ejb.EtudiantEJB;
-import ejbInterface.EtudiantEJBInterface;
+import ejb.implement.EtudiantEJBInterface;
 import entity.Adresse;
 import entity.Contact;
 import entity.Etudiant;

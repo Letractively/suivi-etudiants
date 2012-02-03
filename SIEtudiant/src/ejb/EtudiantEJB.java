@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import ejbInterface.EtudiantEJBInterface;
+import ejb.implement.EtudiantEJBInterface;
 import entity.Etudiant;
 
 @LocalBean

@@ -1,4 +1,4 @@
-package ejbInterface;
+package ejb.implement;
 
 import java.util.List;
 
