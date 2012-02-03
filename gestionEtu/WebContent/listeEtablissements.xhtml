@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="title">Suivi des etudiants</ui:define>
+
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+		
+			<h:form id="formEtab">
+				<p:dataTable var="et" id="tabEtab"
+					value="#{etablissementBean.etablissements}" paginator="true"
+					rows="10">
+					<f:facet name="header">  
+			            Liste des etablissements
+			        </f:facet>
+					<p:column rendered="#{login.isAdmin()}">
+						<f:facet name="header">
+						</f:facet>
+						<h:selectBooleanCheckbox title="supprimer"
+							value="#{etablissementBean.checked[et.id]}" />
+					</p:column>
+					<p:column sortBy="#{et.nom}">
+
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputLink id="lien1" value="listeFormations.faces">
+							<f:param name="id" value="#{et.id}" />
+							<h:outputText value="#{et.nom}" />
+						</h:outputLink>
+					</p:column>
+					<p:column sortBy="#{et.typeEtab}">
+						<f:facet name="header">
+							<h:outputText value="Type Etablissement" />
+						</f:facet>
+						<h:outputText value="#{et.typeEtab}" />
+					</p:column>
+					<p:column style="width:40px">
+
+						<p:commandButton update=":formEtab:display"
+							oncomplete="etablissementDialog.show()" icon="ui-icon-search"
+							title="plus">
+							<f:setPropertyActionListener value="#{et}"
+								target="#{etablissementBean.selectedEtablissement}" />
+						</p:commandButton>
+
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nb Formations" />
+						</f:facet>
+						<h:outputText value="#{et.nbFormations()}" />
+					</p:column>
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Modifier/Consulter"
+							action="#{etablissementBean.edit()}">
+							<f:setPropertyActionListener value="#{et}"
+								target="#{etablissementBean.editEtablissement}" />
+						</h:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Etablissement" widgetVar="etablissementDialog"
+					resizable="false" id="etablissementId" showEffect="fade"
+					hideEffect="explode" modal="true">
+					<h:panelGrid id="display" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+						<h:outputText value="Nom : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.nom}" />
+						<h:outputText value="Type d'etablissement : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.typeEtab}" />
+						<h:outputText value="Adresse : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.adresse.adresse}" />
+						<h:outputText value="Ville : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.adresse.ville}" />
+						<h:outputText value="Tel : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.contact.tel}" />
+						<h:outputText value="Mail : " />
+						<h:outputText
+							value="#{etablissementBean.selectedEtablissement.contact.mail}" />
+					</h:panelGrid>
+				</p:dialog>
+
+				<p:confirmDialog
+					message="Etes vous sur de vouloir supprimer les etablissements selectionnés ? "
+					header="Confirmation de suppression" severity="alert"
+					widgetVar="confirmationSupression">
+					<p:commandButton value="Oui" update="tabEtab"
+						oncomplete="confirmationSupression.hide()"
+						actionListener="#{etablissementBean.supprimer()}" />
+					<p:commandButton value="Non"
+						onclick="confirmationSupression.hide()" type="button" />
+				</p:confirmDialog>
+				<br />
+
+				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
+					onclick="confirmationSupression.show()" type="button" />
+
+				<p:confirmDialog message="Document PDF généré sur le bureau"
+					header="Information" severity="info" widgetVar="confirmationPDF">
+					<p:commandButton value="Ok" oncomplete="confirmationPDF.hide()"
+						actionListener="#{etablissementBean.creerListeEtablissementsPDF()}" />
+				</p:confirmDialog>
+
+				<p:commandButton rendered="#{login.isAdmin()}" value="Generer PDF"
+					onclick="confirmationPDF.show()" type="button" />
+
+			</h:form>
+		</ui:fragment>
+	</ui:define>
+
+</ui:composition>
+</html>
+
+
+
+
+
+
+
+
+

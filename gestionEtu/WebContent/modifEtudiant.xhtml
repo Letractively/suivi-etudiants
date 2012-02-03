@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="layout/template.xhtml">
+	<ui:define name="title">Modification</ui:define>
+
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h1>
+				Modification de
+				<h:outputText value="#{etudiantBean.editEtudiant}" />
+			</h1>
+			<h:form>
+				<h:outputLabel for="nom" value="Nom : " />
+				<h:inputText id="nom" required="true" label="nom"
+					value="#{etudiantBean.editEtudiant.nom}" />
+				<br />
+				<h:outputLabel for="prenom" value="Prenom : " />
+				<h:inputText id="prenom" required="true" label="prenom"
+					value="#{etudiantBean.editEtudiant.prenom}" />
+				<br />
+				<h:outputLabel for="mail" value="Mail : " />
+				<h:inputText id="mail" label="mail"
+					value="#{etudiantBean.editEtudiant.contact.mail}" />
+				<br />
+				<h:outputLabel for="mailAutre" value="Mail Autre : " />
+				<h:inputText id="mailAutre" label="mailAutre"
+					value="#{etudiantBean.editEtudiant.contact.mailAutre}" />
+				<br />
+				<h:outputLabel for="tel" value="Tel : " />
+				<h:inputText id="tel" label="tel"
+					value="#{etudiantBean.editEtudiant.contact.tel}" />
+				<br />
+				<h:outputLabel for="telAutre" value="Tel Autre : " />
+				<h:inputText id="telAutre" label="telAutre"
+					value="#{etudiantBean.editEtudiant.contact.telAutre}" />
+				<br />
+				<h:outputLabel for="adresse" value="Adresse : " />
+				<h:inputText id="adresse" label="adresse"
+					value="#{etudiantBean.editEtudiant.adresse.adresse}" />
+				<br />
+				<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
+				<h:inputText id="adresseSuite" label="adresseSuite"
+					value="#{etudiantBean.editEtudiant.adresse.adresseSuite}" />
+				<br />
+				<h:outputLabel for="cp" value="Code Postal : " />
+				<h:inputText id="cp" label="cp"
+					value="#{etudiantBean.editEtudiant.adresse.codePostal}" />
+				<h:outputLabel for="ville" value="Ville : " />
+				<h:inputText id="ville" label="ville"
+					value="#{etudiantBean.editEtudiant.adresse.ville}" />
+				<br />
+				<h:outputLabel for="pays" value="Pays : " />
+				<h:inputText id="pays" label="pays"
+					value="#{etudiantBean.editEtudiant.adresse.pays}" />
+				<br />
+				<br />
+				<h:commandButton value="Modifier"
+					action="#{etudiantBean.modifier()}" />
+			</h:form>
+		</ui:fragment>
+	</ui:define>
+</ui:composition>
+</html>

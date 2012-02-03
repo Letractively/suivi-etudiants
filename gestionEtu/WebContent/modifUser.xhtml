@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="title">Suivi des etudiants</ui:define>
+
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h:form>
+				<p:panel id="panneauPasse" header="Modification de votre compte">
+					<p:focus context="panneauPasse" />
+					<p:messages />
+					<h:outputLabel for="mdp" value="Mot de passe : " />
+					<p:password id="mdp" required="true" label="Mot de passe"
+						value="#{utilisateurBean.utilisateur.motDePasse}" match="mdp2" />
+					<p:message for="mdp" />
+					<br />
+					<h:outputLabel for="mdp2" value="Répéter mot de passe : " />
+					<p:password id="mdp2" required="true" label="Repeter mot de passe"
+						value="#{utilisateurBean.utilisateur.motDePasse}" />
+					<p:message for="mdp2" />
+						
+					<br />
+					<p:commandButton rendered="#{login.isAdmin()}" value="Modifier"
+						update="panneauPasse" actionListener="#{utilisateurBean.modifier()}" />
+					<p:commandButton value="Generer un mot de passe" update="ale"
+						onclick="mdpGenere.show()" />
+
+					<p:confirmDialog message="#{utilisateurBean.genererMDP()}"
+						header="Votre mot de passe généré" severity="info"
+						widgetVar="mdpGenere">
+						<p:commandButton value="Ok" oncomplete="mdpGenere.hide()" />
+					</p:confirmDialog>
+				</p:panel>
+			</h:form>
+		</ui:fragment>
+	</ui:define>
+</ui:composition>
+</html>

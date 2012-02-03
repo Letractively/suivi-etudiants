@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee               
+	http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>erreur</from-outcome>
+			<to-view-id>/erreur.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>listeEtudiants.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>modifEtudiant.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/ajoutEtudiant.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listEtudiant</from-outcome>
+			<to-view-id>/listeEtudiants.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/modifEtudiant.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listEtudiant</from-outcome>
+			<to-view-id>/listeEtudiants.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/ajoutEntreprise.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeEntreprise</from-outcome>
+			<to-view-id>/listeEntreprises.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listeEntreprises.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>editEntreprise</from-outcome>
+			<to-view-id>/modifEntreprise.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/modifEntreprise.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeEntreprise</from-outcome>
+			<to-view-id>/listeEntreprises.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listeEtudiantEntreprise.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeEtudiant</from-outcome>
+			<to-view-id>/listeEtudiants.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listeEtudiants.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeEtudiant</from-outcome>
+			<to-view-id>/listeEtudiants.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/ajoutEtudiantEntreprise.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeEtudiant</from-outcome>
+			<to-view-id>/listeEtudiants.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/ajoutUser.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeUser</from-outcome>
+			<to-view-id>/listeUsers.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listeEtablissements.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>editEtablissement</from-outcome>
+			<to-view-id>/modifEtablissement.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/modifEtablissement.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeEtablissement</from-outcome>
+			<to-view-id>/listeEtablissements.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listeFormations.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>editFormation</from-outcome>
+			<to-view-id>/modifFormation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/ajoutEtablissement.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeEtablissement</from-outcome>
+			<to-view-id>/listeEtablissements.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listeUsers.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listeUser</from-outcome>
+			<to-view-id>/listeUsers.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>

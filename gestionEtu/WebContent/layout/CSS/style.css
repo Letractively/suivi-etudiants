@@ -1,0 +1,120 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color: #FFFFFF;
+	background-image: url(images/bg.jpg);
+	background-repeat: repeat-x;
+}
+
+#enveloppe {
+	width: 794px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#enveloppe #logo {
+	height: 65px;
+}
+
+#enveloppe #logo h1 {
+	font-size: 35px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	display: block;
+	padding-top: 20px;
+	padding-bottom: 0px;
+}
+
+#enveloppe #entete #menu {
+	margin-left: 540px;
+}
+
+#enveloppe #entete #menu ul {
+	padding-top: 0px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+
+#enveloppe #entete #menu a {
+	font-size: 12px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#enveloppe #logo span {
+	color: #999900;
+}
+
+#enveloppe #entete {
+	background-image: url(images/header.jpg);
+	background-repeat: no-repeat;
+	height: 168px;
+}
+
+#enveloppe #corps {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#enveloppe #corps #contenu {
+	float: left;
+	width: 525px;
+}
+
+#enveloppe #corps p {
+	color: #666666;
+	margin-bottom: 20px;
+	font-size: 110%;
+	line-height: 21px;
+	text-align: justify;
+}
+
+#corps h1,#corps h2,#corps h3,#corps h4,#corps h5 {
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	display: block;
+	padding-left: 5px;
+	margin-bottom: 15px;
+	font-weight: normal;
+}
+
+#piedpage {
+	background-color: #FFFFFF;
+	background-image: url(images/footerbg.gif);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	height: 140px;
+}
+
+#piedpage #contenupiedpage {
+	width: 794px;
+	margin-top: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 35px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+input[type="text"],input[type="password"],select {
+	width: 250px;
+	color: #555;
+	padding: 4px;
+	border: 1px solid #B5B8C8;
+	font-size: 14px;
+	margin-top: 4px;
+	display: block;
+	margin-bottom: 5px;
+}
+
+#enveloppe a {
+	color: #030301;
+	font-weight: bold;
+}
+
+#enveloppe a:hover {
+	font-weight: none;
+	text-transform: uppercase;
+}

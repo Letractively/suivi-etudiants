@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="layout/CSS/style.css" />
+	<title><ui:insert name="title">Suivi des étudiants</ui:insert></title>
+</h:head>
+
+<h:body>
+
+	<div id="enveloppe">
+
+		<div id="logo">
+			<h1>
+				GESTION <span>ETUDIANTS</span>
+			</h1>
+
+		</div>
+
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+			<h:form>
+				<h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
+			</h:form>
+			<a href="modifUser.faces">Gestion du compte</a>
+		</ui:fragment>
+
+		<div id="entete">
+			<div id="menu">
+				<ui:include src="/layout/menu.xhtml" />
+			</div>
+		</div>
+
+		<div id="corps">
+			<ui:insert name="contenu"></ui:insert>
+		</div>
+
+	</div>
+
+	<div id="piedpage">
+		<div id="contenupiedpage">
+			<p>
+				Gestion des etudiants &copy; All rights reserved | Valid XHTML |
+				Powered by Alex, Romain et Gerardo |<a href="#">Put</a> | <a
+					href="#">Any</a> | <a href="#">Links </a>| <a href="#">Here </a>
+			</p>
+		</div>
+	</div>
+
+</h:body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="title">Suivi des Etudiants- Ajout Formation</ui:define>
+
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h1>
+				Inscrire un formation à
+				<h:outputText value="#{formationBean.etablissement.nom}" />
+			</h1>
+			<h:form>
+				<p:panel id="panneauFormation" header="Inscrire une formation">
+					<p:focus context="panneauFormation" />
+					<p:messages />
+					<h:inputHidden id="etablissementCaché"
+						value="#{formationBean.etablissement.id}" />
+					<h:outputLabel for="libelle" value="Libellé : " />
+					<p:inputText id="libelle" required="true" label="libelle"
+						value="#{formationBean.formation.libelle}" />
+					<p:message for="libelle" />
+					<br />
+					<h:outputLabel for="libelleCourt" value="Libellé Court : " />
+					<p:inputText id="libelleCourt" required="true" label="libelleCourt"
+						value="#{formationBean.formation.libelleCourt}" />
+					<p:message for="libelleCourt" />
+					<br />
+					<p:commandButton value="Ajouter" rendered="#{login.isAdmin()}"
+						update="panneauFormation"
+						actionListener="#{formationBean.ajout()}" />
+				</p:panel>
+			</h:form>
+		</ui:fragment>
+	</ui:define>
+
+</ui:composition>
+</html>
