@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="title">Gestion des absences</ui:define>
+
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h:form>
+				<p:panel id="panneauEtudiant" header="Inscrire un etudiant">
+					<p:focus context="panneauEtudiant" />
+					<h:panelGrid columns="4">
+						<h:outputLabel for="nom" value="Nom : " />
+						<p:inputText id="nom" required="true" label="Nom"
+							value="#{etudiantBean.etudiant.nom}" />
+						<p:message for="nom" />
+						<br />
+						<h:outputLabel for="prenom" value="Prenom : " />
+						<p:inputText id="prenom" required="true" label="Prenom"
+							value="#{etudiantBean.etudiant.prenom}" />
+						<p:message for="prenom" />
+						<br />
+						<h:outputLabel for="mail" value="Mail : " />
+						<p:inputText id="mail" required="true" label="Mail"
+							value="#{etudiantBean.etudiant.contact.mail}" />
+						<p:message for="mail" />
+						<br />
+						<h:outputLabel for="mailAutre" value="Autre mail : " />
+						<p:inputText id="mailAutre" required="true" label="Autre mail"
+							value="#{etudiantBean.etudiant.contact.mailAutre}" />
+						<p:message for="mailAutre" />
+						<br />
+						<h:outputLabel for="tel" value="Tel : " />
+						<p:inputText id="tel" label="Tel" required="true"
+							value="#{etudiantBean.etudiant.contact.tel}" />
+						<p:message for="tel" />
+						<br />
+						<h:outputLabel for="telAutre" value="Autre tel: " />
+						<p:inputText id="telAutre" label="Autre tel"
+							value="#{etudiantBean.etudiant.contact.telAutre}" />
+						<p:message for="telAutre" />
+						<br />
+						<h:outputLabel for="adresse" value="Adresse : " />
+						<p:inputText id="adresse" label="Adresse"
+							value="#{etudiantBean.etudiant.adresse.adresse}" />
+						<p:message for="adresse" />
+						<br />
+						<h:outputLabel for="adresseSuite" value="Adresse Suite : " />
+						<p:inputText id="adresseSuite" label="Adresse Suite"
+							value="#{etudiantBean.etudiant.adresse.adresseSuite}" />
+						<p:message for="adresseSuite" />
+						<br />
+						<h:outputLabel for="cp" value="Code Postal : " />
+						<p:inputText id="cp" label="Code Postal"
+							value="#{etudiantBean.etudiant.adresse.codePostal}" />
+						<p:message for="cp" />
+						<br />
+						<h:outputLabel for="ville" value="Ville : " />
+						<p:inputText id="ville" label="Ville"
+							value="#{etudiantBean.etudiant.adresse.ville}" />
+						<p:message for="ville" />
+						<br />
+						<h:outputLabel for="pays" value="Pays : " />
+						<p:inputText id="pays" label="Pays"
+							value="#{etudiantBean.etudiant.adresse.pays}" />
+						<p:message for="pays" />
+						<br />
+					</h:panelGrid>
+					<p:commandButton rendered="#{login.isAdmin()}" value="Ajouter"
+						update="panneauEtudiant" actionListener="#{etudiantBean.ajout()}" />
+
+				</p:panel>
+			</h:form>
+		</ui:fragment>
+	</ui:define>
+
+</ui:composition>
+</html>

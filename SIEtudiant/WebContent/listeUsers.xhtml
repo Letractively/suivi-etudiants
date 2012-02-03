@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="title">Suivi des etudiants</ui:define>
+
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h:form>
+				<p:dataTable value="#{utilisateurBean.utilisateurs}" var="u">
+					<f:facet name="header">  
+	            		Liste des utilisateurs 
+	        		</f:facet>
+
+
+					<p:column>
+						<f:facet name="header">
+
+						</f:facet>
+						<h:selectBooleanCheckbox title="supprimer"
+							value="#{utilisateurBean.checked[u.id]}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Login" />
+						</f:facet>
+						<h:outputText value="#{u.login}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nom complet" />
+						</f:facet>
+						<h:outputText value="#{u.nomComplet}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Niveau" />
+						</f:facet>
+						<h:outputText value="#{u.niveau}" />
+					</p:column>
+				</p:dataTable>
+				<p:confirmDialog
+					message="Etes vous sur de vouloir supprimer les utilisateurs selectionnés ? "
+					header="Attention" severity="alert" widgetVar="confirmation">
+					<p:commandButton value="Oui" update="messages"
+						oncomplete="confirmation.hide()"
+						actionListener="#{utilisateurBean.supprimer()}" />
+					<p:commandButton value="Non" onclick="confirmation.hide()"
+						type="button" />
+				</p:confirmDialog>
+				<br />
+				<h:commandButton value="Supprimer" action="#{utilisateurBean.supprimer()}" 
+					/>
+			</h:form>
+		</ui:fragment>
+	</ui:define>
+
+</ui:composition>
+</html>

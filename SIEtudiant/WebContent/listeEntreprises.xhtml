@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="title">Suivi des etudiants</ui:define>
+
+	<ui:define name="contenu">
+		<ui:fragment rendered="#{login.isLoggedIn()}">
+			<h:form id="formEnt">
+				<p:dataTable id="tabEnt" value="#{entrepriseBean.entreprises}"
+					var="en">
+					<f:facet name="header">  
+			            Liste des entreprises 
+			        </f:facet>
+
+					<p:column rendered="#{login.isAdmin()}">
+						<f:facet name="header">
+						</f:facet>
+						<h:selectBooleanCheckbox title="supprimer"
+							value="#{entrepriseBean.checked[en.id]}" />
+					</p:column>
+					<p:column sortBy="#{en.nom}">
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputText value="#{en.nom}" />
+					</p:column>
+					<p:column sortBy="#{en.raisonsociale}">
+						<f:facet name="header">
+							<h:outputText value="Raison Sociale" />
+						</f:facet>
+						<h:outputText value="#{en.raisonsociale}" />
+					</p:column>
+					<p:column sortBy="#{en.siret}">
+						<f:facet name="header">
+							<h:outputText value="Siret" />
+						</f:facet>
+						<h:outputText value="#{en.siret}" />
+					</p:column>
+					<p:column sortBy="#{en.secteuractivite}">
+						<f:facet name="header">
+							<h:outputText value="Secteur d'activité" />
+						</f:facet>
+						<h:outputText value="#{en.secteuractivite}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nb Etudiant" />
+						</f:facet>
+						<h:outputLink id="lien1" value="listeEtudiants.faces">
+							<h:outputText value="#{en.nbEtudiant()}" />
+							<f:param name="ent" value="#{en.id}" />
+						</h:outputLink>
+					</p:column>
+					<p:column style="width:40px">
+
+						<p:commandButton update=":formEnt:display"
+							oncomplete="entrepriseDialog.show()" icon="ui-icon-search"
+							title="plus">
+							<f:setPropertyActionListener value="#{en}"
+								target="#{entrepriseBean.selectedEntreprise}" />
+						</p:commandButton>
+
+					</p:column>
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Modifier"
+							action="#{entrepriseBean.edit()}">
+							<f:setPropertyActionListener value="#{en}"
+								target="#{entrepriseBean.editEntreprise}" />
+						</h:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog header="Entreprise" widgetVar="entrepriseDialog"
+					resizable="false" id="etudiantId" showEffect="fade"
+					hideEffect="explode" modal="true">
+					<h:panelGrid id="display" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+
+						<h:outputText value="Adresse : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.adresse}" />
+						<h:outputText value="Adresse Suite : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.adresseSuite}" />
+						<h:outputText value="Code Postal : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.codePostal}" />
+						<h:outputText value="Ville : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.adresse.ville}" />
+
+						<h:outputText value="Tel : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.tel}" />
+						<h:outputText value="Tel Autre : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.telAutre}" />
+						<h:outputText value="Mail : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.mail}" />
+						<h:outputText value="MailAutre : " />
+						<h:outputText
+							value="#{entrepriseBean.selectedEntreprise.contact.mailAutre}" />
+
+					</h:panelGrid>
+				</p:dialog>
+
+				<p:confirmDialog
+					message="Etes vous sur de vouloir supprimer la/les entreprise(s) selectionnées ? "
+					header="Confirmation de suppression" severity="alert"
+					widgetVar="confirmationSupression">
+					<p:commandButton value="Oui" update="tabEnt"
+						oncomplete="confirmationSupression.hide()"
+						actionListener="#{entrepriseBean.supprimer()}" />
+					<p:commandButton value="Non"
+						onclick="confirmationSupression.hide()" type="button" />
+				</p:confirmDialog>
+				<br />
+
+				<p:commandButton rendered="#{login.isAdmin()}" value="Supprimer"
+					onclick="confirmationSupression.show()" type="button" />
+
+			</h:form>
+		</ui:fragment>
+	</ui:define>
+
+</ui:composition>
+</html>

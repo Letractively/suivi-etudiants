@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/template.xhtml">
+
+	<ui:define name="title">Gestion des absences</ui:define>
+
+	<ui:define name="contenu">
+
+		<ui:fragment rendered="#{login.isAdmin()}">
+			<h1>
+				Ajouter une formation pour
+				<h:outputText value="#{etudiantFormationBean.etudiant}" />
+			</h1>
+			<h:form>
+				<h:inputHidden id="etudiantCaché"
+					value="#{etudiantFormationBean.etudiant.id}" />
+
+				<h:outputLabel for="etab" value="Etablissement : " />
+				<h:selectOneMenu id="etab" value="#{etudiantFormationBean.etablissementItemSelect}">
+					<f:selectItems value="#{etudiantFormationBean.etablissementsItems}" />
+					<p:ajax listener="#{etudiantFormationBean.doSelectedEtab()}" update="forma" event="change" />
+				</h:selectOneMenu>
+				<br />
+				<h:outputLabel for="forma" value="Formation : " />
+				<h:selectOneMenu id="forma"
+					value="#{etudiantFormationBean.formationItemSelect}">
+					<f:selectItems value="#{etudiantFormationBean.formationsItems}" />
+				</h:selectOneMenu>
+				<br />
+				<h:outputLabel for="dateDebut" value="Date Debut : " />
+				<p:calendar id="dateDebut"
+					value="#{etudiantFormationBean.etudiantFormationId.datedebut}"
+					navigator="true" locale="fr" pattern="yyyy-MM-dd">
+					<f:convertDateTime pattern="yyyy-mm-dd" />
+				</p:calendar>
+
+				<br />
+				<h:outputLabel for="dateFin" value="Date Fin : " />
+
+				<p:calendar id="dateFin"
+					value="#{etudiantFormationBean.etudiantFormation.datefin}"
+					navigator="true" locale="fr" pattern="yyyy-MM-dd">
+					<f:convertDateTime pattern="yyyy-mm-dd" />
+				</p:calendar>
+
+				<br />
+				<h:outputLabel for="description" value="Description : " />
+				<h:inputText id="description" label="description"
+					value="#{etudiantFormationBean.etudiantFormation.description}" />
+				<br />
+				<h:outputLabel for="resultat" value="Resultat : " />
+				<h:inputText id="resultat" label="resultat"
+					value="#{etudiantFormationBean.etudiantFormation.resultat}" />
+				<br />
+
+				<h:commandButton value="Ajouter"
+					action="#{etudiantFormationBean.ajout()}" />
+			</h:form>
+		</ui:fragment>
+
+
+	</ui:define>
+
+</ui:composition>
+</html>
