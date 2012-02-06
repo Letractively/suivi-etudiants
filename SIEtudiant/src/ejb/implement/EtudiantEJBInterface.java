@@ -8,11 +8,11 @@ import entity.Etudiant;
 
 @Remote
 public interface EtudiantEJBInterface {
-	public List<Etudiant> findAllEtudiants();
-	public Etudiant createEtudiant(Etudiant etudiant);
-	public void removeEtudiant(Etudiant etudiant);
-	public void updateEtudiant(Etudiant etudiant);
-	public Etudiant findEtudiantById(Long id);
-	public List<Etudiant> findAllEtudiantsByEnt(Long ent);
+	List<Etudiant> findAllEtudiants();
+	Etudiant createEtudiant(Etudiant etudiant);
+	void removeEtudiant(Etudiant etudiant);
+	void updateEtudiant(Etudiant etudiant);
+	Etudiant findEtudiantById(Long id);
+	List<Etudiant> findAllEtudiantsByEnt(Long ent);
 
 }

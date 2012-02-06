@@ -3,14 +3,16 @@ package ejb;
 import java.util.List;
 
 import javax.ejb.EJBException;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ejb.implement.UtilisateurEJBInterface;
 import entity.Utilisateur;
-
+@LocalBean
 @Stateless
-public class UtilisateurEJB {
+public class UtilisateurEJB implements UtilisateurEJBInterface{
 	@PersistenceContext(unitName = "si_etu")
 	private EntityManager em;
 

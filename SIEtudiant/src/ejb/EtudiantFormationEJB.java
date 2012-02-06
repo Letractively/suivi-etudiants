@@ -2,14 +2,16 @@ package ejb;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ejb.implement.EtudiantFormationEJBInterface;
 import entity.EtudiantFormation;
-
+@LocalBean
 @Stateless
-public class EtudiantFormationEJB 
+public class EtudiantFormationEJB implements EtudiantFormationEJBInterface
 {
 	@PersistenceContext(unitName = "si_etu")
 	  private EntityManager em;

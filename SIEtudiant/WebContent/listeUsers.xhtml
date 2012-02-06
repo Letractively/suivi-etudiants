@@ -45,6 +45,14 @@
 						</f:facet>
 						<h:outputText value="#{u.niveau}" />
 					</p:column>
+					<p:column>
+						<h:commandButton value="Modifier/Consulter"
+							action="#{utilisateurBean.edit()}">
+							<f:setPropertyActionListener value="#{u}"
+								target="#{utilisateurBean.editUtilisateur}" />
+							
+						</h:commandButton>
+					</p:column>
 				</p:dataTable>
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer les utilisateurs selectionnés ? "
