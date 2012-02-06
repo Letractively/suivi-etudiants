@@ -192,17 +192,29 @@
 					<f:param name="id" value="#{etudiantFormationBean.etudiant.id}" />
 					<h:outputText value="Ajouter une formation" />
 				</h:outputLink>
-				<br/>
-				<br/>
-				
+				<br />
+				<br />
+
 				<p:confirmDialog message="Document PDF généré sur le bureau"
 					header="Information" severity="info" widgetVar="confirmationPDF">
 					<p:commandButton value="Ok" oncomplete="confirmationPDF.hide()"
 						actionListener="#{etudiantEntrepriseBean.creerEtudiantPDF()}" />
 				</p:confirmDialog>
 
-				<p:commandButton rendered="#{login.isAdmin()}" value="Generer un PDF pour cet étudiant"
+				<p:commandButton rendered="#{login.isAdmin()}"
+					value="Generer un PDF pour cet étudiant"
 					onclick="confirmationPDF.show()" type="button" />
+
+				<p:confirmDialog message="Document Excel créé sur le bureau"
+					header="Information" severity="info" widgetVar="confirmationXLS">
+					<p:commandButton value="Ok" oncomplete="confirmationXLS.hide()"
+						actionListener="#{etudiantEntrepriseBean.creerEtudiantXLS()}" />
+				</p:confirmDialog>
+
+				<p:commandButton rendered="#{login.isAdmin()}"
+					value="Generer un XLS pour cet étudiant"
+					onclick="confirmationXLS.show()" type="button" />
+
 			</h:form>
 
 		</ui:fragment>

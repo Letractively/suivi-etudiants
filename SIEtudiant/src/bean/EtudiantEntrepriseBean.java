@@ -143,16 +143,22 @@ public class EtudiantEntrepriseBean {
 	}
 
 	/*
-	 * Genere un PDF pour l'etudiant selectionne avec ses entreprises et ses
-	 * formations
+	 * Genere un PDF pour l'etudiant selectionne avec ses entreprises et ses formations
 	 */
 	public void creerEtudiantPDF() {
 
 		System.out.println(efb.getEtudiantFormations().size());
 
 		GenereDocument.creerEtudiantPDF(etudiantEnt, etudiantEntreprises,
-				efb.getEtudiantFormations(), "etudiant");
-
+				efb.getEtudiantFormations(), "etudiant_" + etudiantEnt.getPrenom().toString() + "_" + etudiantEnt.getNom().toString());
+	}
+	
+	/*
+	 * Genere un XLS pour un etudiant avec ses entreprises et ses formations
+	 */
+	public void creerEtudiantXLS() {
+		GenereDocument.creerEtudiantXLS(etudiantEnt, etudiantEntreprises, 
+				efb.getEtudiantFormations(), "etudiant_" + etudiantEnt.getPrenom().toString() + "_" + etudiantEnt.getNom().toString());
 	}
 
 	// création de la liste d'item Entreprise, necessaire pour la page
