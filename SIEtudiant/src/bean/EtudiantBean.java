@@ -18,7 +18,6 @@ import util.GenereDocument;
 import util.Redirection;
 
 import ejb.EtudiantEJB;
-import ejb.SIEtudiantEAO;
 import entity.Etudiant;
 
 //named : propre à conversationScoped, ne surtout pas utiliser managedBean 
@@ -59,9 +58,6 @@ public class EtudiantBean implements Serializable {
 	@EJB
 	private EtudiantEJB etudiantEJB;
 	
-	@EJB
-	private SIEtudiantEAO siEAO;
-
 	private Etudiant etudiant = new Etudiant();
 
 	private List<Etudiant> etudiants = new ArrayList<Etudiant>();

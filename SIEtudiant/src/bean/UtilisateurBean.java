@@ -103,7 +103,7 @@ public class UtilisateurBean implements Serializable {
 		return "listeUser";
 	}
 
-	public void modifier() {
+	public void modifierCompte() {
 		// Message de modif
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Votre mot de passe a bien été modifié"));
@@ -127,6 +127,10 @@ public class UtilisateurBean implements Serializable {
 		// déconnexion automatique en appelant la fonction logout
 		//login.logout();
 
+	}
+	public String modifier() {
+		utilisateurEJB.updateUtilisateur(editUtilisateur);
+		return"test";
 	}
 
 	public String genererMDP() {
