@@ -149,6 +149,10 @@ public class EtudiantBean implements Serializable {
 		// Appeler la procédure pour creer mon PDF d'etudiants
 		GenereDocument.creerListeEtudiantsPDF(etudiants, "liste_etudiants");
 	}
+	
+	public void creerListeEtudiantsXLS() {
+		GenereDocument.creerListeEtudiantsXLS(etudiants, "liste_etudiants");
+	}
 
 	public String getPassedParameter() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();

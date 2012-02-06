@@ -37,9 +37,10 @@ public class EtudiantEntrepriseBean {
 	private EtudiantEntrepriseEJB etudiantEntrepriseEJB;
 
 	private Etudiant etudiantEnt = new Etudiant();
-	
+
 	//@ManagedProperty(value = "#{etudiantFormationBean}")
-	//private EtudiantFormationBean efb;
+	@Inject
+	private EtudiantFormationBean efb;
 
 	private EtudiantEntreprise etudiantEntreprise = new EtudiantEntreprise();
 	private EtudiantEntrepriseId etudiantEntrepriseId = new EtudiantEntrepriseId();
@@ -55,7 +56,7 @@ public class EtudiantEntrepriseBean {
 	private Long entrepriseItemSelect;
 	private String contratItemSelect;
 
-	private EtudiantEntreprise selectedEtudiantEntreprise=new EtudiantEntreprise();
+	private EtudiantEntreprise selectedEtudiantEntreprise = new EtudiantEntreprise();
 
 	@PostConstruct
 	public void init() {
@@ -76,7 +77,6 @@ public class EtudiantEntrepriseBean {
 			} catch (NumberFormatException e) {
 				Redirection.erreurXhtml();
 			}
-
 		}
 		// Je remplis la liste d'entreprise pour la page d'ajout
 		// etudiantEntreprise..
@@ -106,37 +106,33 @@ public class EtudiantEntrepriseBean {
 		// rataché directement dans le jsf)
 		etudiantEntreprise.setTypecontrat(contratItemSelect);
 
-	
 		etudiantEntreprise.setEntreprise(entrepriseEJB
-				.findEntrepriseById(entrepriseItemSelect));	
-		etudiantEntreprise.setEtudiant(etudiantEJB.
-				findEtudiantById(idEtudiant));
+				.findEntrepriseById(entrepriseItemSelect));
+		etudiantEntreprise
+				.setEtudiant(etudiantEJB.findEtudiantById(idEtudiant));
 
 		// On ajoute étudiantEntrepise dans la BDD
 		etudiantEntrepriseEJB.createEtudiantEntreprise(etudiantEntreprise);
-		
+
 		// redirection vers la liste des activités. Seul solution trouvée pour
 		// passé l'id en parametre
 		Redirection.listeEtudiantEntreprise(idEtudiant);
-		
-		
 
 	}
 
 	public void supprimer() {
 
-		//on récupére l'id de l'étudiant de cette manière avant de le supprimer
-		Long idEtu=selectedEtudiantEntreprise.getEtudiant().getId();
-		
+		// on récupére l'id de l'étudiant de cette manière avant de le supprimer
+		Long idEtu = selectedEtudiantEntreprise.getEtudiant().getId();
+
 		System.out.println("COUCOU");
 		System.out.println(idEtu);
-		
+
 		etudiantEntrepriseEJB
 				.removeEtudiantEntreprise(selectedEtudiantEntreprise);
-		
+
 		Redirection.listeEtudiantEntreprise(idEtu);
-		
-		
+
 		/**
 		 * for (EtudiantEntreprise unEtudiantEntreprise : etudiantEntreprises) {
 		 * System.out.println("Test");
@@ -146,14 +142,17 @@ public class EtudiantEntrepriseBean {
 		 * etudiantEntrepriseEJB.removeEtudiantEntreprise(unEtudiantEntreprise);
 		 * } }
 		 */
-				
+
 	}
-	
+
 	/*
-	 * Genere un PDF pour l'etudiant selectionne avec ses entreprises et ses formations
+	 * Genere un PDF pour l'etudiant selectionne avec ses entreprises et ses
+	 * formations
 	 */
 	public void creerEtudiantPDF() {
-		GenereDocument.creerEtudiantPDF(etudiantEnt, etudiantEntreprises, "etudiant");
+		GenereDocument.creerEtudiantPDF(etudiantEnt, etudiantEntreprises,
+				efb.getEtudiantFormations(),
+				"etudiant");
 	}
 
 	// création de la liste d'item Entreprise, necessaire pour la page

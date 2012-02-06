@@ -21,9 +21,9 @@ import entity.Utilisateur;
 import util.MD5Password;
 import util.Redirection;
 
-@ManagedBean(name="login")
+@ManagedBean(name = "login")
 @SessionScoped
-public class Login implements Serializable{
+public class Login implements Serializable {
 
 	private Utilisateur utilisateur;
 
@@ -33,7 +33,7 @@ public class Login implements Serializable{
 	@EJB
 	private UtilisateurEJB utilisateurEJB;
 
-	private Logger logger = Logger.getLogger(Login.class.getName());
+	// private Logger logger = Logger.getLogger(Login.class.getName());
 
 	@NotNull
 	@Length(min = 3, max = 25)
@@ -55,39 +55,40 @@ public class Login implements Serializable{
 		this.password = password;
 	}
 
-	public String login() {
-		logger.log(Level.WARNING, "DEMANDE DE CONNEXION");
-		FacesMessage msg = null;
-		String dest = "site";
+	public void login() {
+		// logger.log(Level.WARNING, "DEMANDE DE CONNEXION");
+		// String dest = "site";
 		List<Utilisateur> results = utilisateurEJB
 				.findUtilisateurByLogin(username);
-		logger.log(Level.WARNING, "taille de la liste : " + results.size());
+		// logger.log(Level.WARNING, "taille de la liste : " + results.size());
 		if (!results.isEmpty()) {
 			try {
 				if (MD5Password.testPassword(password, results.get(0)
 						.getMotDePasse())) {
 					utilisateur = results.get(0);
 					/*
-					 *  Si la tentative de connexion fonctionne, on redirige l'utilisateur
-					 *  pour actualiser le menu
+					 * Si la tentative de connexion fonctionne, on redirige
+					 * l'utilisateur pour actualiser le menu
 					 */
 					Redirection.log();
 				} else {
-					msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Erreur Login", "Authentification invalide");
-					dest = null;
+					// Pb dans le mot de passe
+					FacesContext.getCurrentInstance().addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_WARN,
+									"Erreur mot de passe",
+									"Authentification invalide"));
 				}
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
-
 		} else {
-			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erreur Login",
-					"Authentification invalide");
-			dest = null;
+			// Pb dans le login, on a pas trouvé l'utilisateur
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Erreur Login", "Authentification invalide"));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		return dest;
 	}
 
 	public String logout() {
