@@ -12,7 +12,7 @@
 	<ui:define name="title">Suivi des etudiants</ui:define>
 
 	<ui:define name="contenu">
-		<ui:fragment rendered="#{login.isAdmin()}">
+		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:form>
 				<p:panel id="panneauPasse" header="Modification de votre compte">
 					<p:focus context="panneauPasse" />
@@ -28,7 +28,7 @@
 					<p:message for="mdp2" />
 						
 					<br />
-					<p:commandButton rendered="#{login.isAdmin()}" value="Modifier"
+					<p:commandButton rendered="#{login.isLoggedIn()}" value="Modifier"
 						update="panneauPasse" actionListener="#{utilisateurBean.modifierCompte()}" />
 					<p:commandButton value="Generer un mot de passe" update="ale"
 						onclick="mdpGenere.show()" />
