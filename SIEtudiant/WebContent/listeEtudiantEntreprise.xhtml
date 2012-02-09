@@ -201,7 +201,7 @@
 						actionListener="#{etudiantEntrepriseBean.creerEtudiantPDF()}" />
 				</p:confirmDialog>
 
-				<p:commandButton rendered="#{login.isAdmin()}"
+				<p:commandButton 
 					value="Generer un PDF pour cet étudiant"
 					onclick="confirmationPDF.show()" type="button" />
 
@@ -211,8 +211,8 @@
 						actionListener="#{etudiantEntrepriseBean.creerEtudiantXLS()}" />
 				</p:confirmDialog>
 
-				<p:commandButton rendered="#{login.isAdmin()}"
-					value="Generer un XLS pour cet étudiant"
+				<p:commandButton 
+							value="Generer un XLS pour cet étudiant"
 					onclick="confirmationXLS.show()" type="button" />
 
 			</h:form>

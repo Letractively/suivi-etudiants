@@ -1,18 +1,17 @@
 package util;
 
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class UtilTest {
 
-	public static Properties getInitProperties() {
-        Properties p = new Properties();
+	public static Map getInitProperties() {
+		Map p = new HashMap();
         
-        // We need to tell the context where and how to look
-        p.put("", "");
-        p.put("", "");
-        p.put("", "");
- 
+        p.put("org.glassfish.ejb.embedded.glassfish.installation.root",
+                "C:/glassfish3/glassfish/domains/domain1");
+       
         return p;
     }
 }

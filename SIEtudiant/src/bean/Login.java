@@ -106,6 +106,15 @@ public class Login implements Serializable {
 
 	public boolean isAdmin() {
 		if (utilisateur != null) {
+			if (utilisateur.getNiveau().equals("2")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean isSuperAdmin()
+	{
+		if (utilisateur != null) {
 			if (utilisateur.getNiveau().equals("1")) {
 				return true;
 			}

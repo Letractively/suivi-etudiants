@@ -1,34 +1,44 @@
 package junit;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.ejb.EJB;
-import javax.naming.InitialContext;
+import javax.ejb.embeddable.EJBContainer;
+import javax.naming.Context;
+import javax.naming.NamingException;
 
-import org.junit.Before;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import util.UtilTest;
 
 import ejb.EtudiantEJB;
-import ejb.implement.EtudiantEJBInterface;
 import entity.Adresse;
 import entity.Contact;
 import entity.Etudiant;
 
 public class EtudiantTest {
 	
-	private EtudiantEJBInterface eao;
+	private static EJBContainer container;
+	private static Context ctx;
 	
-	@Before
-    public void setUp() throws Exception {
-        eao = (EtudiantEJBInterface) new InitialContext(UtilTest.getInitProperties())
-                .lookup(""
-                        + "");
-    }
+	@BeforeClass
+    public static void setUp() throws Exception {
+        
+		Map p = new HashMap();
+        
+        p.put("org.glassfish.ejb.embedded.glassfish.installation.root",
+                "C:/glassfish3/glassfish");
+       
+		
+        //container = EJBContainer.createEJBContainer(UtilTest.getInitProperties());
+		container = EJBContainer.createEJBContainer(p);
+        ctx = container.getContext();
+	}
  	 
-	 
-	public void test()
+	@Test
+	public void test() throws NamingException
 	{
 		
 		Contact cont=new Contact();
@@ -53,7 +63,9 @@ public class EtudiantTest {
 		etu.setAdresse(ad);
 				
 		
+		EtudiantEJB etuEJB=(EtudiantEJB) ctx.lookup("java:global/classes/EtudiantEJB");
 		
+		etuEJB.createEtudiant(etu);
 	}
 
 }
