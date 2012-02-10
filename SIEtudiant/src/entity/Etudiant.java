@@ -32,15 +32,6 @@ public class Etudiant implements Serializable {
 	private Set<EtudiantFormation> lesFormations = new HashSet<EtudiantFormation>();
 	private Set<EtudiantEntreprise> lesEntreprises = new HashSet<EtudiantEntreprise>();
 
-	// @OneToMany
-	// public List<Formation> getFormations() {
-	// return formations;
-	// }
-	//
-	// public void setFormations(List<Formation> formations) {
-	// this.formations = formations;
-	// }
-
 	public Etudiant() {
 		super();
 
