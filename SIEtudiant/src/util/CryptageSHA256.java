@@ -5,17 +5,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class CryptageSHA256 {
 
-	private MessageDigest sha256Digest;
+	private static MessageDigest sha256Digest;
 	
-	public CryptageSHA256() {
-		try {
-			// Type de cryptage, ici SHA256
-			sha256Digest = MessageDigest.getInstance("SHA-256");
-		}
-		catch(NoSuchAlgorithmException e) {
-			System.out.println(e);
-		}
-	}
 	
 	/*
 	 * Fonction de cryptage qui convertit un tableau de byte en hexa
@@ -40,15 +31,39 @@ public class CryptageSHA256 {
 	/*
 	 * Va crypter la chaine passée en parametre grace a la fct precedente
 	 */
-	public String crypter(String message) {
+	public static String crypter(String message) {
+		try {
+			sha256Digest = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return convertToHex(sha256Digest.digest(message.getBytes()));
 	}
+	
+	public static boolean testPassword(String clearTextTestPassword,String encodedActualPassword) throws NoSuchAlgorithmException
+    {
+		String encodedTestPassword = crypter(
+				clearTextTestPassword);
+
+			return (encodedTestPassword.equals(encodedActualPassword));
+    }
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		CryptageSHA256 c = new CryptageSHA256();
-		System.out.println(c.crypter("alex"));
+		
+		crypter("alex");
+		
+		try {
+			if(testPassword("alex","4135aa9dc1b842a653dea846903ddb95bfb8c5a10c504a7fa16e10bc31d1fdf0"))
+			{
+					System.out.println("Hello!!!!!!!!!!");
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -12,7 +12,7 @@
 	<ui:define name="title">Suivi des etudiants</ui:define>
 
 	<ui:define name="contenu">
-		<ui:fragment rendered="#{login.isAdmin()}">
+		<ui:fragment rendered="#{login.isSuperAdmin()}">
 			<h:form>
 				<p:dataTable value="#{utilisateurBean.utilisateurs}" var="u">
 					<f:facet name="header">  
@@ -45,14 +45,7 @@
 						</f:facet>
 						<h:outputText value="#{u.niveau}" />
 					</p:column>
-					<p:column>
-						<h:commandButton value="Modifier/Consulter"
-							action="#{utilisateurBean.edit()}">
-							<f:setPropertyActionListener value="#{u}"
-								target="#{utilisateurBean.editUtilisateur}" />
-							
-						</h:commandButton>
-					</p:column>
+					
 				</p:dataTable>
 				<p:confirmDialog
 					message="Etes vous sur de vouloir supprimer les utilisateurs selectionnés ? "

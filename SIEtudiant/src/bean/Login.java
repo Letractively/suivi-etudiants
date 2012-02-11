@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Length;
 
 import ejb.UtilisateurEJB;
 import entity.Utilisateur;
+import util.CryptageSHA256;
 import util.MD5Password;
 import util.Redirection;
 
@@ -63,7 +64,7 @@ public class Login implements Serializable {
 		// logger.log(Level.WARNING, "taille de la liste : " + results.size());
 		if (!results.isEmpty()) {
 			try {
-				if (MD5Password.testPassword(password, results.get(0)
+				if (CryptageSHA256.testPassword(password, results.get(0)
 						.getMotDePasse())) {
 					utilisateur = results.get(0);
 					/*
@@ -106,7 +107,7 @@ public class Login implements Serializable {
 
 	public boolean isAdmin() {
 		if (utilisateur != null) {
-			if (utilisateur.getNiveau().equals("2")) {
+			if (utilisateur.getNiveau().equals("1") || utilisateur.getNiveau().equals("2")) {
 				return true;
 			}
 		}

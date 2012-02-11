@@ -14,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import util.CryptageSHA256;
 import util.MD5Password;
 import util.Mail;
 import util.MotDePasseAleatoire;
@@ -78,10 +79,10 @@ public class UtilisateurBean implements Serializable {
 		 */
 		Mail.autoMail(utilisateur.getMail(), utilisateur.getMotDePasse());
 
-		String mdpMD5 = MD5Password.getEncodedPassword(utilisateur
+		String mdpSHA256 = CryptageSHA256.crypter(utilisateur
 				.getMotDePasse());
 
-		this.utilisateur.setMotDePasse(mdpMD5);
+		this.utilisateur.setMotDePasse(mdpSHA256);
 		
 		/*
 		 * Changer la chaine niveauItemSelect pour la BDD
@@ -114,7 +115,7 @@ public class UtilisateurBean implements Serializable {
 		// recuperation de la session
 		Utilisateur user = login.getUtilisateur();
 
-		String mdpMD5 = MD5Password.getEncodedPassword(utilisateur
+		String mdpMD5 = CryptageSHA256.crypter(utilisateur
 				.getMotDePasse());
 
 		// modification du mot de passe : on met le mot de passe de utilisateur

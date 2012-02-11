@@ -45,14 +45,21 @@
                                                                 url="ajoutEntreprise.faces" />
                                                 </p:submenu>
 
-                                                <p:submenu label="Utilisateurs">
-                                                        <p:menuitem value="Liste Utilisateurs" url="listeUsers.faces" />
-                                                        <p:menuitem value="Ajouter Utilisateur" url="ajoutUser.faces" />
-                                                </p:submenu>
 
                                                 <p:submenu label="Etablissements">
                                                         <p:menuitem value="Liste Etablissements" url="listeEtablissements.faces" />
                                                         <p:menuitem value="Ajouter Etablissement" url="ajoutEtablissement.faces" />
+                                                </p:submenu>
+                                                
+                                                
+                                                <p:submenu rendered="#{login.isSuperAdmin()}" label="Utilisateurs">
+                                                        <p:menuitem value="Liste Utilisateurs" url="listeUsers.faces" />
+                                                        <p:menuitem value="Ajouter Utilisateur" url="ajoutUser.faces" />
+                                                </p:submenu>
+                                                
+                                                <p:submenu rendered="#{login.isSuperAdmin()}" label="Recapitulatif">
+                                                        <p:menuitem value="Recapitulatif" url="recap.faces" />
+                                                        
                                                 </p:submenu>
                                                 
                                         </p:menu>
