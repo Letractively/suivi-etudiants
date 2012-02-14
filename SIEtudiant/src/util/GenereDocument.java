@@ -191,8 +191,8 @@ public class GenereDocument {
 			// Ajouts
 			for (EtudiantEntreprise etuEnt : etudiantsEntreprise) {
 				tableEnt.addCell(etuEnt.getEntreprise().getNom().toString());
-				tableEnt.addCell(Date.format(etuEnt.getId().getDatedebut()));
-				tableEnt.addCell(Date.format(etuEnt.getDatefin()));
+				tableEnt.addCell(DateUtil.format(etuEnt.getId().getDatedebut()));
+				tableEnt.addCell(DateUtil.format(etuEnt.getDatefin()));
 				tableEnt.addCell(etuEnt.getPosteoccupe().toString());
 				tableEnt.addCell(etuEnt.getTypecontrat().toString());
 			}
@@ -225,8 +225,8 @@ public class GenereDocument {
 				tableForma.addCell(etuForma.getFormation().getLibelle()
 						.toString());
 				tableForma
-						.addCell(Date.format(etuForma.getId().getDatedebut()));
-				tableForma.addCell(Date.format(etuForma.getDatefin()));
+						.addCell(DateUtil.format(etuForma.getId().getDatedebut()));
+				tableForma.addCell(DateUtil.format(etuForma.getDatefin()));
 			}
 			// Ajout du tableau au document
 			document.add(tableForma);
@@ -440,8 +440,8 @@ public class GenereDocument {
 			HSSFRow ligneEnt = sheet.createRow(ligneEtuEnt);
 			// Colonnes
 			ligneEnt.createCell((short) 0, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(etuEnt.getEntreprise().getNom().toString()));
-			ligneEnt.createCell((short) 1, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(Date.format(etuEnt.getId().getDatedebut())));
-			ligneEnt.createCell((short) 2, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(Date.format(etuEnt.getDatefin())));
+			ligneEnt.createCell((short) 1, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(DateUtil.format(etuEnt.getId().getDatedebut())));
+			ligneEnt.createCell((short) 2, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(DateUtil.format(etuEnt.getDatefin())));
 			ligneEnt.createCell((short) 3, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(etuEnt.getPosteoccupe().toString()));
 			ligneEnt.createCell((short) 4, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(etuEnt.getTypecontrat().toString()));
 			// Incrementer la ligne
@@ -493,8 +493,8 @@ public class GenereDocument {
 			// Colonnes
 			ligneForma.createCell((short) 0, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(etuForma.getFormation().getEtablissement().getNom().toString()));
 			ligneForma.createCell((short) 1, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(etuForma.getFormation().getLibelle().toString()));
-			ligneForma.createCell((short) 2, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(Date.format(etuForma.getId().getDatedebut())));
-			ligneForma.createCell((short) 3, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(Date.format(etuForma.getDatefin())));
+			ligneForma.createCell((short) 2, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(DateUtil.format(etuForma.getId().getDatedebut())));
+			ligneForma.createCell((short) 3, HSSFCell.CELL_TYPE_STRING).setCellValue(new HSSFRichTextString(DateUtil.format(etuForma.getDatefin())));
 			// Incrementer la ligne
 			ligneEtuForma++;
 		}

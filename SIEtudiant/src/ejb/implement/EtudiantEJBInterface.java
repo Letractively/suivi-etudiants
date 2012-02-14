@@ -1,5 +1,6 @@
 package ejb.implement;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -14,5 +15,7 @@ public interface EtudiantEJBInterface {
 	void updateEtudiant(Etudiant etudiant);
 	Etudiant findEtudiantById(Long id);
 	List<Etudiant> findAllEtudiantsByEnt(Long ent);
+	List<Etudiant> findAllEtudiantsActuel(Date dateActu, long idEtab);
+	List<Etudiant> findAllEtudiantsByFormation(Long formation);
 
 }

@@ -21,7 +21,7 @@
 					value="#{etudiantEntrepriseBean.etudiantEntreprises}" var="ent">
 
 					<f:facet name="header">  
-			            Liste des activités professionnelle de
+			            Activités professionnelles de
 			             <h:outputText
 							value="#{etudiantEntrepriseBean.etudiantEnt}" />
 					</f:facet>
@@ -100,14 +100,23 @@
 			</h:form>
 
 			<br />
+			
+			
 			<h:form id="formFormaEnt">
+				
+				<h:selectOneMenu id="etab" value="#{etudiantFormationBean.formationTypeItemSelect}">
+					<f:selectItems value="#{etudiantFormationBean.formationsTypeItems}" />
+					<p:ajax listener="#{etudiantFormationBean.doSelectedTypeTableau()}" update="tabEtuForm" event="change" />
+				</h:selectOneMenu>
+				 
+				 <br />
+				
 				<p:growl id="msgs" showDetail="true" />
-
 				<p:dataTable id="tabEtuForm"
 					value="#{etudiantFormationBean.etudiantFormations}" var="ef">
 
 					<f:facet name="header">  
-			            Liste des formations de
+			             Formations de 
 			             <h:outputText value="#{etudiantFormationBean.etudiant}" />
 					</f:facet>
 
@@ -161,6 +170,19 @@
 
 				</p:dataTable>
 
+				
+				<br />
+				<br />
+				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
+					value="ajoutEtudiantFormation.faces">
+					<f:param name="id" value="#{etudiantFormationBean.etudiant.id}" />
+					<h:outputText value="Ajouter une formation" />
+				</h:outputLink>
+				
+				<br />
+				<br />
+				<br />
+				
 				<p:dialog header="Formation" widgetVar="etudiantFormationDialog"
 					resizable="false" id="formationId" showEffect="fade"
 					hideEffect="explode" modal="true">
@@ -185,24 +207,13 @@
 					<p:commandButton value="Non"
 						onclick="confirmationSupFormation.hide()" type="button" />
 				</p:confirmDialog>
-
-				<br />
-				<h:outputLink rendered="#{login.isAdmin()}" id="lien2"
-					value="ajoutEtudiantFormation.faces">
-					<f:param name="id" value="#{etudiantFormationBean.etudiant.id}" />
-					<h:outputText value="Ajouter une formation" />
-				</h:outputLink>
-				<br />
-				<br />
-
 				<p:confirmDialog message="Document PDF généré sur le bureau"
 					header="Information" severity="info" widgetVar="confirmationPDF">
 					<p:commandButton value="Ok" oncomplete="confirmationPDF.hide()"
 						actionListener="#{etudiantEntrepriseBean.creerEtudiantPDF()}" />
 				</p:confirmDialog>
 
-				<p:commandButton 
-					value="Generer un PDF pour cet étudiant"
+				<p:commandButton value="Generer un PDF pour cet étudiant"
 					onclick="confirmationPDF.show()" type="button" />
 
 				<p:confirmDialog message="Document Excel créé sur le bureau"
@@ -211,10 +222,8 @@
 						actionListener="#{etudiantEntrepriseBean.creerEtudiantXLS()}" />
 				</p:confirmDialog>
 
-				<p:commandButton 
-							value="Generer un XLS pour cet étudiant"
+				<p:commandButton value="Generer un XLS pour cet étudiant"
 					onclick="confirmationXLS.show()" type="button" />
-
 			</h:form>
 
 		</ui:fragment>

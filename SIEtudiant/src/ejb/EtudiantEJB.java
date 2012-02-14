@@ -1,5 +1,6 @@
 package ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJBException;
@@ -67,6 +68,39 @@ public class EtudiantEJB implements EtudiantEJBInterface{
 						"select DISTINCT e from Etudiant e, EtudiantEntreprise ent" +
 						" where e.id=ent.id.etudiantId and ent.id.entrepriseId=:ent")
 				.setParameter("ent", ent).getResultList();
+		return results;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Etudiant> findAllEtudiantsByFormation(Long formation) throws EJBException {
+		List<Etudiant> results = em
+				.createQuery(
+						"select DISTINCT e from Etudiant e, EtudiantFormation forma" +
+						" where e.id=forma.id.etudiantId and forma.id.formationId=:formation")
+				.setParameter("formation", formation).getResultList();
+		return results;
+	}
+	
+	
+	public List<Etudiant> findAllEtudiantsActuel(Date dateActu,long idEtab) throws EJBException {
+		@SuppressWarnings("unchecked")
+		List<Etudiant> results = em
+				.createQuery(
+						"select DISTINCT e from Etudiant e, EtudiantFormation forma" +
+						" where e.id=forma.id.etudiantId " +
+						"and forma.formation.etablissement.id=:idEtab "+
+						"and :dateActu between forma.id.datedebut and forma.datefin").setParameter("dateActu", dateActu)
+						.setParameter("idEtab", idEtab).getResultList();
+		return results;
+	}
+	public List<Etudiant> findAllEtudiantsAncien(Date dateActu,long idEtab) throws EJBException {
+		@SuppressWarnings("unchecked")
+		List<Etudiant> results = em
+				.createQuery(
+						"select DISTINCT e from Etudiant e, EtudiantFormation forma" +
+						" where e.id=forma.id.etudiantId " +
+						"and forma.formation.etablissement.id=:idEtab "+
+						"and :dateActu > forma.datefin").setParameter("dateActu", dateActu)
+						.setParameter("idEtab", idEtab).getResultList();
 		return results;
 	}
 }

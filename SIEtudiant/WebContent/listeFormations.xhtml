@@ -19,6 +19,7 @@
                                     Liste des formations à <h:outputText
 							value="#{formationBean.etablissement.nom}" />
 					</f:facet>
+					
 					<p:column rendered="#{login.isAdmin()}">
 						<f:facet name="header">
 						</f:facet>
@@ -30,7 +31,10 @@
 						<f:facet name="header">
 							<h:outputText value="Libellé" />
 						</f:facet>
-						<h:outputText value="#{forma.libelle}" />
+						<h:outputLink id="lien1" value="listeEtudiants.faces">
+							<h:outputText value="#{forma.libelle}" />
+							<f:param name="forma" value="#{forma.id}" />
+						</h:outputLink>
 					</p:column>
 					<p:column sortBy="#{forma.libelleCourt}">
 						<f:facet name="header">

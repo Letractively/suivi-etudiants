@@ -1,7 +1,9 @@
 package bean;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +23,8 @@ import entity.EtudiantFormation;
 import entity.EtudiantFormationId;
 import entity.Formation;
 
+import util.DateUtil;
+import util.EtablissementConfig;
 import util.Redirection;
 
 @ManagedBean(name = "etudiantFormationBean")
@@ -40,7 +44,8 @@ public class EtudiantFormationBean implements Serializable {
 
 	@EJB
 	private EtablissementEJB etablissementEJB;
-
+	
+	
 	private Etudiant etudiant = new Etudiant();
 	private EtudiantFormation etudiantFormation = new EtudiantFormation();
 	private EtudiantFormationId etudiantFormationId = new EtudiantFormationId();
@@ -66,6 +71,11 @@ public class EtudiantFormationBean implements Serializable {
 
 	private EtudiantFormation selectedEtudiantFormation;
 
+	private String formationTypeItemSelect;
+	private List<SelectItem> formationsTypeItems = new ArrayList<SelectItem>();
+
+	private Long id;
+
 	@PostConstruct
 	public void init() {
 		/*
@@ -74,13 +84,14 @@ public class EtudiantFormationBean implements Serializable {
 		 */
 		if (this.getPassedParameter() != null) {
 			try {
-				Long id = Long.parseLong(this.getPassedParameter());
+				id = Long.parseLong(this.getPassedParameter());
 
 				// Je remplis ma liste d'etudiantFormations grace a ma requete
 				// etudiantEntreprises =
 				// etudiantFormationEJB.findCompaniesByStudentId(id);
 				etudiantFormations = etudiantFormationEJB
-						.findFormationsByStudentId(id);
+						.findAllFormationsByStudentId(id);
+
 				// etablissements = etablissementEJB.findAllEtablissements();
 				// formations =
 				// formationEJB.findFormationsByEtablissementId(etablissementItemSelect);
@@ -101,7 +112,9 @@ public class EtudiantFormationBean implements Serializable {
 		formations = formationEJB.findAllFormations();
 
 		// appel de la fonction qui initailise la liste d'item entreprise
+
 		creerListeItem();
+		creerListeTypeSelect();
 
 	}
 
@@ -139,6 +152,7 @@ public class EtudiantFormationBean implements Serializable {
 	// combo ça marche pas si on passe comme id un etablissement au lieu d'un
 	// entier
 	public List<SelectItem> doSelectedEtab() {
+		
 		System.out.println("Entré dans la procédure");
 
 		Long idEtab = etablissementItemSelect;
@@ -152,16 +166,23 @@ public class EtudiantFormationBean implements Serializable {
 
 			// code utilisé pour l'instant, j'aurais voulais éviter cela, en
 			// récupérant directement l'établissement au lieu du nombre
-			Etablissement et;
+			
+			/*
+			 * Etablissement et;
+			 *
 			et = etablissementEJB
 					.findEtablissementById(etablissementItemSelect);
 			et.getLesFormations();
-
+			*/
+			
 			// on supprime les éléments de la liste formation
 			formationsItems.removeAll(formationsItems);
 
+			formations= formationEJB.findFormationsByEtablissementId(idEtab);
+			
 			// conversion de la liste hashset en arrayliste formation
-			formations = new ArrayList<Formation>(et.getLesFormations());
+			//formations = new ArrayList<Formation>(et.getLesFormations());
+			
 			System.out.println("Taille formations : " + formations.size());
 
 		}
@@ -169,6 +190,34 @@ public class EtudiantFormationBean implements Serializable {
 		return creerListeItemFormation();
 	}
 
+	public List<EtudiantFormation> doSelectedTypeTableau() {
+		System.out.println(id);
+
+		if (formationTypeItemSelect.equals("APRES IUT")) {
+			etudiantFormations = etudiantFormationEJB
+					.findFormationsUlterieureByStudentId(id,
+							EtablissementConfig.etablissement);
+		}
+		if (formationTypeItemSelect.equals("AVANT IUT")) {
+			etudiantFormations = etudiantFormationEJB
+					.findFormationsAnterieuresByStudentId(id,
+							EtablissementConfig.etablissement);
+		}
+		if (formationTypeItemSelect.equals("IUT")) {
+			etudiantFormations= etudiantFormationEJB
+					.findFormationsByStudentId(id,
+							EtablissementConfig.etablissement);
+		}
+		if (formationTypeItemSelect.equals("Tout")) {
+			etudiantFormations = etudiantFormationEJB
+					.findAllFormationsByStudentId(id);
+		}
+		this.setEtudiantFormations(etudiantFormations);
+		
+		return etudiantFormations;
+		
+	}
+	
 	public List<SelectItem> creerListeItem() {
 		for (Etablissement eta : etablissements) {
 			// identifiant,valeur
@@ -189,12 +238,27 @@ public class EtudiantFormationBean implements Serializable {
 		return formationsItems;
 	}
 
+	public List<SelectItem> creerListeTypeSelect() {
+
+		formationsTypeItems.add(new SelectItem("Tout", "Tout"));
+		formationsTypeItems.add(new SelectItem("IUT", "IUT"));
+		formationsTypeItems.add(new SelectItem("AVANT IUT", "AVANT IUT"));
+		formationsTypeItems.add(new SelectItem("APRES IUT", "APRES IUT"));
+
+		return formationsTypeItems;
+	}
+	
+
 	public String getPassedParameter() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		String parametreId = (String) facesContext.getExternalContext()
 				.getRequestParameterMap().get("id");
 		return parametreId;
 	}
+	
+	
+	
+	
 
 	// getters and setters
 
@@ -317,6 +381,22 @@ public class EtudiantFormationBean implements Serializable {
 	public void setSelectedEtudiantFormation(
 			EtudiantFormation selectedEtudiantFormation) {
 		this.selectedEtudiantFormation = selectedEtudiantFormation;
+	}
+
+	public String getFormationTypeItemSelect() {
+		return formationTypeItemSelect;
+	}
+
+	public void setFormationTypeItemSelect(String formationTypeItemSelect) {
+		this.formationTypeItemSelect = formationTypeItemSelect;
+	}
+
+	public List<SelectItem> getFormationsTypeItems() {
+		return formationsTypeItems;
+	}
+
+	public void setFormationsTypeItems(List<SelectItem> formationsTypeItems) {
+		this.formationsTypeItems = formationsTypeItems;
 	}
 
 }

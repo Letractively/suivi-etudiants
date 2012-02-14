@@ -13,10 +13,20 @@
 	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:form id="formEtu">
+				
+				<h:selectOneMenu id="etab" value="#{etudiantBean.etudiantTypeItemSelect}">
+					<f:selectItems value="#{etudiantBean.etudiantsTypeItems}" />
+					<p:ajax listener="#{etudiantBean.doSelectedTypeEtu()}" update="tabEtu" event="change" />
+				</h:selectOneMenu>
+				<br />
+				
+				<br />
+				
+				
 				<p:dataTable id="tabEtu" var="et" value="#{etudiantBean.etudiants}"
 					paginator="true" rows="10">
 					<f:facet name="header">  
-			            Liste des étudiants 
+			            Etudiants <h:outputText value="#{etudiantBean.msg}" /> (<h:outputText value="#{etudiantBean.nbEtudiant()}" />) 
 			        </f:facet>
 					<p:column rendered="#{login.isAdmin()}">
 						<f:facet name="header">
@@ -59,7 +69,7 @@
 					</p:column>
 
 				</p:dataTable>
-
+			
 				<p:dialog header="Etudiant" widgetVar="etudiantDialog"
 					resizable="false" id="etudiantId" showEffect="fade"
 					hideEffect="explode" modal="true">

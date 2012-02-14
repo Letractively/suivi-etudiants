@@ -1,5 +1,6 @@
 package ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -30,11 +31,47 @@ public class EtudiantFormationEJB implements EtudiantFormationEJBInterface
 	  * Retourne l'ensemble des entreprises rattachees a un etudiant (identifiant)
 	  */
 	 @SuppressWarnings("unchecked") 
-	 public List<EtudiantFormation> findFormationsByStudentId(Long idEtudiant) {
+	 public List<EtudiantFormation> findFormationsByStudentId(Long idEtudiant,long etab) {
 		 List<EtudiantFormation> results = em.createQuery(
-				 "select etf from EtudiantFormation etf where etf.id.etudiantId =:id").setParameter("id", idEtudiant).getResultList();
+				 "select etf from EtudiantFormation etf where etf.id.etudiantId =:id " +
+				 "and  etf.formation.etablissement.id = :etab ").setParameter("id", idEtudiant).setParameter("etab", etab).getResultList();
 		 return results;
 	 }
+	 
+	 @SuppressWarnings("unchecked") 
+	 public List<EtudiantFormation> findFormationsUlterieureByStudentId(Long idEtudiant, long etab) {
+		 List<EtudiantFormation> results = em.createQuery(
+				 "select etf from EtudiantFormation etf " +
+				 "where etf.id.etudiantId =:id " +
+				 "and  etf.formation.etablissement.id != :etab "+
+				"and etf.id.datedebut > (select max(etf2.datefin) from EtudiantFormation etf2 " +
+				"where etf2.formation.etablissement.id = :etab)").
+				setParameter("id", idEtudiant)
+				.setParameter("etab", etab).	
+				getResultList();
+		 return results;
+	 }
+	 @SuppressWarnings("unchecked") 
+	 public List<EtudiantFormation> findFormationsAnterieuresByStudentId(Long idEtudiant, long etab) {
+		 List<EtudiantFormation> results = em.createQuery(
+				 "select etf from EtudiantFormation etf " +
+				 "where etf.id.etudiantId =:id " +
+				 "and  etf.formation.etablissement.id != :etab "+
+				"and etf.datefin < (select min(etf2.id.datedebut) from EtudiantFormation etf2 " +
+				"where etf2.formation.etablissement.id = :etab)").
+				setParameter("id", idEtudiant)
+				.setParameter("etab", etab).	
+				getResultList();
+		 return results;
+	 }
+	 
+	 @SuppressWarnings("unchecked") 
+	 public List<EtudiantFormation> findAllFormationsByStudentId(Long idEtudiant) {
+		 List<EtudiantFormation> results = em.createQuery(
+				 "select etf from EtudiantFormation etf where etf.id.etudiantId =:id ").setParameter("id", idEtudiant).getResultList();
+		 return results;
+	 }
+	 
 	 
 	 /*
 	  * Cree un etudiantEntreprise dans la BDD

@@ -16,7 +16,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import ejb.EtablissementEJB;
 import ejb.UtilisateurEJB;
+import entity.Etablissement;
 import entity.Utilisateur;
 import util.CryptageSHA256;
 import util.MD5Password;
@@ -30,6 +32,12 @@ public class Login implements Serializable {
 
 	private String username;
 	private String password;
+	
+	private Etablissement etab;
+	
+	@EJB
+	private EtablissementEJB etablissementEJB;
+	
 
 	@EJB
 	private UtilisateurEJB utilisateurEJB;
@@ -122,7 +130,6 @@ public class Login implements Serializable {
 		}
 		return false;
 	}
-
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}

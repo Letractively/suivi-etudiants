@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import entity.Etudiant;
 import entity.EtudiantEntreprise;
 @Remote
 public interface EtudiantEntrepriseEJBInterface {
