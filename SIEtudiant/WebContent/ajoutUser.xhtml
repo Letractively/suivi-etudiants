@@ -27,10 +27,16 @@
 						value="#{utilisateurBean.utilisateur.motDePasse}" />
 					<p:message for="mdp" />
 					<br />
-					<h:outputLabel for="nomComplet" value="Nom complet : " />
-					<p:inputText id="nomComplet" required="true" label="Nom complet"
-						value="#{utilisateurBean.utilisateur.nomComplet}" />
-					<p:message for="nomComplet" />
+					<h:outputLabel for="nom" value="Nom  : " />
+					<p:inputText id="nom" required="true" label="Nom complet"
+						value="#{utilisateurBean.utilisateur.nom}" />
+					<p:message for="nom" />
+					
+					<h:outputLabel for="prenom" value="Prénom : " />
+					<p:inputText id="prenom" required="true" label="Prenom"
+						value="#{utilisateurBean.utilisateur.prenom}" />
+					<p:message for="prenom" />
+					
 					<br />
 					<h:outputLabel for="mail" value="Mail : " />
 					<p:inputText id="mail" required="true" label="Mail"
