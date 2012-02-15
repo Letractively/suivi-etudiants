@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
  */
 
 public class Redirection {
-	private static String domain = "SIEtudiant";
+	public static String domain = "SIEtudiant";
 
 	public static void erreurXhtml() {
 		try {

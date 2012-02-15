@@ -1,27 +1,20 @@
 package bean;
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import util.DateUtil;
-import util.EtablissementConfig;
 import util.GenereDocument;
+import util.Page;
 import util.Redirection;
-
 import ejb.EntrepriseEJB;
 import ejb.EtudiantEJB;
 import ejb.FormationEJB;
@@ -55,6 +48,8 @@ public class EtudiantBean implements Serializable {
 	private Boolean dateFinBoolean;
 	
 	private String msg=null;
+	
+	private String titrePDF="";
 
 	/*
 	 * on instancie pas, c'est l'etudiant que l'on récupere à partir du jsf, il
@@ -65,48 +60,47 @@ public class EtudiantBean implements Serializable {
 
 	private Etudiant selectedEtudiant;
 
-	private String etudiantTypeItemSelect;
-	private List<SelectItem> etudiantsTypeItems = new ArrayList<SelectItem>();
-
 	@PostConstruct
 	public void init() {
-		if (conversation.isTransient()) {
+		//solution pour ne pas relancer le bean lors de l'appui sur le boutton pdf, excel.
+		//la liste d'étdudiant est desormais correcte.
+		if (!FacesContext.getCurrentInstance().isPostback() && conversation.isTransient()) {
 			conversation.begin();
 
 			try {
 				// si l'on récupére ent dans l'url, alors la liste d'étudiant
 				// affichée est la liste d'étudiant de lentreprise
-				if (this.getPassedParameter("ent")!= null) 
+				if (Page.getPassedParameter("ent")!= null) 
 				{
-					Long ent = Long.parseLong(this.getPassedParameter("ent"));
+					Long ent = Long.parseLong(Page.getPassedParameter("ent"));
 					etudiants = etudiantEJB.findAllEtudiantsByEnt(ent);
 					msg=" ayant travaillé à "+entrepriseEJB.findEntrepriseById(ent).getNom();
-					
+					titrePDF=entrepriseEJB.findEntrepriseById(ent).getNom();
 				}
 				else
 				{
-					if(this.getPassedParameter("forma")!=null)
+					if(Page.getPassedParameter("forma")!=null)
 					{		
 						System.out.println("salut");
-						Long forma = Long.parseLong(this.getPassedParameter("forma"));
+						Long forma = Long.parseLong(Page.getPassedParameter("forma"));
 						etudiants=etudiantEJB.findAllEtudiantsByFormation(forma);
 						
 						Formation form= formationEJB.findFormationById(forma);
 						msg=" ayant effectué la formation "+form.getLibelle()+" à "+form.getEtablissement().getNom();
 						
+						titrePDF=form.getEtablissement().getNom();
 					}
 					else
 					{
 						etudiants = etudiantEJB.findAllEtudiants();
+					
 					}
 				} 
 			} catch (EJBException e) {
 
-				Redirection.erreurXhtml();
+				//Redirection.erreurXhtml();
 			}
 		}
-
-		creerListeTypeSelect();
 	}
 
 	public String ajout() {
@@ -156,56 +150,15 @@ public class EtudiantBean implements Serializable {
 
 	public void creerListeEtudiantsPDF() {
 		// Appeler la procédure pour creer mon PDF d'etudiants
-		GenereDocument.creerListeEtudiantsPDF(etudiants, "liste_etudiants");
+		System.out.println(titrePDF);
+		GenereDocument.creerListeEtudiantsPDF(etudiants, "liste_etudiants_"+titrePDF);
 	}
 
 	public void creerListeEtudiantsXLS() {
-		GenereDocument.creerListeEtudiantsXLS(etudiants, "liste_etudiants");
+		GenereDocument.creerListeEtudiantsXLS(etudiants, "liste_etudiants_"+titrePDF);
 	}
 
-	public String getPassedParameter(String param) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String parametreId = (String) facesContext.getExternalContext()
-				.getRequestParameterMap().get(param);
-		return parametreId;
-	}
-
-	public List<SelectItem> creerListeTypeSelect() {
-
-		etudiantsTypeItems.add(new SelectItem("Tout", "Tout (Inscrit dans la BD)"));
-		etudiantsTypeItems.add(new SelectItem("Actuel",
-				"Etudiants actuellement à l'IUT"));
-		etudiantsTypeItems.add(new SelectItem("Ancien",
-				"Ancien étudiants de l'IUT"));
-
-		return etudiantsTypeItems;
-	}
-
-	public void doSelectedTypeEtu() throws ParseException {
-		System.out.println(etudiantTypeItemSelect);
-
-		try {
-			System.out.println(DateUtil.date());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Date d = DateUtil.date();
-		
-		if (etudiantTypeItemSelect.equals("Actuel")) {
-			etudiants = etudiantEJB.findAllEtudiantsActuel(d,
-					EtablissementConfig.etablissement);
-		}
-		if (etudiantTypeItemSelect.equals("Tout")) {
-			etudiants = etudiantEJB.findAllEtudiants();
-		}
-		if (etudiantTypeItemSelect.equals("Ancien")) {
-			etudiants = etudiantEJB.findAllEtudiantsAncien(d,
-					EtablissementConfig.etablissement);
-		}
-
-	}
+	
 
 	public int nbEtudiant() {
 		return etudiants.size();
@@ -268,22 +221,6 @@ public class EtudiantBean implements Serializable {
 
 	public void setDateFinBoolean(Boolean dateFinBoolean) {
 		this.dateFinBoolean = dateFinBoolean;
-	}
-
-	public String getEtudiantTypeItemSelect() {
-		return etudiantTypeItemSelect;
-	}
-
-	public void setEtudiantTypeItemSelect(String etudiantTypeItemSelect) {
-		this.etudiantTypeItemSelect = etudiantTypeItemSelect;
-	}
-
-	public List<SelectItem> getEtudiantsTypeItems() {
-		return etudiantsTypeItems;
-	}
-
-	public void setEtudiantsTypeItems(List<SelectItem> etudiantsTypeItems) {
-		this.etudiantsTypeItems = etudiantsTypeItems;
 	}
 
 	public String getMsg() {

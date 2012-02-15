@@ -64,7 +64,7 @@ public class UtilisateurBean implements Serializable {
 
 		for (Utilisateur unUtilisateur : utilisateurs) {
 
-			if (checked.get(unUtilisateur.getId())) {
+			if (checked.get(unUtilisateur.getLogin())) {
 				utilisateurEJB.removeUtilisateur(unUtilisateur);
 
 			}

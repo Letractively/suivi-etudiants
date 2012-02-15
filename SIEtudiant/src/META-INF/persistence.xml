@@ -18,6 +18,7 @@
 		<class>entity.Contact</class>
 		<class>entity.Adresse</class>
 		<class>entity.TypeFormation</class>
+		<class>entity.Personne</class>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE" />
 		</properties>

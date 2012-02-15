@@ -1,4 +1,4 @@
--- PostgreSQL
+-- -- PostgreSQL
 
 /*
  * Ajouter le .jar "postgresql-9.1-901.jdbc4" (selon la version de postgre) dans glassfish/lib 
@@ -47,7 +47,7 @@ create table ETUDIANT (ETUDIANT_ID int not null, adresse varchar(70), adresseSui
 create table ETUDIANT_ENTREPRISE (datedebut date not null, ENTREPRISE_ID int not null, ETUDIANT_ID int not null, commentaire varchar(255), datefin date, description varchar(255), posteoccupe varchar(70), typecontrat varchar(70), primary key (datedebut, ENTREPRISE_ID, ETUDIANT_ID));
 create table ETUDIANT_FORMATION (ETUDIANT_ID int not null, FORMATION_ID int not null, datedebut date, datefin date, description varchar(255), resultat varchar(70), primary key (ETUDIANT_ID, FORMATION_ID, datedebut));
 create table FORMATION (FORMATION_ID int not null, libelle varchar(70), libelleCourt varchar(70), etablissement_ETABLISSEMENT_ID int, primary key (FORMATION_ID));
-create table UTILISATEUR (id int not null, login varchar(70), motDePasse varchar(70), niveau varchar(70), nomComplet varchar(70), mail varchar(70), primary key (id));
+create table UTILISATEUR (login varchar(70), motDePasse varchar(70), niveau varchar(70), nom varchar(70), prenom varchar(70), mail varchar(70), primary key (login));
 
 -- Creation des contraintes
 alter table ETUDIANT_ENTREPRISE add constraint FK_ETUDIANT_ENTREPRISE_ETUDIANT foreign key (ETUDIANT_ID) references ETUDIANT;
@@ -57,9 +57,9 @@ alter table ETUDIANT_FORMATION add constraint FK_ETUDIANT_FORMATION_ETUDIANT for
 alter table FORMATION add constraint FK_FORMATION_ETABLISSEMENT foreign key (etablissement_ETABLISSEMENT_ID) references ETABLISSEMENT;
 
 -- Ajout de donnees de test
-INSERT INTO UTILISATEUR VALUES (1,'alex','534b44a19bf18d20b71ecc4eb77c572f',1,'alex');
-INSERT INTO UTILISATEUR VALUES (2,'romain','5026bc63b5418ffdb54f238db245ec01',1,'romain');
-INSERT INTO UTILISATEUR VALUES (3,'gerardo','4024fb06e1423da90b80f0274e8e4476',2,'gerardo');
+INSERT INTO UTILISATEUR VALUES ('alex','eb459aedab226f507f25f3a191c40f3ff4ffb951f126a53fd881c966dfc003a5',1,'alex','hanock');
+INSERT INTO UTILISATEUR VALUES ('romain','eb459aedab226f507f25f3a191c40f3ff4ffb951f126a53fd881c966dfc003a5',1,'romain','bavier');
+INSERT INTO UTILISATEUR VALUES ('gerardo','eb459aedab226f507f25f3a191c40f3ff4ffb951f126a53fd881c966dfc003a5',2,'gerardo','mootinal');
 
 INSERT INTO ENTREPRISE VALUES (1,'16 rue de la place','','62300','France','Lens','contact@gfi.fr','','0608','0321','GFI','SA','SSII','15456456985474');
 INSERT INTO ENTREPRISE VALUES (2,'16 rue des eaux','','62300','France','Lens','contact@norsys.fr','','0608','0321','Norsys','SAS','SSII','15456412568545');

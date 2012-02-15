@@ -15,6 +15,7 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import util.Page;
 import util.Redirection;
 
 import ejb.EtablissementEJB;
@@ -61,9 +62,9 @@ public class FormationBean implements Serializable {
 			conversation.begin();
 		}
 
-		if (this.getPassedParameter() != null) {
+		if (Page.getPassedParameter("id") != null) {
 
-			Long id = Long.parseLong(this.getPassedParameter());
+			Long id = Long.parseLong(Page.getPassedParameter("id"));
 
 			formations = formationEJB.findFormationsByEtablissementId(id);
 			etablissement = etablissementEJB.findEtablissementById(id);
@@ -102,8 +103,7 @@ public class FormationBean implements Serializable {
 
 		for (Formation uneFormation : formations) {
 			if (checked.get(uneFormation.getId())) {
-				formationEJB.removeFormation(uneFormation);
-				
+				formationEJB.removeFormation(uneFormation);	
 			}
 		}
 		//fin de la conversation de établissement pour mettre à jour
@@ -128,13 +128,14 @@ public class FormationBean implements Serializable {
 		return "editFormation";
 	}
 
-	public String getPassedParameter() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String parametreId = (String) facesContext.getExternalContext()
-				.getRequestParameterMap().get("id");
-		return parametreId;
-	}
-
+	
+	
+	
+	
+	
+	
+	
+	
 	// getters and setters
 
 	public List<Etablissement> getEtablissements() {

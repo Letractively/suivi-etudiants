@@ -66,6 +66,11 @@ public class GenereDocument {
 			document.addCreationDate();
 			// Titre du PDF
 			document.addTitle("Liste des etudiants");
+			
+			document.add(new Paragraph(nomPDF));
+			document.add(new Paragraph("\n"));
+			
+			
 			// Tableau avec x-colonnes
 			PdfPTable table = new PdfPTable(7);
 			// Largeur des colonnes

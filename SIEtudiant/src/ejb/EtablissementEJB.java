@@ -24,6 +24,14 @@ public class EtablissementEJB implements  EtablissementEJBInterface{
 		List<Etablissement> results = em.createQuery("select e from Etablissement e").getResultList();
 	    return results;		
 	}
+	@SuppressWarnings("unchecked") 
+	public List<Etablissement> findAllEtablissementsByEtudiant(Long id) {
+		List<Etablissement> results = em.createQuery("select e from Etablissement e, Formation forma, EtudiantFormation etuforma " +
+				"where e.id = forma.etablissement.id " +
+				"and forma.id=etuforma.id.formationId " +
+				"and etuforma.id.etudiantId = :id").setParameter("id", id).getResultList();
+	    return results;		
+	}
 	
 
 	/*

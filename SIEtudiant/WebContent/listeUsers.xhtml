@@ -25,7 +25,7 @@
 
 						</f:facet>
 						<h:selectBooleanCheckbox title="supprimer"
-							value="#{utilisateurBean.checked[u.id]}" />
+							value="#{utilisateurBean.checked[u.login]}" />
 					</p:column>
 					<p:column>
 						<f:facet name="header">
@@ -35,9 +35,15 @@
 					</p:column>
 					<p:column>
 						<f:facet name="header">
-							<h:outputText value="Nom complet" />
+							<h:outputText value="Prénom" />
 						</f:facet>
-						<h:outputText value="#{u.nomComplet}" />
+						<h:outputText value="#{u.nom}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Nom" />
+						</f:facet>
+						<h:outputText value="#{u.prenom}" />
 					</p:column>
 					<p:column>
 						<f:facet name="header">

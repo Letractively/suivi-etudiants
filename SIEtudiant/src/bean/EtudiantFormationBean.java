@@ -1,17 +1,13 @@
 package bean;
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import ejb.EtablissementEJB;
 import ejb.EtudiantEJB;
@@ -22,9 +18,7 @@ import entity.Etudiant;
 import entity.EtudiantFormation;
 import entity.EtudiantFormationId;
 import entity.Formation;
-
-import util.DateUtil;
-import util.EtablissementConfig;
+import util.Page;
 import util.Redirection;
 
 @ManagedBean(name = "etudiantFormationBean")
@@ -59,12 +53,15 @@ public class EtudiantFormationBean implements Serializable {
 
 	private HashMap<EtudiantFormationId, Boolean> checked = new HashMap<EtudiantFormationId, Boolean>();
 
+	
 	private List<SelectItem> etablissementsItems = new ArrayList<SelectItem>();
+	
 	// c'est cette variable qui aura l'id de l'établissement selectionné via la
 	// liste déroulante
 	private Long etablissementItemSelect;
 
 	private List<SelectItem> formationsItems = new ArrayList<SelectItem>();
+	
 	// c'est cette variable qui aura l'id de la formation selectionné via la
 	// liste déroulante
 	private Long formationItemSelect;
@@ -78,44 +75,59 @@ public class EtudiantFormationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		/*
-		 * On recupere l'id passe en parametre depuis l'autre page Attention :
-		 * Il faut parser en type Long comme dans l'entite
+		
+		/*Ce bean gére plusieurs pages, afin de ne pas charger des listes inutiles aux page non concerné, l'utilisation de cette condition
+		 * est nécessaire.
 		 */
-		if (this.getPassedParameter() != null) {
+		if(Page.pageCourante().equals("/"+Redirection.domain+"/listeEtudiantEntreprise.faces"))
+		{
+			System.out.println("Page courante : "+Page.pageCourante());
+			
+			if (Page.getPassedParameter("id") != null) {
+				try {
+					
+					id = Long.parseLong(Page.getPassedParameter("id"));
+					// Je recupere l'etudiant
+					etudiant = etudiantEJB.findEtudiantById(id);
+					
+					etudiantFormations = etudiantFormationEJB
+							.findAllFormationsByStudentId(id);
+					
+
+					etablissements = etablissementEJB.findAllEtablissementsByEtudiant(id);
+					
+					creerListeItem();
+
+				} catch (NumberFormatException e) {
+					Redirection.erreurXhtml();
+				}
+			}
+			
+		}
+		else
+		{	
+			System.out.println("Coucou");
 			try {
-				id = Long.parseLong(this.getPassedParameter());
-
-				// Je remplis ma liste d'etudiantFormations grace a ma requete
-				// etudiantEntreprises =
-				// etudiantFormationEJB.findCompaniesByStudentId(id);
-				etudiantFormations = etudiantFormationEJB
-						.findAllFormationsByStudentId(id);
-
-				// etablissements = etablissementEJB.findAllEtablissements();
-				// formations =
-				// formationEJB.findFormationsByEtablissementId(etablissementItemSelect);
+				
+				id = Long.parseLong(Page.getPassedParameter("id"));
 				// Je recupere l'etudiant
 				etudiant = etudiantEJB.findEtudiantById(id);
-
-				// Je recupere l'etudiant
+				
+				etudiantFormations = etudiantFormationEJB
+						.findAllFormationsByStudentId(id);
 
 			} catch (NumberFormatException e) {
 				Redirection.erreurXhtml();
 			}
-
+			//Pour la page ajout et modif, il faut au préalable créer les liste déroulantes
+			etablissements = etablissementEJB.findAllEtablissements();
+			
+			creerListeItem();
+			
+			
 		}
-		// etudiantFormations = etudiantFormationEJB.findAllEtudiantFormation();
-		// Je remplis la liste d'entreprise pour la page d'ajout
-		// etudiantEntreprise..
-		etablissements = etablissementEJB.findAllEtablissements();
-		formations = formationEJB.findAllFormations();
-
-		// appel de la fonction qui initailise la liste d'item entreprise
-
-		creerListeItem();
-		creerListeTypeSelect();
-
+		//code valable pour toutes les pages
+		
 	}
 
 	public String ajout() {
@@ -189,33 +201,17 @@ public class EtudiantFormationBean implements Serializable {
 
 		return creerListeItemFormation();
 	}
-
-	public List<EtudiantFormation> doSelectedTypeTableau() {
-		System.out.println(id);
-
-		if (formationTypeItemSelect.equals("APRES IUT")) {
-			etudiantFormations = etudiantFormationEJB
-					.findFormationsUlterieureByStudentId(id,
-							EtablissementConfig.etablissement);
-		}
-		if (formationTypeItemSelect.equals("AVANT IUT")) {
-			etudiantFormations = etudiantFormationEJB
-					.findFormationsAnterieuresByStudentId(id,
-							EtablissementConfig.etablissement);
-		}
-		if (formationTypeItemSelect.equals("IUT")) {
-			etudiantFormations= etudiantFormationEJB
-					.findFormationsByStudentId(id,
-							EtablissementConfig.etablissement);
-		}
-		if (formationTypeItemSelect.equals("Tout")) {
-			etudiantFormations = etudiantFormationEJB
-					.findAllFormationsByStudentId(id);
-		}
-		this.setEtudiantFormations(etudiantFormations);
+	public List<EtudiantFormation> doSelectedEtabEtuFormation() {
 		
+		System.out.println("Entré dans la procédure");
+
+		Long idEtab = etablissementItemSelect;
+		
+		
+		etudiantFormations.removeAll(etudiantFormations);
+		this.setEtudiantFormations(etudiantFormationEJB.findFormationsByEtablissement(idEtab,id));
+
 		return etudiantFormations;
-		
 	}
 	
 	public List<SelectItem> creerListeItem() {
@@ -237,25 +233,6 @@ public class EtudiantFormationBean implements Serializable {
 
 		return formationsItems;
 	}
-
-	public List<SelectItem> creerListeTypeSelect() {
-
-		formationsTypeItems.add(new SelectItem("Tout", "Tout"));
-		formationsTypeItems.add(new SelectItem("IUT", "IUT"));
-		formationsTypeItems.add(new SelectItem("AVANT IUT", "AVANT IUT"));
-		formationsTypeItems.add(new SelectItem("APRES IUT", "APRES IUT"));
-
-		return formationsTypeItems;
-	}
-	
-
-	public String getPassedParameter() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String parametreId = (String) facesContext.getExternalContext()
-				.getRequestParameterMap().get("id");
-		return parametreId;
-	}
-	
 	
 	
 	

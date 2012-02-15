@@ -60,6 +60,9 @@ public class EtudiantEJB implements EtudiantEJBInterface{
 		Etudiant results = (Etudiant) em.find(Etudiant.class, id);
 		return results;
 	}
+	
+	
+	
 
 	@SuppressWarnings("unchecked")
 	public List<Etudiant> findAllEtudiantsByEnt(Long ent) throws EJBException {

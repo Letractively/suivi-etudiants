@@ -9,6 +9,7 @@
 
 <ui:composition template="layout/template.xhtml">
 
+
 	<ui:define name="title">Suivi des etudiants</ui:define>
 
 	<ui:define name="contenu">
@@ -78,6 +79,12 @@
 								target="#{etudiantEntrepriseBean.selectedEtudiantEntreprise}" />
 						</h:commandButton>
 					</p:column>
+					<p:column rendered="#{login.isAdmin()}">
+						<h:commandButton value="Modifier"
+							action="modifEtudiantEntreprise.faces">
+							<f:param name="id" value="#{etudiantEntreprise}"/>  
+						</h:commandButton>
+					</p:column>
 				</p:dataTable>
 
 				<p:dialog header="Description" widgetVar="activiteDialog"
@@ -104,9 +111,9 @@
 			
 			<h:form id="formFormaEnt">
 				
-				<h:selectOneMenu id="etab" value="#{etudiantFormationBean.formationTypeItemSelect}">
-					<f:selectItems value="#{etudiantFormationBean.formationsTypeItems}" />
-					<p:ajax listener="#{etudiantFormationBean.doSelectedTypeTableau()}" update="tabEtuForm" event="change" />
+				<h:selectOneMenu id="etab" value="#{etudiantFormationBean.etablissementItemSelect}">
+					<f:selectItems value="#{etudiantFormationBean.etablissementsItems}" />
+					<p:ajax listener="#{etudiantFormationBean.doSelectedEtabEtuFormation()}" update="tabEtuForm" event="change" />
 				</h:selectOneMenu>
 				 
 				 <br />

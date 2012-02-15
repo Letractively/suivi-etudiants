@@ -8,20 +8,16 @@
 
 <ui:composition template="layout/template.xhtml">
 
+<f:metadata>
+        <f:event type="javax.faces.event.PreRenderViewEvent"
+                listener="#{etudiantBean.init()}" />
+</f:metadata>
+
 	<ui:define name="title">Suivi des etudiants</ui:define>
 
 	<ui:define name="contenu">
 		<ui:fragment rendered="#{login.isLoggedIn()}">
-			<h:form id="formEtu">
-				
-				<h:selectOneMenu id="etab" value="#{etudiantBean.etudiantTypeItemSelect}">
-					<f:selectItems value="#{etudiantBean.etudiantsTypeItems}" />
-					<p:ajax listener="#{etudiantBean.doSelectedTypeEtu()}" update="tabEtu" event="change" />
-				</h:selectOneMenu>
-				<br />
-				
-				<br />
-				
+			<h:form id="formEtu">				
 				
 				<p:dataTable id="tabEtu" var="et" value="#{etudiantBean.etudiants}"
 					paginator="true" rows="10">
@@ -111,7 +107,8 @@
 				<p:confirmDialog message="Document PDF généré sur le bureau"
 					header="Information" severity="info" widgetVar="confirmationPDF">
 					<p:commandButton value="Ok" oncomplete="confirmationPDF.hide()"
-						actionListener="#{etudiantBean.creerListeEtudiantsPDF()}" />
+						actionListener="#{etudiantBean.creerListeEtudiantsPDF()}" 
+					/>
 				</p:confirmDialog>
 
 				<p:commandButton value="Generer PDF"
@@ -125,7 +122,7 @@
 
 				<p:commandButton value="Generer XLS"
 					onclick="confirmationXLS.show()" type="button" />
-
+					
 			</h:form>
 		</ui:fragment>
 	</ui:define>

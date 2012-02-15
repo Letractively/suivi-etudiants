@@ -1,6 +1,5 @@
 package ejb;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -27,6 +26,14 @@ public class EtudiantFormationEJB implements EtudiantFormationEJBInterface
 				 "select e from EtudiantFormation e").getResultList();
 		 return results;
 	 }
+	@SuppressWarnings("unchecked") 
+	 public List<EtudiantFormation> findFormationsByEtablissement(Long idEtab,Long idEtu) {
+		 List<EtudiantFormation> results = em.createQuery(
+				 "select etuForma from EtudiantFormation etuForma " +
+				"where etuForma.id.etudiantId = :etu  " +
+				"and etuForma.formation.etablissement.id = :etab ").setParameter("etu", idEtu).setParameter("etab", idEtab).getResultList();
+		 return results;
+	 }
 	 /* 
 	  * Retourne l'ensemble des entreprises rattachees a un etudiant (identifiant)
 	  */
@@ -37,6 +44,26 @@ public class EtudiantFormationEJB implements EtudiantFormationEJBInterface
 				 "and  etf.formation.etablissement.id = :etab ").setParameter("id", idEtudiant).setParameter("etab", etab).getResultList();
 		 return results;
 	 }
+
+	 /*
+	  * Cree un etudiantEntreprise dans la BDD
+	  */
+	 public EtudiantFormation createEtudiantFormation(EtudiantFormation etudiantFormation) {
+		 	
+		em.persist(etudiantFormation);
+			
+		return etudiantFormation;
+	 }
+	 public void removeEtudiantFormation(EtudiantFormation etudiantFormation) {
+			
+		 em.remove(em.merge(etudiantFormation));	
+	 }
+
+	 
+	 
+	 
+	 
+	 
 	 
 	 @SuppressWarnings("unchecked") 
 	 public List<EtudiantFormation> findFormationsUlterieureByStudentId(Long idEtudiant, long etab) {
@@ -73,19 +100,5 @@ public class EtudiantFormationEJB implements EtudiantFormationEJBInterface
 	 }
 	 
 	 
-	 /*
-	  * Cree un etudiantEntreprise dans la BDD
-	  */
-	 public EtudiantFormation createEtudiantFormation(EtudiantFormation etudiantFormation) {
-		 	
-		em.persist(etudiantFormation);
-			
-		return etudiantFormation;
-	 }
-	 public void removeEtudiantFormation(EtudiantFormation etudiantFormation) {
-			
-		 em.remove(em.merge(etudiantFormation));	
-	 }
-
 }
 

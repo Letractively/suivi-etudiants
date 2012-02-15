@@ -7,11 +7,11 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import util.GenereDocument;
+import util.Page;
 import util.Redirection;
 
 import ejb.EntrepriseEJB;
@@ -61,27 +61,35 @@ public class EtudiantEntrepriseBean {
 		 * On recupere l'id passe en parametre depuis l'autre page Attention :
 		 * Il faut parser en type Long comme dans l'entite
 		 */
-		if (this.getPassedParameter() != null) {
-			try {
-				Long id = Long.parseLong(this.getPassedParameter());
-				// Je remplis ma liste d'etudiantEntreprises grace a ma requete
-				etudiantEntreprises = etudiantEntrepriseEJB
-						.findCompaniesByStudentId(id);
-
-				// Je recupere l'etudiant
-				etudiantEnt = etudiantEJB.findEtudiantById(id);
-
-			} catch (NumberFormatException e) {
-				Redirection.erreurXhtml();
+		if(Page.pageCourante().equals("/"+Redirection.domain+"/listeEtudiantEntreprise.faces"))
+		{
+		
+			if (Page.getPassedParameter("id") != null) {
+				try {
+					Long id = Long.parseLong(Page.getPassedParameter("id"));
+					// Je remplis ma liste d'etudiantEntreprises grace a ma requete
+					etudiantEntreprises = etudiantEntrepriseEJB
+							.findCompaniesByStudentId(id);
+	
+					// Je recupere l'etudiant
+					etudiantEnt = etudiantEJB.findEtudiantById(id);
+	
+				} catch (NumberFormatException e) {
+					Redirection.erreurXhtml();
+				}
 			}
 		}
-		// Je remplis la liste d'entreprise pour la page d'ajout
-		// etudiantEntreprise..
-		entreprises = entrepriseEJB.findAllEntreprises();
+		else
+		{
+			// Je remplis la liste d'entreprise pour la page d'ajout
+			// etudiantEntreprise..
+			entreprises = entrepriseEJB.findAllEntreprises();
 
-		// appel de la fonction qui initailise la liste d'item entreprise
-		creerListeItemEntreprise();
-		creerListeItemContrat();
+			// appel de la fonction qui initailise la liste d'item entreprise
+			creerListeItemEntreprise();
+			creerListeItemContrat();
+		}
+		
 
 	}
 
@@ -186,13 +194,6 @@ public class EtudiantEntrepriseBean {
 		contratsItems.add(new SelectItem("Autre", "Autre"));
 
 		return contratsItems;
-	}
-
-	public String getPassedParameter() {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String parametreId = (String) facesContext.getExternalContext()
-				.getRequestParameterMap().get("id");
-		return parametreId;
 	}
 
 	// getters and setters

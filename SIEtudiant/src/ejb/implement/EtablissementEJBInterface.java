@@ -12,5 +12,5 @@ public interface EtablissementEJBInterface {
 	void removeEtablissement(Etablissement etablissement);
 	void updateEtablissement(Etablissement etablissement);
 	Etablissement findEtablissementById(Long id);
-
+	 List<Etablissement> findAllEtablissementsByEtudiant(Long id);
 }
