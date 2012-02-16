@@ -56,5 +56,12 @@ public class EntrepriseEJB implements EntrepriseEJBInterface{
 		Entreprise results = em.find(Entreprise.class, id);
 		return results;
 	}
-
+	@SuppressWarnings("unchecked")
+	public List<Entreprise> findEntreprisesByStudent(Long idEtudiant) {
+		List<Entreprise> results = em.createQuery("select ent from Entreprise ent,EtudiantEntreprise etuEnt " +
+				 "  where  ent.id=etuEnt.id.entrepriseId " +
+				 "and etuEnt.id.etudiantId = :id").setParameter("id", idEtudiant).getResultList();
+		return results;
+	}
+	
 }

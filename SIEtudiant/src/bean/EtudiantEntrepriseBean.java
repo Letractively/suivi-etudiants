@@ -50,8 +50,10 @@ public class EtudiantEntrepriseBean {
 
 	// c'est cette variable qui aura l'id de lentreprise selectionné via la
 	// liste déroulante
-	private Long entrepriseItemSelect;
+	private Long entrepriseItemSelected;
 	private String contratItemSelect;
+
+	private Long id;
 
 	private EtudiantEntreprise selectedEtudiantEntreprise = new EtudiantEntreprise();
 
@@ -61,35 +63,46 @@ public class EtudiantEntrepriseBean {
 		 * On recupere l'id passe en parametre depuis l'autre page Attention :
 		 * Il faut parser en type Long comme dans l'entite
 		 */
-		if(Page.pageCourante().equals("/"+Redirection.domain+"/listeEtudiantEntreprise.faces"))
-		{
-		
+		if (Page.pageCourante().equals(
+				"/" + Redirection.domain + "/listeEtudiantEntreprise.faces")) {
+
 			if (Page.getPassedParameter("id") != null) {
 				try {
-					Long id = Long.parseLong(Page.getPassedParameter("id"));
-					// Je remplis ma liste d'etudiantEntreprises grace a ma requete
+					id = Long.parseLong(Page.getPassedParameter("id"));
+					// Je remplis ma liste d'etudiantEntreprises grace a ma
+					// requete
 					etudiantEntreprises = etudiantEntrepriseEJB
 							.findCompaniesByStudentId(id);
-	
+
 					// Je recupere l'etudiant
 					etudiantEnt = etudiantEJB.findEtudiantById(id);
-	
+
+					entreprises = entrepriseEJB.findEntreprisesByStudent(id);
+					creerListeItemEntreprise();
+
 				} catch (NumberFormatException e) {
-					Redirection.erreurXhtml();
+					// Redirection.erreurXhtml();
 				}
 			}
-		}
-		else
-		{
-			// Je remplis la liste d'entreprise pour la page d'ajout
-			// etudiantEntreprise..
-			entreprises = entrepriseEJB.findAllEntreprises();
+		} else {
+			try {
+				id = Long.parseLong(Page.getPassedParameter("id"));
 
-			// appel de la fonction qui initailise la liste d'item entreprise
-			creerListeItemEntreprise();
-			creerListeItemContrat();
+				// Je recupere l'etudiant
+				etudiantEnt = etudiantEJB.findEtudiantById(id);
+
+				entreprises = entrepriseEJB.findAllEntreprises();
+
+				// appel de la fonction qui initailise la liste d'item
+				// entreprise
+				creerListeItemEntreprise();
+				creerListeItemContrat();
+
+			} catch (NumberFormatException e) {
+				Redirection.erreurXhtml();
+			}
+
 		}
-		
 
 	}
 
@@ -102,7 +115,7 @@ public class EtudiantEntrepriseBean {
 		// j'instancie ma clé primaire
 		etudiantEntrepriseId = new EtudiantEntrepriseId(
 				etudiantEntrepriseId.getDatedebut(), idEtudiant,
-				entrepriseItemSelect);
+				entrepriseItemSelected);
 
 		// mise en place de la clé primaire pour etudiatentreprise
 		etudiantEntreprise.setId(etudiantEntrepriseId);
@@ -112,7 +125,7 @@ public class EtudiantEntrepriseBean {
 		etudiantEntreprise.setTypecontrat(contratItemSelect);
 
 		etudiantEntreprise.setEntreprise(entrepriseEJB
-				.findEntrepriseById(entrepriseItemSelect));
+				.findEntrepriseById(entrepriseItemSelected));
 		etudiantEntreprise
 				.setEtudiant(etudiantEJB.findEtudiantById(idEtudiant));
 
@@ -151,22 +164,27 @@ public class EtudiantEntrepriseBean {
 	}
 
 	/*
-	 * Genere un PDF pour l'etudiant selectionne avec ses entreprises et ses formations
+	 * Genere un PDF pour l'etudiant selectionne avec ses entreprises et ses
+	 * formations
 	 */
 	public void creerEtudiantPDF() {
 
 		System.out.println(efb.getEtudiantFormations().size());
 
 		GenereDocument.creerEtudiantPDF(etudiantEnt, etudiantEntreprises,
-				efb.getEtudiantFormations(), "etudiant_" + etudiantEnt.getPrenom().toString() + "_" + etudiantEnt.getNom().toString());
+				efb.getEtudiantFormations(), "etudiant_"
+						+ etudiantEnt.getPrenom().toString() + "_"
+						+ etudiantEnt.getNom().toString());
 	}
-	
+
 	/*
 	 * Genere un XLS pour un etudiant avec ses entreprises et ses formations
 	 */
 	public void creerEtudiantXLS() {
-		GenereDocument.creerEtudiantXLS(etudiantEnt, etudiantEntreprises, 
-				efb.getEtudiantFormations(), "etudiant_" + etudiantEnt.getPrenom().toString() + "_" + etudiantEnt.getNom().toString());
+		GenereDocument.creerEtudiantXLS(etudiantEnt, etudiantEntreprises,
+				efb.getEtudiantFormations(), "etudiant_"
+						+ etudiantEnt.getPrenom().toString() + "_"
+						+ etudiantEnt.getNom().toString());
 	}
 
 	// création de la liste d'item Entreprise, necessaire pour la page
@@ -194,6 +212,18 @@ public class EtudiantEntrepriseBean {
 		contratsItems.add(new SelectItem("Autre", "Autre"));
 
 		return contratsItems;
+	}
+
+	public List<EtudiantEntreprise> doSelectedEntrepriseEtuEnt() {
+		System.out.println("Entré dans la procédure");
+
+		Long idEnt = this.entrepriseItemSelected;
+
+		this.etudiantEntreprises.removeAll(etudiantEntreprises);
+		this.setEtudiantEntreprises(etudiantEntrepriseEJB
+				.findFormationsByEntreprise(idEnt, id));
+
+		return etudiantEntreprises;
 	}
 
 	// getters and setters
@@ -239,12 +269,12 @@ public class EtudiantEntrepriseBean {
 		this.etudiantEnt = etudiant;
 	}
 
-	public Long getEntrepriseItemSelect() {
-		return entrepriseItemSelect;
+	public Long getEntrepriseItemSelected() {
+		return entrepriseItemSelected;
 	}
 
-	public void setEntrepriseItemSelect(Long entrepriseItemSelect) {
-		this.entrepriseItemSelect = entrepriseItemSelect;
+	public void setEntrepriseItemSelected(Long entrepriseItemSelected) {
+		this.entrepriseItemSelected = entrepriseItemSelected;
 	}
 
 	public EtudiantEntrepriseId getEtudiantEntrepriseId() {

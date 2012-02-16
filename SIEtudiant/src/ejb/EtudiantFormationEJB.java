@@ -34,6 +34,11 @@ public class EtudiantFormationEJB implements EtudiantFormationEJBInterface
 				"and etuForma.formation.etablissement.id = :etab ").setParameter("etu", idEtu).setParameter("etab", idEtab).getResultList();
 		 return results;
 	 }
+	
+	
+	
+	
+	
 	 /* 
 	  * Retourne l'ensemble des entreprises rattachees a un etudiant (identifiant)
 	  */

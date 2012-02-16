@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import ejb.implement.EtudiantEntrepriseEJBInterface;
 import entity.EtudiantEntreprise;
+import entity.EtudiantFormation;
 
 @LocalBean
 @Stateless
@@ -38,7 +39,15 @@ public class EtudiantEntrepriseEJB implements EtudiantEntrepriseEJBInterface{
 				.setParameter("id", idEtudiant).getResultList();
 		return results;
 	}
-
+	
+	@SuppressWarnings("unchecked") 
+	 public List<EtudiantEntreprise> findFormationsByEntreprise(Long idEnt,Long idEtu) {
+		 List<EtudiantEntreprise> results = em.createQuery(
+				 "select etuEnt from EtudiantEntreprise etuEnt " +
+				"where etuEnt.id.etudiantId = :etu  " +
+				"and etuEnt.entreprise.id = :ent ").setParameter("etu", idEtu).setParameter("ent", idEnt).getResultList();
+		 return results;
+	 }
 	/*
 	 * Cree un etudiantEntreprise dans la BDD
 	 */

@@ -16,6 +16,14 @@
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 
 			<h:form id="formEtuEnt">
+				
+				<h:selectOneMenu id="ent" value="#{etudiantEntrepriseBean.entrepriseItemSelected}">
+					<f:selectItems value="#{etudiantEntrepriseBean.entreprisesItems}" />
+					<p:ajax listener="#{etudiantEntrepriseBean.doSelectedEntrepriseEtuEnt()}" update="tabEtuEnt" event="change" />
+				</h:selectOneMenu>
+				
+				<br />
+				
 				<p:growl id="msgs" showDetail="true" />
 
 				<p:dataTable id="tabEtuEnt"

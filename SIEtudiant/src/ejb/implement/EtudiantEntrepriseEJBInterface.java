@@ -12,4 +12,6 @@ public interface EtudiantEntrepriseEJBInterface {
 	List<EtudiantEntreprise> findCompaniesByStudentId(Long idEtudiant);
 	EtudiantEntreprise createEtudiantEntreprise(EtudiantEntreprise etudiantEntreprise);
 	void removeEtudiantEntreprise(EtudiantEntreprise etudiantEntreprise);
+	List<EtudiantEntreprise> findFormationsByEntreprise(Long idEnt,Long idEtu);
+	
 }

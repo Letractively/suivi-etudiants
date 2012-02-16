@@ -12,4 +12,5 @@ public interface EntrepriseEJBInterface {
 	void removeEntreprise(Entreprise entreprise);
 	void updateEntreprise(Entreprise entreprise);
 	Entreprise findEntrepriseById(Long id);
+	List<Entreprise> findEntreprisesByStudent(Long idEtudiant);
 }
