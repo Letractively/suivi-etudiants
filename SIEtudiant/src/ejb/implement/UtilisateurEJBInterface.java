@@ -12,5 +12,6 @@ public interface UtilisateurEJBInterface {
 	void updateUtilisateur(Utilisateur utilisateur);
 	void removeUtilisateur(Utilisateur utilisateur);
 	Utilisateur createUtilisateur(Utilisateur utilisateur);
+	Utilisateur findUserByLogin(String login);
 	
 }

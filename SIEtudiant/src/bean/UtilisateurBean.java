@@ -18,6 +18,7 @@ import util.CryptageSHA256;
 import util.MD5Password;
 import util.Mail;
 import util.MotDePasseAleatoire;
+import util.Page;
 import util.Redirection;
 import ejb.UtilisateurEJB;
 import entity.Utilisateur;
@@ -48,8 +49,24 @@ public class UtilisateurBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		
+		if (Page.pageCourante().equals(
+				"/" + Redirection.domain + "/modifCompte.faces")) 
+		{
+			if (Page.getPassedParameter("id") != null) {
+				try {
+					String id = Page.getPassedParameter("id");
+					editUtilisateur=utilisateurEJB.findUserByLogin(id);
+					
+					System.out.println(editUtilisateur.getNom());
+				}
+				catch (Exception e) {
+					Redirection.erreurXhtml();
+				}
+			}
+		
+		}
 		utilisateurs = utilisateurEJB.findAllUtilisateurs();
-
 		creerListeItemEntreprise();
 	}
 
@@ -115,12 +132,12 @@ public class UtilisateurBean implements Serializable {
 		// recuperation de la session
 		Utilisateur user = login.getUtilisateur();
 
-		String mdpMD5 = CryptageSHA256.crypter(utilisateur
+		String mdpSha256 = CryptageSHA256.crypter(utilisateur
 				.getMotDePasse());
 
 		// modification du mot de passe : on met le mot de passe de utilisateur
 		// dans user
-		user.setMotDePasse(mdpMD5);
+		user.setMotDePasse(mdpSha256);
 
 		// on persiste dans la bd
 		utilisateurEJB.updateUtilisateur(user);
@@ -130,13 +147,29 @@ public class UtilisateurBean implements Serializable {
 
 	}
 	public String modifier() {
+		
+		System.out.println(editUtilisateur.getMotDePasse());
+		
+		String mdpSha256 = CryptageSHA256.crypter(editUtilisateur
+				.getMotDePasse());
+		
+		editUtilisateur.setMotDePasse(mdpSha256);
+		
 		utilisateurEJB.updateUtilisateur(editUtilisateur);
-		return"test";
+		
+		return "liste";
 	}
 
 	public String genererMDP() {
 		return MotDePasseAleatoire.genererMotDePasse();
 	}
+	public String edit()
+	{
+		return "edit";
+	}
+	
+	
+	
 
 	// getters and setters
 	public List<Utilisateur> getUtilisateurs() {
@@ -194,4 +227,5 @@ public class UtilisateurBean implements Serializable {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
+	
 }

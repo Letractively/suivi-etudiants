@@ -1,9 +1,11 @@
 package entity;
 
+import javax.persistence.Access;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
+import javax.persistence.AccessType;
 @Embeddable
+@Access(AccessType.PROPERTY)
 public class Adresse {
   private String adresse;
   private String adresseSuite;

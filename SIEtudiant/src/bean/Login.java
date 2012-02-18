@@ -19,6 +19,8 @@ import org.hibernate.validator.constraints.Length;
 import ejb.EtablissementEJB;
 import ejb.UtilisateurEJB;
 import entity.Etablissement;
+import entity.Etudiant;
+import entity.Users;
 import entity.Utilisateur;
 import util.CryptageSHA256;
 import util.MD5Password;
@@ -128,6 +130,7 @@ public class Login implements Serializable {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	public Utilisateur getUtilisateur() {

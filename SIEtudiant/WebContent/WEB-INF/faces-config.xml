@@ -130,4 +130,18 @@
 			<to-view-id>/listeUsers.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listeUsers.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/modifCompte.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/modifCompte.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>liste</from-outcome>
+			<to-view-id>/listeUsers.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

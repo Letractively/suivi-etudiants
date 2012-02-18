@@ -22,8 +22,9 @@
 		</div>
 
 		<ui:fragment rendered="#{login.isLoggedIn()}">
+			
 			<h:form>
-				<h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
+				<h:outputText value="#{login.utilisateur.login}"></h:outputText><h:commandLink value="Déconnexion" actionListener="#{login.logout}" />
 			</h:form>
 			<a href="modifUser.faces">Gestion du compte</a>
 		</ui:fragment>

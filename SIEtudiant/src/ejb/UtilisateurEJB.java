@@ -31,7 +31,12 @@ public class UtilisateurEJB implements UtilisateurEJBInterface{
 				.setParameter("login", login).getResultList();
 		return results;
 	}
- 
+	@SuppressWarnings("unchecked")
+	public Utilisateur findUserByLogin(String login) {
+		Utilisateur results = em.find(Utilisateur.class,login);
+				
+		return results;
+	}
 	public void updateUtilisateur(Utilisateur utilisateur) {
 		em.merge(utilisateur);
 	}

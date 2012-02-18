@@ -51,6 +51,12 @@
 						</f:facet>
 						<h:outputText value="#{u.niveau}" />
 					</p:column>
+					<p:column>
+						<h:outputLink value="modifCompte.faces">
+							<f:param name="id" value="#{u.login}" /> 
+							<h:outputText value="Modifier"/>
+						</h:outputLink>
+					</p:column>
 					
 				</p:dataTable>
 				<p:confirmDialog

@@ -1,16 +1,19 @@
 package entity;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
+@Access(AccessType.PROPERTY)
 public class Contact {
   private String mail;
   private String mailAutre;
   private String tel;
   private String telAutre;
   
-  
+   
   
   
   
