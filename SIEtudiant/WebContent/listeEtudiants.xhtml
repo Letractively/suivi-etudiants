@@ -19,10 +19,10 @@
 		<ui:fragment rendered="#{login.isLoggedIn()}">
 			<h:form id="formEtu">				
 				
-				<p:dataTable id="tabEtu" var="et" value="#{etudiantBean.etudiants}"
-					paginator="true" rows="10">
+				<p:dataTable id="tabEtu" var="et" value="#{etudiantBean.etudiants}">
 					<f:facet name="header">  
-			            Etudiants <h:outputText value="#{etudiantBean.msg}" /> (<h:outputText value="#{etudiantBean.nbEtudiant()}" />) 
+			            Etudiants <h:outputText value="#{etudiantBean.msg}" /> (
+			            <h:outputText value="#{etudiantBean.nbEtudiant()}" />) 
 			        </f:facet>
 					<p:column rendered="#{login.isAdmin()}">
 						<f:facet name="header">
@@ -47,7 +47,6 @@
 						<h:outputText value="#{et.prenom}" />
 					</p:column>
 					<p:column style="width:40px">
-
 						<p:commandButton update=":formEtu:display"
 							oncomplete="etudiantDialog.show()" icon="ui-icon-search"
 							title="plus">

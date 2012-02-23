@@ -1,8 +1,12 @@
 package junit;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -11,40 +15,41 @@ import javax.naming.NamingException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import util.UtilTest;
 
 import ejb.EtudiantEJB;
+import ejb.UtilisateurEJB;
+import ejb.implement.EtudiantEJBInterface;
 import entity.Adresse;
 import entity.Contact;
 import entity.Etudiant;
+import entity.Utilisateur;
 
 public class EtudiantTest {
+	private static javax.ejb.embeddable.EJBContainer container;
+    public static Context ctx;
+    private static EtudiantEJBInterface etuEJB;
 	
-	private static EJBContainer container;
-	private static Context ctx;
-	
-	@BeforeClass
-    public static void setUp() throws Exception {
+    @EJB
+    private UtilisateurEJB uEJB; 
+    
+    @BeforeClass
+    public static void setup() throws NamingException {
+            	
+        //créer une nouvelle instance du conteneur et de l'initialiser
+        container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         
-		Map p = new HashMap();
-        
-        p.put("org.glassfish.ejb.embedded.glassfish.installation.root",
-                "C:/glassfish3/glassfish");
-       
-		
-        //container = EJBContainer.createEJBContainer(UtilTest.getInitProperties());
-		container = EJBContainer.createEJBContainer(p);
+        //renvoyer un objet de type Context qui permet un accès à l'annuaire pour rechercher des ressources de type EJB Session
         ctx = container.getContext();
-	}
+        
+       etuEJB=(EtudiantEJBInterface) ctx.lookup("EtudiantEJB");
+       
+    }
  	 
 	@Test
 	public void test() throws NamingException
 	{
 		
-		Contact cont=new Contact();
-		Adresse ad=new Adresse();
-		
-		
+		/*
 		cont.setMail("aa@aa.fr");
 		cont.setMailAutre("bb@bb.fr");
 		cont.setTel("1234567891");
@@ -55,15 +60,27 @@ public class EtudiantTest {
 		ad.setCodePostal("62210");
 		ad.setPays("France");
 		ad.setVille("Avion");
+		*/
+		
 		
 		Etudiant etu = new Etudiant();
+		
+		etu.getContact().setMail("aa@aa.fr");
+		etu.getContact().setMailAutre("bb@bb.fr");
+		etu.getContact().setTel("1234567891");
+		etu.getContact().setTelAutre("9876543210");
+		
+		etu.getAdresse().setAdresse("16 rue benoit frachon");
+		etu.getAdresse().setAdresseSuite("");
+		etu.getAdresse().setCodePostal("62210");
+		etu.getAdresse().setPays("France");
+		etu.getAdresse().setVille("Avion");
+		
 		etu.setNom("Toto");
 		etu.setPrenom("titi");
-		etu.setContact(cont);
-		etu.setAdresse(ad);
+		etu.setId(4654564L);
 				
-		
-		EtudiantEJB etuEJB=(EtudiantEJB) ctx.lookup("java:global/classes/EtudiantEJB");
+		//assertEquals(1, etuEJB2.findAllEtudiants().size());
 		
 		etuEJB.createEtudiant(etu);
 	}

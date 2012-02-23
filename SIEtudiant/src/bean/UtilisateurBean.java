@@ -94,7 +94,7 @@ public class UtilisateurBean implements Serializable {
 		 * Envoi du mail -- Ok Le faire avant de crypter le mot de passe sinon
 		 * l'utilisateur va recevoir le hash MD5 et pas son vrai mot de passe !
 		 */
-		Mail.autoMail(utilisateur.getMail(), utilisateur.getMotDePasse());
+		Mail.autoMail(utilisateur.getMail(), utilisateur.getMotDePasse(),utilisateur.getLogin());
 
 		String mdpSHA256 = CryptageSHA256.crypter(utilisateur
 				.getMotDePasse());
@@ -105,11 +105,11 @@ public class UtilisateurBean implements Serializable {
 		 * Changer la chaine niveauItemSelect pour la BDD
 		 */
 		if(niveauItemSelect.equals("Lecture")) {
-			niveauItemSelect = "2";
+			niveauItemSelect = "3";
 		}
 		else {
 			if(niveauItemSelect.equals("Administrateur")) {
-				niveauItemSelect = "1";
+				niveauItemSelect = "2";
 			}
 		}
 		
@@ -167,6 +167,8 @@ public class UtilisateurBean implements Serializable {
 	{
 		return "edit";
 	}
+	
+	
 	
 	
 	

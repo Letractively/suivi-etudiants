@@ -64,6 +64,10 @@ public class EtudiantBean implements Serializable {
 	public void init() {
 		//solution pour ne pas relancer le bean lors de l'appui sur le boutton pdf, excel.
 		//la liste d'étdudiant est desormais correcte.
+		/*if(conversation.isTransient())
+		{	
+			conversation.begin();*/
+		
 		if (!FacesContext.getCurrentInstance().isPostback() && conversation.isTransient()) {
 			conversation.begin();
 
@@ -98,9 +102,10 @@ public class EtudiantBean implements Serializable {
 				} 
 			} catch (EJBException e) {
 
-				//Redirection.erreurXhtml();
+				Redirection.erreurXhtml();
 			}
 		}
+		
 	}
 
 	public String ajout() {
@@ -108,13 +113,9 @@ public class EtudiantBean implements Serializable {
 		this.etudiantEJB.createEtudiant(etudiant);
 		// Fin
 		conversation.end();
-
-		/*
-		 * si on est en session, actualisation de la liste d'étudiant et de
-		 * l'étudiant etudiants = etudiantEJB.findAllEtudiants(); etudiant =new
-		 * Etudiant();
-		 */
+		
 		Redirection.listeEtudiants();
+		
 		return "listEtudiant";
 	}
 
@@ -122,17 +123,21 @@ public class EtudiantBean implements Serializable {
 	// checked
 	public void supprimer() {
 		for (Etudiant unEtudiant : etudiants) {
+			
 			if (checked.get(unEtudiant.getId())) {
+				
 				etudiantEJB.removeEtudiant(unEtudiant);
 			}
 		}
 		conversation.end();
 		/*
 		 * si on est en session, actualisation de la liste d'étudiant
-		 * etudiants=etudiantEJB.findAllEtudiants();
+		 
 		 */
 
 		Redirection.listeEtudiants();
+		
+		etudiants=etudiantEJB.findAllEtudiants();
 	}
 
 	// fonction permettant de modifier un etudiant => retourne list (voir

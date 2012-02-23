@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class MotDePasseAleatoire {
 
-	private static final int LONGUEUR_MOT_DE_PASSE = 8;
+	private static final int LONGUEURMDP = 8;
 	
 	public MotDePasseAleatoire() {
 		
@@ -13,32 +13,35 @@ public class MotDePasseAleatoire {
 	/*
 	 * Genere un mot de passe aleatoire de 8 caracteres
 	 */
-	public static String genererMotDePasse() {
+	
 		
-		Random rand = new Random();
-		String motDePasse = "";
-		char lettre;
-		
-		// Boucler 8 fois
-		for (int i = 0; i < LONGUEUR_MOT_DE_PASSE; i++) {
-			// Genere un rand entre 0 et i-1 (6)
-			int n = rand.nextInt(7);
-			// Si n vaut 0, le prochain caractere genere sera un chiffre
-			if (n==0) {
-				motDePasse += rand.nextInt(10);
+		public static String genererMotDePasse() {
+			
+			Random rand = new Random();
+			String mdp = "";
+						
+			// Boucler 9 fois
+			for (int i = 0; i < LONGUEURMDP; i++) {
+				// Genere un rand entre 0 et i-1 (6)
+				int n = rand.nextInt(9);
+				// Si n inferieur à 2, le prochain caractere genere sera un chiffre
+				if (n<2) {
+					mdp += rand.nextInt(10);
+				}
+				// Sinon, ce sera une lettre, il faut caster
+				else {									
+					if(n<5)
+					{
+						mdp += (char) ('a' +rand.nextInt(26));
+					}
+					else
+					{
+						mdp += (char) ('A' +rand.nextInt(26));
+					}
+				}
 			}
-			// Sinon, si n est compris entre 1 et 3, ce sera une lettre majuscule
-			else if (n >= 1 && n <= 3) {
-				lettre = (char) ('A' + rand.nextInt(26));
-				motDePasse += lettre;
-			}
-			// Sinon, ce sera une lettre minuscule
-			else {
-				lettre = (char) ('a' + rand.nextInt(26));
-				motDePasse += lettre;
-			}
-		}
-		return motDePasse;
+
+		return mdp;
 	}
 	
 	/*

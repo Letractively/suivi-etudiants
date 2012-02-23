@@ -14,7 +14,7 @@ import ejb.implement.EtudiantEJBInterface;
 import entity.Etudiant;
 
 @LocalBean
-@Stateless
+@Stateless(mappedName="EtudiantEJB")
 public class EtudiantEJB implements EtudiantEJBInterface{
 	@PersistenceContext(unitName = "si_etu")
 	private EntityManager em;

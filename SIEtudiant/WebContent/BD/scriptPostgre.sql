@@ -68,6 +68,21 @@ INSERT INTO ENTREPRISE VALUES (3,'16 rue des maux','','62000','France','Arras','
 INSERT INTO ETUDIANT VALUES (1,'16 rue des lilas','','62300','France','Lens','toto@t.fr','','0608','0321','BAVIER','Romain');
 INSERT INTO ETUDIANT VALUES (2,'16 rue du chardon','','62000','France','Arras','toto@t.fr','','0608','0321','HANOCQ','Alexandre');
 INSERT INTO ETUDIANT VALUES (3,'16 boulevard jean-jaurï¿½s','','62000','France','Arras','toto@t.fr','','0608','0321','MORIVAL','Romain');
+INSERT INTO ETUDIANT VALUES (4,'167 rue des chaumiére','','62300','France','Lens','toto@t.fr','','0608','0321','Le petit','Julien');
+INSERT INTO ETUDIANT VALUES (5,'12 rue paul eluard','','62300','France','Lens','toto@t.fr','','0608','0321','Le grand','Frederic');
+INSERT INTO ETUDIANT VALUES (6,'4 rue romain rolland ','','62300','France','Lens','toto@t.fr','','0608','0321','Kalvowski','Maxime');
+INSERT INTO ETUDIANT VALUES (7,'9 rue marcel cachin','','62300','France','Lens','toto@t.fr','','0608','0321','Rolland','Romain');
+INSERT INTO ETUDIANT VALUES (8,'45 rue marrat','','62300','France','Lens','toto@t.fr','','0608','0321','Duchemin','Anthony');
+INSERT INTO ETUDIANT VALUES (9,'89 rue descarte','','62300','France','Lens','toto@t.fr','','0608','0321','Beaujeois','Alexandre');
+INSERT INTO ETUDIANT VALUES (10,'166 jacques prevert','','62300','France','Lens','toto@t.fr','','0608','0321','Parrain','Galbrielle');
+INSERT INTO ETUDIANT VALUES (11,'25 devid anget','','62300','France','Lens','toto@t.fr','','0608','0321','Cousin','Emeline');
+INSERT INTO ETUDIANT VALUES (12,'9 rue falconnet','','62300','France','Lens','toto@t.fr','','0608','0321','Delcourt','Estelle');
+INSERT INTO ETUDIANT VALUES (13,'2 rue lemercier','','62300','France','Lens','toto@t.fr','','0608','0321','Lefevre','Jonathan');
+INSERT INTO ETUDIANT VALUES (14,'7 rue des fort de vaux','','62300','France','Lens','toto@t.fr','','0608','0321','Dugardin','François');
+INSERT INTO ETUDIANT VALUES (15,'81 rue francois lefevre','','62300','France','Lens','toto@t.fr','','0608','0321','Galland','Cédric');
+INSERT INTO ETUDIANT VALUES (16,'30 rue charles ferrand','','62300','France','Lens','toto@t.fr','','0608','0321','Martin','Eric');
+
+
 
 INSERT INTO ETABLISSEMENT VALUES (1,'1 rue de l''Universite','','62300','France','Lens','','','','','IUT Lens','IUT');
 INSERT INTO ETABLISSEMENT VALUES (2,'22 route du puits','','62000','France','Arras','','','','','Lycee Guy Mollet','Lycee');

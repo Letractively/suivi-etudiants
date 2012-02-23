@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import ejb.implement.UtilisateurEJBInterface;
 import entity.Utilisateur;
 @LocalBean
-@Stateless
+@Stateless(mappedName="UtilisateurEJB")
 public class UtilisateurEJB implements UtilisateurEJBInterface{
 	@PersistenceContext(unitName = "si_etu")
 	private EntityManager em;

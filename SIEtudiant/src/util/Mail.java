@@ -12,15 +12,15 @@ public class Mail {
 
 	// Variables concernant celui qui envoie le mail ou serveur de messagerie
 	private static final String SERVEUR_DE_MESSAGERIE = "smtp.gmail.com"; // Le smtp, ex : smtp.gmail.com
-	private static final String COMPTE_UTILISATEUR = "romain.bavier@gmail.fr"; // @mail
-	private static final String MOT_DE_PASSE = ""; // MDP
+	private static final String COMPTE_UTILISATEUR = "romain.bavier@gmail.com"; // @mail
+	private static final String MOT_DE_PASSE = "rom1210390"; // MDP
 
 	/*
 	 * Envoie un mail à l'adresse mail passee en parametre
 	 * @param adresse mail de l'utilisateur
 	 * @param mot de passe lors de l'inscription sur le site
 	 */
-	public static void autoMail(String to, String mdp) {
+	public static void autoMail(String to, String mdp, String login) {
 		Properties props = System.getProperties();
 		Session session = Session.getDefaultInstance(props);
 		MimeMessage message = new MimeMessage(session);
@@ -41,6 +41,6 @@ public class Mail {
 
 	public static void main(String args[]) {
 		Mail m = new Mail();
-		m.autoMail("hanocq.alexandre@yahoo.fr", "test");
+		//m.autoMail("hanocq.alexandre@yahoo.fr", "test");
 	}
 }
